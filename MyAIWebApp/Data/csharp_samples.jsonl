@@ -1,0 +1,3 @@
+{"prompt": "Create a simple class", "completion": "public class Person\n{\n    public string Name { get; set; }\n    public int Age { get; set; }\n    \n    public Person(string name, int age)\n    {\n        Name = name;\n        Age = age;\n    }\n}"}
+{"prompt": "Async method example", "completion": "public async Task<List<string>> GetDataAsync()\n{\n    using var httpClient = new HttpClient();\n    var response = await httpClient.GetStringAsync(\"https://api.example.com/data\");\n    return JsonSerializer.Deserialize<List<string>>(response);\n}"}
+{"prompt": "LINQ query example", "completion": "var result = customers\n    .Where(c => c.Age > 18)\n    .OrderBy(c => c.Name)\n    .Select(c => new { c.Name, c.Email })\n    .ToList();"}
