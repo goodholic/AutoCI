@@ -18,60 +18,33 @@
             }
         </div>
     </div>
-    
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <h2>RAG 질문하기</h2>
-            <input @bind="question" class="form-control" />
-            <button @onclick="AskQuestion" class="btn btn-primary mt-2">질문</button>
-            
-            @if (!string.IsNullOrEmpty(answer))
-            {
-                <div class="alert alert-info mt-3">
-                    @answer
-                </div>
-            }
-        </div>
-    </div>
 </div>
 
 @code {
     private string prompt = "";
     private string generatedText = "";
-    private string question = "";
-    private string answer = "";
     
     private async Task GenerateText()
     {
-        var response = await Http.PostAsJsonAsync("api/ai/generate", 
-            new { prompt });
-        
-        if (response.IsSuccessStatusCode)
+        try
         {
-            var result = await response.Content.ReadFromJsonAsync<GenerateResponse>();
-            generatedText = result?.Result ?? "";
+            var response = await Http.PostAsJsonAsync("api/llama/generate", 
+                new { prompt });
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<GenerateResponse>();
+                generatedText = result?.GeneratedCode ?? "";
+            }
         }
-    }
-    
-    private async Task AskQuestion()
-    {
-        var response = await Http.PostAsJsonAsync("api/ai/rag/query", 
-            new { question });
-        
-        if (response.IsSuccessStatusCode)
+        catch (Exception ex)
         {
-            var result = await response.Content.ReadFromJsonAsync<RAGResponse>();
-            answer = result?.Answer ?? "";
+            generatedText = $"오류: {ex.Message}";
         }
     }
     
     public class GenerateResponse
     {
-        public string Result { get; set; } = "";
-    }
-    
-    public class RAGResponse
-    {
-        public string Answer { get; set; } = "";
+        public string GeneratedCode { get; set; } = "";
     }
 }

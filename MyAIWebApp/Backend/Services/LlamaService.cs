@@ -16,18 +16,9 @@ public class LlamaService
     
     public async Task<string> GenerateCode(string prompt)
     {
-        var enhancedPrompt = $@"Generate C# code for: {prompt}
-Requirements:
-- Modern C# syntax
-- Include error handling
-- Add comments
-Code:";
-        
         var request = new
         {
-            prompt = enhancedPrompt,
-            max_length = 500,
-            temperature = 0.7
+            prompt = prompt
         };
         
         var json = JsonConvert.SerializeObject(request);
@@ -42,12 +33,11 @@ Code:";
                 dynamic responseData = JsonConvert.DeserializeObject(result);
                 return responseData?.generated_text ?? "// 코드 생성 실패";
             }
+            return "// API 호출 실패";
         }
         catch (Exception ex)
         {
             return $"// 오류 발생: {ex.Message}";
         }
-        
-        return "// Python 서버에 연결할 수 없습니다.";
     }
 }
