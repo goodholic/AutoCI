@@ -1,0 +1,8 @@
+{
+  "source": "intensive_collector",
+  "type": "optimization_tip",
+  "tip": "async/await 사용 시 ConfigureAwait(false) 적용으로 Context 스위칭 방지",
+  "category": "performance_optimization",
+  "impact_level": "high",
+  "collected_at": "2025-06-25T02:36:36.719277"
+}

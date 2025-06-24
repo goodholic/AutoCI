@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-06-25T02:45:09.472756",
+  "total_files": 578,
+  "total_size_kb": 342.025390625,
+  "improvement_ratio": 7.410256410256411,
+  "categories": {
+    "unity_advanced": 26,
+    "implementation_patterns": 125,
+    "performance_optimization": 125,
+    "unity_optimization": 125,
+    "advanced_async": 25,
+    "performance_tips": 26,
+    "architecture_patterns": 23,
+    "memory_optimization": 25,
+    "advanced_patterns": 2,
+    "advanced_concepts": 2,
+    "advanced_architecture": 2,
+    "unity_expert": 2,
+    "performance_expert": 10,
+    "architecture_expert": 15,
+    "modern_csharp": 20,
+    "real_world": 20,
+    "educational": 5
+  },
+  "sources": {
+    "intensive_collector": 500,
+    "synthetic_patterns": 2,
+    "microsoft_docs": 2,
+    "advanced_patterns": 2,
+    "unity_expertise": 2,
+    "performance_patterns": 10,
+    "architecture_patterns": 15,
+    "modern_csharp": 20,
+    "real_world_examples": 20,
+    "learning_scenarios": 5
+  },
+  "expected_improvements": {
+    "code_generation": 50,
+    "response_accuracy": 28.9,
+    "unity_expertise": 10
+  }
+}

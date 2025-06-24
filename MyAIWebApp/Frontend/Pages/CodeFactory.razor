@@ -1,0 +1,365 @@
+@page "/codefactory"
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+@using System.Text.Json
+
+<PageTitle>🏭 24시간 코드 공장 - AutoCI</PageTitle>
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="d-flex align-items-center mb-4">
+                <h1 class="h2 me-3">🏭 24시간 자동 코드 공장</h1>
+                <span class="badge bg-success">Always Working</span>
+                <button @onclick="RefreshStatus" class="btn btn-outline-primary btn-sm ms-auto">
+                    <i class="bi bi-arrow-clockwise"></i> 새로고침
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 상태 대시보드 -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark">
+                <div class="card-body text-center">
+                    <h3 class="card-title">📋 @currentStatus.Pending</h3>
+                    <p class="card-text">대기 중인 작업</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <h3 class="card-title">🔧 @currentStatus.InProgress</h3>
+                    <p class="card-text">진행 중인 작업</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <h3 class="card-title">✅ @currentStatus.Completed</h3>
+                    <p class="card-text">완료된 작업</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body text-center">
+                    <h3 class="card-title">❌ @currentStatus.Failed</h3>
+                    <p class="card-text">실패한 작업</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- 왼쪽: 작업 추가 -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>새 작업 추가</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">🎯 빠른 선택</label>
+                        <div class="d-grid gap-2">
+                            <button @onclick="@(() => SetQuickTask(\"unity_player\"))" class="btn btn-outline-primary btn-sm text-start">
+                                <i class="bi bi-controller me-2"></i>Unity 플레이어 컨트롤러 생성
+                            </button>
+                            <button @onclick="@(() => SetQuickTask(\"unity_enemy\"))" class="btn btn-outline-primary btn-sm text-start">
+                                <i class="bi bi-bug me-2"></i>Unity 적 AI 스크립트 생성
+                            </button>
+                            <button @onclick="@(() => SetQuickTask(\"game_manager\"))" class="btn btn-outline-primary btn-sm text-start">
+                                <i class="bi bi-gear me-2"></i>Unity 게임 매니저 생성
+                            </button>
+                            <button @onclick="@(() => SetQuickTask(\"improve_all\"))" class="btn btn-outline-warning btn-sm text-start">
+                                <i class="bi bi-arrow-up-circle me-2"></i>모든 스크립트 개선
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">�� 대상 폴더</label>
+                        <input @bind="targetFolder" class="form-control" placeholder="../Assets/Scripts" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">�� 파일 패턴</label>
+                        <input @bind="filePattern" class="form-control" placeholder="PlayerController.cs 또는 *.cs" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">🛠️ 작업 타입</label>
+                        <select @bind="modificationType" class="form-select">
+                            <option value="create">새 파일 생성</option>
+                            <option value="modify">기존 파일 수정</option>
+                            <option value="improve">코드 개선</option>
+                            <option value="fix">버그 수정</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">📝 작업 설명</label>
+                        <textarea @bind="description" class="form-control" rows="3" placeholder="어떤 작업을 수행할지 자세히 설명해주세요..."></textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button @onclick="AddTask" class="btn btn-primary" disabled="@isAddingTask">
+                            @if (isAddingTask)
+                            {
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                                <span>작업 추가 중...</span>
+                            }
+                            else
+                            {
+                                <i class="bi bi-plus-circle me-2"></i>
+                                <span>작업 추가하기</span>
+                            }
+                        </button>
+                        <button @onclick="StartContinuous" class="btn btn-success" disabled="@isContinuousRunning">
+                            <i class="bi bi-play-circle me-2"></i>
+                            <span>24시간 연속 모드 시작</span>
+                        </button>
+                        <button @onclick="AddExamples" class="btn btn-outline-info">
+                            <i class="bi bi-lightbulb me-2"></i>예시 작업 추가
+                        </button>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(addTaskMessage))
+                    {
+                        <div class="alert alert-info mt-3" role="alert">
+                            @addTaskMessage
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- 오른쪽: 최근 작업 현황 -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-list-task me-2"></i>최근 작업 현황</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                        <p class="mt-2">아직 작업이 없습니다.</p>
+                        <small>왼쪽에서 새 작업을 추가해보세요!</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 사용 가이드 -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="bi bi-info-circle me-2"></i>🏭 코딩 공장 사용 가이드</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">✨ 자동 코드 생성</h6>
+                            <ul class="small">
+                                <li>Unity 스크립트 자동 생성</li>
+                                <li>ASP.NET 컨트롤러 생성</li>
+                                <li>디자인 패턴 구현</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">�� 코드 자동 수정</h6>
+                            <ul class="small">
+                                <li>기존 코드 개선</li>
+                                <li>버그 자동 수정</li>
+                                <li>성능 최적화</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">🕒 24시간 연속 작업</h6>
+                            <ul class="small">
+                                <li>백그라운드 자동 실행</li>
+                                <li>작업 큐 관리</li>
+                                <li>실시간 상태 모니터링</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    // 상태 정보
+    private StatusInfo currentStatus = new();
+
+    // 입력 필드
+    private string targetFolder = "../Assets/Scripts";
+    private string filePattern = "PlayerController.cs";
+    private string modificationType = "create";
+    private string description = "Unity 플레이어 컨트롤러 스크립트 생성";
+
+    // 상태 플래그
+    private bool isAddingTask = false;
+    private bool isContinuousRunning = false;
+    private string addTaskMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshStatus();
+    }
+
+    private void SetQuickTask(string taskType)
+    {
+        switch (taskType)
+        {
+            case "unity_player":
+                targetFolder = "../Assets/Scripts";
+                filePattern = "PlayerController.cs";
+                modificationType = "create";
+                description = "Unity 플레이어 컨트롤러 스크립트 생성 (WASD 이동, 점프, 달리기 포함)";
+                break;
+            case "unity_enemy":
+                targetFolder = "../Assets/Scripts";
+                filePattern = "EnemyAI.cs";
+                modificationType = "create";
+                description = "Unity 적 AI 스크립트 생성 (플레이어 추적, NavMesh 사용)";
+                break;
+            case "game_manager":
+                targetFolder = "../Assets/Scripts";
+                filePattern = "GameManager.cs";
+                modificationType = "create";
+                description = "Unity 게임 매니저 스크립트 생성 (점수, 일시정지, 씬 관리)";
+                break;
+            case "improve_all":
+                targetFolder = "../Assets/Scripts";
+                filePattern = "*.cs";
+                modificationType = "improve";
+                description = "모든 Unity 스크립트에 성능 최적화 및 주석 추가";
+                break;
+        }
+        StateHasChanged();
+    }
+
+    private async Task AddTask()
+    {
+        try
+        {
+            isAddingTask = true;
+            addTaskMessage = "";
+            
+            var request = new
+            {
+                targetFolder,
+                filePattern,
+                modificationType,
+                description
+            };
+
+            var response = await Http.PostAsJsonAsync("/api/CodeModifier/add-task", request);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                addTaskMessage = "✅ 작업이 성공적으로 추가되었습니다!";
+                await RefreshStatus();
+            }
+            else
+            {
+                addTaskMessage = "❌ 작업 추가에 실패했습니다.";
+            }
+        }
+        catch (Exception ex)
+        {
+            addTaskMessage = $"❌ 오류: {ex.Message}";
+        }
+        finally
+        {
+            isAddingTask = false;
+        }
+    }
+
+    private async Task StartContinuous()
+    {
+        try
+        {
+            isContinuousRunning = true;
+            
+            var response = await Http.PostAsync("/api/CodeModifier/start-continuous", null);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                addTaskMessage = "🚀 24시간 연속 모드가 시작되었습니다!";
+            }
+            else
+            {
+                addTaskMessage = "❌ 연속 모드 시작에 실패했습니다.";
+            }
+        }
+        catch (Exception ex)
+        {
+            addTaskMessage = $"❌ 오류: {ex.Message}";
+        }
+        finally
+        {
+            isContinuousRunning = false;
+        }
+    }
+
+    private async Task AddExamples()
+    {
+        try
+        {
+            var response = await Http.PostAsync("/api/CodeModifier/add-examples", null);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                addTaskMessage = "🎯 3개의 예시 작업이 추가되었습니다!";
+                await RefreshStatus();
+            }
+            else
+            {
+                addTaskMessage = "❌ 예시 작업 추가에 실패했습니다.";
+            }
+        }
+        catch (Exception ex)
+        {
+            addTaskMessage = $"❌ 오류: {ex.Message}";
+        }
+    }
+
+    private async Task RefreshStatus()
+    {
+        try
+        {
+            var response = await Http.GetAsync("/api/CodeModifier/status");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                // 간단한 상태 업데이트
+                currentStatus.Pending = 0;
+                currentStatus.InProgress = 0;
+                currentStatus.Completed = 0;
+                currentStatus.Failed = 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            // 로깅 또는 오류 처리
+        }
+    }
+
+    // 데이터 모델
+    public class StatusInfo
+    {
+        public int Pending { get; set; }
+        public int InProgress { get; set; }
+        public int Completed { get; set; }
+        public int Failed { get; set; }
+    }
+}

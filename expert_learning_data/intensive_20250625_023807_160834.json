@@ -1,0 +1,8 @@
+{
+  "source": "intensive_collector",
+  "type": "optimization_tip",
+  "tip": "ReadOnlySpan<T> 사용으로 메모리 할당 없는 데이터 처리",
+  "category": "performance_optimization",
+  "impact_level": "high",
+  "collected_at": "2025-06-25T02:38:07.160813"
+}

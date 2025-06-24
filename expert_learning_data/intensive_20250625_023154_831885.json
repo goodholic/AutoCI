@@ -1,0 +1,9 @@
+{
+  "source": "intensive_collector",
+  "type": "pattern_knowledge",
+  "category": "memory_optimization",
+  "pattern_name": "stackalloc을 이용한 스택 할당",
+  "description": "stackalloc을 이용한 스택 할당에 대한 전문적인 설명과 구현 방법",
+  "complexity_level": "expert",
+  "collected_at": "2025-06-25T02:31:54.831862"
+}

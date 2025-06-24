@@ -568,12 +568,17 @@ class CSharpExpertTrainer:
         """모델 학습 단계"""
         # 실제 학습 코드 (fine_tune.py 활용)
         import subprocess
+        import sys
         
         logger.info("🏃 모델 학습 시작...")
         
+        # 가상환경 Python 경로 찾기
+        venv_python = Path("./llm_venv_wsl/bin/python")
+        python_cmd = str(venv_python) if venv_python.exists() else sys.executable
+        
         # 학습 스크립트 실행
         cmd = [
-            "python", "MyAIWebApp/Models/fine_tune.py",
+            python_cmd, "MyAIWebApp/Models/fine_tune.py",
             "--data", str(self.crawler.data_dir / "training_dataset.json"),
             "--model", self.model_path
         ]

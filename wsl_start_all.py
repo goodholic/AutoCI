@@ -38,6 +38,45 @@ class WSLAutoCI:
         self.start_time = None
         self.is_wsl = self._detect_wsl()
         
+        # 가상환경 Python 경로 설정 (여러 경로 시도)
+        potential_paths = [
+            self.base_dir / "llm_venv_wsl" / "bin" / "python",
+            self.base_dir / "llm_venv_wsl" / "bin" / "python3",
+            self.base_dir / "llm_venv_wsl" / "bin" / "python3.12",
+            self.base_dir / "llm_venv" / "bin" / "python",
+            self.base_dir / "llm_venv" / "bin" / "python3"
+        ]
+        
+        self.venv_python = None
+        for path in potential_paths:
+            if path.exists() and path.is_file():
+                self.venv_python = str(path.resolve())  # 절대 경로로 변환
+                logger.info(f"가상환경 Python 발견: {self.venv_python}")
+                break
+        
+        if not self.venv_python:
+            logger.warning("가상환경 Python을 찾을 수 없음. 시스템 Python 사용")
+            # WSL에서는 python3 명령어 사용
+            self.venv_python = "python3"
+            
+        logger.info(f"사용할 Python 경로: {self.venv_python}")
+        
+        # 가상환경 유효성 검증
+        if "llm_venv" in str(self.venv_python):
+            try:
+                # 가상환경에서 peft 패키지 확인
+                result = subprocess.run([
+                    "bash", "-c", 
+                    f'source "{self.base_dir}/llm_venv_wsl/bin/activate" && python3 -c "import peft; print(\\"peft available\\")"'
+                ], capture_output=True, text=True, timeout=10)
+                
+                if result.returncode == 0 and "peft available" in result.stdout:
+                    logger.info("✅ 가상환경에서 peft 패키지 확인됨")
+                else:
+                    logger.warning("⚠️  가상환경에서 peft 패키지를 찾을 수 없음")
+            except Exception as e:
+                logger.warning(f"가상환경 검증 실패: {e}")
+        
         # 서비스 포트 설정
         self.ports = {
             'ai_server': 8000,
@@ -167,23 +206,63 @@ class WSLAutoCI:
             if env:
                 process_env.update(env)
             
+            # Python 서비스인 경우 가상환경 activate
+            if command[0] in [str(self.venv_python), "python", "python3"] or any(cmd.endswith(".py") for cmd in command):
+                # 가상환경 활성화 및 실행을 위한 bash 명령어 생성
+                venv_activate_path = self.base_dir / "llm_venv_wsl" / "bin" / "activate"
+                if venv_activate_path.exists():
+                    # 명령어를 문자열로 조합
+                    if command[0] == str(self.venv_python):
+                        # 이미 가상환경 python 경로가 지정된 경우 - python3으로 변경
+                        new_command = ["python3"] + command[1:]
+                        cmd_str = " ".join([f'"{cmd}"' if " " in cmd else cmd for cmd in new_command])
+                    else:
+                        # python 명령어를 python3로 변경
+                        if command[0] == "python":
+                            new_command = ["python3"] + command[1:]
+                        else:
+                            new_command = command
+                        cmd_str = " ".join([f'"{cmd}"' if " " in cmd else cmd for cmd in new_command])
+                    
+                    # 절대 경로로 활성화 스크립트 사용 (따옴표로 감싸기)
+                    abs_activate_path = str(venv_activate_path.resolve())
+                    
+                    # bash를 통해 가상환경 활성화 후 실행 (경로를 따옴표로 안전하게 감싸기)
+                    venv_command = f'source "{abs_activate_path}" && {cmd_str}'
+                    command = ["bash", "-c", venv_command]
+                    
+                    print(f'   가상환경에서 실행: source "{abs_activate_path}" && {cmd_str}')
+                else:
+                    print(f"   ⚠️  가상환경이 없어 시스템 Python으로 실행: {command}")
+                    # python을 python3로 변경
+                    if command[0] == "python":
+                        command[0] = "python3"
+            
             # WSL에서는 Windows 특정 플래그 제거
             process = subprocess.Popen(
                 command,
                 cwd=cwd,
                 env=process_env,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
                 preexec_fn=os.setsid
             )
             
             self.processes[name] = process
-            time.sleep(2)  # 서비스 시작 대기
+            time.sleep(3)  # 서비스 시작 대기 시간 증가
             
             # 프로세스 확인
             if process.poll() is None:
                 print(f"✅ {name} 시작 완료 (PID: {process.pid})")
                 return True
             else:
+                # 오류 로그 출력
+                stdout, stderr = process.communicate()
                 print(f"❌ {name} 시작 실패")
+                if stderr:
+                    print(f"   오류: {stderr.decode('utf-8', errors='ignore')[:200]}...")
+                if stdout:
+                    print(f"   출력: {stdout.decode('utf-8', errors='ignore')[:200]}...")
                 return False
                 
         except Exception as e:
@@ -200,7 +279,7 @@ class WSLAutoCI:
         if (self.base_dir / "csharp_expert_crawler.py").exists():
             self.start_service(
                 "Expert Learning System",
-                [sys.executable, "csharp_expert_crawler.py"],
+                [str(self.venv_python), "csharp_expert_crawler.py"],
                 cwd=str(self.base_dir)
             )
         
@@ -218,7 +297,7 @@ class WSLAutoCI:
         # WSL에서는 항상 0.0.0.0으로 바인딩
         return self.start_service(
             "AI Model Server",
-            [sys.executable, "-m", "uvicorn", "enhanced_server:app", 
+            [str(self.venv_python), "-m", "uvicorn", "enhanced_server:app", 
              "--host", "0.0.0.0", "--port", str(self.ports['ai_server'])],
             cwd=str(models_dir)
         )
@@ -232,7 +311,7 @@ class WSLAutoCI:
         if (self.base_dir / "expert_learning_api.py").exists():
             return self.start_service(
                 "Monitoring API",
-                [sys.executable, "expert_learning_api.py"],
+                [str(self.venv_python), "expert_learning_api.py"],
                 cwd=str(self.base_dir)
             )
         return False

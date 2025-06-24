@@ -1,0 +1,7 @@
+{
+  "source": "advanced_patterns",
+  "pattern_name": "Event Sourcing",
+  "code": "\npublic abstract class DomainEvent\n{\n    public Guid Id { get; protected set; } = Guid.NewGuid();\n    public DateTime OccurredAt { get; protected set; } = DateTime.UtcNow;\n}\n\npublic class EventStore\n{\n    public async Task SaveEventsAsync(string aggregateId, IEnumerable<DomainEvent> events)\n    {\n        // 이벤트 저장 로직\n    }\n}\n",
+  "category": "advanced_architecture",
+  "timestamp": "2025-06-25T02:30:04.396610"
+}

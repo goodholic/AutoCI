@@ -1,0 +1,9 @@
+{
+  "source": "intensive_collector",
+  "type": "pattern_knowledge",
+  "category": "memory_optimization",
+  "pattern_name": "ReadOnlySpan<T> 제로 카피 처리",
+  "description": "ReadOnlySpan<T> 제로 카피 처리에 대한 전문적인 설명과 구현 방법",
+  "complexity_level": "expert",
+  "collected_at": "2025-06-25T02:36:26.659242"
+}
