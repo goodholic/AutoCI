@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MyAIWebApp", "MyAIWebApp", "{F27EDFD0-E1AB-2B73-C1F7-3293E0752D99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backend", "MyAIWebApp\Backend\Backend.csproj", "{83BF6836-DFCC-7DB0-B6EF-21EA4595E841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "MyAIWebApp\Frontend\Frontend.csproj", "{8DE34240-4571-BC67-FEBD-34D96180EBD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83BF6836-DFCC-7DB0-B6EF-21EA4595E841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83BF6836-DFCC-7DB0-B6EF-21EA4595E841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83BF6836-DFCC-7DB0-B6EF-21EA4595E841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83BF6836-DFCC-7DB0-B6EF-21EA4595E841}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE34240-4571-BC67-FEBD-34D96180EBD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE34240-4571-BC67-FEBD-34D96180EBD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE34240-4571-BC67-FEBD-34D96180EBD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE34240-4571-BC67-FEBD-34D96180EBD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{83BF6836-DFCC-7DB0-B6EF-21EA4595E841} = {F27EDFD0-E1AB-2B73-C1F7-3293E0752D99}
+		{8DE34240-4571-BC67-FEBD-34D96180EBD0} = {F27EDFD0-E1AB-2B73-C1F7-3293E0752D99}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {641F15F6-34C4-4518-BCA6-B24BAD0C0DFB}
+	EndGlobalSection
+EndGlobal

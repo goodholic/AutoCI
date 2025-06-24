@@ -1,6 +1,8 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Frontend</a>
+        <a class="navbar-brand" href="">
+            <i class="bi bi-robot me-2"></i><span class="fw-bold">AutoCI</span>
+        </a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,21 +13,91 @@
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                <span class="bi bi-house-door-fill me-2" aria-hidden="true"></span> 
+                <span>홈</span>
+            </NavLink>
+        </div>
+        
+        <hr class="my-2 text-white-50" />
+        <div class="px-3 text-white-50 small text-uppercase fw-bold mb-2">AI 기능</div>
+        
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="codegen">
+                <span class="bi bi-magic me-2" aria-hidden="true"></span> 
+                <span>AI 코드 생성</span>
             </NavLink>
         </div>
         <div class="nav-item px-3">
+            <NavLink class="nav-link" href="codesearch">
+                <span class="bi bi-search me-2" aria-hidden="true"></span> 
+                <span>스마트 코드 검색</span>
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="rag">
+                <span class="bi bi-chat-dots me-2" aria-hidden="true"></span> 
+                <span>프로젝트 Q&A</span>
+            </NavLink>
+        </div>
+        
+        <hr class="my-2 text-white-50" />
+        <div class="px-3 text-white-50 small text-uppercase fw-bold mb-2">기타</div>
+        
+        <div class="nav-item px-3">
             <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+                <span class="bi bi-plus-square me-2" aria-hidden="true"></span> 
+                <span>카운터</span>
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+                <span class="bi bi-cloud-sun me-2" aria-hidden="true"></span> 
+                <span>날씨</span>
             </NavLink>
         </div>
     </nav>
+    
+    <div class="nav-footer px-3 py-3 text-white-50 small">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-info-circle me-2"></i>
+            <span>v1.0.0</span>
+        </div>
+        <div class="mt-1">
+            <small>Code Llama 7B 기반</small>
+        </div>
+    </div>
 </div>
+
+<style>
+    .nav-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0,0,0,0.2);
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    
+    .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-radius: 0.375rem;
+        transition: all 0.2s;
+    }
+    
+    .nav-link:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+    
+    .nav-link.active {
+        background-color: rgba(255,255,255,0.15);
+    }
+</style>
 
 @code {
     private bool collapseNavMenu = true;

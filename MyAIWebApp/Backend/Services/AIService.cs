@@ -1,43 +1,58 @@
-// Backend/Services/AIService.cs
 using System;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 public class AIService
 {
-    private readonly HttpClient _httpClient;
-    private readonly string _huggingFaceApiKey = "YOUR_API_KEY";
+    private readonly LlamaService _llamaService;
     
-    public AIService(HttpClient httpClient)
+    public AIService(LlamaService llamaService)
     {
-        _httpClient = httpClient;
+        _llamaService = llamaService;
     }
     
     public async Task<string> GenerateText(string prompt)
     {
-        var apiUrl = "https://api-inference.huggingface.co/models/gpt2";
-        
-        var request = new
+        // LlamaService를 통해 텍스트 생성
+        return await _llamaService.GenerateCode(prompt);
+    }
+    
+    public async Task<string> GenerateCode(string prompt, string language = "csharp")
+    {
+        // 언어별 프롬프트 조정
+        var enhancedPrompt = language.ToLower() switch
         {
-            inputs = prompt,
-            parameters = new
-            {
-                max_length = 100,
-                temperature = 0.7
-            }
+            "csharp" => $"Generate C# code for the following request:\n{prompt}",
+            "javascript" => $"Generate JavaScript code for the following request:\n{prompt}",
+            "python" => $"Generate Python code for the following request:\n{prompt}",
+            _ => prompt
         };
         
-        var json = JsonConvert.SerializeObject(request);
-        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        return await _llamaService.GenerateCode(enhancedPrompt);
+    }
+    
+    public async Task<string> ExplainCode(string code)
+    {
+        var prompt = $@"Explain the following code in detail:
+
+```
+{code}
+```
+
+Please explain what this code does, how it works, and any important concepts it uses.";
         
-        _httpClient.DefaultRequestHeaders.Authorization = 
-            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _huggingFaceApiKey);
+        return await _llamaService.GenerateCode(prompt);
+    }
+    
+    public async Task<string> ImproveCode(string code)
+    {
+        var prompt = $@"Improve the following code by making it more efficient, readable, and following best practices:
+
+```
+{code}
+```
+
+Please provide the improved version with explanations of the changes made.";
         
-        var response = await _httpClient.PostAsync(apiUrl, content);
-        var result = await response.Content.ReadAsStringAsync();
-        
-        return result;
+        return await _llamaService.GenerateCode(prompt);
     }
 }

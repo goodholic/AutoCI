@@ -1,0 +1,190 @@
+/* AutoCI Custom Styles */
+
+/* 기본 설정 */
+:root {
+    --primary-color: #007bff;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --dark-color: #343a40;
+    --light-color: #f8f9fa;
+}
+
+/* 폰트 설정 */
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 카드 효과 */
+.feature-card-enhanced {
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.feature-card-enhanced:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 그라데이션 배경 */
+.bg-gradient {
+    background: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-indigo) 100%);
+}
+
+.bg-gradient.bg-success {
+    background: linear-gradient(135deg, var(--bs-success) 0%, #20c997 100%);
+}
+
+.bg-gradient.bg-info {
+    background: linear-gradient(135deg, var(--bs-info) 0%, #3d7eaa 100%);
+}
+
+/* 히어로 섹션 */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+.hero-section h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 아이콘 애니메이션 */
+.bi {
+    transition: transform 0.2s;
+}
+
+.btn:hover .bi {
+    transform: scale(1.1);
+}
+
+/* 코드 블록 스타일 */
+pre {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+pre code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.875rem;
+    color: #212529;
+}
+
+/* 버튼 개선 */
+.btn {
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+}
+
+/* 입력 필드 개선 */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* 로딩 애니메이션 */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* 알림 메시지 */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+/* 네비게이션 개선 */
+.navbar-dark {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 반응형 그리드 */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .feature-card-enhanced {
+        margin-bottom: 1rem;
+    }
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* 스크롤바 스타일 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Bootstrap Icons 추가 스타일 */
+.bi-magic::before {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 뱃지 스타일 */
+.badge {
+    font-weight: 500;
+    padding: 0.375rem 0.75rem;
+}
+
+/* 섀도우 효과 */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* 토스트 메시지 스타일 */
+.toast {
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+}
+
+/* 다크 모드 지원 (향후 구현) */
+@media (prefers-color-scheme: dark) {
+    /* 다크 모드 스타일 */
+}

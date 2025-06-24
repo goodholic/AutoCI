@@ -1,0 +1,101 @@
+# AutoCI Expert Learning System Requirements
+# Python 3.8+ required
+
+# Core AI/ML packages
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.14.0
+accelerate>=0.20.0
+sentencepiece>=0.1.99
+protobuf>=4.23.0
+tokenizers>=0.13.3
+
+# Fine-tuning and optimization
+peft>=0.4.0  # Parameter-Efficient Fine-Tuning
+bitsandbytes>=0.40.0  # 8-bit quantization
+scipy>=1.11.0
+scikit-learn>=1.3.0
+
+# Web frameworks
+fastapi>=0.100.0
+uvicorn[standard]>=0.22.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# HTTP clients
+aiohttp>=3.8.0
+requests>=2.31.0
+httpx>=0.24.0
+
+# Monitoring and visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# File watching and automation
+watchdog>=3.0.0
+
+# Utilities
+tqdm>=4.65.0
+colorama>=0.4.6
+python-dotenv>=1.0.0
+psutil>=5.9.0
+click>=8.1.0
+
+# Code quality and analysis
+black>=23.0.0
+pylint>=2.17.0
+autopep8>=2.0.0
+
+# Documentation
+markdown>=3.4.0
+pygments>=2.15.0
+
+# Database (optional)
+sqlalchemy>=2.0.0
+aiosqlite>=0.19.0
+
+# Caching
+diskcache>=5.6.0
+aiocache>=0.12.0
+
+# ML.NET interop (optional)
+pythonnet>=3.0.0  # For .NET interoperability
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+
+# Logging and monitoring
+loguru>=0.7.0
+python-json-logger>=2.0.0
+
+# API documentation
+fastapi-users>=12.0.0
+slowapi>=0.1.8  # Rate limiting
+
+# Security
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+
+# Additional ML tools
+einops>=0.6.0  # Tensor operations
+wandb>=0.15.0  # Experiment tracking (optional)
+
+# Code parsing
+tree-sitter>=0.20.0
+tree-sitter-languages>=1.7.0
+
+# GitHub API
+PyGithub>=1.59.0
+gitpython>=3.1.0
+
+# Stack Exchange API
+py-stackexchange>=2.2.0

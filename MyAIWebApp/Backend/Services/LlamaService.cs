@@ -30,7 +30,7 @@ public class LlamaService
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadAsStringAsync();
-                dynamic responseData = JsonConvert.DeserializeObject(result);
+                dynamic? responseData = JsonConvert.DeserializeObject(result);
                 return responseData?.generated_text ?? "// 코드 생성 실패";
             }
             return "// API 호출 실패";

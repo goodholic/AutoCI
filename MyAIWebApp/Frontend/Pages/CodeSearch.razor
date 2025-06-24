@@ -1,0 +1,412 @@
+@page "/codesearch"
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+
+<PageTitle>스마트 코드 검색 - AutoCI</PageTitle>
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="d-flex align-items-center mb-4">
+                <h1 class="h2 me-3">🔍 스마트 코드 검색</h1>
+                <span class="badge bg-success">ML.NET 기반</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <!-- 검색 바 -->
+                    <div class="row g-3">
+                        <div class="col-md-9">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-success text-white">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input @bind="searchQuery" 
+                                       @bind:event="oninput"
+                                       @onkeypress="@(async (e) => { if (e.Key == "Enter") await SearchCode(); })"
+                                       class="form-control" 
+                                       placeholder="코드 검색... (예: 플레이어 이동, async 메서드, 싱글톤 패턴)"
+                                       autofocus />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button @onclick="SearchCode" 
+                                    class="btn btn-success btn-lg w-100" 
+                                    disabled="@isSearching">
+                                @if (isSearching)
+                                {
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                    <span>검색 중...</span>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-search me-2"></i>
+                                    <span>검색하기</span>
+                                }
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 빠른 검색 태그 -->
+                    <div class="mt-3">
+                        <span class="text-muted me-2">인기 검색:</span>
+                        <button @onclick='() => QuickSearch("unity")' class="btn btn-sm btn-outline-secondary me-1 mb-1">Unity</button>
+                        <button @onclick='() => QuickSearch("controller")' class="btn btn-sm btn-outline-secondary me-1 mb-1">Controller</button>
+                        <button @onclick='() => QuickSearch("async")' class="btn btn-sm btn-outline-secondary me-1 mb-1">Async</button>
+                        <button @onclick='() => QuickSearch("singleton")' class="btn btn-sm btn-outline-secondary me-1 mb-1">Singleton</button>
+                        <button @onclick='() => QuickSearch("player")' class="btn btn-sm btn-outline-secondary me-1 mb-1">Player</button>
+                        <button @onclick='() => QuickSearch("service")' class="btn btn-sm btn-outline-secondary me-1 mb-1">Service</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 검색 결과 -->
+    <div class="row">
+        <div class="col-lg-12">
+            @if (searchResults.Any())
+            {
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">
+                        <i class="bi bi-file-code me-2"></i>
+                        검색 결과 <span class="badge bg-secondary">@(searchResults.Count)개</span>
+                    </h5>
+                    <div class="btn-group" role="group">
+                        <button @onclick="@(() => SortResults("score"))" 
+                                class="btn btn-sm @(sortBy == "score" ? "btn-primary" : "btn-outline-primary")">
+                            관련도순
+                        </button>
+                        <button @onclick="@(() => SortResults("name"))" 
+                                class="btn btn-sm @(sortBy == "name" ? "btn-primary" : "btn-outline-primary")">
+                            이름순
+                        </button>
+                    </div>
+                </div>
+
+                @foreach (var result in searchResults)
+                {
+                    <div class="card mb-3 search-result-card">
+                        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0">
+                                    <i class="bi bi-file-earmark-code text-primary me-2"></i>
+                                    @result.Title
+                                </h6>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="badge bg-success me-2">
+                                    관련도: @((result.Score * 100).ToString("F0"))%
+                                </span>
+                                <button @onclick="() => CopyCode(result.Content)" 
+                                        class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <pre class="code-preview mb-2"><code>@result.Content</code></pre>
+                            
+                            @if (result.Tags != null && result.Tags.Any())
+                            {
+                                <div class="mt-2">
+                                    <i class="bi bi-tags text-muted me-1"></i>
+                                    @foreach (var tag in result.Tags)
+                                    {
+                                        <span class="badge bg-secondary me-1">@tag</span>
+                                    }
+                                </div>
+                            }
+                            
+                            <div class="mt-3">
+                                <button @onclick="() => ViewFullCode(result)" 
+                                        class="btn btn-sm btn-primary me-2">
+                                    <i class="bi bi-eye me-1"></i>전체 코드 보기
+                                </button>
+                                <button @onclick="() => ImproveCode(result.Content)" 
+                                        class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-magic me-1"></i>AI로 개선하기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else if (hasSearched && !isSearching)
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-search" style="font-size: 4rem; color: #dee2e6;"></i>
+                    <h5 class="mt-3 text-muted">검색 결과가 없습니다</h5>
+                    <p class="text-muted">다른 검색어를 시도해보세요.</p>
+                </div>
+            }
+            else if (!hasSearched)
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-code-square" style="font-size: 4rem; color: #dee2e6;"></i>
+                    <h5 class="mt-3 text-muted">코드를 검색해보세요</h5>
+                    <p class="text-muted">자연어로 검색하거나 함수명, 클래스명으로 찾을 수 있습니다.</p>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- 코드 인덱싱 -->
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-database me-2"></i>새 코드 인덱싱</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">📁 파일명</label>
+                                <input type="text" class="form-control" @bind="indexFileName" 
+                                       placeholder="예: PlayerController.cs" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">🏷️ 언어</label>
+                                <select class="form-select" @bind="indexLanguage">
+                                    <option value="csharp" selected>C#</option>
+                                    <option value="unity">Unity C#</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">📝 코드 내용</label>
+                        <textarea class="form-control font-monospace" @bind="indexContent" rows="10" 
+                                  placeholder="// 인덱싱할 C# 코드를 붙여넣으세요...
+
+public class PlayerController : MonoBehaviour
+{
+    // 코드 내용...
+}"></textarea>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">
+                            <i class="bi bi-info-circle me-1"></i>
+                            인덱싱된 코드는 검색 가능하며, AI 학습 데이터로도 활용됩니다.
+                        </small>
+                        <button class="btn btn-info text-white" @onclick="IndexCode" disabled="@isIndexing">
+                            @if (isIndexing)
+                            {
+                                <span class="spinner-border spinner-border-sm me-2"></span>
+                                <span>인덱싱 중...</span>
+                            }
+                            else
+                            {
+                                <i class="bi bi-database-add me-2"></i>
+                                <span>코드 인덱싱</span>
+                            }
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger mt-3" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            @errorMessage
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success mt-3" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            @successMessage
+        </div>
+    }
+</div>
+
+<style>
+    .search-result-card {
+        transition: transform 0.2s;
+        border-left: 4px solid #28a745;
+    }
+    
+    .search-result-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .code-preview {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+        max-height: 200px;
+    }
+    
+    .code-preview code {
+        font-size: 0.875rem;
+        color: #212529;
+    }
+</style>
+
+@code {
+    private string searchQuery = "";
+    private List<SearchResult> searchResults = new();
+    private bool isSearching = false;
+    private bool hasSearched = false;
+    private string sortBy = "score";
+    
+    private string indexFileName = "";
+    private string indexContent = "";
+    private string indexLanguage = "csharp";
+    private bool isIndexing = false;
+    
+    private string errorMessage = "";
+    private string successMessage = "";
+
+    private async Task SearchCode()
+    {
+        if (string.IsNullOrWhiteSpace(searchQuery)) return;
+
+        isSearching = true;
+        hasSearched = true;
+        errorMessage = "";
+        successMessage = "";
+
+        try
+        {
+            var response = await Http.GetFromJsonAsync<List<SearchResult>>(
+                $"api/search/code?query={Uri.EscapeDataString(searchQuery)}&maxResults=20");
+            searchResults = response ?? new();
+            
+            // 기본 정렬 (관련도순)
+            SortResults("score");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"검색 중 오류가 발생했습니다: {ex.Message}";
+        }
+        finally
+        {
+            isSearching = false;
+        }
+    }
+
+    private void QuickSearch(string query)
+    {
+        searchQuery = query;
+        _ = SearchCode();
+    }
+
+    private void SortResults(string criteria)
+    {
+        sortBy = criteria;
+        
+        searchResults = criteria switch
+        {
+            "name" => searchResults.OrderBy(r => r.Title).ToList(),
+            _ => searchResults.OrderByDescending(r => r.Score).ToList()
+        };
+    }
+
+    private async Task CopyCode(string code)
+    {
+        await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", code);
+        // 토스트 메시지 대신 간단한 피드백
+        successMessage = "코드가 클립보드에 복사되었습니다!";
+        StateHasChanged();
+        
+        // 3초 후 메시지 제거
+        await Task.Delay(3000);
+        successMessage = "";
+        StateHasChanged();
+    }
+
+    private async Task ViewFullCode(SearchResult result)
+    {
+        // 전체 코드를 보여주는 모달 구현 (추후 개선)
+        await JSRuntime.InvokeVoidAsync("console.log", $"전체 코드 보기: {result.Title}");
+    }
+
+    private async Task ImproveCode(string code)
+    {
+        // AI 코드 개선 페이지로 이동 (추후 구현)
+        await JSRuntime.InvokeVoidAsync("console.log", "AI 코드 개선 기능 준비 중");
+    }
+
+    private async Task IndexCode()
+    {
+        if (string.IsNullOrWhiteSpace(indexFileName) || string.IsNullOrWhiteSpace(indexContent))
+        {
+            errorMessage = "파일명과 코드 내용을 모두 입력해주세요.";
+            return;
+        }
+
+        isIndexing = true;
+        errorMessage = "";
+        successMessage = "";
+        
+        try
+        {
+            var request = new IndexCodeRequest
+            {
+                FileName = indexFileName,
+                Content = indexContent,
+                Language = indexLanguage
+            };
+            
+            var response = await Http.PostAsJsonAsync("api/search/index", request);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = "코드가 성공적으로 인덱싱되었습니다! 이제 검색이 가능합니다.";
+                indexFileName = "";
+                indexContent = "";
+                
+                // 성공 메시지 5초 후 제거
+                await Task.Delay(5000);
+                successMessage = "";
+                StateHasChanged();
+            }
+            else
+            {
+                errorMessage = "코드 인덱싱에 실패했습니다.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"인덱싱 중 오류가 발생했습니다: {ex.Message}";
+        }
+        finally
+        {
+            isIndexing = false;
+        }
+    }
+
+    public class SearchResult
+    {
+        public string Id { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string Content { get; set; } = "";
+        public float Score { get; set; }
+        public string Language { get; set; } = "";
+        public string[]? Tags { get; set; }
+    }
+
+    public class IndexCodeRequest
+    {
+        public string FileName { get; set; } = "";
+        public string Content { get; set; } = "";
+        public string? Language { get; set; }
+    }
+}

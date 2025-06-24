@@ -1,0 +1,474 @@
+@page "/rag"
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+
+<PageTitle>프로젝트 Q&A - AutoCI</PageTitle>
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="d-flex align-items-center mb-4">
+                <h1 class="h2 me-3">💬 프로젝트 Q&A</h1>
+                <span class="badge bg-info">RAG 시스템</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- 왼쪽: 문서 관리 및 질문 -->
+        <div class="col-lg-4">
+            <!-- README 인덱싱 카드 -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-file-text me-2"></i>문서 인덱싱</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">📄 README 파일 경로</label>
+                        <div class="input-group">
+                            <input type="text" 
+                                   class="form-control" 
+                                   @bind="readmePath" 
+                                   placeholder="README.md 경로" />
+                            <button class="btn btn-outline-secondary" 
+                                    @onclick="LoadCurrentProjectReadme"
+                                    title="현재 프로젝트 README 자동 입력">
+                                <i class="bi bi-folder2-open"></i>
+                            </button>
+                        </div>
+                        <small class="text-muted">현재 프로젝트의 README를 자동으로 찾습니다</small>
+                    </div>
+                    
+                    <button class="btn btn-info text-white w-100" 
+                            @onclick="IndexReadme" 
+                            disabled="@isIndexing">
+                        @if (isIndexing)
+                        {
+                            <span class="spinner-border spinner-border-sm me-2"></span>
+                            <span>인덱싱 중...</span>
+                        }
+                        else
+                        {
+                            <i class="bi bi-database-add me-2"></i>
+                            <span>문서 인덱싱 시작</span>
+                        }
+                    </button>
+
+                    @if (isDocumentIndexed)
+                    {
+                        <div class="alert alert-success mt-3 mb-0" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            문서가 인덱싱되어 질문할 수 있습니다!
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- 인덱싱된 문서 목록 -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h6 class="mb-0"><i class="bi bi-collection me-2"></i>인덱싱된 문서</h6>
+                </div>
+                <div class="card-body">
+                    @if (indexedDocuments.Any())
+                    {
+                        <div class="list-group list-group-flush">
+                            @foreach (var doc in indexedDocuments)
+                            {
+                                <div class="list-group-item px-0">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1 text-truncate">@doc.Title</h6>
+                                        <small class="text-success">
+                                            <i class="bi bi-check-circle"></i>
+                                        </small>
+                                    </div>
+                                    <small class="text-muted text-truncate d-block">@doc.FilePath</small>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center mb-0">
+                            <i class="bi bi-inbox" style="font-size: 2rem;"></i><br>
+                            아직 인덱싱된 문서가 없습니다
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- 오른쪽: 채팅 인터페이스 -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-chat-dots me-2"></i>프로젝트에 대해 물어보세요</h5>
+                </div>
+                <div class="card-body d-flex flex-column" style="height: 600px;">
+                    <!-- 대화 내용 -->
+                    <div class="chat-container flex-grow-1 overflow-auto mb-3 p-3 bg-light rounded">
+                        @if (!conversations.Any())
+                        {
+                            <div class="text-center text-muted py-5">
+                                <i class="bi bi-chat-left-text" style="font-size: 3rem;"></i>
+                                <p class="mt-3">프로젝트에 대해 궁금한 점을 물어보세요!</p>
+                                <div class="mt-3">
+                                    <small class="d-block mb-2">💡 예시 질문:</small>
+                                    <button @onclick='() => SetSampleQuestion("이 프로젝트의 주요 기능은 무엇인가요?")' 
+                                            class="btn btn-sm btn-outline-secondary m-1">
+                                        주요 기능 설명
+                                    </button>
+                                    <button @onclick='() => SetSampleQuestion("프로젝트 실행 방법을 알려주세요")' 
+                                            class="btn btn-sm btn-outline-secondary m-1">
+                                        실행 방법
+                                    </button>
+                                    <button @onclick='() => SetSampleQuestion("필요한 환경 설정은 무엇인가요?")' 
+                                            class="btn btn-sm btn-outline-secondary m-1">
+                                        환경 설정
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            @foreach (var conv in conversations)
+                            {
+                                <!-- 사용자 질문 -->
+                                <div class="d-flex justify-content-end mb-3">
+                                    <div class="chat-bubble chat-bubble-user">
+                                        <div class="d-flex align-items-start">
+                                            <div class="me-2">
+                                                <strong>나</strong>
+                                                <p class="mb-0">@conv.Question</p>
+                                            </div>
+                                            <i class="bi bi-person-circle fs-4"></i>
+                                        </div>
+                                        <small class="text-muted">@conv.Timestamp.ToString("HH:mm")</small>
+                                    </div>
+                                </div>
+
+                                <!-- AI 답변 -->
+                                <div class="d-flex justify-content-start mb-3">
+                                    <div class="chat-bubble chat-bubble-ai">
+                                        <div class="d-flex align-items-start">
+                                            <i class="bi bi-robot fs-4 me-2"></i>
+                                            <div>
+                                                <strong>AutoCI</strong>
+                                                <p class="mb-0 white-space-pre-wrap">@conv.Answer</p>
+                                            </div>
+                                        </div>
+                                        <small class="text-muted">@conv.Timestamp.ToString("HH:mm")</small>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <!-- 질문 입력 -->
+                    <div class="chat-input">
+                        <div class="input-group">
+                            <textarea @bind="question" 
+                                      @bind:event="oninput"
+                                      @onkeydown="@(async (e) => { if (e.Key == "Enter" && !e.ShiftKey) { await HandleEnterKey(e); } })"
+                                      class="form-control" 
+                                      placeholder="질문을 입력하세요... (Shift+Enter로 줄바꿈)"
+                                      rows="2"
+                                      disabled="@(!isDocumentIndexed)">
+                            </textarea>
+                            <button class="btn btn-primary" 
+                                    @onclick="AskQuestion" 
+                                    disabled="@(isQuerying || !isDocumentIndexed || string.IsNullOrWhiteSpace(question))">
+                                @if (isQuerying)
+                                {
+                                    <span class="spinner-border spinner-border-sm"></span>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-send-fill"></i>
+                                }
+                            </button>
+                        </div>
+                        @if (!isDocumentIndexed)
+                        {
+                            <small class="text-danger mt-1">먼저 README 파일을 인덱싱해주세요.</small>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 에러/성공 메시지 -->
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            @errorMessage
+            <button type="button" class="btn-close" @onclick="() => errorMessage = string.Empty"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(successMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            @successMessage
+            <button type="button" class="btn-close" @onclick="() => successMessage = string.Empty"></button>
+        </div>
+    }
+
+    <!-- 사용 안내 -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0"><i class="bi bi-info-circle me-2"></i>RAG 시스템 사용 안내</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">📚 RAG란?</h6>
+                            <p class="small mb-0">
+                                Retrieval-Augmented Generation의 약자로, 문서를 기반으로 정확한 답변을 생성하는 AI 시스템입니다.
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">🎯 활용 방법</h6>
+                            <ul class="small mb-0">
+                                <li>프로젝트 구조 이해</li>
+                                <li>설치 및 실행 방법 확인</li>
+                                <li>API 사용법 문의</li>
+                                <li>트러블슈팅 가이드</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="fw-bold">💡 팁</h6>
+                            <ul class="small mb-0">
+                                <li>구체적인 질문이 더 정확한 답변을 받습니다</li>
+                                <li>기술적인 용어를 사용해도 됩니다</li>
+                                <li>여러 번 질문하여 상세 정보를 얻으세요</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .chat-container {
+        min-height: 400px;
+        max-height: 500px;
+    }
+    
+    .chat-bubble {
+        max-width: 70%;
+        padding: 12px 16px;
+        border-radius: 16px;
+        margin-bottom: 4px;
+    }
+    
+    .chat-bubble-user {
+        background-color: #007bff;
+        color: white;
+        border-bottom-right-radius: 4px;
+    }
+    
+    .chat-bubble-ai {
+        background-color: #e9ecef;
+        color: #212529;
+        border-bottom-left-radius: 4px;
+    }
+    
+    .chat-bubble-user small {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .white-space-pre-wrap {
+        white-space: pre-wrap;
+    }
+    
+    .chat-input textarea {
+        resize: none;
+        border-right: none;
+    }
+    
+    .chat-input button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        width: 60px;
+    }
+</style>
+
+@code {
+    private string readmePath = "";
+    private string question = "";
+    private bool isIndexing = false;
+    private bool isQuerying = false;
+    private bool isDocumentIndexed = false;
+    
+    private List<Conversation> conversations = new();
+    private List<Document> indexedDocuments = new();
+    
+    private string errorMessage = "";
+    private string successMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDocuments();
+    }
+
+    private void LoadCurrentProjectReadme()
+    {
+        readmePath = "/mnt/c/Users/super/Desktop/Unity Project(25년도 제작)/26.AutoCI/AutoCI/README.md";
+        successMessage = "현재 프로젝트의 README 경로가 자동으로 입력되었습니다.";
+    }
+
+    private void SetSampleQuestion(string sampleQuestion)
+    {
+        question = sampleQuestion;
+    }
+
+    private async Task HandleEnterKey(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey)
+        {
+            await AskQuestion();
+        }
+    }
+
+    private async Task IndexReadme()
+    {
+        if (string.IsNullOrWhiteSpace(readmePath))
+        {
+            errorMessage = "README 파일 경로를 입력해주세요.";
+            return;
+        }
+
+        isIndexing = true;
+        errorMessage = "";
+        successMessage = "";
+        
+        try
+        {
+            var request = new IndexReadmeRequest { ReadmePath = readmePath };
+            var response = await Http.PostAsJsonAsync("api/rag/index-readme", request);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                successMessage = "README 파일이 성공적으로 인덱싱되었습니다! 이제 질문할 수 있습니다.";
+                isDocumentIndexed = true;
+                await LoadDocuments();
+            }
+            else
+            {
+                errorMessage = "README 파일 인덱싱에 실패했습니다. 파일 경로를 확인해주세요.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"인덱싱 중 오류가 발생했습니다: {ex.Message}";
+        }
+        finally
+        {
+            isIndexing = false;
+        }
+    }
+
+    private async Task AskQuestion()
+    {
+        if (string.IsNullOrWhiteSpace(question)) return;
+
+        isQuerying = true;
+        errorMessage = "";
+        
+        // 사용자 질문을 먼저 대화에 추가 (임시 답변과 함께)
+        var newConversation = new Conversation
+        {
+            Question = question,
+            Answer = "답변을 생성하고 있습니다...",
+            Timestamp = DateTime.Now
+        };
+        conversations.Add(newConversation);
+        
+        var currentQuestion = question;
+        question = ""; // 입력 필드 초기화
+        
+        try
+        {
+            var request = new QueryRequest { Question = currentQuestion };
+            var response = await Http.PostAsJsonAsync("api/rag/query", request);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<QueryResponse>();
+                if (result != null)
+                {
+                    // 실제 답변으로 업데이트
+                    newConversation.Answer = result.Answer;
+                }
+            }
+            else
+            {
+                newConversation.Answer = "죄송합니다. 질문을 처리하는 중 오류가 발생했습니다.";
+                errorMessage = "질문 처리 중 오류가 발생했습니다.";
+            }
+        }
+        catch (Exception ex)
+        {
+            newConversation.Answer = "죄송합니다. 서버와 통신 중 오류가 발생했습니다.";
+            errorMessage = $"질문 처리 중 오류가 발생했습니다: {ex.Message}";
+        }
+        finally
+        {
+            isQuerying = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadDocuments()
+    {
+        try
+        {
+            var response = await Http.GetFromJsonAsync<List<Document>>("api/rag/documents");
+            indexedDocuments = response ?? new();
+            isDocumentIndexed = indexedDocuments.Any();
+        }
+        catch
+        {
+            // 오류 무시
+        }
+    }
+
+    public class IndexReadmeRequest
+    {
+        public string ReadmePath { get; set; } = "";
+    }
+
+    public class QueryRequest
+    {
+        public string Question { get; set; } = "";
+    }
+
+    public class QueryResponse
+    {
+        public string Question { get; set; } = "";
+        public string Answer { get; set; } = "";
+    }
+
+    public class Conversation
+    {
+        public string Question { get; set; } = "";
+        public string Answer { get; set; } = "";
+        public DateTime Timestamp { get; set; }
+    }
+
+    public class Document
+    {
+        public string Id { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string Content { get; set; } = "";
+        public string FilePath { get; set; } = "";
+    }
+}
