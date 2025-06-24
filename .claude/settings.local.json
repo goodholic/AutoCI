@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(touch:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(file:*)",
+      "Bash(chmod:*)"
+    ],
+    "deny": []
+  }
+}

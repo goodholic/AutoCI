@@ -41,3 +41,15 @@ obj/
 .DS_Store
 Thumbs.db
 EOF
+
+# Python 가상환경
+llm_venv_wsl/
+venv/
+env/
+ENV/
+.venv/
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+*$py.class
