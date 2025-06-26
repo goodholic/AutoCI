@@ -1,0 +1,32 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "azure/app-insights-aspnet-core-quickstart/Pages/Index.cshtml.cs",
+  "file_name": "Index.cshtml.cs",
+  "content": "﻿using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Threading.Tasks;\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Mvc.RazorPages;\nusing Microsoft.Extensions.Logging;\n\nnamespace app_insights_aspnet_core_quickstart.Pages\n{\n    public class IndexModel : PageModel\n    {\n        private readonly ILogger<IndexModel> _logger;\n\n        public IndexModel(ILogger<IndexModel> logger)\n        {\n            _logger = logger;\n        }\n\n        public void OnGet()\n        {\n\n        }\n    }\n}\n",
+  "analysis": {
+    "lines": 26,
+    "classes": 1,
+    "methods": 1,
+    "interfaces": 0,
+    "usings": [
+      "System.Linq",
+      "Microsoft.AspNetCore.Mvc",
+      "Microsoft.Extensions.Logging",
+      "System",
+      "System.Collections.Generic",
+      "Microsoft.AspNetCore.Mvc.RazorPages",
+      "System.Threading.Tasks"
+    ],
+    "namespaces": [
+      "app_insights_aspnet_core_quickstart.Pages"
+    ],
+    "has_async": false,
+    "has_linq": false,
+    "has_generics": true,
+    "complexity_estimate": 0,
+    "quality_score": 0.85
+  },
+  "size": 529,
+  "url": "https://github.com/dotnet/samples/blob/main/azure/app-insights-aspnet-core-quickstart/Pages/Index.cshtml.cs",
+  "collected_at": "2025-06-25T19:29:07.946543"
+}

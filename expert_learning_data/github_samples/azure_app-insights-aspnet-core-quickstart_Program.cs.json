@@ -1,0 +1,33 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "azure/app-insights-aspnet-core-quickstart/Program.cs",
+  "file_name": "Program.cs",
+  "content": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Threading.Tasks;\nusing Microsoft.AspNetCore.Hosting;\nusing Microsoft.Extensions.Configuration;\nusing Microsoft.Extensions.Hosting;\nusing Microsoft.Extensions.Logging;\n\nnamespace app_insights_aspnet_core_quickstart\n{\n    public class Program\n    {\n        public static void Main(string[] args)\n        {\n            CreateHostBuilder(args).Build().Run();\n        }\n\n        public static IHostBuilder CreateHostBuilder(string[] args) =>\n            Host.CreateDefaultBuilder(args)\n                .ConfigureWebHostDefaults(webBuilder =>\n                {\n                    webBuilder.UseStartup<Startup>();\n                });\n    }\n}\n",
+  "analysis": {
+    "lines": 27,
+    "classes": 1,
+    "methods": 0,
+    "interfaces": 0,
+    "usings": [
+      "System.Linq",
+      "Microsoft.Extensions.Hosting",
+      "System",
+      "Microsoft.Extensions.Configuration",
+      "System.Collections.Generic",
+      "Microsoft.Extensions.Logging",
+      "Microsoft.AspNetCore.Hosting",
+      "System.Threading.Tasks"
+    ],
+    "namespaces": [
+      "app_insights_aspnet_core_quickstart"
+    ],
+    "has_async": false,
+    "has_linq": false,
+    "has_generics": true,
+    "complexity_estimate": 0,
+    "quality_score": 0.75
+  },
+  "size": 717,
+  "url": "https://github.com/dotnet/samples/blob/main/azure/app-insights-aspnet-core-quickstart/Program.cs",
+  "collected_at": "2025-06-25T19:29:08.590234"
+}

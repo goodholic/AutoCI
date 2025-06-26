@@ -7,7 +7,9 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-public class RAGService
+namespace Backend.Services
+{
+    public class RAGService
 {
     private readonly List<Document> _documents;
     private readonly Dictionary<string, float[]> _embeddings;
@@ -283,10 +285,11 @@ public class RAGService
     }
 }
 
-public class Document
-{
-    public string Id { get; set; } = string.Empty;
-    public string Title { get; set; } = string.Empty;
-    public string Content { get; set; } = string.Empty;
-    public string FilePath { get; set; } = string.Empty;
+    public class Document
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
+        public string FilePath { get; set; } = string.Empty;
+    }
 }

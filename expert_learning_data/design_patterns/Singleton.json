@@ -1,0 +1,25 @@
+{
+  "name": "Singleton",
+  "category": "Creational",
+  "intent": "Ensure a class has only one instance and provide a global point of access to it.",
+  "structure": {},
+  "participants": [],
+  "implementation": {
+    "csharp": "public sealed class Singleton\n{\n    private static readonly Lazy<Singleton> lazy = \n        new Lazy<Singleton>(() => new Singleton());\n    \n    public static Singleton Instance => lazy.Value;\n    \n    private Singleton()\n    {\n    }\n}"
+  },
+  "example_usage": "",
+  "when_to_use": [
+    "When exactly one instance of a class is needed",
+    "When the single instance should be extensible by subclassing"
+  ],
+  "pros": [
+    "Controlled access to sole instance",
+    "Reduced namespace pollution"
+  ],
+  "cons": [
+    "Difficult to test",
+    "Violates Single Responsibility Principle"
+  ],
+  "related_patterns": [],
+  "collected_at": "2025-06-25T19:28:45.446946"
+}

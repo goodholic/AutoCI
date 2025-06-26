@@ -1,0 +1,79 @@
+{
+  "url": "https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/",
+  "title": "C# operators and expressions",
+  "topic": "language-reference/operators/",
+  "content": "Table of contents\nExit focus mode\nAsk Learn\nAsk Learn\nTable of contents\nRead in English\nAdd\nAdd to plan\nEdit\nShare via\nFacebook\nx.com\nLinkedIn\nEmail\nPrint\nNote\nAccess to this page requires authorization. You can try\nsigning in\nor\nchanging directories\n.\nAccess to this page requires authorization. You can try\nchanging directories\n.\nC# operators and expressions\n2023-03-09\nFeedback\nIn this article\nC# provides a number of operators. Many of them are supported by the\nbuilt-in types\nand allow you to perform basic operations with values of those types. Those operators include the following groups:\nArithmetic operators\nthat perform arithmetic operations with numeric operands\nComparison operators\nthat compare numeric operands\nBoolean logical operators\nthat perform logical operations with\nbool\noperands\nBitwise and shift operators\nthat perform bitwise or shift operations with operands of the integral types\nEquality operators\nthat check if their operands are equal or not\nTypically, you can\noverload\nthose operators, that is, specify the operator behavior for the operands of a user-defined type.\nThe simplest C# expressions are literals (for example,\ninteger\nand\nreal\nnumbers) and names of variables. You can combine them into complex expressions by using operators. Operator\nprecedence\nand\nassociativity\ndetermine the order in which the operations in an expression are performed. You can use parentheses to change the order of evaluation imposed by operator precedence and associativity.\nIn the following code, examples of expressions are at the right-hand side of assignments:\nint a, b, c;\na = 7;\nb = a;\nc = b++;\nb = a + b * c;\nc = a >= 100 ? b : c / 10;\na = (int)Math.Sqrt(b * b + c * c);\n\nstring s = \"String literal\";\nchar l = s[s.Length - 1];\n\nList<int> numbers = [..collection];\nb = numbers.FindLast(n => n > 1);\nTypically, an expression produces a result and can be included in another expression. A\nvoid\nmethod call is an example of an expression that doesn't produce a result. It can be used only as a\nstatement\n, as the following example shows:\nConsole.WriteLine(\"Hello, world!\");\nHere are some other kinds of expressions that C# provides:\nInterpolated string expressions\nthat provide convenient syntax to create formatted strings:\nvar r = 2.3;\nvar message = $\"The area of a circle with radius {r} is {Math.PI * r * r:F3}.\";\nConsole.WriteLine(message);\n// Output:\n// The area of a circle with radius 2.3 is 16.619.\nLambda expressions\nthat allow you to create anonymous functions:\nint[] numbers = { 2, 3, 4, 5 };\nvar maximumSquare = numbers.Max(x => x * x);\nConsole.WriteLine(maximumSquare);\n// Output:\n// 25\nQuery expressions\nthat allow you to use query capabilities directly in C#:\nint[] scores = { 90, 97, 78, 68, 85 };\nIEnumerable<int> highScoresQuery =\n    from score in scores\n    where score > 80\n    orderby score descending\n    select score;\nConsole.WriteLine(string.Join(\" \", highScoresQuery));\n// Output:\n// 97 90 85\nYou can use an\nexpression body definition\nto provide a concise definition for a method, constructor, property, indexer, or finalizer.\nOperator precedence\nIn an expression with multiple operators, the operators with higher precedence are evaluated before the operators with lower precedence. In the following example, the multiplication is performed first because it has higher precedence than addition:\nvar a = 2 + 2 * 2;\nConsole.WriteLine(a); //  output: 6\nUse parentheses to change the order of evaluation imposed by operator precedence:\nvar a = (2 + 2) * 2;\nConsole.WriteLine(a); //  output: 8\nThe following table lists the C# operators starting with the highest precedence to the lowest. The operators within each row have the same precedence.\nOperators\nCategory or name\nx.y\n,\nf(x)\n,\na[i]\n,\nx?.y\n,\nx?[y]\n,\nx++\n,\nx--\n,\nx!\n,\nnew\n,\ntypeof\n,\nchecked\n,\nunchecked\n,\ndefault\n,\nnameof\n,\ndelegate\n,\nsizeof\n,\nstackalloc\n,\nx->y\nPrimary\n+x\n,\n-x\n,\n!x\n,\n~x\n,\n++x\n,\n--x\n,\n^x\n,\n(T)x\n,\nawait\n,\n&x\n,\n*x\n,\ntrue and false\nUnary\nx..y\nRange\nswitch\n,\nwith\nswitch\nand\nwith\nexpressions\nx * y\n,\nx / y\n,\nx % y\nMultiplicative\nx + y\n,\nx – y\nAdditive\nx <<  y\n,\nx >> y\n,\nx >>> y\nShift\nx < y\n,\nx > y\n,\nx <= y\n,\nx >= y\n,\nis\n,\nas\nRelational and type-testing\nx == y\n,\nx != y\nEquality\nx & y\nBoolean logical AND\nor\nbitwise logical AND\nx ^ y\nBoolean logical XOR\nor\nbitwise logical XOR\nx | y\nBoolean logical OR\nor\nbitwise logical OR\nx && y\nConditional AND\nx || y\nConditional OR\nx ?? y\nNull-coalescing operator\nc ? t : f\nConditional operator\nx = y\n,\nx += y\n,\nx -= y\n,\nx *= y\n,\nx /= y\n,\nx %= y\n,\nx &= y\n,\nx |= y\n,\nx ^= y\n,\nx <<= y\n,\nx >>= y\n,\nx >>>= y\n,\nx ??= y\n,\n=>\nAssignment and lambda declaration\nFor information about the precedence of\nlogical pattern combinators\n, see the\nPrecedence and order of checking of logical patterns\nsection of the\nPatterns\narticle.\nOperator associativity\nWhen operators have the same precedence, associativity of the operators determines the order in which the operations are performed:\nLeft-associative\noperators are evaluated in order from left to right. Except for the\nassignment operators\nand the\nnull-coalescing operators\n, all binary operators are left-associative. For example,\na + b - c\nis evaluated as\n(a + b) - c\n.\nRight-associative\noperators are evaluated in order from right to left. The assignment operators, the null-coalescing operators, lambdas, and the\nconditional operator\n?:\nare right-associative. For example,\nx = y = z\nis evaluated as\nx = (y = z)\n.\nImportant\nIn an expression of the form\nP?.A0?.A1\n, if\nP\nis\nnull\n, neither\nA0\nnor\nA1\nare evaluated. Similarly, in an expression of the form\nP?.A0.A1\n, because\nA0\nisn't evaluated when\nP\nis null, neither is\nA0.A1\n. See the\nC# language specification\nfor more details.\nUse parentheses to change the order of evaluation imposed by operator associativity:\nint a = 13 / 5 / 2;\nint b = 13 / (5 / 2);\nConsole.WriteLine($\"a = {a}, b = {b}\");  // output: a = 1, b = 6\nOperand evaluation\nUnrelated to operator precedence and associativity, operands in an expression are evaluated from left to right. The following examples demonstrate the order in which operators and operands are evaluated:\nExpression\nOrder of evaluation\na + b\na, b, +\na + b * c\na, b, c, *, +\na / b + c * d\na, b, /, c, d, *, +\na / (b + c) * d\na, b, c, +, /, d, *\nTypically, all operator operands are evaluated. However, some operators evaluate operands conditionally. That is, the value of the leftmost operand of such an operator defines if (or which) other operands should be evaluated. These operators are the conditional logical\nAND (\n&&\n)\nand\nOR (\n||\n)\noperators, the\nnull-coalescing operators\n??\nand\n??=\n, the\nnull-conditional operators\n?.\nand\n?[]\n, and the\nconditional operator\n?:\n. For more information, see the description of each operator.\nC# language specification\nFor more information, see the following sections of the\nC# language specification\n:\nExpressions\nOperators\nSee also\nOperator overloading\nExpression trees\nCollaborate with us on GitHub\nThe source for this content can be found on GitHub, where you can also create and review issues and pull requests. For more information, see\nour contributor guide\n.\n.NET\nOpen a documentation issue\nProvide product feedback\nAdditional resources",
+  "code_samples": [
+    {
+      "language": "csharp",
+      "code": "int a, b, c;\na = 7;\nb = a;\nc = b++;\nb = a + b * c;\nc = a >= 100 ? b : c / 10;\na = (int)Math.Sqrt(b * b + c * c);\n\nstring s = \"String literal\";\nchar l = s[s.Length - 1];\n\nList<int> numbers = [..collection];\nb = numbers.FindLast(n => n > 1);",
+      "lines": 13
+    },
+    {
+      "language": "csharp",
+      "code": "int a, b, c;\na = 7;\nb = a;\nc = b++;\nb = a + b * c;\nc = a >= 100 ? b : c / 10;\na = (int)Math.Sqrt(b * b + c * c);\n\nstring s = \"String literal\";\nchar l = s[s.Length - 1];\n\nList<int> numbers = [..collection];\nb = numbers.FindLast(n => n > 1);",
+      "lines": 13
+    },
+    {
+      "language": "csharp",
+      "code": "var r = 2.3;\nvar message = $\"The area of a circle with radius {r} is {Math.PI * r * r:F3}.\";\nConsole.WriteLine(message);\n// Output:\n// The area of a circle with radius 2.3 is 16.619.",
+      "lines": 5
+    },
+    {
+      "language": "csharp",
+      "code": "var r = 2.3;\nvar message = $\"The area of a circle with radius {r} is {Math.PI * r * r:F3}.\";\nConsole.WriteLine(message);\n// Output:\n// The area of a circle with radius 2.3 is 16.619.",
+      "lines": 5
+    },
+    {
+      "language": "csharp",
+      "code": "int[] numbers = { 2, 3, 4, 5 };\nvar maximumSquare = numbers.Max(x => x * x);\nConsole.WriteLine(maximumSquare);\n// Output:\n// 25",
+      "lines": 5
+    },
+    {
+      "language": "csharp",
+      "code": "int[] numbers = { 2, 3, 4, 5 };\nvar maximumSquare = numbers.Max(x => x * x);\nConsole.WriteLine(maximumSquare);\n// Output:\n// 25",
+      "lines": 5
+    },
+    {
+      "language": "csharp",
+      "code": "int[] scores = { 90, 97, 78, 68, 85 };\nIEnumerable<int> highScoresQuery =\n    from score in scores\n    where score > 80\n    orderby score descending\n    select score;\nConsole.WriteLine(string.Join(\" \", highScoresQuery));\n// Output:\n// 97 90 85",
+      "lines": 9
+    },
+    {
+      "language": "csharp",
+      "code": "int[] scores = { 90, 97, 78, 68, 85 };\nIEnumerable<int> highScoresQuery =\n    from score in scores\n    where score > 80\n    orderby score descending\n    select score;\nConsole.WriteLine(string.Join(\" \", highScoresQuery));\n// Output:\n// 97 90 85",
+      "lines": 9
+    },
+    {
+      "language": "csharp",
+      "code": "var a = 2 + 2 * 2;\nConsole.WriteLine(a); //  output: 6",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "var a = 2 + 2 * 2;\nConsole.WriteLine(a); //  output: 6",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "var a = (2 + 2) * 2;\nConsole.WriteLine(a); //  output: 8",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "var a = (2 + 2) * 2;\nConsole.WriteLine(a); //  output: 8",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "int a = 13 / 5 / 2;\nint b = 13 / (5 / 2);\nConsole.WriteLine($\"a = {a}, b = {b}\");  // output: a = 1, b = 6",
+      "lines": 3
+    },
+    {
+      "language": "csharp",
+      "code": "int a = 13 / 5 / 2;\nint b = 13 / (5 / 2);\nConsole.WriteLine($\"a = {a}, b = {b}\");  // output: a = 1, b = 6",
+      "lines": 3
+    }
+  ],
+  "collected_at": "2025-06-25T19:28:55.998287"
+}

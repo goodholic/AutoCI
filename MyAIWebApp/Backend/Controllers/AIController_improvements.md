@@ -15,6 +15,7 @@
 // Backend/Controllers/AIController.cs
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Backend.Services;
 
 [ApiController]
 [Route("api/[controller]")]

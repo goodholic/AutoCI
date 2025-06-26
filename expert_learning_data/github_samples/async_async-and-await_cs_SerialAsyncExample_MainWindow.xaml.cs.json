@@ -1,0 +1,31 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "async/async-and-await/cs/SerialAsyncExample/MainWindow.xaml.cs",
+  "file_name": "MainWindow.xaml.cs",
+  "content": "﻿using System;\nusing System.Collections.Generic;\nusing System.Diagnostics;\nusing System.Net.Http;\nusing System.Threading.Tasks;\nusing System.Windows;\n\nnamespace SerialAsyncExample\n{\n    public partial class MainWindow : Window\n    {\n        private readonly HttpClient _client = new HttpClient { MaxResponseContentBufferSize = 1_000_000 };\n\n        private readonly IEnumerable<string> _urlList = new string[]\n        {\n            \"https://docs.microsoft.com\",\n            \"https://docs.microsoft.com/azure\",\n            \"https://docs.microsoft.com/powershell\",\n            \"https://docs.microsoft.com/dotnet\",\n            \"https://docs.microsoft.com/aspnet/core\",\n            \"https://docs.microsoft.com/windows\"\n        };\n\n        private async void OnStartButtonClick(object sender, RoutedEventArgs e)\n        {\n            _startButton.IsEnabled = false;\n            _resultsTextBox.Clear();\n\n            await SumPageSizesAsync();\n\n            _resultsTextBox.Text += $\"\\nControl returned to {nameof(OnStartButtonClick)}.\";\n            _startButton.IsEnabled = true;\n        }\n\n        private async Task SumPageSizesAsync()\n        {\n            var stopwatch = Stopwatch.StartNew();\n\n            int total = 0;\n            foreach (string url in _urlList)\n            {\n                int contentLength = await ProcessUrlAsync(url, _client);\n                total += contentLength;\n            }\n\n            stopwatch.Stop();\n            _resultsTextBox.Text += $\"\\nTotal bytes returned:  {total:#,#}\";\n            _resultsTextBox.Text += $\"\\nElapsed time:          {stopwatch.Elapsed}\\n\";\n        }\n\n        private async Task<int> ProcessUrlAsync(string url, HttpClient client)\n        {\n            byte[] content = await client.GetByteArrayAsync(url);\n            DisplayResults(url, content);\n\n            return content.Length;\n        }\n\n        private void DisplayResults(string url, byte[] content) =>\n            _resultsTextBox.Text += $\"{url,-60} {content.Length,10:#,#}\\n\";\n\n        protected override void OnClosed(EventArgs e) => _client.Dispose();\n    }\n}\n",
+  "analysis": {
+    "lines": 65,
+    "classes": 1,
+    "methods": 1,
+    "interfaces": 0,
+    "usings": [
+      "System.Windows",
+      "System.Collections.Generic",
+      "System",
+      "System.Net.Http",
+      "System.Diagnostics",
+      "System.Threading.Tasks"
+    ],
+    "namespaces": [
+      "SerialAsyncExample"
+    ],
+    "has_async": true,
+    "has_linq": false,
+    "has_generics": true,
+    "complexity_estimate": 2,
+    "quality_score": 0.95
+  },
+  "size": 2086,
+  "url": "https://github.com/dotnet/samples/blob/main/async/async-and-await/cs/SerialAsyncExample/MainWindow.xaml.cs",
+  "collected_at": "2025-06-25T19:29:05.211537"
+}

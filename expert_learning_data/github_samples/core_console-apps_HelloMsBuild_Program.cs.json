@@ -1,0 +1,26 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "core/console-apps/HelloMsBuild/Program.cs",
+  "file_name": "Program.cs",
+  "content": "﻿using System;\n\nnamespace Hello\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Hello World!\");\n        }\n    }\n}\n",
+  "analysis": {
+    "lines": 13,
+    "classes": 1,
+    "methods": 0,
+    "interfaces": 0,
+    "usings": [
+      "System"
+    ],
+    "namespaces": [
+      "Hello"
+    ],
+    "has_async": false,
+    "has_linq": false,
+    "has_generics": false,
+    "complexity_estimate": 0,
+    "quality_score": 0.7
+  },
+  "size": 175,
+  "url": "https://github.com/dotnet/samples/blob/main/core/console-apps/HelloMsBuild/Program.cs",
+  "collected_at": "2025-06-25T19:29:10.400270"
+}

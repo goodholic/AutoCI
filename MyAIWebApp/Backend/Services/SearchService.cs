@@ -6,7 +6,9 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-public class SearchService
+namespace Backend.Services
+{
+    public class SearchService
 {
     private readonly List<CodeDocument> _codeDocuments;
     private readonly string _indexPath = "code_index.json";
@@ -199,12 +201,13 @@ public class CodeDocument
     public string[]? Tags { get; set; }
 }
 
-public class SearchResult
-{
-    public string Id { get; set; } = string.Empty;
-    public string Title { get; set; } = string.Empty;
-    public string Content { get; set; } = string.Empty;
-    public float Score { get; set; }
-    public string Language { get; set; } = string.Empty;
-    public string[]? Tags { get; set; }
+    public class SearchResult
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
+        public float Score { get; set; }
+        public string Language { get; set; } = string.Empty;
+        public string[]? Tags { get; set; }
+    }
 }

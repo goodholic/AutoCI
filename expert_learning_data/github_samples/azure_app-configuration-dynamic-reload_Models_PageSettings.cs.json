@@ -1,0 +1,24 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "azure/app-configuration-dynamic-reload/Models/PageSettings.cs",
+  "file_name": "PageSettings.cs",
+  "content": "namespace app_configuration_dynamic_reload.Models;\n\npublic class PageSettings\n{\n    public string BackgroundColor { get; set; } = null!;\n    public long FontSize { get; set; }\n    public string FontColor { get; set; } = null!;\n    public string Message { get; set; } = null!;\n}\n",
+  "analysis": {
+    "lines": 10,
+    "classes": 1,
+    "methods": 0,
+    "interfaces": 0,
+    "usings": [],
+    "namespaces": [
+      "app_configuration_dynamic_reload.Models"
+    ],
+    "has_async": false,
+    "has_linq": false,
+    "has_generics": false,
+    "complexity_estimate": 0,
+    "quality_score": 0.7
+  },
+  "size": 278,
+  "url": "https://github.com/dotnet/samples/blob/main/azure/app-configuration-dynamic-reload/Models/PageSettings.cs",
+  "collected_at": "2025-06-25T19:29:06.137203"
+}

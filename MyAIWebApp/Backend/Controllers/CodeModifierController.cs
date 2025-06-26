@@ -37,6 +37,9 @@ public class CodeModifierController : ControllerBase
             };
             
             using var process = Process.Start(processInfo);
+            if (process == null)
+                return BadRequest(new { error = "프로세스 시작에 실패했습니다." });
+                
             var output = await process.StandardOutput.ReadToEndAsync();
             var error = await process.StandardError.ReadToEndAsync();
             
@@ -87,6 +90,9 @@ public class CodeModifierController : ControllerBase
             };
             
             using var process = Process.Start(processInfo);
+            if (process == null)
+                return BadRequest(new { error = "프로세스 시작에 실패했습니다." });
+                
             var output = await process.StandardOutput.ReadToEndAsync();
             await process.WaitForExitAsync();
             
@@ -129,6 +135,9 @@ public class CodeModifierController : ControllerBase
             };
             
             using var process = Process.Start(processInfo);
+            if (process == null)
+                return BadRequest(new { error = "프로세스 시작에 실패했습니다." });
+                
             var output = await process.StandardOutput.ReadToEndAsync();
             await process.WaitForExitAsync();
             
@@ -200,6 +209,9 @@ public class CodeModifierController : ControllerBase
             };
             
             using var process = Process.Start(processInfo);
+            if (process == null)
+                return BadRequest(new { error = "프로세스 시작에 실패했습니다." });
+                
             var output = await process.StandardOutput.ReadToEndAsync();
             await process.WaitForExitAsync();
             

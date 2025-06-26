@@ -1,0 +1,33 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "azure/app-insights-aspnet-core-quickstart/Pages/Error.cshtml.cs",
+  "file_name": "Error.cshtml.cs",
+  "content": "using System;\nusing System.Collections.Generic;\nusing System.Diagnostics;\nusing System.Linq;\nusing System.Threading.Tasks;\nusing Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Mvc.RazorPages;\nusing Microsoft.Extensions.Logging;\n\nnamespace app_insights_aspnet_core_quickstart.Pages\n{\n    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]\n    [IgnoreAntiforgeryToken]\n    public class ErrorModel : PageModel\n    {\n        public string RequestId { get; set; }\n\n        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);\n\n        private readonly ILogger<ErrorModel> _logger;\n\n        public ErrorModel(ILogger<ErrorModel> logger)\n        {\n            _logger = logger;\n        }\n\n        public void OnGet()\n        {\n            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;\n        }\n    }\n}\n",
+  "analysis": {
+    "lines": 33,
+    "classes": 1,
+    "methods": 1,
+    "interfaces": 0,
+    "usings": [
+      "System.Linq",
+      "Microsoft.AspNetCore.Mvc",
+      "Microsoft.Extensions.Logging",
+      "System",
+      "System.Collections.Generic",
+      "System.Diagnostics",
+      "Microsoft.AspNetCore.Mvc.RazorPages",
+      "System.Threading.Tasks"
+    ],
+    "namespaces": [
+      "app_insights_aspnet_core_quickstart.Pages"
+    ],
+    "has_async": false,
+    "has_linq": false,
+    "has_generics": true,
+    "complexity_estimate": 3,
+    "quality_score": 0.85
+  },
+  "size": 865,
+  "url": "https://github.com/dotnet/samples/blob/main/azure/app-insights-aspnet-core-quickstart/Pages/Error.cshtml.cs",
+  "collected_at": "2025-06-25T19:29:07.635790"
+}

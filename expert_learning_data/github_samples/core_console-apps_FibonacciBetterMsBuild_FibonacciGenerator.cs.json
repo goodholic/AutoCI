@@ -1,0 +1,27 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "core/console-apps/FibonacciBetterMsBuild/FibonacciGenerator.cs",
+  "file_name": "FibonacciGenerator.cs",
+  "content": "﻿using System;\nusing System.Collections.Generic;\n\nnamespace Hello\n{\n    public class FibonacciGenerator\n    {\n        private Dictionary<int, int> _cache = new Dictionary<int, int>();\n\n        private int Fib(int n) => n < 2 ? n : FibValue(n - 1) + FibValue(n - 2);\n\n        private int FibValue(int n)\n        {\n            if (!_cache.ContainsKey(n))\n            {\n                _cache.Add(n, Fib(n));\n            }\n\n            return _cache[n];\n        }\n\n        public IEnumerable<int> Generate(int n)\n        {\n            for (int i = 0; i < n; i++)\n            {\n                yield return FibValue(i);\n            }\n        }\n    }\n}\n",
+  "analysis": {
+    "lines": 31,
+    "classes": 1,
+    "methods": 2,
+    "interfaces": 0,
+    "usings": [
+      "System",
+      "System.Collections.Generic"
+    ],
+    "namespaces": [
+      "Hello"
+    ],
+    "has_async": false,
+    "has_linq": false,
+    "has_generics": true,
+    "complexity_estimate": 2,
+    "quality_score": 0.7999999999999999
+  },
+  "size": 650,
+  "url": "https://github.com/dotnet/samples/blob/main/core/console-apps/FibonacciBetterMsBuild/FibonacciGenerator.cs",
+  "collected_at": "2025-06-25T19:29:09.813137"
+}

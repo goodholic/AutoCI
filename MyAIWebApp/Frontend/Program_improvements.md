@@ -14,16 +14,12 @@
 ```csharp
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Frontend;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient 
-{ 
-    BaseAddress = new Uri("http://localhost:5049/") 
-});
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5049/") });
 
 await builder.Build().RunAsync();
 // AI가 개선한 코드

@@ -1,0 +1,27 @@
+{
+  "repo": "dotnet/samples",
+  "file_path": "azure/app-configuration-dynamic-reload/Pages/Privacy.cshtml.cs",
+  "file_name": "Privacy.cshtml.cs",
+  "content": "﻿using Microsoft.AspNetCore.Mvc;\nusing Microsoft.AspNetCore.Mvc.RazorPages;\n\nnamespace app_configuration_dynamic_reload.Pages;\n\npublic class PrivacyModel : PageModel\n{\n    private readonly ILogger<PrivacyModel> _logger;\n\n    public PrivacyModel(ILogger<PrivacyModel> logger)\n    {\n        _logger = logger;\n    }\n\n    public void OnGet()\n    {\n    }\n}\n\n",
+  "analysis": {
+    "lines": 20,
+    "classes": 1,
+    "methods": 1,
+    "interfaces": 0,
+    "usings": [
+      "Microsoft.AspNetCore.Mvc",
+      "Microsoft.AspNetCore.Mvc.RazorPages"
+    ],
+    "namespaces": [
+      "app_configuration_dynamic_reload.Pages"
+    ],
+    "has_async": false,
+    "has_linq": false,
+    "has_generics": true,
+    "complexity_estimate": 0,
+    "quality_score": 0.7999999999999999
+  },
+  "size": 355,
+  "url": "https://github.com/dotnet/samples/blob/main/azure/app-configuration-dynamic-reload/Pages/Privacy.cshtml.cs",
+  "collected_at": "2025-06-25T19:29:07.035448"
+}

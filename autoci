@@ -1,0 +1,267 @@
+#!/bin/bash
+# AutoCI - WSL 터미널 명령어 스크립트
+
+# 색상 정의
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# AutoCI 디렉토리 설정
+AUTOCI_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$AUTOCI_DIR"
+
+# 가상환경 경로 설정
+VENV_PATH=""
+if [ -d "llm_venv_wsl" ]; then
+    VENV_PATH="llm_venv_wsl"
+elif [ -d "llm_venv" ]; then
+    VENV_PATH="llm_venv"
+elif [ -d "venv" ]; then
+    VENV_PATH="venv"
+fi
+
+# 가상환경 활성화
+if [ -n "$VENV_PATH" ] && [ -f "$VENV_PATH/bin/activate" ]; then
+    echo -e "${GREEN}✓ 가상환경 활성화: $VENV_PATH${NC}"
+    source "$VENV_PATH/bin/activate"
+else
+    echo -e "${YELLOW}⚠️  가상환경을 찾을 수 없습니다. 시스템 Python을 사용합니다.${NC}"
+fi
+
+# 파이썬 환경 확인
+if ! command -v python3 &> /dev/null; then
+    echo -e "${RED}❌ Python3가 설치되어 있지 않습니다.${NC}"
+    exit 1
+fi
+
+# 명령어 처리
+case "$1" in
+    # 시스템 시작
+    start)
+        echo -e "${GREEN}🚀 AutoCI 시스템을 시작합니다...${NC}"
+        python3 autoci_terminal.py --start
+        ;;
+    
+    # 대화형 모드
+    terminal|t)
+        echo -e "${BLUE}🤖 AutoCI 터미널 모드${NC}"
+        python3 autoci_terminal.py --interactive
+        ;;
+    
+    # 빠른 명령 실행
+    create|c)
+        shift
+        python3 autoci_terminal.py "만들어줘 $*"
+        ;;
+    
+    modify|m)
+        shift
+        python3 autoci_terminal.py "수정해줘 $*"
+        ;;
+    
+    improve|i)
+        shift
+        python3 autoci_terminal.py "개선해줘 $*"
+        ;;
+    
+    fix|f)
+        shift
+        python3 autoci_terminal.py "고쳐줘 $*"
+        ;;
+    
+    # 데이터 관리
+    data)
+        case "$2" in
+            add)
+                echo -e "${YELLOW}📥 전문가 데이터 수집 중...${NC}"
+                python3 autoci_terminal.py "데이터 추가"
+                ;;
+            index)
+                echo -e "${YELLOW}🔍 벡터 기반 고급 인덱싱 중...${NC}"
+                python3 vector_indexer.py
+                ;;
+            *)
+                echo "사용법: autoci data [add|index]"
+                ;;
+        esac
+        ;;
+    
+    # 시스템 상태
+    status|s)
+        python3 autoci_terminal.py "상태"
+        ;;
+    
+    # Dual Phase 시스템
+    dual)
+        case "$2" in
+            start)
+                echo -e "${GREEN}🚀 Robust Dual Phase System 시작 (RAG + Fine-tuning)${NC}"
+                echo -e "${YELLOW}웹 UI: http://localhost:8080${NC}"
+                python3 robust_dual_phase.py start
+                ;;
+            stop)
+                echo -e "${RED}🛑 Dual Phase System 종료${NC}"
+                python3 robust_dual_phase.py stop
+                ;;
+            status)
+                echo -e "${YELLOW}📊 시스템 상태${NC}"
+                python3 robust_dual_phase.py status
+                ;;
+            report)
+                echo -e "${CYAN}📝 상태 리포트${NC}"
+                # 최신 dual phase 리포트 찾기
+                REPORT_DIR="$AUTOCI_DIR/autoci_reports"
+                if [ -d "$REPORT_DIR" ]; then
+                    LATEST_REPORT=$(ls -t "$REPORT_DIR"/final_report_*.md 2>/dev/null | head -n1)
+                    if [ -f "$LATEST_REPORT" ]; then
+                        cat "$LATEST_REPORT"
+                    else
+                        echo "리포트가 없습니다. 시스템을 실행하세요."
+                    fi
+                else
+                    echo "리포트 디렉토리가 없습니다."
+                fi
+                ;;
+            *)
+                echo "사용법: autoci dual [start|stop|status|report]"
+                ;;
+        esac
+        ;;
+    
+    # RAG 시스템
+    rag)
+        case "$2" in
+            start)
+                echo -e "${GREEN}🔍 Enhanced RAG v2.0 서버 시작${NC}"
+                python3 enhanced_rag_system_v2.py --server
+                ;;
+            test)
+                python3 enhanced_rag_system_v2.py --test
+                ;;
+            query)
+                shift 2
+                python3 enhanced_rag_system_v2.py --query "$*"
+                ;;
+            *)
+                echo "사용법: autoci rag [start|test|query <질문>]"
+                ;;
+        esac
+        ;;
+    
+    # 향상된 시스템 (24시간 자동 코드 수정)
+    enhance)
+        shift
+        case "$1" in
+            start)
+                echo -e "${GREEN}🚀 24시간 자동 코드 수정 시스템 시작${NC}"
+                shift
+                if [ -n "$1" ]; then
+                    echo -e "${BLUE}📁 대상 경로: $1${NC}"
+                    python3 "$AUTOCI_DIR/advanced_autoci_system.py" start --path "$1"
+                else
+                    echo -e "${BLUE}📁 현재 디렉토리에서 시작${NC}"
+                    python3 "$AUTOCI_DIR/advanced_autoci_system.py" start
+                fi
+                ;;
+            stop)
+                echo -e "${RED}🛑 시스템 종료${NC}"
+                python3 "$AUTOCI_DIR/advanced_autoci_system.py" stop
+                ;;
+            status)
+                echo -e "${YELLOW}📊 시스템 상태 확인${NC}"
+                python3 "$AUTOCI_DIR/advanced_autoci_system.py" status
+                ;;
+            collect)
+                echo -e "${BLUE}📚 심층 C# 전문 데이터 수집${NC}"
+                python3 "$AUTOCI_DIR/deep_csharp_collector.py"
+                ;;
+            report)
+                echo -e "${CYAN}📝 최신 리포트 보기${NC}"
+                # 최신 리포트 파일 찾기
+                REPORT_DIR="$AUTOCI_DIR/autoci_reports"
+                if [ -d "$REPORT_DIR" ]; then
+                    LATEST_REPORT=$(ls -t "$REPORT_DIR"/*.md 2>/dev/null | head -n1)
+                    if [ -f "$LATEST_REPORT" ]; then
+                        cat "$LATEST_REPORT"
+                    else
+                        echo "리포트가 없습니다. 먼저 시스템을 실행하세요."
+                    fi
+                else
+                    echo "리포트 디렉토리가 없습니다."
+                fi
+                ;;
+            *)
+                echo -e "${YELLOW}사용법: autoci enhance [start|stop|status|collect|report] [옵션]${NC}"
+                echo "  start [경로]      # 24시간 자동 시스템 시작"
+                echo "  stop              # 시스템 종료"
+                echo "  status            # 현재 상태 확인"
+                echo "  collect           # C# 전문 데이터 수집"
+                echo "  report            # 최신 리포트 보기"
+                echo ""
+                echo "예시:"
+                echo "  autoci enhance start /home/user/my-project"
+                echo "  autoci enhance start  # 현재 디렉토리"
+                ;;
+        esac
+        ;;
+    
+    # 인터랙티브 모드 (인자 없이 실행)
+    "")
+        echo -e "${CYAN}🤖 AutoCI Interactive Mode${NC}"
+        echo -e "${GREEN}가상환경 활성화 및 시스템 초기화 중...${NC}"
+        
+        # 간단한 버전 사용 (의존성 최소화)
+        python3 "$AUTOCI_DIR/autoci_simple_interactive.py"
+        ;;
+    
+    # 도움말
+    help|h)
+        echo -e "${BLUE}🤖 AutoCI - 24시간 자동 코드 수정 시스템${NC}"
+        echo ""
+        echo "사용법: autoci [명령] [옵션]"
+        echo ""
+        echo "기본 명령어:"
+        echo "  start              - 모든 시스템 시작"
+        echo "  terminal, t        - 대화형 터미널 모드"
+        echo "  status, s          - 시스템 상태 확인"
+        echo ""
+        echo "빠른 코드 수정:"
+        echo "  create, c <설명>   - 코드 생성 (예: autoci c PlayerController 클래스)"
+        echo "  modify, m <파일>   - 코드 수정 (예: autoci m GameManager.cs)"
+        echo "  improve, i <파일>  - 코드 개선 (예: autoci i /path/to/file.cs)"
+        echo "  fix, f <설명>      - 버그 수정 (예: autoci f NetworkManager 오류)"
+        echo ""
+        echo "데이터 관리:"
+        echo "  data add           - 전문가 데이터 수집"
+        echo "  data index         - 데이터 인덱싱"
+        echo ""
+        echo "고급 기능:"
+        echo "  dual start         - Enhanced Dual Phase System 시작"
+        echo "  dual stop          - Dual Phase System 종료"
+        echo "  dual status        - Dual Phase 상태 확인"
+        echo "  dual report        - Dual Phase 상태 리포트"
+        echo "  rag start          - RAG 서버만 시작"
+        echo "  rag test           - RAG 시스템 테스트"
+        echo "  rag query <질문>   - RAG 쿼리 실행"
+        echo ""
+        echo "24시간 자동 시스템:"
+        echo "  enhance start [경로] - 24시간 자동 코드 수정 시작"
+        echo "  enhance stop         - 시스템 종료"
+        echo "  enhance status       - 현재 상태 확인"
+        echo "  enhance collect      - C# 전문 데이터 수집"
+        echo "  enhance report       - 최신 리포트 보기"
+        echo ""
+        echo "예시:"
+        echo "  autoci c Unity에서 Object Pool 패턴 구현"
+        echo "  autoci m Assets/Scripts/Player.cs 위치: /home/user/project"
+        echo "  autoci terminal    # 대화형 모드로 진입"
+        ;;
+    
+    # 알 수 없는 명령
+    *)
+        # 한글 명령어도 Python 스크립트로 전달
+        python3 autoci_terminal.py "$@"
+        ;;
+esac

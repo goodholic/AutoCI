@@ -1,14 +1,18 @@
 using System;
 using System.Threading.Tasks;
 
-public class AIService
+namespace Backend.Services
 {
-    private readonly LlamaService _llamaService;
-    
-    public AIService(LlamaService llamaService)
+    public class AIService
     {
-        _llamaService = llamaService;
-    }
+        private readonly LlamaService _llamaService;
+        private readonly EnhancedRAGService _ragService;
+        
+        public AIService(LlamaService llamaService, EnhancedRAGService ragService)
+        {
+            _llamaService = llamaService;
+            _ragService = ragService;
+        }
     
     public async Task<string> GenerateText(string prompt)
     {
@@ -18,10 +22,10 @@ public class AIService
     
     public async Task<string> GenerateCode(string prompt, string language = "csharp")
     {
-        // 언어별 프롬프트 조정
+        // Enhanced RAG로 프롬프트 향상 (C#인 경우)
         var enhancedPrompt = language.ToLower() switch
         {
-            "csharp" => $"Generate C# code for the following request:\n{prompt}",
+            "csharp" => _ragService.EnhancePrompt(prompt),
             "javascript" => $"Generate JavaScript code for the following request:\n{prompt}",
             "python" => $"Generate Python code for the following request:\n{prompt}",
             _ => prompt
@@ -54,5 +58,6 @@ Please explain what this code does, how it works, and any important concepts it 
 Please provide the improved version with explanations of the changes made.";
         
         return await _llamaService.GenerateCode(prompt);
+    }
     }
 }

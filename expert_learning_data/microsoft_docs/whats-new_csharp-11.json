@@ -1,0 +1,79 @@
+{
+  "url": "https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-11",
+  "title": "What's new in C# 11",
+  "topic": "whats-new/csharp-11",
+  "content": "Table of contents\nExit focus mode\nAsk Learn\nAsk Learn\nTable of contents\nRead in English\nAdd\nAdd to plan\nEdit\nShare via\nFacebook\nx.com\nLinkedIn\nEmail\nPrint\nNote\nAccess to this page requires authorization. You can try\nsigning in\nor\nchanging directories\n.\nAccess to this page requires authorization. You can try\nchanging directories\n.\nWhat's new in C# 11\n2024-03-15\nFeedback\nIn this article\nThe following features were added in C# 11:\nRaw string literals\nGeneric math support\nGeneric attributes\nUTF-8 string literals\nNewlines in string interpolation expressions\nList patterns\nFile-local types\nRequired members\nAuto-default structs\nPattern match\nSpan<char>\non a constant\nstring\nExtended\nnameof\nscope\nNumeric IntPtr\nref\nfields and\nscoped ref\nImproved method group conversion to delegate\nWarning wave 7\nC# 11 is supported on\n.NET 7\n. For more information, see\nC# language versioning\n.\nYou can download the latest .NET 7 SDK from the\n.NET downloads page\n. You can also download\nVisual Studio 2022\n, which includes the .NET 7 SDK.\nNote\nWe're interested in your feedback on these features. If you find issues with any of these new features, create a\nnew issue\nin the\ndotnet/roslyn\nrepository.\nGeneric attributes\nYou can declare a\ngeneric class\nwhose base class is\nSystem.Attribute\n. This feature provides a more convenient syntax for attributes that require a\nSystem.Type\nparameter. Previously, you'd need to create an attribute that takes a\nType\nas its constructor parameter:\n// Before C# 11:\npublic class TypeAttribute : Attribute\n{\n   public TypeAttribute(Type t) => ParamType = t;\n\n   public Type ParamType { get; }\n}\nAnd to apply the attribute, you use the\ntypeof\noperator:\n[TypeAttribute(typeof(string))]\npublic string Method() => default;\nUsing this new feature, you can create a generic attribute instead:\n// C# 11 feature:\npublic class GenericAttribute<T> : Attribute { }\nThen, specify the type parameter to use the attribute:\n[GenericAttribute<string>()]\npublic string Method() => default;\nYou must supply all type parameters when you apply the attribute. In other words, the generic type must be\nfully constructed\n.\nIn the example above, the empty parentheses (\n(\nand\n)\n) can be omitted as the attribute does not have any arguments.\npublic class GenericType<T>\n{\n   [GenericAttribute<T>()] // Not allowed! generic attributes must be fully constructed types.\n   public string Method() => default;\n}\nThe type arguments must satisfy the same restrictions as the\ntypeof\noperator. Types that require metadata annotations aren't allowed. For example, the following types aren't allowed as the type parameter:\ndynamic\nstring?\n(or any nullable reference type)\n(int X, int Y)\n(or any other tuple types using C# tuple syntax).\nThese types aren't directly represented in metadata. They include annotations that describe the type. In all cases, you can use the underlying type instead:\nobject\nfor\ndynamic\n.\nstring\ninstead of\nstring?\n.\nValueTuple<int, int>\ninstead of\n(int X, int Y)\n.\nGeneric math support\nThere are several language features that enable generic math support:\nstatic virtual\nmembers in interfaces\nchecked user defined operators\nrelaxed shift operators\nunsigned right-shift operator\nYou can add\nstatic abstract\nor\nstatic virtual\nmembers in interfaces to define interfaces that include overloadable operators, other static members, and static properties. The primary scenario for this feature is to use mathematical operators in generic types. For example, you can implement the\nSystem.IAdditionOperators<TSelf, TOther, TResult>\ninterface in a type that implements\noperator +\n. Other interfaces define other mathematical operations or well-defined values. You can learn about the new syntax in the article on\ninterfaces\n. Interfaces that include\nstatic virtual\nmethods are typically\ngeneric interfaces\n. Furthermore, most will declare a constraint that the type parameter\nimplements the declared interface\n.\nYou can learn more and try the feature yourself in the tutorial\nExplore static abstract interface members\n, or the\nPreview features in .NET 6 – generic math\nblog post.\nGeneric math created other requirements on the language.\nunsigned right shift operator\n: Before C# 11, to force an unsigned right-shift, you would need to cast any signed integer type to an unsigned type, perform the shift, then cast the result back to a signed type. Beginning in C# 11, you can use the\n>>>\n, the\nunsigned shift operator\n.\nrelaxed shift operator requirements\n: C# 11 removes the requirement that the second operand must be an\nint\nor implicitly convertible to\nint\n. This change allows types that implement generic math interfaces to be used in these locations.\nchecked and unchecked user defined operators\n: Developers can now define\nchecked\nand\nunchecked\narithmetic operators. The compiler generates calls to the correct variant based on the current context. You can read more about\nchecked\noperators in the article on\nArithmetic operators\n.\nNumeric\nIntPtr\nand\nUIntPtr\nThe\nnint\nand\nnuint\ntypes now alias\nSystem.IntPtr\nand\nSystem.UIntPtr\n, respectively.\nNewlines in string interpolations\nThe text inside the\n{\nand\n}\ncharacters for a string interpolation can now span multiple lines. The text between the\n{\nand\n}\nmarkers is parsed as C#. Any legal C#, including newlines, is allowed. This feature makes it easier to read string interpolations that use longer C# expressions, like pattern matching\nswitch\nexpressions, or LINQ queries.\nYou can learn more about the newlines feature in the\nstring interpolations\narticle in the language reference.\nList patterns\nList patterns\nextend pattern matching to match sequences of elements in a list or an array. For example,\nsequence is [1, 2, 3]\nis\ntrue\nwhen the\nsequence\nis an array or a list of three integers (1, 2, and 3). You can match elements using any pattern, including constant, type, property and relational patterns. The discard pattern (\n_\n) matches any single element, and the new\nrange pattern\n(\n..\n) matches any sequence of zero or more elements.\nYou can learn more details about list patterns in the\npattern matching\narticle in the language reference.\nImproved method group conversion to delegate\nThe C# standard on\nMethod group conversions\nnow includes the following item:\nThe conversion is permitted (but not required) to use an existing delegate instance that already contains these references.\nPrevious versions of the standard prohibited the compiler from reusing the delegate object created for a method group conversion. The C# 11 compiler caches the delegate object created from a method group conversion and reuses that single delegate object. This feature was first available in Visual Studio 2022 version 17.2 as a preview feature, and in .NET 7 Preview 2.\nRaw string literals\nRaw string literals\nare a new format for string literals. Raw string literals can contain arbitrary text, including whitespace, new lines, embedded quotes, and other special characters without requiring escape sequences. A raw string literal starts with at least three double-quote (\"\"\") characters. It ends with the same number of double-quote characters. Typically, a raw string literal uses three double quotes on a single line to start the string, and three double quotes on a separate line to end the string. The newlines following the opening quote and preceding the closing quote aren't included in the final content:\nstring longMessage = \"\"\"\n    This is a long message.\n    It has several lines.\n        Some are indented\n                more than others.\n    Some should start at the first column.\n    Some have \"quoted text\" in them.\n    \"\"\";\nAny whitespace to the left of the closing double quotes will be removed from the string literal. Raw string literals can be combined with string interpolation to include braces in the output text. Multiple\n$\ncharacters denote how many consecutive braces start and end the interpolation:\nvar location = $$\"\"\"\n   You are at {{{Longitude}}, {{Latitude}}}\n   \"\"\";\nThe preceding example specifies that two braces start and end an interpolation. The third repeated opening and closing brace are included in the output string.\nYou can learn more about raw string literals in the article on\nstrings in the programming guide\n, and the language reference articles on\nstring literals\nand\ninterpolated strings\n.\nAuto-default struct\nThe C# 11 compiler ensures that all fields of a\nstruct\ntype are initialized to their default value as part of executing a constructor. This change means any field or auto property not initialized by a constructor is automatically initialized by the compiler. Structs where the constructor doesn't definitely assign all fields now compile, and any fields not explicitly initialized are set to their default value. You can read more about how this change affects struct initialization in the article on\nstructs\n.\nPattern match\nSpan<char>\nor\nReadOnlySpan<char>\non a constant\nstring\nYou've been able to test if a\nstring\nhad a specific constant value using pattern matching for several releases. Now, you can use the same pattern matching logic with variables that are\nSpan<char>\nor\nReadOnlySpan<char>\n.\nExtended nameof scope\nType parameter names and parameter names are now in scope when used in a\nnameof\nexpression in an\nattribute declaration\non that method. This feature means you can use the\nnameof\noperator to specify the name of a method parameter in an attribute on the method or parameter declaration. This feature is most often useful to add attributes for\nnullable analysis\n.\nUTF-8 string literals\nYou can specify the\nu8\nsuffix on a string literal to specify UTF-8 character encoding. If your application needs UTF-8 strings, for HTTP string constants or similar text protocols, you can use this feature to simplify the creation of UTF-8 strings.\nYou can learn more about UTF-8 string literals in the string literal section of the article on\nbuiltin reference types\n.\nRequired members\nYou can add the\nrequired\nmodifier\nto properties and fields to enforce constructors and callers to initialize those values. The\nSystem.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute\ncan be added to constructors to inform the compiler that a constructor initializes\nall\nrequired members.\nFor more information on required members, See the\nRequired properties\nsection of the properties article.\nref\nfields and\nref scoped\nvariables\nYou can declare\nref\nfields inside a\nref struct\n. This supports types such as\nSystem.Span<T>\nwithout special attributes or hidden internal types.\nYou can add the\nscoped\nmodifier to any\nref\ndeclaration. This limits the\nscope\nwhere the reference can escape to.\nFile local types\nBeginning in C# 11, you can use the\nfile\naccess modifier to create a type whose visibility is scoped to the source file in which it is declared. This feature helps source generator authors avoid naming collisions. You can learn more about this feature in the article on\nfile-scoped types\nin the language reference.\nSee also\nWhat's new in .NET 7\nCollaborate with us on GitHub\nThe source for this content can be found on GitHub, where you can also create and review issues and pull requests. For more information, see\nour contributor guide\n.\n.NET\nOpen a documentation issue\nProvide product feedback\nAdditional resources",
+  "code_samples": [
+    {
+      "language": "csharp",
+      "code": "// Before C# 11:\npublic class TypeAttribute : Attribute\n{\n   public TypeAttribute(Type t) => ParamType = t;\n\n   public Type ParamType { get; }\n}",
+      "lines": 7
+    },
+    {
+      "language": "csharp",
+      "code": "// Before C# 11:\npublic class TypeAttribute : Attribute\n{\n   public TypeAttribute(Type t) => ParamType = t;\n\n   public Type ParamType { get; }\n}",
+      "lines": 7
+    },
+    {
+      "language": "csharp",
+      "code": "[TypeAttribute(typeof(string))]\npublic string Method() => default;",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "[TypeAttribute(typeof(string))]\npublic string Method() => default;",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "// C# 11 feature:\npublic class GenericAttribute<T> : Attribute { }",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "// C# 11 feature:\npublic class GenericAttribute<T> : Attribute { }",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "[GenericAttribute<string>()]\npublic string Method() => default;",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "[GenericAttribute<string>()]\npublic string Method() => default;",
+      "lines": 2
+    },
+    {
+      "language": "csharp",
+      "code": "public class GenericType<T>\n{\n   [GenericAttribute<T>()] // Not allowed! generic attributes must be fully constructed types.\n   public string Method() => default;\n}",
+      "lines": 5
+    },
+    {
+      "language": "csharp",
+      "code": "public class GenericType<T>\n{\n   [GenericAttribute<T>()] // Not allowed! generic attributes must be fully constructed types.\n   public string Method() => default;\n}",
+      "lines": 5
+    },
+    {
+      "language": "csharp",
+      "code": "string longMessage = \"\"\"\n    This is a long message.\n    It has several lines.\n        Some are indented\n                more than others.\n    Some should start at the first column.\n    Some have \"quoted text\" in them.\n    \"\"\";",
+      "lines": 8
+    },
+    {
+      "language": "csharp",
+      "code": "string longMessage = \"\"\"\n    This is a long message.\n    It has several lines.\n        Some are indented\n                more than others.\n    Some should start at the first column.\n    Some have \"quoted text\" in them.\n    \"\"\";",
+      "lines": 8
+    },
+    {
+      "language": "csharp",
+      "code": "var location = $$\"\"\"\n   You are at {{{Longitude}}, {{Latitude}}}\n   \"\"\";",
+      "lines": 3
+    },
+    {
+      "language": "csharp",
+      "code": "var location = $$\"\"\"\n   You are at {{{Longitude}}, {{Latitude}}}\n   \"\"\";",
+      "lines": 3
+    }
+  ],
+  "collected_at": "2025-06-25T19:28:59.460839"
+}
