@@ -9,18 +9,18 @@
     "methods": 0,
     "interfaces": 0,
     "usings": [
-      "Azure.Core",
-      "Azure",
+      "Azure.ResourceManager.Storage",
+      "Azure.ResourceManager.Storage.Models",
       "System.Text",
+      "Azure",
+      "Azure.ResourceManager.Resources",
+      "Azure.Core",
       "Azure.ResourceManager",
       "Azure.Storage.Blobs.Models",
-      "Azure.ResourceManager.Resources",
-      "System",
       "Azure.Identity",
-      "Azure.ResourceManager.Storage.Models",
-      "Azure.Storage.Blobs",
-      "Azure.ResourceManager.Storage",
-      "System.Threading.Tasks"
+      "System",
+      "System.Threading.Tasks",
+      "Azure.Storage.Blobs"
     ],
     "namespaces": [
       "AzureIdentityStorageExample"
@@ -33,5 +33,5 @@
   },
   "size": 9024,
   "url": "https://github.com/dotnet/samples/blob/main/azure/sdk-identity-resources-storage/Program.cs",
-  "collected_at": "2025-06-25T19:29:09.227182"
+  "collected_at": "2025-06-27T01:19:24.438883"
 }

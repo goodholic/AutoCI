@@ -9,15 +9,15 @@
     "methods": 2,
     "interfaces": 0,
     "usings": [
-      "System.Linq",
-      "Microsoft.Extensions.DependencyInjection",
       "Microsoft.Extensions.Hosting",
+      "Microsoft.Extensions.DependencyInjection",
       "Microsoft.AspNetCore.Builder",
-      "System",
-      "Microsoft.AspNetCore.HttpsPolicy",
-      "Microsoft.Extensions.Configuration",
       "System.Collections.Generic",
+      "System.Linq",
+      "Microsoft.AspNetCore.HttpsPolicy",
       "Microsoft.AspNetCore.Hosting",
+      "Microsoft.Extensions.Configuration",
+      "System",
       "System.Threading.Tasks"
     ],
     "namespaces": [
@@ -31,5 +31,5 @@
   },
   "size": 1727,
   "url": "https://github.com/dotnet/samples/blob/main/azure/app-insights-aspnet-core-quickstart/Startup.cs",
-  "collected_at": "2025-06-25T19:29:08.896795"
+  "collected_at": "2025-06-27T01:19:24.029516"
 }

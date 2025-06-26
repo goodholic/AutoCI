@@ -9,13 +9,13 @@
     "methods": 1,
     "interfaces": 0,
     "usings": [
+      "System.Collections.Generic",
+      "System.Diagnostics",
       "System.Linq",
+      "Microsoft.AspNetCore.Mvc.RazorPages",
       "Microsoft.AspNetCore.Mvc",
       "Microsoft.Extensions.Logging",
       "System",
-      "System.Collections.Generic",
-      "System.Diagnostics",
-      "Microsoft.AspNetCore.Mvc.RazorPages",
       "System.Threading.Tasks"
     ],
     "namespaces": [
@@ -29,5 +29,5 @@
   },
   "size": 865,
   "url": "https://github.com/dotnet/samples/blob/main/azure/app-insights-aspnet-core-quickstart/Pages/Error.cshtml.cs",
-  "collected_at": "2025-06-25T19:29:07.635790"
+  "collected_at": "2025-06-27T01:19:21.270335"
 }

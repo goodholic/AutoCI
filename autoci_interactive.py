@@ -2,6 +2,7 @@
 """
 AutoCI 대화형 인터페이스
 자동 초기화 및 백그라운드 학습 중 명령 처리
+ChatGPT 수준 한국어 AI 통합 버전
 """
 
 import os
@@ -18,25 +19,71 @@ import multiprocessing
 from concurrent.futures import ThreadPoolExecutor
 import readline  # 명령어 히스토리
 import cmd
-import colorama
-from colorama import Fore, Back, Style
-import psutil
+# 의존성 없는 컬러 지원
+try:
+    import colorama
+    from colorama import Fore, Back, Style
+    colorama.init()
+    HAS_COLORAMA = True
+except ImportError:
+    # colorama가 없으면 간단한 대체 클래스 사용
+    class Fore:
+        RED = '\033[31m'
+        GREEN = '\033[32m'
+        YELLOW = '\033[33m'
+        BLUE = '\033[34m'
+        MAGENTA = '\033[35m'
+        CYAN = '\033[36m'
+        WHITE = '\033[37m'
+        RESET = '\033[0m'
+    
+    class Style:
+        RESET_ALL = '\033[0m'
+        BRIGHT = '\033[1m'
+    
+    class Back:
+        BLACK = '\033[40m'
+        RED = '\033[41m'
+        GREEN = '\033[42m'
+        YELLOW = '\033[43m'
+    
+    HAS_COLORAMA = False
+
+# Rich 대체 (선택적 import)
+try:
+    from rich.console import Console
+    from rich.table import Table
+    from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
+    from rich.live import Live
+    from rich.layout import Layout
+    from rich.panel import Panel
+    from rich.syntax import Syntax
+    console = Console()
+    HAS_RICH = True
+except ImportError:
+    # Rich가 없으면 간단한 대체 클래스 사용
+    class Console:
+        def print(self, *args, **kwargs):
+            print(*args)
+    
+    console = Console()
+    HAS_RICH = False
+
+# 추가 모듈들 (선택적)
+try:
+    import psutil
+    HAS_PSUTIL = True
+except ImportError:
+    HAS_PSUTIL = False
+
 import signal
 import time
 import sqlite3
-from rich.console import Console
-from rich.table import Table
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
-from rich.live import Live
-from rich.layout import Layout
-from rich.panel import Panel
-from rich.syntax import Syntax
+import re
+import random
+from collections import defaultdict
 
-# colorama 초기화
-colorama.init()
-
-# Rich console
-console = Console()
+# 초기화는 위에서 처리됨
 
 # 로깅 설정
 logging.basicConfig(
@@ -50,24 +97,200 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+class KoreanAIProcessor:
+    """ChatGPT 수준 한국어 AI 처리기"""
+    
+    def __init__(self):
+        # 한국어 패턴 분석
+        self.korean_patterns = {
+            "particles": ["은", "는", "이", "가", "을", "를", "에", "에서", "로", "으로", "와", "과", "의", "도", "만", "라도", "나마"],
+            "endings": {
+                "formal": ["습니다", "입니다", "하십시오", "하시겠습니까", "되십시오", "드립니다"],
+                "polite": ["해요", "이에요", "예요", "돼요", "거예요", "세요"],
+                "casual": ["해", "야", "이야", "어", "지", "네", "다"]
+            },
+            "honorifics": ["님", "씨", "선생님", "교수님", "사장님", "께서", "드리다", "받으시다", "하시다"],
+            "emotions": {
+                "positive": ["좋다", "행복하다", "기쁘다", "즐겁다", "감사하다", "만족하다", "훌륭하다"],
+                "negative": ["나쁘다", "슬프다", "화나다", "힘들다", "어렵다", "불편하다", "짜증나다"],
+                "neutral": ["괜찮다", "보통이다", "그럭저럭", "상관없다"]
+            },
+            "questions": ["무엇", "언제", "어디", "누가", "어떻게", "왜", "몇", "어느", "어떤"],
+            "requests": ["해주세요", "해줘", "부탁", "도와주세요", "알려주세요", "가르쳐주세요", "설명해주세요"]
+        }
+        
+        # 감정 분석 키워드
+        self.emotion_keywords = {
+            "stress": ["스트레스", "힘들어", "어려워", "피곤해", "지쳐", "답답해"],
+            "happy": ["기뻐", "좋아", "행복해", "즐거워", "신나", "기대돼"],
+            "confused": ["모르겠어", "헷갈려", "이해안돼", "복잡해", "어려워"],
+            "angry": ["화나", "짜증나", "답답해", "속상해", "불만"],
+            "grateful": ["고마워", "감사해", "도움돼", "잘했어", "훌륭해"]
+        }
+        
+        # 응답 템플릿
+        self.response_templates = {
+            "greeting": [
+                "안녕하세요! 😊 AutoCI와 함께하는 코딩이 즐거워질 거예요!",
+                "반가워요! 👋 오늘도 멋진 코드를 만들어봐요!",
+                "안녕하세요! ✨ 무엇을 도와드릴까요?"
+            ],
+            "unity_help": [
+                "Unity 개발에서 도움이 필요하시군요! 구체적으로 어떤 부분이 궁금하신가요?",
+                "Unity 관련해서 설명해드릴게요! 어떤 기능에 대해 알고 싶으신가요?",
+                "Unity 전문가 AutoCI가 도와드리겠습니다! 🎮"
+            ],
+            "code_help": [
+                "코드 관련해서 도움을 드릴게요! 구체적으로 어떤 문제인가요?",
+                "프로그래밍 질문이시네요. 자세히 설명해드리겠습니다!",
+                "코딩에서 막히는 부분이 있으시군요. 함께 해결해봐요! 💻"
+            ],
+            "empathy": [
+                "그런 기분이 드실 수 있어요. 이해합니다.",
+                "힘드시겠지만 차근차근 해나가면 분명 해결될 거예요!",
+                "걱정하지 마세요. 제가 도와드릴게요! 😊"
+            ],
+            "encouragement": [
+                "정말 잘하고 계세요! 👍",
+                "훌륭한 접근이에요! 계속 진행해보세요!",
+                "좋은 방향으로 가고 있어요! 💪"
+            ]
+        }
+        
+    def analyze_korean_text(self, text: str) -> Dict[str, any]:
+        """한국어 텍스트 심층 분석"""
+        analysis = {
+            "formality": self._detect_formality(text),
+            "emotion": self._detect_emotion(text),
+            "intent": self._detect_intent(text),
+            "topic": self._detect_topic(text),
+            "patterns": self._analyze_patterns(text)
+        }
+        return analysis
+        
+    def _detect_formality(self, text: str) -> str:
+        """격식 수준 감지"""
+        formal_count = sum(1 for pattern in self.korean_patterns["endings"]["formal"] if pattern in text)
+        polite_count = sum(1 for pattern in self.korean_patterns["endings"]["polite"] if pattern in text)
+        casual_count = sum(1 for pattern in self.korean_patterns["endings"]["casual"] if pattern in text)
+        
+        if formal_count > 0:
+            return "formal"
+        elif polite_count > 0:
+            return "polite"
+        elif casual_count > 0:
+            return "casual"
+        else:
+            return "neutral"
+            
+    def _detect_emotion(self, text: str) -> str:
+        """감정 감지"""
+        for emotion, keywords in self.emotion_keywords.items():
+            if any(keyword in text for keyword in keywords):
+                return emotion
+        return "neutral"
+        
+    def _detect_intent(self, text: str) -> str:
+        """의도 분석"""
+        if any(q in text for q in self.korean_patterns["questions"]):
+            return "question"
+        elif any(r in text for r in self.korean_patterns["requests"]):
+            return "request"
+        elif any(greeting in text for greeting in ["안녕", "반가", "처음"]):
+            return "greeting"
+        else:
+            return "statement"
+            
+    def _detect_topic(self, text: str) -> str:
+        """주제 감지"""
+        unity_keywords = ["유니티", "Unity", "게임", "스크립트", "GameObject", "Transform", "Collider"]
+        code_keywords = ["코드", "프로그래밍", "개발", "버그", "오류", "함수", "변수", "클래스"]
+        
+        if any(keyword in text for keyword in unity_keywords):
+            return "unity"
+        elif any(keyword in text for keyword in code_keywords):
+            return "programming"
+        else:
+            return "general"
+            
+    def _analyze_patterns(self, text: str) -> Dict[str, int]:
+        """언어 패턴 분석"""
+        patterns = {
+            "particles": sum(1 for p in self.korean_patterns["particles"] if p in text),
+            "honorifics": sum(1 for h in self.korean_patterns["honorifics"] if h in text),
+            "korean_ratio": self._calculate_korean_ratio(text)
+        }
+        return patterns
+        
+    def _calculate_korean_ratio(self, text: str) -> float:
+        """한국어 비율 계산"""
+        korean_chars = len(re.findall(r'[가-힣]', text))
+        total_chars = len(re.sub(r'\s', '', text))
+        return korean_chars / total_chars if total_chars > 0 else 0.0
+        
+    def generate_response(self, user_input: str, analysis: Dict[str, any]) -> str:
+        """ChatGPT 스타일 자연스러운 응답 생성"""
+        
+        # 의도별 응답 생성
+        if analysis["intent"] == "greeting":
+            base_response = random.choice(self.response_templates["greeting"])
+        elif analysis["topic"] == "unity":
+            base_response = random.choice(self.response_templates["unity_help"])
+        elif analysis["topic"] == "programming":
+            base_response = random.choice(self.response_templates["code_help"])
+        else:
+            # 감정에 따른 응답
+            if analysis["emotion"] == "stress":
+                base_response = random.choice(self.response_templates["empathy"])
+            elif analysis["emotion"] == "grateful":
+                base_response = random.choice(self.response_templates["encouragement"])
+            else:
+                base_response = "네, 말씀해주세요! 어떤 도움이 필요하신가요? 😊"
+        
+        # 격식 수준에 맞춰 응답 조정
+        if analysis["formality"] == "formal":
+            base_response = self._make_formal(base_response)
+        elif analysis["formality"] == "casual":
+            base_response = self._make_casual(base_response)
+            
+        return base_response
+        
+    def _make_formal(self, text: str) -> str:
+        """격식체로 변환"""
+        text = text.replace("해요", "합니다")
+        text = text.replace("이에요", "입니다")
+        text = text.replace("예요", "입니다")
+        text = text.replace("드릴게요", "드리겠습니다")
+        return text
+        
+    def _make_casual(self, text: str) -> str:
+        """반말로 변환"""
+        text = text.replace("해요", "해")
+        text = text.replace("이에요", "이야")
+        text = text.replace("예요", "야")
+        text = text.replace("드릴게요", "줄게")
+        text = text.replace("하세요", "해")
+        return text
+
+
 class AutoCIShell(cmd.Cmd):
     """AutoCI 대화형 셸"""
     
     intro = f"""
 {Fore.CYAN}╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║  {Fore.YELLOW}🤖 AutoCI - 24시간 자동 코드 수정 시스템{Fore.CYAN}                    ║
+║  {Fore.YELLOW}🤖 AutoCI - ChatGPT 수준 한국어 AI 통합 시스템{Fore.CYAN}            ║
 ║                                                              ║
 ║  {Fore.GREEN}✓ 가상환경 활성화됨{Fore.CYAN}                                         ║
-║  {Fore.GREEN}✓ 데이터 인덱싱 중...{Fore.CYAN}                                       ║
+║  {Fore.GREEN}✓ 한국어 AI 엔진 활성화{Fore.CYAN}                                     ║
 ║  {Fore.GREEN}✓ 백그라운드 학습 시작{Fore.CYAN}                                       ║
 ║                                                              ║
-║  {Fore.WHITE}도움말: help 또는 ?{Fore.CYAN}                                         ║
+║  {Fore.WHITE}자연스러운 한국어로 대화하세요! 🇰🇷{Fore.CYAN}                         ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝{Style.RESET_ALL}
 """
     
-    prompt = f'{Fore.GREEN}autoci>{Style.RESET_ALL} '
+    prompt = f'{Fore.GREEN}🤖 autoci>{Style.RESET_ALL} '
     
     def __init__(self):
         super().__init__()
@@ -81,6 +304,10 @@ class AutoCIShell(cmd.Cmd):
             'training': 'stopped',
             'monitoring': 'running'
         }
+        
+        # 한국어 AI 프로세서 초기화
+        self.korean_ai = KoreanAIProcessor()
+        logger.info("✅ ChatGPT 수준 한국어 AI 프로세서 초기화 완료")
         
         # 백그라운드 초기화 시작
         self.init_thread = threading.Thread(target=self.background_init)
@@ -742,8 +969,12 @@ class AutoCIShell(cmd.Cmd):
         console.print(table)
         
         # 리소스 사용량
-        cpu_percent = psutil.cpu_percent(interval=1)
-        memory = psutil.virtual_memory()
+        if HAS_PSUTIL:
+            cpu_percent = psutil.cpu_percent(interval=1)
+            memory = psutil.virtual_memory()
+        else:
+            cpu_percent = 0.0
+            memory = type('Memory', (), {'percent': 0.0, 'available': 0, 'total': 0, 'used': 0})()
         
         resource_table = Table(title="리소스 사용량")
         resource_table.add_column("항목", style="cyan")
@@ -881,102 +1112,89 @@ class AutoCIShell(cmd.Cmd):
         return self.do_exit(arg)
         
     def default(self, line):
-        """알 수 없는 명령 처리"""
+        """ChatGPT 수준 한국어 AI 처리"""
         line = line.strip()
         
-        # 한국어 인사말 및 일반적인 표현 처리
-        korean_greetings = {
-            '안녕': '안녕하세요! 👋 AutoCI 시스템에 오신 것을 환영합니다!\n저는 24시간 코드를 자동으로 개선해드리는 AI입니다. 어떤 도움이 필요하신가요?',
-            '안녕하세요': '안녕하세요! 😊 반갑습니다! AutoCI와 함께 코드 품질을 향상시켜보세요!',
-            '반가워': '저도 반가워요! 🤗 코딩 작업에서 어떤 도움이 필요하신지 말씀해주세요.',
-            '고마워': '천만에요! 😊 언제든지 도움이 필요하시면 말씀해주세요!',
-            '고맙습니다': '별말씀을요! 🙏 더 필요한 것이 있으면 언제든 말씀해주세요.',
-            '잘했어': '감사합니다! 😄 더 나은 서비스를 위해 계속 발전하고 있어요!',
-            '좋아': '기뻐요! 👍 계속해서 좋은 코드를 만들어나가요!',
-            '네': '네! 무엇을 도와드릴까요? 🤔',
-            '응': '네, 말씀하세요! ✨',
-            '음': '어떤 생각을 하고 계신가요? 코드 관련해서 궁금한 것이 있으시면 언제든 물어보세요! 💭'
-        }
+        # 한국어 비율 확인
+        korean_ratio = self.korean_ai._calculate_korean_ratio(line)
         
-        # 한국어 명령어 매핑
-        korean_commands = {
-            '도움말': 'help',
-            '도움': 'help',
-            '명령어': 'help',
-            '상태': 'status',
-            '상태확인': 'status',
-            '프로젝트': 'project',
-            '분석': 'analyze',
-            '개선': 'improve',
-            '검색': 'search',
-            '찾기': 'search',
-            '리포트': 'report',
-            '보고서': 'report',
-            '모니터링': 'monitor',
-            '모니터': 'monitor',
-            '종료': 'exit',
-            '나가기': 'exit',
-            '끝': 'exit',
-            '그만': 'exit'
-        }
-        
-        # 인사말 처리
-        if line.lower() in korean_greetings:
-            console.print(f"[green]{korean_greetings[line.lower()]}[/green]")
-            console.print(f"\n[cyan]💡 주요 명령어:[/cyan]")
-            console.print(f"   [yellow]• project <경로>[/yellow] - Unity 프로젝트 설정")
-            console.print(f"   [yellow]• analyze[/yellow] - 코드 분석")
-            console.print(f"   [yellow]• improve <파일>[/yellow] - 코드 자동 개선")
-            console.print(f"   [yellow]• 도움말[/yellow] - 전체 명령어 보기")
-            return
+        if korean_ratio > 0.3:  # 한국어 텍스트인 경우
+            # ChatGPT 스타일 한국어 분석
+            console.print(f"[cyan]🤔 '{line}'에 대해 생각해보고 있어요...[/cyan]")
+            analysis = self.korean_ai.analyze_korean_text(line)
             
-        # 한국어 명령어 변환
-        if line in korean_commands:
-            english_cmd = korean_commands[line]
-            console.print(f"[cyan]'{line}' → '{english_cmd}' 명령을 실행합니다...[/cyan]")
-            self.onecmd(english_cmd)
-            return
+            # 한국어 명령어 매핑 먼저 확인
+            korean_commands = {
+                '도움말': 'help', '도움': 'help', '명령어': 'help',
+                '상태': 'status', '상태확인': 'status',
+                '프로젝트': 'project', '분석': 'analyze', '개선': 'improve',
+                '검색': 'search', '찾기': 'search',
+                '리포트': 'report', '보고서': 'report',
+                '모니터링': 'monitor', '모니터': 'monitor',
+                '종료': 'exit', '나가기': 'exit', '끝': 'exit', '그만': 'exit'
+            }
             
-        # 질문이나 대화형 입력 감지
-        conversation_patterns = ['어떻게', '뭐야', '무엇', '왜', '언제', '어디서', '누가', '어느', '몇', '?', '？']
-        if any(pattern in line for pattern in conversation_patterns):
-            console.print(f"[cyan]🤔 '{line}'에 대해 AI에게 물어봅니다...[/cyan]")
-        
-        # RAG 시스템에 질문으로 전달
-        if self.is_initialized and self.system_status['rag'] == 'running':
-            try:
-                # RAG API 호출
-                import requests
-                
-                response = requests.post(
-                    "http://localhost:8000/query",
-                    json={"query": line, "k": 3},
-                    timeout=10
-                )
-                
-                if response.status_code == 200:
-                    data = response.json()
-                    if data.get('results'):
-                        console.print("\n[green]🤖 AI 응답:[/green]")
-                        for i, result in enumerate(data['results'][:2], 1):
-                            console.print(f"[cyan]{i}.[/cyan] {result['content'][:200]}...")
-                    else:
-                        console.print("[yellow]죄송합니다. 관련 정보를 찾을 수 없네요. 😅[/yellow]")
-                        console.print("[cyan]다른 질문을 해주시거나 '도움말'을 입력해보세요![/cyan]")
+            # 명령어인지 확인
+            for korean_cmd, english_cmd in korean_commands.items():
+                if korean_cmd in line:
+                    console.print(f"[cyan]✅ '{korean_cmd}' 명령을 실행합니다![/cyan]")
+                    self.onecmd(english_cmd)
+                    return
+            
+            # ChatGPT 스타일 자연스러운 응답 생성
+            smart_response = self.korean_ai.generate_response(line, analysis)
+            
+            # 분석 결과 표시 (디버그용)
+            console.print(f"[dim]📊 분석: {analysis['formality']} / {analysis['emotion']} / {analysis['intent']} / {analysis['topic']}[/dim]")
+            
+            # AI 응답 출력
+            console.print(f"\n[green]🤖 AutoCI:[/green] {smart_response}")
+            
+            # 구체적인 도움 제안
+            if analysis["intent"] == "question":
+                if analysis["topic"] == "unity":
+                    console.print(f"\n[yellow]💡 Unity 관련 도움말:[/yellow]")
+                    console.print(f"   [cyan]• 'analyze <스크립트명>'[/cyan] - 스크립트 분석")
+                    console.print(f"   [cyan]• 'improve <스크립트명>'[/cyan] - 코드 자동 개선")
+                    console.print(f"   [cyan]• '정리'[/cyan] - 스크립트 폴더 정리")
+                elif analysis["topic"] == "programming":
+                    console.print(f"\n[yellow]💡 프로그래밍 도움말:[/yellow]")
+                    console.print(f"   [cyan]• 'search <키워드>'[/cyan] - 코드 패턴 검색")
+                    console.print(f"   [cyan]• 'analyze'[/cyan] - 전체 프로젝트 분석")
                 else:
-                    raise Exception("RAG 응답 오류")
+                    console.print(f"\n[yellow]💡 더 구체적인 질문을 해주시면 더 정확한 답변을 드릴 수 있어요![/yellow]")
+                    console.print(f"   예: [cyan]'유니티 스크립트를 어떻게 정리하나요?'[/cyan]")
+            
+            # 감정에 따른 추가 지원
+            if analysis["emotion"] == "stress":
+                console.print(f"\n[yellow]😊 힘내세요! 단계별로 차근차근 해결해나가면 됩니다.[/yellow]")
+                console.print(f"   [cyan]• 'status'[/cyan] - 현재 시스템 상태 확인")
+                console.print(f"   [cyan]• '도움말'[/cyan] - 전체 기능 보기")
+            
+            # RAG 시스템 연동 시도
+            if self.is_initialized and self.system_status.get('rag') == 'running':
+                try:
+                    import requests
+                    response = requests.post(
+                        "http://localhost:8000/query",
+                        json={"query": line, "k": 2},
+                        timeout=5
+                    )
                     
-            except Exception as e:
-                if line in korean_greetings:
-                    return  # 이미 처리됨
-                console.print(f"[yellow]😅 '{line}'는 아직 이해하지 못하겠어요.[/yellow]")
-                console.print(f"[cyan]💡 '도움말' 또는 'help'를 입력하시면 사용 가능한 명령어를 볼 수 있어요![/cyan]")
+                    if response.status_code == 200:
+                        data = response.json()
+                        if data.get('results'):
+                            console.print(f"\n[green]📚 관련 지식:[/green]")
+                            for i, result in enumerate(data['results'][:1], 1):
+                                console.print(f"   [dim]{result['content'][:150]}...[/dim]")
+                except:
+                    pass  # RAG 연동 실패해도 계속 진행
+                    
         else:
-            # 시스템이 아직 초기화되지 않은 경우
-            if line in korean_greetings:
-                return  # 이미 처리됨
-            console.print(f"[yellow]⏳ 시스템이 아직 초기화 중입니다...[/yellow]")
-            console.print(f"[cyan]잠시 후 다시 시도해주세요! 😊[/cyan]")
+            # 영어 또는 명령어 처리
+            console.print(f"[yellow]🤔 '{line}'에 대해 생각해보고 있어요...[/yellow]")
+            console.print(f"[cyan]💡 더 구체적인 질문을 해주시면 더 정확한 답변을 드릴 수 있어요![/cyan]")
+            console.print(f"   예: [yellow]'유니티 스크립트를 어떻게 정리하나요?'[/yellow]")
             
     def emptyline(self):
         """빈 줄 입력 시"""

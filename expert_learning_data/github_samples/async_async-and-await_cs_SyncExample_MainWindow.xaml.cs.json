@@ -9,12 +9,12 @@
     "methods": 4,
     "interfaces": 0,
     "usings": [
+      "System.Collections.Generic",
+      "System.Diagnostics",
       "System.Linq",
       "System.Net",
       "System.Windows",
-      "System.Diagnostics",
-      "System.IO",
-      "System.Collections.Generic"
+      "System.IO"
     ],
     "namespaces": [
       "SyncExample"
@@ -27,5 +27,5 @@
   },
   "size": 1883,
   "url": "https://github.com/dotnet/samples/blob/main/async/async-and-await/cs/SyncExample/MainWindow.xaml.cs",
-  "collected_at": "2025-06-25T19:29:05.808478"
+  "collected_at": "2025-06-27T01:19:19.451599"
 }

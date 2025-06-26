@@ -9,11 +9,11 @@
     "methods": 1,
     "interfaces": 0,
     "usings": [
-      "System.Windows",
       "System.Collections.Generic",
-      "System",
-      "System.Net.Http",
       "System.Diagnostics",
+      "System.Windows",
+      "System.Net.Http",
+      "System",
       "System.Threading.Tasks"
     ],
     "namespaces": [
@@ -27,5 +27,5 @@
   },
   "size": 2086,
   "url": "https://github.com/dotnet/samples/blob/main/async/async-and-await/cs/SerialAsyncExample/MainWindow.xaml.cs",
-  "collected_at": "2025-06-25T19:29:05.211537"
+  "collected_at": "2025-06-27T01:19:18.856776"
 }

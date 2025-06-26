@@ -9,12 +9,12 @@
     "methods": 1,
     "interfaces": 0,
     "usings": [
+      "System.Collections.Generic",
       "System.Linq",
+      "Microsoft.AspNetCore.Mvc.RazorPages",
       "Microsoft.AspNetCore.Mvc",
       "Microsoft.Extensions.Logging",
       "System",
-      "System.Collections.Generic",
-      "Microsoft.AspNetCore.Mvc.RazorPages",
       "System.Threading.Tasks"
     ],
     "namespaces": [
@@ -28,5 +28,5 @@
   },
   "size": 529,
   "url": "https://github.com/dotnet/samples/blob/main/azure/app-insights-aspnet-core-quickstart/Pages/Index.cshtml.cs",
-  "collected_at": "2025-06-25T19:29:07.946543"
+  "collected_at": "2025-06-27T01:19:21.551089"
 }

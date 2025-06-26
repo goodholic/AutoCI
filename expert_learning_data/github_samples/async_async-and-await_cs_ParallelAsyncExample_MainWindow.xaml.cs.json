@@ -9,14 +9,14 @@
     "methods": 2,
     "interfaces": 0,
     "usings": [
-      "System.Linq",
-      "System.Threading.Tasks",
-      "System.Windows.Threading",
-      "System.Windows",
-      "System",
-      "System.Net.Http",
+      "System.Collections.Generic",
       "System.Diagnostics",
-      "System.Collections.Generic"
+      "System.Linq",
+      "System.Windows",
+      "System.Windows.Threading",
+      "System.Net.Http",
+      "System",
+      "System.Threading.Tasks"
     ],
     "namespaces": [
       "ParallelAsyncExample"
@@ -29,5 +29,5 @@
   },
   "size": 3329,
   "url": "https://github.com/dotnet/samples/blob/main/async/async-and-await/cs/ParallelAsyncExample/MainWindow.xaml.cs",
-  "collected_at": "2025-06-25T19:29:04.685072"
+  "collected_at": "2025-06-27T01:19:18.211397"
 }

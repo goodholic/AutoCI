@@ -9,10 +9,10 @@
     "methods": 1,
     "interfaces": 0,
     "usings": [
+      "Microsoft.Extensions.Options",
       "app_configuration_dynamic_reload.Models",
       "Microsoft.AspNetCore.Mvc",
-      "Microsoft.AspNetCore.Mvc.RazorPages",
-      "Microsoft.Extensions.Options"
+      "Microsoft.AspNetCore.Mvc.RazorPages"
     ],
     "namespaces": [
       "app_configuration_dynamic_reload.Pages"
@@ -25,5 +25,5 @@
   },
   "size": 801,
   "url": "https://github.com/dotnet/samples/blob/main/azure/app-configuration-dynamic-reload/Pages/Index.cshtml.cs",
-  "collected_at": "2025-06-25T19:29:06.736901"
+  "collected_at": "2025-06-27T01:19:20.335690"
 }

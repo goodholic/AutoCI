@@ -1,0 +1,9 @@
+{
+  "source": "stackoverflow_expert",
+  "url": "https://stackoverflow.com/questions/2446027",
+  "type": "expert_qa",
+  "content": "Q: Debug vs. Release performance\n\nA: <p>I've encountered the following paragraph:</p>\n\n<blockquote>\n  <p>“Debug vs. Release setting in the IDE when you compile your code in Visual Studio makes almost no difference to performance… the generated code is almost the same. The C# compiler doesn’t really do any optimization. The C# compiler just spits out IL… and at the runtime it’s the JITer that does all the optimization. The JITer does have a Debug/Release mode and that makes a huge difference to performance. But that doesn’t key off whether you run the Debug or Release configuration of your project, that keys off whether a debugger is attached.”</p>\n</blockquote>\n\n<p>The source is <a href=\"http://andrewmyhre.wordpress.com/2008/05/13/c-debugrelease-and-performance/\" rel=\"noreferrer\">here</a> and the podcast is <a href=\"http://go2.wordpress.com/?id=725X1342&amp;site=andrewmyhre.wordpress.com&amp;url=http%3A%2F%2Fwww.microsoft.com%2Fdownloads%2Fdetails.aspx%3FFamilyId%3DB11AD912-4158-44CC-A771-A5E044F7E3BB%26displaylang%3Den\" rel=\"noreferrer\">here</a>.</p>\n\n<p>Can someone direct me to a Microsoft article that can actually prove this?</p>\n\n<p>Googling \"<em>C# debug vs release performance</em>\" mostly returns results saying \"<em>Debug has a lot of performance hit</em>\", \"<em>release is optimized</em>\", and \"<em>don't deploy debug to production</em>\".</p>\n",
+  "score": 147,
+  "timestamp": "2025-06-27T00:14:07.727856",
+  "category": "expert_solutions"
+}

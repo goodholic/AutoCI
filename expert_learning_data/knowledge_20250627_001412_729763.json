@@ -1,0 +1,9 @@
+{
+  "source": "stackoverflow_expert",
+  "url": "https://stackoverflow.com/questions/17481863",
+  "type": "expert_qa",
+  "content": "Q: Unity3D: optimize garbage collection\n\nA: <p>Unity3D <a href=\"http://docs.unity3d.com/Documentation/Manual/Profiler.html\" rel=\"noreferrer\">Profiler</a> gives me spikes that is mostly about garbage collection. In the screenshot below, the three red spikes represent three stalls that I had in my gameplay. Each of these stalls are 100+ms and most of the time was spent on <code>TrackDependencies</code>. </p>\n\n<p>According to <a href=\"http://docs.unity3d.com/Documentation/Manual/UnderstandingAutomaticMemoryManagement.html\" rel=\"noreferrer\">Unity instruction</a>, I tried adding this to my code:</p>\n\n<pre><code>if (Time.frameCount % 30 == 0)\n{\n    System.GC.Collect();\n}\n</code></pre>\n\n<p>This didn't help. I still have spikes and they still take 100+ms. What exactly is going on and what can I do to optimize my game?</p>\n\n<p>PS: </p>\n\n<p>I am dynamically creating and destroying a lot of <code>GameObject</code>s in my game. Could that be a problem?</p>\n\n<p>I don't have string concatenation in a loop or array as return value as caveated in <a href=\"http://docs.unity3d.com/Documentation/Manual/UnderstandingAutomaticMemoryManagement.html\" rel=\"noreferrer\">the post</a>.</p>\n\n<p><img src=\"https://i.sstatic.net/r4yTa.png\" alt=\"profiler\"></p>\n",
+  "score": 14,
+  "timestamp": "2025-06-27T00:14:12.729753",
+  "category": "expert_solutions"
+}

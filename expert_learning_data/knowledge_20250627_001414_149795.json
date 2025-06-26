@@ -1,0 +1,9 @@
+{
+  "source": "stackoverflow_expert",
+  "url": "https://stackoverflow.com/questions/46231344",
+  "type": "expert_qa",
+  "content": "Q: ASP.NET Core 2.0 Razor vs Angular/React/etc\n\nA: <p>I am beginning to develop an Enterprise level web application.  The application will have many separate web pages but two of those pages being more focused and very heavy - heavy as in a lot of user interaction, modals that display mass data, websocket connections, chat, etc.</p>\n<p>I have been assigned to Chief Architect on the project, so I am doing some research into the latest web frameworks.  For the back end, we have done some testing and have decided to go with the Azure SQL platform.  So far, I am liking the improvements that have been made, and are being made, to ASP.NET with Core 2.0.  Specifically the Razor engine, over previous versions of ASP.NET MVC.</p>\n<p>I wanted to get some expert opinions on the &quot;new&quot; Razor vs. Angular/React and the like.  I'm particularly more concerned with performance.  How does Core 2.0 Razor hold up to client side rendering frameworks?  Are the differences negligible?  Our app is targeting a potential 1,000,000 users (roughly 100,000 concurrent).</p>\n",
+  "score": 133,
+  "timestamp": "2025-06-27T00:14:14.149779",
+  "category": "expert_solutions"
+}

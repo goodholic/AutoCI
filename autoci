@@ -50,6 +50,22 @@ case "$1" in
         python3 autoci_terminal.py --interactive
         ;;
     
+    # 한국어 AI 대화 모드
+    korean|k|한국어)
+        echo -e "${CYAN}🇰🇷 AutoCI ChatGPT 수준 한국어 AI 대화 모드${NC}"
+        echo -e "${GREEN}자연스러운 한국어로 대화하세요!${NC}"
+        echo -e "${BLUE}✨ 격식체/반말 자동 감지, 감정 인식, Unity 전문 지식 통합${NC}"
+        
+        # 의존성 확인 후 적절한 버전 실행
+        if python3 -c "import rich, colorama, psutil" 2>/dev/null; then
+            echo -e "${GREEN}✅ 고급 한국어 AI 실행${NC}"
+            python3 "$AUTOCI_DIR/autoci_interactive.py"
+        else
+            echo -e "${YELLOW}⚠️  간단한 한국어 AI 실행${NC}"
+            python3 "$AUTOCI_DIR/autoci_simple_interactive.py"
+        fi
+        ;;
+    
     # 빠른 명령 실행
     create|c)
         shift
@@ -207,13 +223,89 @@ case "$1" in
         esac
         ;;
     
+    # 24시간 연속 학습 시스템
+    learn)
+        shift
+        case "$1" in
+            start)
+                echo -e "${GREEN}🧠 AutoCI 24시간 연속 학습 시스템 시작${NC}"
+                echo -e "${BLUE}📚 C# 전문 지식 지속적 크롤링 및 학습${NC}"
+                python3 "$AUTOCI_DIR/start_continuous_learning.py" start
+                ;;
+            stop)
+                echo -e "${RED}🛑 연속 학습 시스템 종료${NC}"
+                python3 "$AUTOCI_DIR/start_continuous_learning.py" stop
+                ;;
+            restart)
+                echo -e "${YELLOW}🔄 연속 학습 시스템 재시작${NC}"
+                python3 "$AUTOCI_DIR/start_continuous_learning.py" restart
+                ;;
+            status)
+                echo -e "${CYAN}📊 연속 학습 상태 확인${NC}"
+                python3 "$AUTOCI_DIR/start_continuous_learning.py" status
+                ;;
+            logs)
+                shift
+                if [ -n "$1" ]; then
+                    echo -e "${YELLOW}📄 연속 학습 로그 (최근 $1줄)${NC}"
+                    python3 "$AUTOCI_DIR/start_continuous_learning.py" logs "$1"
+                else
+                    echo -e "${YELLOW}📄 연속 학습 로그 (최근 50줄)${NC}"
+                    python3 "$AUTOCI_DIR/start_continuous_learning.py" logs
+                fi
+                ;;
+            simple)
+                echo -e "${GREEN}🧠 간단한 연속 학습 시스템 (대화형)${NC}"
+                echo -e "${BLUE}✨ 의존성 없이 실행 가능한 버전${NC}"
+                python3 "$AUTOCI_DIR/autoci_simple_continuous_learning.py"
+                ;;
+            demo)
+                echo -e "${CYAN}🚀 연속 학습 데모 실행${NC}"
+                echo -e "${YELLOW}✨ 실제 학습 AI 개념 시연${NC}"
+                python3 "$AUTOCI_DIR/autoci_learning_ai_concept.py"
+                ;;
+            *)
+                echo -e "${YELLOW}사용법: autoci learn [start|stop|restart|status|logs|simple|demo] [옵션]${NC}"
+                echo ""
+                echo "  start             # 24시간 연속 학습 시작"
+                echo "  stop              # 연속 학습 중지"
+                echo "  restart           # 연속 학습 재시작"
+                echo "  status            # 학습 상태 및 통계 확인"
+                echo "  logs [줄수]       # 학습 로그 보기 (기본: 50줄)"
+                echo "  simple            # 간단한 버전 (의존성 없음)"
+                echo "  demo              # 실제 학습 AI 개념 데모"
+                echo ""
+                echo "특징:"
+                echo "  🧠 ChatGPT 수준 학습: Microsoft Docs, Unity, GitHub, StackOverflow 크롤링"
+                echo "  📊 실시간 통계: 학습 세션, 지식 증가량, 정확도 향상 추적"
+                echo "  🔄 자동 복구: 네트워크 오류 시 자동 재시도"
+                echo "  🗄️ 지식베이스: SQLite 기반 영구 저장"
+                echo ""
+                echo "예시:"
+                echo "  autoci learn start     # 백그라운드 학습 시작"
+                echo "  autoci learn status    # 실시간 상태 확인"
+                echo "  autoci learn logs 100  # 최근 100줄 로그"
+                echo "  autoci learn simple    # 대화형 간단 버전"
+                ;;
+        esac
+        ;;
+    
     # 인터랙티브 모드 (인자 없이 실행)
     "")
-        echo -e "${CYAN}🤖 AutoCI Interactive Mode${NC}"
+        echo -e "${CYAN}🤖 AutoCI ChatGPT 수준 한국어 AI 통합 시스템${NC}"
         echo -e "${GREEN}가상환경 활성화 및 시스템 초기화 중...${NC}"
+        echo -e "${BLUE}✨ ChatGPT 수준의 자연스러운 한국어 대화 지원${NC}"
         
-        # 간단한 버전 사용 (의존성 최소화)
-        python3 "$AUTOCI_DIR/autoci_simple_interactive.py"
+        # 업그레이드된 한국어 AI 버전 시도
+        echo -e "${YELLOW}🔄 의존성 확인 중...${NC}"
+        if python3 -c "import rich, colorama, psutil" 2>/dev/null; then
+            echo -e "${GREEN}✅ 모든 의존성 설치됨 - 고급 버전 실행${NC}"
+            python3 "$AUTOCI_DIR/autoci_interactive.py"
+        else
+            echo -e "${YELLOW}⚠️  일부 의존성 누락 - 간단한 버전 실행${NC}"
+            echo -e "${CYAN}💡 완전한 기능을 위해 다음 명령어 실행: bash install_dependencies_wsl.sh${NC}"
+            python3 "$AUTOCI_DIR/autoci_simple_interactive.py"
+        fi
         ;;
     
     # 도움말
@@ -225,6 +317,7 @@ case "$1" in
         echo "기본 명령어:"
         echo "  start              - 모든 시스템 시작"
         echo "  terminal, t        - 대화형 터미널 모드"
+        echo "  korean, k, 한국어   - ChatGPT 수준 한국어 AI 대화 모드 🇰🇷"
         echo "  status, s          - 시스템 상태 확인"
         echo ""
         echo "빠른 코드 수정:"
@@ -253,10 +346,20 @@ case "$1" in
         echo "  enhance collect      - C# 전문 데이터 수집"
         echo "  enhance report       - 최신 리포트 보기"
         echo ""
+        echo "24시간 연속 학습 시스템:"
+        echo "  learn start          - 백그라운드 연속 학습 시작 🧠"
+        echo "  learn stop           - 연속 학습 중지"
+        echo "  learn restart        - 연속 학습 재시작"
+        echo "  learn status         - 학습 상태 및 통계 확인"
+        echo "  learn logs [줄수]    - 학습 로그 보기"
+        echo "  learn simple         - 간단 버전 (의존성 없음)"
+        echo "  learn demo           - 실제 학습 AI 개념 데모"
+        echo ""
         echo "예시:"
         echo "  autoci c Unity에서 Object Pool 패턴 구현"
         echo "  autoci m Assets/Scripts/Player.cs 위치: /home/user/project"
         echo "  autoci terminal    # 대화형 모드로 진입"
+        echo "  autoci learn start # ChatGPT 수준 24시간 학습 시작"
         ;;
     
     # 알 수 없는 명령

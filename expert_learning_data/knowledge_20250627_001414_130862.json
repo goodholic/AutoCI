@@ -1,0 +1,9 @@
+{
+  "source": "stackoverflow_expert",
+  "url": "https://stackoverflow.com/questions/42053135",
+  "type": "expert_qa",
+  "content": "Q: ConfigureAwait(false) relevant in ASP.NET Core?\n\nA: <p>I stumbled on an issue (<a href=\"https://github.com/HTBox/allReady/issues/1313\" rel=\"noreferrer\">https://github.com/HTBox/allReady/issues/1313</a>) at GitHub where they discussed about taking the <code>ConfigureAwait(false)</code> out of the code, claiming that, in <strong>ASP.NET Core</strong></p>\n\n<blockquote>\n  <p>the call to <code>ConfigureAwait(false)</code> is redundant and does nothing</p>\n</blockquote>\n\n<p>Best I could find here is a “side note” in an answer (from Stephen Cleary, <a href=\"https://stackoverflow.com/a/40220190/2805831\">https://stackoverflow.com/a/40220190/2805831</a>) telling that </p>\n\n<blockquote>\n  <p>ASP.NET Core no longer has a \"context\"</p>\n</blockquote>\n\n<p>So, is <code>ConfigureAwait(false)</code> really unnecessary in <strong>ASP.NET Core</strong> (even if using full .Net Framework)? Does it have any real gain in performance in some cases or difference in the result/semantic?</p>\n\n<p><strong>EDIT:</strong> Is it different in this aspect if I am hosting it as a console application or in IIS?</p>\n",
+  "score": 184,
+  "timestamp": "2025-06-27T00:14:14.130847",
+  "category": "expert_solutions"
+}

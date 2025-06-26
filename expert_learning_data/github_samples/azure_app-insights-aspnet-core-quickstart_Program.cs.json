@@ -9,14 +9,14 @@
     "methods": 0,
     "interfaces": 0,
     "usings": [
-      "System.Linq",
       "Microsoft.Extensions.Hosting",
-      "System",
-      "Microsoft.Extensions.Configuration",
       "System.Collections.Generic",
+      "System.Linq",
+      "Microsoft.Extensions.Configuration",
       "Microsoft.Extensions.Logging",
       "Microsoft.AspNetCore.Hosting",
-      "System.Threading.Tasks"
+      "System.Threading.Tasks",
+      "System"
     ],
     "namespaces": [
       "app_insights_aspnet_core_quickstart"
@@ -29,5 +29,5 @@
   },
   "size": 717,
   "url": "https://github.com/dotnet/samples/blob/main/azure/app-insights-aspnet-core-quickstart/Program.cs",
-  "collected_at": "2025-06-25T19:29:08.590234"
+  "collected_at": "2025-06-27T01:19:23.691247"
 }

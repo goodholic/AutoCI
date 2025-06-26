@@ -1,0 +1,9 @@
+{
+  "source": "stackoverflow_expert",
+  "url": "https://stackoverflow.com/questions/6961474",
+  "type": "expert_qa",
+  "content": "Q: Unity3d performance on iPhone\n\nA: <p>I am really interested in using Unity3d to develop an app.\nI like the fact that I can develop once and port the app to multiple platforms (Mac/Windows/iPhone/Android), and the performance on my Mac seems to be quite good.</p>\n\n<p>This will be the first time I write an app for iPhone, and I am curious about performance issues down the road. I think I will definitely use Unity3d on iPhone for a prototype, but am wondering if building an iPhone Unity3d app will use the iPhone resources as efficiently as a native app written in Objective-C.</p>\n\n<p>The Unity3d site seems to suggest that Unity3d algorithms are optimized, and I thought that if I asked that question in the Unity3d forums, that would be the kind of response I would get. Ideally, I'd be interested in hearing from someone who has built an app in Unity3d and Objective-C and can compare the two.</p>\n\n<p>The discussion that got me thinking about this was <a href=\"https://stackoverflow.com/questions/209170/how-much-does-it-cost-to-develop-an-iphone-application\">Andrew and Peter Mortensen's response to a question about iOS development cost</a>, which begins \"There is a much easier way to develop iPhone apps than learning Cocoa.\"</p>\n",
+  "score": 11,
+  "timestamp": "2025-06-27T00:14:12.732683",
+  "category": "expert_solutions"
+}

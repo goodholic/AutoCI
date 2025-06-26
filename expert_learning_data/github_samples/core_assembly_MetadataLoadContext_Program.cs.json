@@ -9,11 +9,11 @@
     "methods": 0,
     "interfaces": 0,
     "usings": [
+      "System.Collections.Generic",
       "System.Runtime.InteropServices",
-      "System.Reflection",
       "System",
-      "System.IO",
-      "System.Collections.Generic"
+      "System.Reflection",
+      "System.IO"
     ],
     "namespaces": [
       "MetadataLoadContextSample"
@@ -26,5 +26,5 @@
   },
   "size": 4624,
   "url": "https://github.com/dotnet/samples/blob/main/core/assembly/MetadataLoadContext/Program.cs",
-  "collected_at": "2025-06-25T19:29:09.544359"
+  "collected_at": "2025-06-27T01:19:24.753080"
 }
