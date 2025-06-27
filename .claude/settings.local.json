@@ -14,7 +14,8 @@
       "Bash(python3:*)",
       "Bash(pip install:*)",
       "Bash(./llm_venv/bin/python:*)",
-      "Bash(./llm_venv/bin/pip install:*)"
+      "Bash(./llm_venv/bin/pip install:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
