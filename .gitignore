@@ -53,3 +53,6 @@ ENV/
 __pycache__/
 *.py[cod]
 *$py.class
+
+neural_venv/
+llm_venv/

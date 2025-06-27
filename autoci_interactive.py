@@ -279,11 +279,12 @@ class AutoCIShell(cmd.Cmd):
     intro = f"""
 {Fore.CYAN}╔══════════════════════════════════════════════════════════════╗
 ║                                                              ║
-║  {Fore.YELLOW}🤖 AutoCI - ChatGPT 수준 한국어 AI 통합 시스템{Fore.CYAN}            ║
+║  {Fore.YELLOW}🤖 AutoCI - 진짜 학습하는 한국어 AI 코딩 어시스턴트{Fore.CYAN}         ║
 ║                                                              ║
 ║  {Fore.GREEN}✓ 가상환경 활성화됨{Fore.CYAN}                                         ║
-║  {Fore.GREEN}✓ 한국어 AI 엔진 활성화{Fore.CYAN}                                     ║
-║  {Fore.GREEN}✓ 백그라운드 학습 시작{Fore.CYAN}                                       ║
+║  {Fore.GREEN}✓ ChatGPT 수준 한국어 AI{Fore.CYAN}                                    ║
+║  {Fore.GREEN}✓ 실시간 학습 시스템 작동{Fore.CYAN}                                    ║
+║  {Fore.GREEN}✓ 1분마다 자동 모니터링{Fore.CYAN}                                     ║
 ║                                                              ║
 ║  {Fore.WHITE}자연스러운 한국어로 대화하세요! 🇰🇷{Fore.CYAN}                         ║
 ║                                                              ║
@@ -306,13 +307,39 @@ class AutoCIShell(cmd.Cmd):
         }
         
         # 한국어 AI 프로세서 초기화
-        self.korean_ai = KoreanAIProcessor()
-        logger.info("✅ ChatGPT 수준 한국어 AI 프로세서 초기화 완료")
+        try:
+            # 고급 한국어 AI 사용 시도
+            from advanced_korean_ai import AdvancedKoreanAI
+            self.korean_ai = AdvancedKoreanAI()
+            self.use_advanced_ai = True
+            logger.info("✅ ChatGPT 수준 고급 한국어 AI 프로세서 초기화 완료")
+        except ImportError:
+            # 기본 한국어 AI 사용
+            self.korean_ai = KoreanAIProcessor()
+            self.use_advanced_ai = False
+            logger.info("✅ 기본 한국어 AI 프로세서 초기화 완료")
+            
+        # 실제 학습 시스템 초기화
+        try:
+            from real_learning_system import RealLearningSystem
+            self.learning_system = RealLearningSystem()
+            self.learning_system.start_background_learning()
+            self.has_learning = True
+            logger.info("✅ 실제 학습 시스템 초기화 및 시작")
+        except Exception as e:
+            self.learning_system = None
+            self.has_learning = False
+            logger.warning(f"학습 시스템 초기화 실패: {e}")
         
         # 백그라운드 초기화 시작
         self.init_thread = threading.Thread(target=self.background_init)
         self.init_thread.daemon = True
         self.init_thread.start()
+        
+        # 1분마다 모니터링 시작
+        self.monitoring_thread = threading.Thread(target=self.start_monitoring)
+        self.monitoring_thread.daemon = True
+        self.monitoring_thread.start()
         
         # 시그널 핸들러
         signal.signal(signal.SIGINT, self.signal_handler)
@@ -441,6 +468,25 @@ class AutoCIShell(cmd.Cmd):
         except Exception as e:
             logger.error(f"Dual Phase 시작 오류: {e}")
             raise
+            
+    def start_monitoring(self):
+        """1분마다 AI 학습 환경 모니터링"""
+        try:
+            # 모니터링 프로세스가 이미 실행 중인지 확인
+            import subprocess
+            result = subprocess.run(['pgrep', '-f', 'ai_learning_monitor.py'], capture_output=True)
+            if result.returncode != 0:  # 프로세스가 없으면
+                # 백그라운드로 모니터링 시작
+                subprocess.Popen(
+                    [sys.executable, str(self.base_path / "ai_learning_monitor.py")],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
+                logger.info("📊 AI 학습 환경 모니터링이 백그라운드에서 시작되었습니다.")
+                console.print("[green]📊 1분마다 AI 학습 환경을 모니터링합니다.[/green]")
+                console.print("[yellow]웹 대시보드: http://localhost:8888[/yellow]")
+        except Exception as e:
+            logger.error(f"모니터링 시작 오류: {e}")
             
     def do_project(self, arg):
         """프로젝트 설정 - project <경로>"""
@@ -1121,7 +1167,13 @@ class AutoCIShell(cmd.Cmd):
         if korean_ratio > 0.3:  # 한국어 텍스트인 경우
             # ChatGPT 스타일 한국어 분석
             console.print(f"[cyan]🤔 '{line}'에 대해 생각해보고 있어요...[/cyan]")
-            analysis = self.korean_ai.analyze_korean_text(line)
+            
+            if self.use_advanced_ai:
+                # 고급 AI 사용
+                analysis = self.korean_ai.analyze_input(line)
+            else:
+                # 기본 AI 사용
+                analysis = self.korean_ai.analyze_korean_text(line)
             
             # 한국어 명령어 매핑 먼저 확인
             korean_commands = {
@@ -1142,10 +1194,28 @@ class AutoCIShell(cmd.Cmd):
                     return
             
             # ChatGPT 스타일 자연스러운 응답 생성
-            smart_response = self.korean_ai.generate_response(line, analysis)
+            if self.use_advanced_ai:
+                smart_response = self.korean_ai.generate_response(analysis)
+            else:
+                smart_response = self.korean_ai.generate_response(line, analysis)
+                
+            # 실제 학습 시스템에 대화 저장
+            if self.has_learning and self.learning_system:
+                try:
+                    learning_result = self.learning_system.learn_from_conversation(
+                        line, smart_response,
+                        {'session_id': 'interactive', 'timestamp': datetime.now()}
+                    )
+                    logger.info(f"대화 학습 완료: {learning_result['patterns']} 패턴 발견")
+                except Exception as e:
+                    logger.error(f"학습 중 오류: {e}")
             
             # 분석 결과 표시 (디버그용)
-            console.print(f"[dim]📊 분석: {analysis['formality']} / {analysis['emotion']} / {analysis['intent']} / {analysis['topic']}[/dim]")
+            if self.use_advanced_ai:
+                console.print(f"[dim]📊 분석: {analysis['formality']} / {analysis['emotion']} / {analysis['intent']} / {analysis['topic']}[/dim]")
+                console.print(f"[dim]   키워드: {', '.join(analysis.get('keywords', [])[:5])}[/dim]")
+            else:
+                console.print(f"[dim]📊 분석: {analysis['formality']} / {analysis['emotion']} / {analysis['intent']} / {analysis['topic']}[/dim]")
             
             # AI 응답 출력
             console.print(f"\n[green]🤖 AutoCI:[/green] {smart_response}")

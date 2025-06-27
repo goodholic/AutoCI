@@ -9,7 +9,12 @@
       "Bash(/mnt/c/Users/super/Desktop/Unity\\ Project\\(25년도\\ 제작\\)/26.AutoCI/AutoCI/autoci data index)",
       "Bash(source:*)",
       "Bash(/mnt/c/Users/super/Desktop/Unity\\ Project\\(25년도\\ 제작\\)/26.AutoCI/AutoCI/autoci help)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(python test:*)",
+      "Bash(python3:*)",
+      "Bash(pip install:*)",
+      "Bash(./llm_venv/bin/python:*)",
+      "Bash(./llm_venv/bin/pip install:*)"
     ],
     "deny": []
   }
