@@ -86,3 +86,8 @@ godot_engine.exe
 .import/
 export.cfg
 export_presets.cfg
+
+# 제외할 디렉토리
+gemini-cli/
+godot_analysis/
+llama/
