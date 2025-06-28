@@ -15,7 +15,20 @@
       "Bash(pip install:*)",
       "Bash(./llm_venv/bin/python:*)",
       "Bash(./llm_venv/bin/pip install:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(git clone:*)",
+      "Bash(cd:*)",
+      "Bash(find:*)",
+      "Bash(docker:*)",
+      "Bash(godot:*)",
+      "Bash(python:*)",
+      "Bash(wget:*)",
+      "Bash(unzip:*)",
+      "Bash(mv:*)",
+      "Bash(sudo apt:*)",
+      "Bash(sudo apt install:*)",
+      "Bash(curl:*)",
+      "Bash(sh:*)"
     ],
     "deny": []
   }

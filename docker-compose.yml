@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  # Redis for message queue and caching
+  redis:
+    image: redis:7-alpine
+    container_name: autoci_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  # Weaviate vector database
+  weaviate:
+    image: semitechnologies/weaviate:1.21.4
+    container_name: autoci_weaviate
+    ports:
+      - "8080:8080"
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      DEFAULT_VECTORIZER_MODULE: 'text2vec-transformers'
+      ENABLE_MODULES: 'text2vec-transformers'
+      TRANSFORMERS_INFERENCE_API: 'http://t2v-transformers:8080'
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    restart: unless-stopped
+    depends_on:
+      - t2v-transformers
+
+  # Transformers inference API for Weaviate
+  t2v-transformers:
+    image: semitechnologies/transformers-inference:sentence-transformers-all-MiniLM-L6-v2
+    container_name: autoci_transformers
+    environment:
+      ENABLE_CUDA: '0'
+    restart: unless-stopped
+
+  # AutoCI Main Application
+  autoci-app:
+    build: .
+    container_name: autoci_main
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - WEAVIATE_URL=http://weaviate:8080
+      - GODOT_PATH=/app/godot_engine
+    volumes:
+      - ./:/app
+      - ./godot_projects:/app/godot_projects
+    depends_on:
+      - redis
+      - weaviate
+    restart: unless-stopped
+
+  # Celery Worker for background tasks
+  celery-worker:
+    build: .
+    container_name: autoci_celery
+    command: celery -A autoci_app worker --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - WEAVIATE_URL=http://weaviate:8080
+    volumes:
+      - ./:/app
+    depends_on:
+      - redis
+      - weaviate
+    restart: unless-stopped
+
+  # Celery Beat for scheduled tasks
+  celery-beat:
+    build: .
+    container_name: autoci_scheduler
+    command: celery -A autoci_app beat --loglevel=info
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ./:/app
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  weaviate_data:

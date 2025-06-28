@@ -56,3 +56,33 @@ __pycache__/
 
 neural_venv/
 llm_venv/
+
+# Python 패키지 및 라이브러리
+site-packages/
+*.so
+*.so.*
+
+# NVIDIA CUDA 라이브러리
+**/nvidia/
+**/cublas/
+**/cudnn/
+**/cufft/
+**/cusolver/
+**/cusparse/
+**/nccl/
+
+# Python 환경
+env/
+venv/
+.env
+
+# Godot 엔진
+godot_engine
+godot_engine.exe
+*.tmp
+*.log
+
+# Godot 프로젝트 파일
+.import/
+export.cfg
+export_presets.cfg
