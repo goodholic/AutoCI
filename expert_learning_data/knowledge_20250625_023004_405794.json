@@ -1,7 +1,0 @@
-{
-  "source": "unity_expertise",
-  "pattern_name": "Object Pooling Advanced",
-  "code": "\npublic class AdvancedObjectPool<T> : MonoBehaviour where T : Component\n{\n    private Queue<T> available = new Queue<T>();\n    private HashSet<T> inUse = new HashSet<T>();\n    \n    public T Get()\n    {\n        if (available.Count > 0)\n        {\n            T obj = available.Dequeue();\n            inUse.Add(obj);\n            obj.gameObject.SetActive(true);\n            return obj;\n        }\n        return CreateNewObject();\n    }\n}\n",
-  "category": "unity_expert",
-  "timestamp": "2025-06-25T02:30:04.405887"
-}

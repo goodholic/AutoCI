@@ -1,8 +1,0 @@
-{
-  "source": "intensive_collector",
-  "type": "optimization_tip",
-  "tip": "ArrayPool<T>.Shared 사용으로 배열 재사용 및 GC 압박 감소",
-  "category": "performance_optimization",
-  "impact_level": "high",
-  "collected_at": "2025-06-25T02:36:51.779435"
-}

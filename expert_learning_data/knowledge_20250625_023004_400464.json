@@ -1,7 +1,0 @@
-{
-  "source": "unity_expertise",
-  "pattern_name": "ECS Performance",
-  "code": "\nusing Unity.Entities;\nusing Unity.Jobs;\n\n[UpdateInGroup(typeof(SimulationSystemGroup))]\npublic partial class MovementSystem : SystemBase\n{\n    protected override void OnUpdate()\n    {\n        float deltaTime = Time.DeltaTime;\n        \n        Entities\n            .ForEach((ref Translation translation, in VelocityComponent velocity) =>\n            {\n                translation.Value += velocity.Value * deltaTime;\n            })\n            .ScheduleParallel();\n    }\n}\n",
-  "category": "unity_expert",
-  "timestamp": "2025-06-25T02:30:04.400514"
-}

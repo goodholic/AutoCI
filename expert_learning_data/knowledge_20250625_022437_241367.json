@@ -1,8 +1,0 @@
-{
-  "source": "synthetic_patterns",
-  "type": "design_pattern",
-  "pattern_name": "Repository Pattern",
-  "content": "\npublic interface IRepository<T> where T : class\n{\n    Task<T> GetByIdAsync(int id);\n    Task<IEnumerable<T>> GetAllAsync();\n    Task<T> AddAsync(T entity);\n    Task UpdateAsync(T entity);\n    Task DeleteAsync(int id);\n}\n\npublic class GenericRepository<T> : IRepository<T> where T : class\n{\n    private readonly DbContext _context;\n    private readonly DbSet<T> _dbSet;\n\n    public GenericRepository(DbContext context)\n    {\n        _context = context;\n        _dbSet = context.Set<T>();\n    }\n\n    public async Task<T> GetByIdAsync(int id)\n    {\n        return await _dbSet.FindAsync(id);\n    }\n}\n",
-  "timestamp": "2025-06-25T02:24:37.241268",
-  "category": "advanced_patterns"
-}

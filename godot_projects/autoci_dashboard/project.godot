@@ -1,0 +1,23 @@
+
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the properties are organized in sections here.
+
+[application]
+
+config/name="AutoCI Dashboard"
+config/description="AutoCI 실시간 진행상황 대시보드"
+run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=true
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

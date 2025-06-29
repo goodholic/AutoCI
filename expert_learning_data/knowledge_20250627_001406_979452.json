@@ -1,8 +1,0 @@
-{
-  "source": "synthetic_patterns",
-  "type": "design_pattern",
-  "pattern_name": "Unity Object Pool Pattern",
-  "content": "\nusing UnityEngine;\nusing System.Collections.Generic;\n\npublic class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour\n{\n    [SerializeField] private T prefab;\n    [SerializeField] private int poolSize = 10;\n    private Queue<T> pool = new Queue<T>();\n    \n    private void Start()\n    {\n        for (int i = 0; i < poolSize; i++)\n        {\n            T obj = Instantiate(prefab);\n            obj.gameObject.SetActive(false);\n            pool.Enqueue(obj);\n        }\n    }\n    \n    public T GetFromPool()\n    {\n        if (pool.Count > 0)\n        {\n            T obj = pool.Dequeue();\n            obj.gameObject.SetActive(true);\n            return obj;\n        }\n        return Instantiate(prefab);\n    }\n}\n",
-  "timestamp": "2025-06-27T00:14:06.979406",
-  "category": "advanced_patterns"
-}

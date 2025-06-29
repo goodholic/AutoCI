@@ -1,0 +1,136 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Dashboard.gd" id="1"]
+[ext_resource type="Theme" path="res://DashboardTheme.tres" id="2"]
+
+[node name="Dashboard" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2")
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 1.0)
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 32
+text = "AutoCI 실시간 대시보드"
+horizontal_alignment = 1
+
+[node name="MainPanel" type="Panel" parent="."]
+anchor_left = 0.05
+anchor_top = 0.15
+anchor_right = 0.95
+anchor_bottom = 0.95
+modulate = Color(1, 1, 1, 0.95)
+
+[node name="StatusContainer" type="VBoxContainer" parent="MainPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+
+[node name="CurrentTask" type="RichTextLabel" parent="MainPanel/StatusContainer"]
+custom_minimum_size = Vector2(0, 60)
+bbcode_enabled = true
+text = "[b]현재 작업:[/b] 초기화 중..."
+
+[node name="ProgressBar" type="ProgressBar" parent="MainPanel/StatusContainer"]
+custom_minimum_size = Vector2(0, 30)
+value = 0.0
+
+[node name="HSeparator" type="HSeparator" parent="MainPanel/StatusContainer"]
+custom_minimum_size = Vector2(0, 20)
+
+[node name="StatsGrid" type="GridContainer" parent="MainPanel/StatusContainer"]
+columns = 2
+custom_constants/h_separation = 50
+
+[node name="TasksLabel" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "완료된 작업:"
+
+[node name="TasksValue" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "0"
+
+[node name="ErrorsLabel" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "오류 수:"
+
+[node name="ErrorsValue" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "0"
+modulate = Color(1, 0.3, 0.3, 1)
+
+[node name="TimeLabel" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "실행 시간:"
+
+[node name="TimeValue" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "00:00:00"
+
+[node name="AIStatusLabel" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "AI 상태:"
+
+[node name="AIStatusValue" type="Label" parent="MainPanel/StatusContainer/StatsGrid"]
+text = "준비 중"
+modulate = Color(0.3, 1, 0.3, 1)
+
+[node name="HSeparator2" type="HSeparator" parent="MainPanel/StatusContainer"]
+custom_minimum_size = Vector2(0, 20)
+
+[node name="LogLabel" type="Label" parent="MainPanel/StatusContainer"]
+text = "실시간 로그:"
+
+[node name="LogScroll" type="ScrollContainer" parent="MainPanel/StatusContainer"]
+size_flags_vertical = 3
+
+[node name="LogText" type="RichTextLabel" parent="MainPanel/StatusContainer/LogScroll"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
+[node name="ErrorPanel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.2
+anchor_top = 0.3
+anchor_right = 0.8
+anchor_bottom = 0.7
+modulate = Color(1, 0.8, 0.8, 0.95)
+
+[node name="ErrorTitle" type="Label" parent="ErrorPanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 10.0
+offset_right = 100.0
+offset_bottom = 40.0
+text = "⚠️ 오류 발생"
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+
+[node name="ErrorText" type="RichTextLabel" parent="ErrorPanel"]
+anchor_left = 0.05
+anchor_top = 0.2
+anchor_right = 0.95
+anchor_bottom = 0.8
+bbcode_enabled = true
+
+[node name="CloseButton" type="Button" parent="ErrorPanel"]
+anchor_left = 0.5
+anchor_top = 0.85
+anchor_right = 0.5
+anchor_bottom = 0.95
+offset_left = -50.0
+offset_right = 50.0
+text = "닫기"
+
+[connection signal="pressed" from="ErrorPanel/CloseButton" to="." method="_on_error_close"]

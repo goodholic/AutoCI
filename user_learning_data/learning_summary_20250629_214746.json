@@ -1,0 +1,155 @@
+{
+  "start_time": "2025-06-29T21:47:46.465495",
+  "end_time": "2025-06-29T21:55:58.330754",
+  "duration": "0:08:11.865259",
+  "total_learning_hours": 7.100000000000001,
+  "completed_topics": [
+    "연산자",
+    "메서드",
+    "반복문",
+    "인터페이스",
+    "조건문",
+    "캡슐화",
+    "변수와 타입",
+    "다형성",
+    "LINQ",
+    "델리게이트",
+    "배열과 컬렉션",
+    "클래스",
+    "객체",
+    "상속",
+    "예외 처리",
+    "제네릭",
+    "람다 표현식"
+  ],
+  "completion_rate": 47.22222222222222,
+  "current_level": "중급 (Intermediate)",
+  "sessions": [
+    {
+      "topic": "연산자",
+      "level": "beginner",
+      "duration_minutes": 22,
+      "start_time": "2025-06-29 21:47:46.467579",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "연산자 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "반복문",
+      "level": "beginner",
+      "duration_minutes": 22,
+      "start_time": "2025-06-29 21:48:10.698103",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "반복문 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "메서드",
+      "level": "beginner",
+      "duration_minutes": 37,
+      "start_time": "2025-06-29 21:48:35.996467",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "메서드 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "배열과 컬렉션",
+      "level": "beginner",
+      "duration_minutes": 21,
+      "start_time": "2025-06-29 21:49:17.822687",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "배열과 컬렉션 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "객체",
+      "level": "intermediate",
+      "duration_minutes": 26,
+      "start_time": "2025-06-29 21:49:45.620268",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "객체 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "상속",
+      "level": "intermediate",
+      "duration_minutes": 26,
+      "start_time": "2025-06-29 21:50:15.313076",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "상속 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "다형성",
+      "level": "intermediate",
+      "duration_minutes": 28,
+      "start_time": "2025-06-29 21:50:45.012566",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "다형성 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "캡슐화",
+      "level": "intermediate",
+      "duration_minutes": 32,
+      "start_time": "2025-06-29 21:51:17.447827",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "캡슐화 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "인터페이스",
+      "level": "intermediate",
+      "duration_minutes": 22,
+      "start_time": "2025-06-29 21:51:53.740846",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "인터페이스 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "제네릭",
+      "level": "intermediate",
+      "duration_minutes": 38,
+      "start_time": "2025-06-29 21:52:21.591735",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "제네릭 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "델리게이트",
+      "level": "intermediate",
+      "duration_minutes": 40,
+      "start_time": "2025-06-29 21:53:05.569646",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "델리게이트 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "람다 표현식",
+      "level": "intermediate",
+      "duration_minutes": 28,
+      "start_time": "2025-06-29 21:53:50.666293",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "람다 표현식 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "LINQ",
+      "level": "intermediate",
+      "duration_minutes": 34,
+      "start_time": "2025-06-29 21:54:22.590753",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "LINQ 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "예외 처리",
+      "level": "intermediate",
+      "duration_minutes": 23,
+      "start_time": "2025-06-29 21:55:01.157746",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "예외 처리 학습 완료. 숙련도: 90.0%"
+    }
+  ]
+}

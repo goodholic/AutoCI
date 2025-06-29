@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""
+AI Godot 상태 확인
+"""
+import os
+import sys
+import json
+from pathlib import Path
+
+# 색상 코드
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+RED = '\033[91m'
+BLUE = '\033[94m'
+CYAN = '\033[96m'
+RESET = '\033[0m'
+
+def main():
+    print(f"\n{BLUE}🔍 AI Godot 상태 확인{RESET}")
+    print("=" * 50)
+    
+    # 프로젝트 루트
+    script_path = Path(__file__).resolve()
+    project_root = script_path.parent
+    
+    # 1. 설정 파일 확인
+    config_file = project_root / ".godot_config.json"
+    if config_file.exists():
+        print(f"\n{GREEN}✅ 설정 파일 발견{RESET}")
+        try:
+            with open(config_file) as f:
+                config = json.load(f)
+            
+            godot_path = config.get("godot_path", "")
+            if Path(godot_path).exists():
+                print(f"   경로: {godot_path}")
+                print(f"   버전: {config.get('version', 'unknown')}")
+                print(f"   AI 수정: {config.get('ai_modified', False)}")
+                
+                if config.get('ai_modified'):
+                    print(f"\n{GREEN}✅ AI 수정된 Godot 사용 가능!{RESET}")
+                    print(f"\n기능:")
+                    for feature in config.get('features', []):
+                        print(f"  - {feature}")
+                else:
+                    print(f"\n{YELLOW}⚠️ 일반 Godot (AI 기능 제한적){RESET}")
+            else:
+                print(f"{RED}❌ 설정된 경로에 Godot이 없습니다{RESET}")
+        except:
+            print(f"{RED}❌ 설정 파일 읽기 실패{RESET}")
+    else:
+        print(f"{YELLOW}⚠️ 설정 파일이 없습니다{RESET}")
+    
+    # 2. 빌드된 Godot 확인
+    print(f"\n{CYAN}빌드된 Godot 검색:{RESET}")
+    
+    godot_paths = [
+        project_root / "godot_ai_build" / "output" / "godot.ai.editor.linux.x86_64",
+        project_root / "godot_ai_build" / "Godot_v4.3-stable_win64.exe",
+        project_root / "godot_engine" / "Godot_v4.3-stable_linux.x86_64",
+    ]
+    
+    found = False
+    for path in godot_paths:
+        if path.exists():
+            print(f"  ✅ {path.name}")
+            found = True
+    
+    if not found:
+        print(f"  {YELLOW}없음{RESET}")
+    
+    # 3. 빌드 상태
+    build_dir = project_root / "godot_ai_build"
+    if build_dir.exists():
+        print(f"\n{CYAN}빌드 디렉토리:{RESET}")
+        
+        # 소스코드
+        if (build_dir / "godot-source").exists():
+            print(f"  ✅ 소스코드 다운로드됨")
+        
+        # 로그
+        logs_dir = build_dir / "logs"
+        if logs_dir.exists():
+            log_files = list(logs_dir.glob("*.log"))
+            if log_files:
+                print(f"  📋 빌드 로그: {len(log_files)}개")
+    
+    # 4. 다음 단계
+    print(f"\n{YELLOW}다음 단계:{RESET}")
+    
+    if config_file.exists() and Path(config.get("godot_path", "")).exists():
+        print(f"  {GREEN}autoci{RESET} 명령어를 실행하세요")
+    else:
+        print(f"  {CYAN}build-godot{RESET} 명령어로 빌드를 시작하세요")
+    
+    print()
+
+if __name__ == "__main__":
+    main()

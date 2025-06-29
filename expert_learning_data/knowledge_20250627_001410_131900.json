@@ -1,9 +1,0 @@
-{
-  "source": "github_patterns",
-  "url": "https://github.com/abishekaditya/DesignPatterns",
-  "type": "project_documentation",
-  "content": "# Design Patterns\nDesign patterns are solutions to recurring problems; guidelines on how to tackle certain problems.\nI have included implementations of some design patterns in C# to help beginners like me get their feet wet.\nThere are better alternatives available for some of them in the .NET Framework, so this is by no means a comprehensive tutorial.\n\nAny comments and suggestions are welcome. If you want to add a new design pattern implementation, just follow the naming convention, fork my repo and submit a pull request. Same goes for any improvements and modifications.\n\nThis was created as a C# alternative to Java while reading https://www.oreilly.com/library/view/head-first-design/0596007124/ <- take a look at it if anything confuses you.\n\n## Types of Design Patterns\n---------------------------\nThere are three kinds of Design Patterns:\n\n* Creational\n* Structural\n* Behavioral\n\n## List of Design Pattern Implementations\n-----------------------------------------\n\n* [Adapter](/AdapterPattern)\n* [Bridge](/BridgePattern)\n* [Builder](/BuilderPattern)\n* [ChainOfResponsibility](/ChainOfResponsibilityPattern)\n* [Command](/CommandPattern)\n* [Composite](/CompositePattern)\n* [Decorator](/DecoratorPattern)\n* [Facade](/FacadePattern)\n* [Factory](/FactoryPattern)\n* [Flyweight](/FlyweightPattern)\n* [Iterator](/IteratorPattern)\n* [Mediator](/MediatorPattern)\n* [Observer](/ObserverPattern)\n* [Prototype](/PrototypePattern)\n* [Proxy](/ProxyPattern)\n* [Singleton](/SingletonPattern)\n* [SingletonPattern.Tests](/SingletonPattern.Tests)\n* [State](/StatePattern)\n* [Strategy](/StrategyPattern)\n* [Template](/TemplatePattern)\n* [Visitor](/VisitorPattern)\n",
-  "stars": 2699,
-  "timestamp": "2025-06-27T00:14:10.131890",
-  "category": "advanced_patterns"
-}

@@ -1,0 +1,53 @@
+[application]
+
+config/name="AI Puzzle Game"
+config/description="AI Generated Puzzle Game by AutoCI"
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+AIGameManager="*res://scripts/AIGameManager.gd"
+AIResourceManager="*res://scripts/AIResourceManager.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
+
+[input]
+
+# AI 생성 입력 맵
+
+select={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+reset={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+# AI 생성 레이어
+
+2d_physics/layer_1="Piece"
+2d_physics/layer_2="Target"
+2d_physics/layer_3="UI"
+2d_physics/layer_4="Background"
+
+[physics]
+
+# 게임 타입별 물리 설정
+
+2d/default_gravity=0
+2d/default_linear_damp=1.0
+2d/default_angular_damp=1.0
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+textures/canvas_textures/default_texture_filter=0

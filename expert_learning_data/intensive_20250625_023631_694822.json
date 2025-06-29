@@ -1,9 +1,0 @@
-{
-  "source": "intensive_collector",
-  "type": "code_example",
-  "template_name": "memory_optimization",
-  "code": "\n// Span<T>를 이용한 고성능 문자열 처리\npublic static class StringProcessor\n{\n    public static void ProcessWithSpan(ReadOnlySpan<char> input)\n    {\n        // 할당 없이 문자열 조작\n        foreach (var c in input)\n        {\n            // 문자 처리\n        }\n    }\n    \n    public static string[] SplitOptimized(string input, char separator)\n    {\n        Span<Range> ranges = stackalloc Range[100]; // 스택 할당\n        int count = input.AsSpan().Split(ranges, separator);\n        \n        var result = new string[count];\n        for (int i = 0; i < count; i++)\n        {\n            result[i] = input[ranges[i]];\n        }\n        \n        return result;\n    }\n}\n\n// ArrayPool을 이용한 메모리 재사용\npublic class BufferProcessor\n{\n    private readonly ArrayPool<byte> _arrayPool = ArrayPool<byte>.Shared;\n    \n    public async Task ProcessDataAsync(Stream stream)\n    {\n        var buffer = _arrayPool.Rent(4096);\n        try\n        {\n            int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);\n            // 버퍼 처리\n        }\n        finally\n        {\n            _arrayPool.Return(buffer);\n        }\n    }\n}\n",
-  "category": "implementation_patterns",
-  "quality_score": 90,
-  "collected_at": "2025-06-25T02:36:31.694806"
-}

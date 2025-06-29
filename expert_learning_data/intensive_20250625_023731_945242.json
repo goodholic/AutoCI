@@ -1,9 +1,0 @@
-{
-  "source": "intensive_collector",
-  "type": "code_example",
-  "template_name": "unity_object_pool",
-  "code": "\nusing UnityEngine;\nusing System.Collections.Generic;\n\npublic class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour\n{\n    [SerializeField] private T prefab;\n    [SerializeField] private int poolSize = 10;\n    [SerializeField] private bool allowExpansion = true;\n    \n    private Queue<T> pool = new Queue<T>();\n    private HashSet<T> activeObjects = new HashSet<T>();\n    \n    private void Awake()\n    {\n        InitializePool();\n    }\n    \n    private void InitializePool()\n    {\n        for (int i = 0; i < poolSize; i++)\n        {\n            T obj = Instantiate(prefab);\n            obj.gameObject.SetActive(false);\n            pool.Enqueue(obj);\n        }\n    }\n    \n    public T Get()\n    {\n        T obj = null;\n        \n        if (pool.Count > 0)\n        {\n            obj = pool.Dequeue();\n        }\n        else if (allowExpansion)\n        {\n            obj = Instantiate(prefab);\n        }\n        \n        if (obj != null)\n        {\n            obj.gameObject.SetActive(true);\n            activeObjects.Add(obj);\n        }\n        \n        return obj;\n    }\n    \n    public void Return(T obj)\n    {\n        if (activeObjects.Remove(obj))\n        {\n            obj.gameObject.SetActive(false);\n            pool.Enqueue(obj);\n        }\n    }\n    \n    public void ReturnAll()\n    {\n        foreach (var obj in activeObjects)\n        {\n            obj.gameObject.SetActive(false);\n            pool.Enqueue(obj);\n        }\n        activeObjects.Clear();\n    }\n}\n",
-  "category": "implementation_patterns",
-  "quality_score": 94,
-  "collected_at": "2025-06-25T02:37:31.945223"
-}

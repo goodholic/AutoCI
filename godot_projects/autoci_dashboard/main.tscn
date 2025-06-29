@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Dashboard.gd" id="1"]
+[ext_resource type="Theme" path="res://theme.tres" id="2"]
+
+[node name="Dashboard" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2")
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -300.0
+margin_top = 20.0
+margin_right = 300.0
+margin_bottom = 80.0
+theme_override_font_sizes/font_size = 36
+text = "🚀 AutoCI 실시간 대시보드"
+horizontal_alignment = 1
+
+[node name="StatsContainer" type="VBoxContainer" parent="."]
+margin_left = 50.0
+margin_top = 120.0
+margin_right = 600.0
+margin_bottom = 680.0
+
+[node name="CurrentTask" type="RichTextLabel" parent="StatsContainer"]
+custom_minimum_size = Vector2(0, 60)
+bbcode_enabled = true
+text = "[b]현재 작업:[/b] 대기 중..."
+
+[node name="Progress" type="ProgressBar" parent="StatsContainer"]
+custom_minimum_size = Vector2(0, 30)
+value = 0.0
+
+[node name="Stats" type="RichTextLabel" parent="StatsContainer"]
+custom_minimum_size = Vector2(0, 400)
+bbcode_enabled = true
+text = "[b]통계[/b]"
+
+[node name="LogContainer" type="VBoxContainer" parent="."]
+margin_left = 650.0
+margin_top = 120.0
+margin_right = 1230.0
+margin_bottom = 680.0
+
+[node name="LogTitle" type="Label" parent="LogContainer"]
+text = "실시간 로그"
+theme_override_font_sizes/font_size = 24
+
+[node name="LogScroll" type="ScrollContainer" parent="LogContainer"]
+custom_minimum_size = Vector2(0, 520)
+
+[node name="LogText" type="RichTextLabel" parent="LogContainer/LogScroll"]
+custom_minimum_size = Vector2(560, 500)
+bbcode_enabled = true
+scroll_following = true

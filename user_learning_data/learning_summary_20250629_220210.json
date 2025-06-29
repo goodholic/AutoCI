@@ -1,0 +1,99 @@
+{
+  "start_time": "2025-06-29T22:02:10.846294",
+  "end_time": "2025-06-29T22:06:29.556119",
+  "duration": "0:04:18.709825",
+  "total_learning_hours": 3.2666666666666666,
+  "completed_topics": [
+    "상속",
+    "Thread Safety",
+    "async/await",
+    "파일 I/O",
+    "CancellationToken",
+    "반복문",
+    "연산자",
+    "다형성",
+    "클래스",
+    "람다 표현식",
+    "객체",
+    "메서드",
+    "변수와 타입",
+    "배열과 컬렉션",
+    "Task",
+    "LINQ",
+    "캡슐화",
+    "델리게이트",
+    "예외 처리",
+    "제네릭",
+    "조건문",
+    "인터페이스",
+    "비동기 스트림",
+    "병렬 처리"
+  ],
+  "completion_rate": 66.66666666666666,
+  "current_level": "초급 (Beginner)",
+  "sessions": [
+    {
+      "topic": "파일 I/O",
+      "level": "intermediate",
+      "duration_minutes": 25,
+      "start_time": "2025-06-29 22:02:18.091947",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "파일 I/O 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "async/await",
+      "level": "advanced",
+      "duration_minutes": 30,
+      "start_time": "2025-06-29 22:02:50.315712",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "async/await 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "Task",
+      "level": "advanced",
+      "duration_minutes": 21,
+      "start_time": "2025-06-29 22:03:24.429346",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "Task 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "병렬 처리",
+      "level": "advanced",
+      "duration_minutes": 30,
+      "start_time": "2025-06-29 22:03:48.642106",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "병렬 처리 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "Thread Safety",
+      "level": "advanced",
+      "duration_minutes": 29,
+      "start_time": "2025-06-29 22:04:22.738732",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "Thread Safety 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "CancellationToken",
+      "level": "advanced",
+      "duration_minutes": 21,
+      "start_time": "2025-06-29 22:04:55.719942",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "CancellationToken 학습 완료. 숙련도: 90.0%"
+    },
+    {
+      "topic": "비동기 스트림",
+      "level": "advanced",
+      "duration_minutes": 40,
+      "start_time": "2025-06-29 22:05:19.919702",
+      "completion_rate": 100.0,
+      "mastery_score": 90.0,
+      "notes": "비동기 스트림 학습 완료. 숙련도: 90.0%"
+    }
+  ]
+}

@@ -1,7 +1,0 @@
-{
-  "source": "advanced_patterns",
-  "pattern_name": "CQRS Pattern",
-  "code": "\npublic interface ICommand<TResult> { }\npublic interface IQuery<TResult> { }\n\npublic interface ICommandHandler<TCommand, TResult> where TCommand : ICommand<TResult>\n{\n    Task<TResult> HandleAsync(TCommand command);\n}\n\npublic class CreateUserCommand : ICommand<User>\n{\n    public string Name { get; set; }\n    public string Email { get; set; }\n}\n",
-  "category": "advanced_architecture",
-  "timestamp": "2025-06-25T02:30:04.392831"
-}

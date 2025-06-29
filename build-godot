@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""
+WSL에서 AI Godot 빌드 실행 - 통합 명령어
+"""
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+# 색상 코드
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+RED = '\033[91m'
+BLUE = '\033[94m'
+CYAN = '\033[96m'
+RESET = '\033[0m'
+
+def main():
+    print(f"\n{BLUE}🤖 AutoCI - AI Godot 빌드 시스템{RESET}")
+    print("=" * 50)
+    
+    # 스크립트 위치 찾기
+    if Path(__file__).is_symlink():
+        script_path = Path(os.readlink(__file__))
+    else:
+        script_path = Path(__file__).resolve()
+    
+    project_dir = script_path.parent
+    
+    # 옵션 표시
+    print(f"\n{YELLOW}빌드 옵션:{RESET}")
+    print(f"1. {GREEN}AI 수정된 Godot 빌드 (Linux){RESET} - WSL에서 직접 빌드 ⭐")
+    print(f"2. {CYAN}빠른 Windows 설정 (5분){RESET} - 일반 Godot 다운로드")
+    print(f"3. {YELLOW}전체 Windows 빌드 (1시간){RESET} - Windows에서 소스 빌드")
+    print("4. 취소")
+    
+    choice = input(f"\n{GREEN}선택 (1-4) [기본: 1]: {RESET}").strip()
+    
+    if choice == "4":
+        print("취소되었습니다.")
+        return 0
+    
+    # 기본값은 1 (AI 수정된 Linux 빌드)
+    if not choice or choice == "1":
+        print(f"\n{GREEN}🔨 AI 수정된 Godot 빌드를 시작합니다...{RESET}")
+        print("예상 시간: 20-60분")
+        print("")
+        
+        # build_ai_godot.py 실행
+        build_script = project_dir / "build_ai_godot.py"
+        if not build_script.exists():
+            print(f"{RED}❌ build_ai_godot.py를 찾을 수 없습니다.{RESET}")
+            return 1
+        
+        try:
+            # Python으로 직접 실행
+            result = subprocess.run([sys.executable, str(build_script)], 
+                                  cwd=str(project_dir))
+            
+            if result.returncode == 0:
+                print(f"\n{GREEN}✅ 빌드 성공!{RESET}")
+                print(f"\n다음 단계:")
+                print(f"1. {GREEN}autoci{RESET} 명령어 실행")
+                print(f"2. AI Godot이 자동으로 실행됩니다")
+            else:
+                print(f"\n{RED}❌ 빌드 실패{RESET}")
+                print("godot_ai_build/logs/ 폴더의 로그를 확인하세요.")
+            
+            return result.returncode
+            
+        except Exception as e:
+            print(f"{RED}❌ 실행 중 오류: {e}{RESET}")
+            return 1
+            
+    elif choice == "2":
+        bat_file = project_dir / "RUN_SIMPLE_BUILD.bat"
+        print(f"\n{CYAN}빠른 Windows 설정을 시작합니다...{RESET}")
+    elif choice == "3":
+        bat_file = project_dir / "BUILD_AI_GODOT.bat"
+        print(f"\n{YELLOW}전체 Windows 빌드를 시작합니다...{RESET}")
+    else:
+        print(f"{RED}잘못된 선택입니다.{RESET}")
+        return 1
+    
+    # Windows 경로로 변환
+    wsl_path = str(bat_file.absolute())
+    
+    if wsl_path.startswith('/mnt/'):
+        drive = wsl_path[5]
+        win_path = f"{drive.upper()}:{wsl_path[6:].replace('/', '\\')}"
+    else:
+        result = subprocess.run(['wslpath', '-w', wsl_path], 
+                              capture_output=True, text=True)
+        if result.returncode == 0:
+            win_path = result.stdout.strip()
+        else:
+            print(f"{RED}❌ Windows 경로 변환 실패{RESET}")
+            return 1
+    
+    # 실행
+    print(f"\n{BLUE}Windows에서 실행 중...{RESET}")
+    print(f"경로: {win_path}")
+    
+    try:
+        # 새 창에서 실행
+        subprocess.run(['cmd.exe', '/c', 'start', win_path])
+        
+        print(f"\n{GREEN}✅ 성공적으로 실행되었습니다!{RESET}")
+        print("\n다음 단계:")
+        print(f"1. Windows 창에서 설정이 {YELLOW}완료될 때까지 기다리세요{RESET}")
+        print(f"2. 완료되면 이 터미널에서 {GREEN}autoci{RESET} 실행")
+        print("\n예시:")
+        print(f"  {GREEN}$ autoci{RESET}")
+        print(f"  {GREEN}> create platformer game{RESET}")
+        
+    except Exception as e:
+        print(f"{RED}❌ 실행 중 오류: {e}{RESET}")
+        return 1
+    
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

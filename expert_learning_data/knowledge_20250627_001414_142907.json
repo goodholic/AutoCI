@@ -1,9 +1,0 @@
-{
-  "source": "stackoverflow_expert",
-  "url": "https://stackoverflow.com/questions/2762844",
-  "type": "expert_qa",
-  "content": "Q: How does BitLocker affect performance?\n\nA: <p>I'm an ASP.NET / C# developer. I use VS2010 all the time. I am thinking of enabling BitLocker on my laptop to protect the contents, but I am concerned about performance degradation. Developers who use IDEs like Visual Studio are working on lots and lots of files at once. More than the usual office worker, I would think.</p>\n<p><strong>So I was curious if there are other developers out there who develop with BitLocker enabled. How has the performance been? Is it noticeable? If so, is it bad?</strong></p>\n<p>My laptop is a 2.53GHz Core 2 Duo with 4GB RAM and an Intel X25-M G2 SSD. It's pretty snappy but I want it to stay that way. If I hear some bad stories about BitLocker, I'll keep doing what I am doing now, which is keeping stuff RAR'ed with a password when I am not actively working on it, and then SDeleting it when I am done (but it's such a pain).</p>\n<p><strong>2015 Update:</strong> I've been using Visual Studio 2015 on my Surface Pro 3 when I travel, which has BitLocker enabled by default. It feels pretty much like my desktop, which is an i7-2600k @ 4.6 GHz. I think on modern hardware with a good SSD, you won't notice!</p>\n<p><strong>2021 Update:</strong> I have been enabling bitlocker on all my computers and it flies now. No worries. Get an NVMe SSD and don't look back.</p>\n",
-  "score": 137,
-  "timestamp": "2025-06-27T00:14:14.142892",
-  "category": "expert_solutions"
-}

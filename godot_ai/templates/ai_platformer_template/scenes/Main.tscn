@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://platformer_main"]
+
+[ext_resource type="Script" path="res://scripts/GameManager.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/Player.tscn" id="2"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Player" parent="." instance=ExtResource("2")]
+position = Vector2(100, 400)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+
+[node name="HealthBar" type="ProgressBar" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 20.0

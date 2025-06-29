@@ -28,7 +28,23 @@
       "Bash(sudo apt:*)",
       "Bash(sudo apt install:*)",
       "Bash(curl:*)",
-      "Bash(sh:*)"
+      "Bash(sh:*)",
+      "Bash(tree:*)",
+      "Bash(./godot_engine --version)",
+      "Bash(/mnt/d/AutoCI/AutoCI/autoci_env/bin/python --version)",
+      "Bash(/mnt/d/AutoCI/AutoCI/autoci_env/bin/pip list)",
+      "Bash(/mnt/d/AutoCI/AutoCI/autoci_env/bin/python -c \"import sys; print('Python executable:', sys.executable); print('Python version:', sys.version); import torch; print('PyTorch version:', torch.__version__); import transformers; print('Transformers version:', transformers.__version__)\")",
+      "Bash(grep:*)",
+      "Bash(for:*)",
+      "Bash(do [ -d \"$dir\" ])",
+      "Bash(done)",
+      "Bash(rg:*)",
+      "Bash(./install_autoci.sh:*)",
+      "Bash(timeout 5 python3:*)",
+      "Bash(timeout 8 python3 autoci.py --godot)",
+      "Bash(timeout 8 python3 autoci.py --status)",
+      "Bash(./autoci --status)",
+      "Bash(timeout 10 python3:*)"
     ],
     "deny": []
   }

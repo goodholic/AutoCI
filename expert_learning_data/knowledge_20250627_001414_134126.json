@@ -1,9 +1,0 @@
-{
-  "source": "stackoverflow_expert",
-  "url": "https://stackoverflow.com/questions/53811569",
-  "type": "expert_qa",
-  "content": "Q: HTTP Error 500.30 - ANCM In-Process Start Failure\n\nA: <p>I was experimenting with a new feature that comes with .NET core sdk 2.2 that is supposedly meant to improve performance by around 400%.</p>\n<p>Impressive so I tried it out on my ABP (<em>ASP.NET Boilerplate</em>) project</p>\n<p><code>Template asp.net core mvc  4.0.2.0</code></p>\n<p>I added the following to my <code>web.mv.cproj</code> file</p>\n<pre><code>  &lt;PropertyGroup&gt;\n    &lt;TargetFramework&gt;netcoreapp2.2&lt;/TargetFramework&gt;\n    &lt;AspNetCoreHostingModel&gt;InProcess&lt;/AspNetCoreHostingModel&gt;\n  &lt;/PropertyGroup&gt;\n\n  &lt;ItemGroup&gt;\n    &lt;PackageReference Include=&quot;Microsoft.AspNetCore.App&quot; /&gt;\n    &lt;PackageReference Include=&quot;Microsoft.AspNetCore.Razor.Design&quot; Version=&quot;2.2.0&quot; PrivateAssets=&quot;All&quot; /&gt;\n  &lt;/ItemGroup&gt;\n</code></pre>\n<p>Unfortunately I do not think this version of the ABP framework is compatible as the project simply fails to run and throws: (eventually)</p>\n<blockquote>\n<p>HTTP Error 500.30 - ANCM In-Process Start Failure</p>\n</blockquote>\n<p>I checked the logs after setting <code>stdoutLogEnabled=&quot;true&quot;</code> in the web.config and re-trying - but no entries.</p>\n<p>Has anybody had any success running the current ABP against a asp.net core in process setup?</p>\n<p>I'm thinking this may be something only available in ABP vNext.</p>\n",
-  "score": 177,
-  "timestamp": "2025-06-27T00:14:14.134113",
-  "category": "expert_solutions"
-}
