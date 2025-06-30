@@ -20,8 +20,8 @@ echo [확인] Python 설치 확인됨
 echo.
 
 REM 빌드 스크립트 실행
-echo 빌드를 시작합니다...
-python build_ai_godot.py
+echo Windows 빌드를 시작합니다...
+python build_ai_godot_windows.py
 
 if %errorlevel% equ 0 (
     echo.

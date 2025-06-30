@@ -111,3 +111,8 @@ llama/
 # .gitignore 파일에 추가
 *.x86_64
 godot_ai_build/output/
+
+# 3D Models
+*.fbx
+*.mat
+models/

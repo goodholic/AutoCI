@@ -1,0 +1,24 @@
+{
+  "question": {
+    "id": "cs_intermediate_3_translate_1751265056",
+    "topic": "인터페이스",
+    "type": "translate",
+    "language": "korean",
+    "difficulty": 3,
+    "question": "다음 C# 개념을 한글로 번역하고 설명하세요: implementation",
+    "keywords": [
+      "인터페이스",
+      "구현",
+      "계약",
+      "다중상속"
+    ]
+  },
+  "answer": {
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "session_id": "20250630_153003"
+}

@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "cs_intermediate_1_error_1751265292",
+    "topic": "클래스와 객체",
+    "type": "error",
+    "language": "english",
+    "difficulty": 3,
+    "question": "What are common errors with 클래스와 객체 in C# and how to fix them?",
+    "keywords": [
+      "class",
+      "object",
+      "constructor",
+      "destructor",
+      "properties"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_153003"
+}

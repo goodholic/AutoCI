@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "cs_intermediate_2_translate_1751266078",
+    "topic": "상속과 다형성",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Translate and explain this Korean term in C# context: 추상",
+    "keywords": [
+      "inheritance",
+      "polymorphism",
+      "override",
+      "virtual",
+      "abstract"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_154758"
+}

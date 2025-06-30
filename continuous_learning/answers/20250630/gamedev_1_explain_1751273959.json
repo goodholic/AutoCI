@@ -1,0 +1,24 @@
+{
+  "question": {
+    "id": "gamedev_1_explain_1751273959",
+    "topic": "상태 머신",
+    "type": "explain",
+    "language": "korean",
+    "difficulty": 4,
+    "question": "상태 머신에 대해 한글로 자세히 설명해주세요. 특히 패턴에 초점을 맞춰주세요.",
+    "keywords": [
+      "상태",
+      "전이",
+      "패턴",
+      "유한상태기계"
+    ]
+  },
+  "answer": {
+    "error": "Model gemma-4b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model gemma-4b failed to load"
+  },
+  "session_id": "20250630_175919"
+}

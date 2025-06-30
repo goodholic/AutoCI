@@ -1,0 +1,23 @@
+{
+  "cycle": 3,
+  "question": {
+    "id": "godot_nodes_example_1751224082",
+    "topic": "노드 시스템",
+    "category": "Godot",
+    "type": "example",
+    "question": "노드 시스템을(를) 사용하는 C# 코드 예제를 한글 주석과 함께 작성해주세요.",
+    "language": "korean",
+    "difficulty": 3
+  },
+  "answer": {
+    "model": "qwen2.5-coder-32b",
+    "question_id": "godot_nodes_example_1751224082",
+    "answer": "```csharp\n// 노드 시스템 구현\nusing Godot;\n\npublic partial class Demo : Node {\n    // 트리 활용\n    public override void _Ready() {\n        GD.Print(\"GetNode 예제\");\n    }\n}\n```\n\n[Qwen2.5: 고급 코드 분석 및 한글 지원 강화]",
+    "response_time": 1.8805034479353226,
+    "timestamp": "2025-06-30T04:08:02.668878"
+  },
+  "stats_snapshot": {
+    "total_questions": 3,
+    "topics_count": 2
+  }
+}

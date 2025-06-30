@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """
-WSL에서 AI Godot 빌드 실행 - 통합 명령어
+WSL에서 AI Godot Windows 빌드 실행
+MinGW를 사용하여 Windows exe 파일을 크로스 컴파일
 """
 import os
 import subprocess
 import sys
 from pathlib import Path
+import time
+import shutil
+import urllib.request
+import zipfile
 
 # 색상 코드
 GREEN = '\033[92m'
@@ -15,8 +20,184 @@ BLUE = '\033[94m'
 CYAN = '\033[96m'
 RESET = '\033[0m'
 
+def check_dependencies():
+    """필수 의존성 확인 및 설치"""
+    print(f"{YELLOW}🔍 빌드 의존성 확인 중...{RESET}")
+    
+    missing_deps = []
+    has_mingw = False
+    
+    # MinGW 확인
+    try:
+        subprocess.run(["x86_64-w64-mingw32-g++", "--version"], capture_output=True, check=True)
+        print(f"  ✅ MinGW-w64 설치됨")
+        has_mingw = True
+    except:
+        print(f"  ⚠️  MinGW-w64 없음 (미리 빌드된 버전 사용)")
+    
+    # SCons 확인 (MinGW가 있을 때만 필요)
+    if has_mingw:
+        try:
+            subprocess.run(["scons", "--version"], capture_output=True, check=True)
+            print(f"  ✅ SCons 설치됨")
+        except:
+            missing_deps.append("scons")
+    
+    # 필수 라이브러리들 (MinGW가 있을 때만 필요)
+    if has_mingw:
+        required_packages = ["pkg-config", "libx11-dev", "libgl1-mesa-dev"]
+        for pkg in required_packages:
+            result = subprocess.run(["dpkg", "-l", pkg], capture_output=True)
+            if result.returncode != 0:
+                missing_deps.append(pkg)
+            else:
+                print(f"  ✅ {pkg} 설치됨")
+    
+    if missing_deps:
+        print(f"\n{YELLOW}📦 누락된 패키지가 있습니다:{RESET}")
+        print(f"   sudo apt install {' '.join(missing_deps)}")
+        print(f"\n{YELLOW}소스 빌드를 건너뛰고 미리 빌드된 버전을 사용합니다.{RESET}")
+        return has_mingw
+    
+    return has_mingw
+
+def download_godot_source(project_dir):
+    """Godot 소스코드 다운로드"""
+    source_dir = project_dir / "godot_modified" / "godot-source"
+    
+    if source_dir.exists() and (source_dir / "SConstruct").exists():
+        print(f"{GREEN}✅ Godot 소스가 이미 존재합니다.{RESET}")
+        return source_dir
+    
+    print(f"{BLUE}📥 Godot 4.3 소스코드 다운로드 중...{RESET}")
+    
+    # 디렉토리 생성
+    source_dir.parent.mkdir(parents=True, exist_ok=True)
+    
+    # 다운로드
+    url = "https://github.com/godotengine/godot/archive/4.3-stable.zip"
+    zip_path = source_dir.parent / "godot-source.zip"
+    
+    try:
+        def download_progress(block_num, block_size, total_size):
+            downloaded = block_num * block_size
+            percent = min(downloaded * 100 / total_size, 100)
+            print(f"\r  진행률: {percent:.1f}%", end='')
+        
+        urllib.request.urlretrieve(url, zip_path, download_progress)
+        print()
+        
+        # 압축 해제
+        print(f"{BLUE}📦 압축 해제 중...{RESET}")
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(source_dir.parent)
+        
+        # 디렉토리 이름 변경
+        extracted = source_dir.parent / "godot-4.3-stable"
+        if extracted.exists():
+            if source_dir.exists():
+                shutil.rmtree(source_dir)
+            extracted.rename(source_dir)
+        
+        # zip 파일 삭제
+        zip_path.unlink()
+        
+        print(f"{GREEN}✅ 소스코드 준비 완료{RESET}")
+        return source_dir
+        
+    except Exception as e:
+        print(f"{RED}❌ 다운로드 실패: {e}{RESET}")
+        return None
+
+def build_windows_exe(source_dir, output_dir):
+    """Windows exe 크로스 컴파일"""
+    print(f"\n{BLUE}🔨 Windows exe 빌드 시작...{RESET}")
+    print(f"{YELLOW}⏱️  예상 시간: 30-60분{RESET}")
+    
+    # 출력 디렉토리 생성
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    # 빌드 로그 디렉토리
+    log_dir = output_dir.parent / "logs"
+    log_dir.mkdir(exist_ok=True)
+    
+    # 원래 디렉토리 저장
+    original_dir = os.getcwd()
+    os.chdir(source_dir)
+    
+    try:
+        # Windows 크로스 컴파일 명령
+        build_cmd = [
+            "scons",
+            "platform=windows",
+            "target=editor",
+            "arch=x86_64",
+            "use_mingw=yes",
+            "-j4",  # 4개 코어 사용
+            "production=yes"
+        ]
+        
+        print(f"실행 명령: {' '.join(build_cmd)}")
+        
+        # 로그 파일
+        log_file = log_dir / f"build_windows_{int(time.time())}.log"
+        
+        start_time = time.time()
+        
+        # 빌드 실행
+        with open(log_file, 'w') as log:
+            process = subprocess.Popen(
+                build_cmd,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=True,
+                bufsize=1
+            )
+            
+            # 진행 상황 표시
+            line_count = 0
+            for line in process.stdout:
+                log.write(line)
+                line_count += 1
+                if line_count % 100 == 0:
+                    elapsed = time.time() - start_time
+                    print(f"\r  진행 중... ({elapsed/60:.1f}분 경과)", end='')
+            
+            process.wait()
+        
+        build_time = time.time() - start_time
+        
+        if process.returncode == 0:
+            print(f"\n{GREEN}✅ 빌드 성공! ({build_time/60:.1f}분 소요){RESET}")
+            
+            # 빌드된 exe 찾기
+            bin_dir = source_dir / "bin"
+            exe_files = list(bin_dir.glob("godot.windows.editor.x86_64*.exe"))
+            
+            if exe_files:
+                source_exe = exe_files[0]
+                target_exe = output_dir / "godot.windows.editor.x86_64.exe"
+                
+                # 복사
+                shutil.copy2(source_exe, target_exe)
+                print(f"{GREEN}✅ 빌드된 파일: {target_exe}{RESET}")
+                return target_exe
+            else:
+                print(f"{RED}❌ 빌드된 exe 파일을 찾을 수 없습니다.{RESET}")
+                return None
+        else:
+            print(f"\n{RED}❌ 빌드 실패 (코드: {process.returncode}){RESET}")
+            print(f"로그 확인: {log_file}")
+            return None
+            
+    except Exception as e:
+        print(f"{RED}❌ 빌드 중 오류: {e}{RESET}")
+        return None
+    finally:
+        os.chdir(original_dir)
+
 def main():
-    print(f"\n{BLUE}🤖 AutoCI - AI Godot 빌드 시스템{RESET}")
+    print(f"\n{BLUE}🤖 AutoCI - AI Godot Windows 빌드 시스템{RESET}")
     print("=" * 50)
     
     # 스크립트 위치 찾기
@@ -27,97 +208,68 @@ def main():
     
     project_dir = script_path.parent
     
-    # 옵션 표시
-    print(f"\n{YELLOW}빌드 옵션:{RESET}")
-    print(f"1. {GREEN}AI 수정된 Godot 빌드 (Linux){RESET} - WSL에서 직접 빌드 ⭐")
-    print(f"2. {CYAN}빠른 Windows 설정 (5분){RESET} - 일반 Godot 다운로드")
-    print(f"3. {YELLOW}전체 Windows 빌드 (1시간){RESET} - Windows에서 소스 빌드")
-    print("4. 취소")
+    # 의존성 확인
+    has_mingw = check_dependencies()
     
-    choice = input(f"\n{GREEN}선택 (1-4) [기본: 1]: {RESET}").strip()
+    output_dir = project_dir / "godot_ai_build" / "output"
+    exe_path = None
     
-    if choice == "4":
-        print("취소되었습니다.")
+    if has_mingw:
+        # MinGW가 있으면 소스에서 빌드
+        # 소스 다운로드
+        source_dir = download_godot_source(project_dir)
+        if source_dir:
+            # Windows exe 빌드
+            exe_path = build_windows_exe(source_dir, output_dir)
+    
+    if exe_path:
+        print(f"\n{GREEN}🎉 빌드 완료!{RESET}")
+        print(f"📍 Windows exe 경로: {exe_path}")
+        print(f"\n다음 단계:")
+        print(f"1. {GREEN}autoci{RESET} 명령어로 실행")
+        print(f"2. 빌드된 Godot이 자동으로 실행됩니다")
         return 0
-    
-    # 기본값은 1 (AI 수정된 Linux 빌드)
-    if not choice or choice == "1":
-        print(f"\n{GREEN}🔨 AI 수정된 Godot 빌드를 시작합니다...{RESET}")
-        print("예상 시간: 20-60분")
-        print("")
+    else:
+        # MinGW가 없거나 빌드 실패 시 미리 빌드된 버전 다운로드
+        if not has_mingw:
+            print(f"\n{YELLOW}📥 미리 빌드된 Windows Godot 다운로드 중...{RESET}")
+        else:
+            print(f"\n{YELLOW}📥 빌드 실패. 미리 빌드된 Godot 다운로드 중...{RESET}")
         
-        # build_ai_godot.py 실행
-        build_script = project_dir / "build_ai_godot.py"
-        if not build_script.exists():
-            print(f"{RED}❌ build_ai_godot.py를 찾을 수 없습니다.{RESET}")
-            return 1
+        godot_url = "https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_win64.exe.zip"
+        output_dir.mkdir(parents=True, exist_ok=True)
+        zip_path = output_dir / "godot_windows.zip"
+        exe_path = output_dir / "godot.windows.editor.x86_64.exe"
         
         try:
-            # Python으로 직접 실행
-            result = subprocess.run([sys.executable, str(build_script)], 
-                                  cwd=str(project_dir))
+            print(f"  URL: {godot_url}")
             
-            if result.returncode == 0:
-                print(f"\n{GREEN}✅ 빌드 성공!{RESET}")
-                print(f"\n다음 단계:")
-                print(f"1. {GREEN}autoci{RESET} 명령어 실행")
-                print(f"2. AI Godot이 자동으로 실행됩니다")
-            else:
-                print(f"\n{RED}❌ 빌드 실패{RESET}")
-                print("godot_ai_build/logs/ 폴더의 로그를 확인하세요.")
+            def download_progress(block_num, block_size, total_size):
+                downloaded = block_num * block_size
+                percent = min(downloaded * 100 / total_size, 100)
+                mb_downloaded = downloaded / (1024 * 1024)
+                mb_total = total_size / (1024 * 1024)
+                print(f"\r  다운로드 중... {percent:.1f}% ({mb_downloaded:.1f}MB / {mb_total:.1f}MB)", end='')
             
-            return result.returncode
+            urllib.request.urlretrieve(godot_url, zip_path, download_progress)
+            print()  # 새 줄
+            
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                zip_ref.extractall(output_dir)
+            
+            # 파일 이름 변경
+            downloaded_exe = output_dir / "Godot_v4.3-stable_win64.exe"
+            if downloaded_exe.exists():
+                downloaded_exe.rename(exe_path)
+            
+            zip_path.unlink()
+            
+            print(f"{GREEN}✅ 다운로드 완료: {exe_path}{RESET}")
+            return 0
             
         except Exception as e:
-            print(f"{RED}❌ 실행 중 오류: {e}{RESET}")
+            print(f"{RED}❌ 다운로드 실패: {e}{RESET}")
             return 1
-            
-    elif choice == "2":
-        bat_file = project_dir / "RUN_SIMPLE_BUILD.bat"
-        print(f"\n{CYAN}빠른 Windows 설정을 시작합니다...{RESET}")
-    elif choice == "3":
-        bat_file = project_dir / "BUILD_AI_GODOT.bat"
-        print(f"\n{YELLOW}전체 Windows 빌드를 시작합니다...{RESET}")
-    else:
-        print(f"{RED}잘못된 선택입니다.{RESET}")
-        return 1
-    
-    # Windows 경로로 변환
-    wsl_path = str(bat_file.absolute())
-    
-    if wsl_path.startswith('/mnt/'):
-        drive = wsl_path[5]
-        win_path = f"{drive.upper()}:{wsl_path[6:].replace('/', '\\')}"
-    else:
-        result = subprocess.run(['wslpath', '-w', wsl_path], 
-                              capture_output=True, text=True)
-        if result.returncode == 0:
-            win_path = result.stdout.strip()
-        else:
-            print(f"{RED}❌ Windows 경로 변환 실패{RESET}")
-            return 1
-    
-    # 실행
-    print(f"\n{BLUE}Windows에서 실행 중...{RESET}")
-    print(f"경로: {win_path}")
-    
-    try:
-        # 새 창에서 실행
-        subprocess.run(['cmd.exe', '/c', 'start', win_path])
-        
-        print(f"\n{GREEN}✅ 성공적으로 실행되었습니다!{RESET}")
-        print("\n다음 단계:")
-        print(f"1. Windows 창에서 설정이 {YELLOW}완료될 때까지 기다리세요{RESET}")
-        print(f"2. 완료되면 이 터미널에서 {GREEN}autoci{RESET} 실행")
-        print("\n예시:")
-        print(f"  {GREEN}$ autoci{RESET}")
-        print(f"  {GREEN}> create platformer game{RESET}")
-        
-    except Exception as e:
-        print(f"{RED}❌ 실행 중 오류: {e}{RESET}")
-        return 1
-    
-    return 0
 
 if __name__ == "__main__":
     sys.exit(main())

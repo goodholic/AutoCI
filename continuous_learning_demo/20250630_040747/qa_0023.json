@@ -1,0 +1,23 @@
+{
+  "cycle": 23,
+  "question": {
+    "id": "godot_signals_error_1751224198",
+    "topic": "시그널 시스템",
+    "category": "Godot",
+    "type": "error",
+    "question": "시그널 시스템 사용 시 흔한 오류와 해결 방법을 한글로 설명해주세요.",
+    "language": "korean",
+    "difficulty": 3
+  },
+  "answer": {
+    "model": "qwen2.5-coder-32b",
+    "question_id": "godot_signals_error_1751224198",
+    "answer": "시그널 시스템 관련 일반적인 실수는 이벤트 초기화를 잊는 것입니다.\n\n[Qwen2.5: 고급 코드 분석 및 한글 지원 강화]",
+    "response_time": 0.7795447622126377,
+    "timestamp": "2025-06-30T04:09:58.848448"
+  },
+  "stats_snapshot": {
+    "total_questions": 23,
+    "topics_count": 6
+  }
+}

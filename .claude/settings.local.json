@@ -44,7 +44,12 @@
       "Bash(timeout 8 python3 autoci.py --godot)",
       "Bash(timeout 8 python3 autoci.py --status)",
       "Bash(./autoci --status)",
-      "Bash(timeout 10 python3:*)"
+      "Bash(timeout 10 python3:*)",
+      "Bash(cp:*)",
+      "Bash(sudo rm:*)",
+      "Bash(sudo ln:*)",
+      "Bash(dpkg:*)",
+      "Bash(pip3 install:*)"
     ],
     "deny": []
   }

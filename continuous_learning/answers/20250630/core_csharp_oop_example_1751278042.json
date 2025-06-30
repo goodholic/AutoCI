@@ -1,0 +1,38 @@
+{
+  "question": {
+    "id": "core_csharp_oop_example_1751278042",
+    "topic": "객체지향 프로그래밍",
+    "type": "example",
+    "language": "korean",
+    "difficulty": 3,
+    "question": "객체지향 프로그래밍을 사용하는 C# 코드 예제를 작성하고 한글로 설명해주세요.",
+    "keywords": [
+      "클래스",
+      "객체",
+      "상속",
+      "다형성",
+      "캡슐화",
+      "인터페이스"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_csharp_oop_example_1751278042",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.03177332878112793,
+    "timestamp": "2025-06-30T19:07:55.867743",
+    "memory_usage": {
+      "before_gb": 0.7268218994140625,
+      "after_gb": 0.7273445129394531,
+      "delta_gb": 0.000522613525390625
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_190722"
+}

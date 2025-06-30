@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "cs_advanced_1_optimize_1751271728",
+    "topic": "비동기 프로그래밍",
+    "type": "optimize",
+    "language": "english",
+    "difficulty": 4,
+    "question": "How to optimize performance when using 비동기 프로그래밍 in C#?",
+    "keywords": [
+      "async",
+      "await",
+      "Task",
+      "concurrent",
+      "parallel"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_154758"
+}

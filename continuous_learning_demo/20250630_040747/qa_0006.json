@@ -1,0 +1,23 @@
+{
+  "cycle": 6,
+  "question": {
+    "id": "csharp_async_example_1751224102",
+    "topic": "비동기 프로그래밍",
+    "category": "C# 고급",
+    "type": "example",
+    "question": "비동기 프로그래밍을(를) 사용하는 C# 코드 예제를 한글 주석과 함께 작성해주세요.",
+    "language": "korean",
+    "difficulty": 4
+  },
+  "answer": {
+    "model": "qwen2.5-coder-32b",
+    "question_id": "csharp_async_example_1751224102",
+    "answer": "```csharp\n// 비동기 프로그래밍 예제\npublic class Example {\n    private await value;\n    \n    public void Demo() {\n        // 동시성 사용 예시\n    }\n}\n```\n\n[Qwen2.5: 고급 코드 분석 및 한글 지원 강화]",
+    "response_time": 0.875147014791922,
+    "timestamp": "2025-06-30T04:08:22.243420"
+  },
+  "stats_snapshot": {
+    "total_questions": 6,
+    "topics_count": 4
+  }
+}

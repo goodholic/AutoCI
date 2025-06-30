@@ -1,0 +1,24 @@
+{
+  "question": {
+    "id": "cs_basics_3_explain_1751271832",
+    "topic": "조건문",
+    "type": "explain",
+    "language": "english",
+    "difficulty": 2,
+    "question": "Explain 조건문 in C# with focus on ternary.",
+    "keywords": [
+      "if-else",
+      "switch",
+      "ternary",
+      "pattern matching"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_165905"
+}

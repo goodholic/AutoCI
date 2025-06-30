@@ -1,0 +1,15 @@
+{
+  "timestamp": "2025-06-30T06:06:20.874195",
+  "system_memory_gb": 15.592506408691406,
+  "current_usage_gb": 0.617034912109375,
+  "current_usage_percent": 5.5,
+  "recommended_limit_gb": 8.0,
+  "recommended_models": "소형 모델 (llama-3.1-8b)",
+  "optimization_features": [
+    "dynamic_loading",
+    "automatic_unloading",
+    "sequential_usage",
+    "rotation_system",
+    "memory_monitoring"
+  ]
+}

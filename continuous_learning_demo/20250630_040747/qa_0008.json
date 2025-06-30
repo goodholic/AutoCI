@@ -1,0 +1,23 @@
+{
+  "cycle": 8,
+  "question": {
+    "id": "csharp_async_optimize_1751224115",
+    "topic": "비동기 프로그래밍",
+    "category": "C# 고급",
+    "type": "optimize",
+    "question": "비동기 프로그래밍의 성능 최적화 방법을 한글로 설명해주세요.",
+    "language": "korean",
+    "difficulty": 4
+  },
+  "answer": {
+    "model": "qwen2.5-coder-32b",
+    "question_id": "csharp_async_optimize_1751224115",
+    "answer": "비동기 프로그래밍 성능 최적화를 위해서는 concurrent를 효율적으로 사용해야 합니다.\n\n[Qwen2.5: 고급 코드 분석 및 한글 지원 강화]",
+    "response_time": 1.8243050279575015,
+    "timestamp": "2025-06-30T04:08:35.544152"
+  },
+  "stats_snapshot": {
+    "total_questions": 8,
+    "topics_count": 4
+  }
+}

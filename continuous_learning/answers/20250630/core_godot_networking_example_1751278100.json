@@ -1,0 +1,38 @@
+{
+  "question": {
+    "id": "core_godot_networking_example_1751278100",
+    "topic": "MultiplayerAPI 시스템",
+    "type": "example",
+    "language": "english",
+    "difficulty": 4,
+    "question": "Write a C# code example demonstrating MultiplayerAPI 시스템 with comments.",
+    "keywords": [
+      "MultiplayerAPI",
+      "server",
+      "client",
+      "sync",
+      "RPC",
+      "peer"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_godot_networking_example_1751278100",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.002252340316772461,
+    "timestamp": "2025-06-30T19:08:20.269162",
+    "memory_usage": {
+      "before_gb": 0.7279319763183594,
+      "after_gb": 0.7279319763183594,
+      "delta_gb": 0.0
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_190722"
+}

@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "cs_basics_1_example_1751266661",
+    "topic": "변수와 데이터 타입",
+    "type": "example",
+    "language": "english",
+    "difficulty": 1,
+    "question": "Write a C# code example demonstrating 변수와 데이터 타입 with comments.",
+    "keywords": [
+      "int",
+      "string",
+      "bool",
+      "float",
+      "var"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_155741"
+}

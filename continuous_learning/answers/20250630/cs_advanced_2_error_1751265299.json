@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "cs_advanced_2_error_1751265299",
+    "topic": "LINQ",
+    "type": "error",
+    "language": "english",
+    "difficulty": 4,
+    "question": "What are common errors with LINQ in C# and how to fix them?",
+    "keywords": [
+      "LINQ",
+      "lambda",
+      "query",
+      "select",
+      "where"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_153003"
+}

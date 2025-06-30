@@ -1,0 +1,36 @@
+{
+  "question": {
+    "id": "core_nakama_ai_example_1751278094",
+    "topic": "AI 통합 Nakama",
+    "type": "example",
+    "language": "korean",
+    "difficulty": 5,
+    "question": "AI 통합 Nakama을 사용하는 C# 코드 예제를 작성하고 한글로 설명해주세요.",
+    "keywords": [
+      "AI매칭",
+      "지능형스토리지",
+      "자동스케일링",
+      "예측분석"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_nakama_ai_example_1751278094",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.0022292137145996094,
+    "timestamp": "2025-06-30T19:08:14.709909",
+    "memory_usage": {
+      "before_gb": 0.7279319763183594,
+      "after_gb": 0.7279319763183594,
+      "delta_gb": 0.0
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_190722"
+}

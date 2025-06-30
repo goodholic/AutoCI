@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "cs_intermediate_2_explain_1751265020",
+    "topic": "상속과 다형성",
+    "type": "explain",
+    "language": "korean",
+    "difficulty": 3,
+    "question": "상속과 다형성에 대해 한글로 자세히 설명해주세요. 특히 가상에 초점을 맞춰주세요.",
+    "keywords": [
+      "상속",
+      "다형성",
+      "오버라이드",
+      "가상",
+      "추상"
+    ]
+  },
+  "answer": {
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "session_id": "20250630_153003"
+}

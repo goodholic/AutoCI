@@ -1,0 +1,24 @@
+{
+  "question": {
+    "id": "gamedev_1_error_1751265129",
+    "topic": "상태 머신",
+    "type": "error",
+    "language": "english",
+    "difficulty": 4,
+    "question": "What are common errors with 상태 머신 in C# and how to fix them?",
+    "keywords": [
+      "state",
+      "FSM",
+      "transition",
+      "pattern"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_153003"
+}

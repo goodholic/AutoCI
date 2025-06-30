@@ -1,0 +1,6 @@
+[application]
+config/name="platformer_20250630_022007"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+
+[rendering]
+renderer/rendering_method="gl_compatibility"

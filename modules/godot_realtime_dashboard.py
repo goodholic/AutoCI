@@ -52,16 +52,14 @@ class GodotRealtimeDashboard:
         
         # 수정된 Godot 빌드 경로들 (우선순위 높음)
         modified_godot_paths = [
-            # Linux AI 빌드 (최우선)
-            str(self.project_root / "godot_ai_build" / "output" / "godot.ai.editor.linux.x86_64"),
-            # 간단한 빌드로 설정된 Godot
-            str(self.project_root / "godot_ai_build" / "Godot_v4.3-stable_win64.exe"),
+            # Windows AI 빌드 (최우선)
+            str(self.project_root / "godot_ai_build" / "output" / "godot.windows.editor.x86_64.exe"),
+            str(self.project_root / "godot_ai_build" / "output" / "godot.ai.editor.windows.x86_64.exe"),
             # AutoCI 프로젝트의 수정된 Godot (빌드 예정 경로)
             str(self.project_root / "godot_modified" / "bin" / "godot.windows.editor.x86_64.exe"),
             str(self.project_root / "godot_modified" / "godot.windows.editor.x86_64.exe"),
-            str(self.project_root / "godot_ai_build" / "output" / "godot.windows.editor.x86_64.exe"),
-            # 일반 Linux Godot
-            str(self.project_root / "godot_engine" / "Godot_v4.3-stable_linux.x86_64"),
+            # 간단한 빌드로 설정된 Godot
+            str(self.project_root / "godot_ai_build" / "Godot_v4.3-stable_win64.exe"),
             # 상위 디렉토리의 수정된 Godot
             str(self.project_root.parent / "godot-modified" / "bin" / "godot.windows.editor.x86_64.exe"),
             str(self.project_root.parent / "godot-ai" / "bin" / "godot.windows.editor.x86_64.exe"),
@@ -71,6 +69,10 @@ class GodotRealtimeDashboard:
             "/mnt/c/godot-modified/bin/godot.windows.editor.x86_64.exe",
             # 프로젝트 내 AI 폴더
             str(self.project_root / "godot_ai" / "godot.windows.editor.x86_64.exe"),
+            # Linux AI 빌드 (WSL에서만 사용 가능한 경우를 위해 마지막에 배치)
+            str(self.project_root / "godot_ai_build" / "output" / "godot.ai.editor.linux.x86_64"),
+            # 일반 Linux Godot
+            str(self.project_root / "godot_engine" / "Godot_v4.3-stable_linux.x86_64"),
         ]
         
         # 수정된 Godot 먼저 확인
@@ -523,15 +525,24 @@ default_font_size = 16
             # Windows 경로로 변환
             win_project_path = self.get_windows_path(str(self.godot_project_path))
             
-            # cmd.exe를 통해 Windows에서 Godot 실행
-            subprocess.Popen([
-                "cmd.exe", "/c", "start", "", 
-                self.godot_executable.replace('/mnt/c/', 'C:\\').replace('/mnt/d/', 'D:\\').replace('/', '\\'),
-                "--path", win_project_path
-            ])
+            # Windows 실행 파일인지 확인
+            if self.godot_executable.endswith('.exe'):
+                # cmd.exe를 통해 Windows에서 Godot 실행
+                subprocess.Popen([
+                    "cmd.exe", "/c", "start", "", 
+                    self.godot_executable.replace('/mnt/c/', 'C:\\').replace('/mnt/d/', 'D:\\').replace('/', '\\'),
+                    "--path", win_project_path
+                ])
+                print("✅ Windows Godot이 시작되었습니다!")
+            else:
+                # Linux 실행 파일인 경우 직접 실행
+                subprocess.Popen([
+                    self.godot_executable,
+                    "--path", str(self.godot_project_path)
+                ])
+                print("✅ Linux Godot이 시작되었습니다!")
             
             self.is_running = True
-            print("✅ Godot이 시작되었습니다!")
             print("📊 AutoCI 대시보드가 자동으로 표시됩니다.")
             
             # 연결 대기

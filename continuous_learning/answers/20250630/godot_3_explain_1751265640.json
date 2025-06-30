@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "godot_3_explain_1751265640",
+    "topic": "물리 엔진",
+    "type": "explain",
+    "language": "korean",
+    "difficulty": 4,
+    "question": "물리 엔진에 대해 한글로 자세히 설명해주세요. 특히 강체에 초점을 맞춰주세요.",
+    "keywords": [
+      "물리",
+      "충돌",
+      "강체",
+      "영역",
+      "레이캐스트"
+    ]
+  },
+  "answer": {
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "session_id": "20250630_153003"
+}

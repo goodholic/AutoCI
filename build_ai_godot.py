@@ -14,6 +14,14 @@ import shutil
 from pathlib import Path
 import time
 
+# 색상 코드
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+RED = '\033[91m'
+BLUE = '\033[94m'
+CYAN = '\033[96m'
+RESET = '\033[0m'
+
 class AIGodotBuilder:
     """AI 수정된 Godot 빌드 시스템"""
     
@@ -74,30 +82,101 @@ class AIGodotBuilder:
         for dir_path in [self.build_dir, self.output_dir, self.logs_dir]:
             dir_path.mkdir(exist_ok=True)
         
-        # 빌드 도구 확인
+        # 빌드 도구 확인 (Windows 크로스 컴파일용)
         missing_tools = []
-        tools = {"scons": "SCons 빌드 시스템", "pkg-config": "패키지 설정"}
+        basic_tools = {
+            "scons": "SCons 빌드 시스템", 
+            "pkg-config": "패키지 설정"
+        }
         
-        for tool, desc in tools.items():
+        # 기본 도구 확인
+        for tool, desc in basic_tools.items():
             try:
                 subprocess.run([tool, "--version"], capture_output=True, check=True)
                 print(f"  ✅ {tool} 확인됨")
             except (subprocess.CalledProcessError, FileNotFoundError):
                 missing_tools.append((tool, desc))
         
+        # MinGW 확인 (posix threads 우선)
+        mingw_found = False
+        mingw_compilers = [
+            ("x86_64-w64-mingw32-g++-posix", "MinGW-w64 posix threads (권장)"),
+            ("x86_64-w64-mingw32-g++", "MinGW-w64 기본")
+        ]
+        
+        for compiler, desc in mingw_compilers:
+            try:
+                result = subprocess.run([compiler, "--version"], capture_output=True, check=True, text=True)
+                print(f"  ✅ {desc} 확인됨")
+                # posix threads 지원 확인
+                if "posix" in result.stdout.lower() or "posix" in compiler:
+                    print(f"    💡 posix threads 지원")
+                mingw_found = True
+                break
+            except (subprocess.CalledProcessError, FileNotFoundError):
+                continue
+        
+        if not mingw_found:
+            missing_tools.append(("x86_64-w64-mingw32-g++", "MinGW-w64 크로스 컴파일러"))
+        
         if missing_tools:
-            print("⚠️  필요한 도구가 누락되었습니다:")
+            print("⚠️  Windows 크로스 빌드에 필요한 도구가 누락되었습니다:")
             for tool, desc in missing_tools:
                 print(f"  - {tool}: {desc}")
             
             print("\n🔧 자동 설치 시도 중...")
             try:
                 subprocess.run(["sudo", "apt", "update"], check=True, capture_output=True)
-                subprocess.run(["sudo", "apt", "install", "-y", "scons", "pkg-config", "libx11-dev", "libxcursor-dev", "libxinerama-dev", "libgl1-mesa-dev", "libglu1-mesa-dev", "libasound2-dev", "libpulse-dev", "libudev-dev", "libxi-dev", "libxrandr-dev"], check=True, capture_output=True)
-                print("  ✅ 빌드 도구 설치 완료")
+                
+                # 더 완전한 MinGW 도구 세트 설치
+                mingw_packages = [
+                    "scons", 
+                    "pkg-config", 
+                    "gcc-mingw-w64-x86-64", 
+                    "g++-mingw-w64-x86-64",
+                    "mingw-w64-tools",       # windres, dlltool 등
+                    "mingw-w64-x86-64-dev",  # 헤더 파일들
+                    "build-essential"
+                ]
+                
+                subprocess.run(["sudo", "apt", "install", "-y"] + mingw_packages, 
+                             check=True, capture_output=True)
+                print("  ✅ Windows 크로스 빌드 도구 설치 완료")
+                
+                # posix threads 설정 자동화
+                print("  🔧 posix threads 설정 중...")
+                try:
+                    # gcc posix 설정
+                    subprocess.run(["sudo", "update-alternatives", "--install", 
+                                  "/usr/bin/x86_64-w64-mingw32-gcc", "x86_64-w64-mingw32-gcc", 
+                                  "/usr/bin/x86_64-w64-mingw32-gcc-posix", "60"], 
+                                 check=True, capture_output=True)
+                    subprocess.run(["sudo", "update-alternatives", "--set", 
+                                  "x86_64-w64-mingw32-gcc", "/usr/bin/x86_64-w64-mingw32-gcc-posix"], 
+                                 check=True, capture_output=True)
+                    
+                    # g++ posix 설정
+                    subprocess.run(["sudo", "update-alternatives", "--install", 
+                                  "/usr/bin/x86_64-w64-mingw32-g++", "x86_64-w64-mingw32-g++", 
+                                  "/usr/bin/x86_64-w64-mingw32-g++-posix", "60"], 
+                                 check=True, capture_output=True)
+                    subprocess.run(["sudo", "update-alternatives", "--set", 
+                                  "x86_64-w64-mingw32-g++", "/usr/bin/x86_64-w64-mingw32-g++-posix"], 
+                                 check=True, capture_output=True)
+                    
+                    print("  ✅ posix threads 자동 설정 완료")
+                except:
+                    print("  ⚠️  posix threads 자동 설정 실패 (수동 설정 필요)")
+                    
             except subprocess.CalledProcessError:
                 print("  ❌ 자동 설치 실패")
-                raise Exception("필수 빌드 도구 설치 실패")
+                print("  💡 수동 설치 명령어:")
+                print("     sudo apt update")
+                print("     sudo apt install scons pkg-config gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64")
+                print("     sudo apt install mingw-w64-tools mingw-w64-x86-64-dev build-essential")
+                print("  💡 posix threads 수동 설정:")
+                print("     sudo update-alternatives --config x86_64-w64-mingw32-g++")
+                raise Exception("Windows 크로스 빌드 도구 설치 실패")
     
     def _download_source(self):
         """Godot 소스 다운로드"""
@@ -214,10 +293,108 @@ public:
         os.chdir(self.source_dir)
         
         try:
-            # 빌드 명령어
-            build_cmd = ["scons", "platform=linuxbsd", "target=editor", "bits=64", "-j2", "verbose=yes"]
+            # MinGW posix threads 환경 설정 (우선순위: posix -> 기본)
+            mingw_env = os.environ.copy()
+            
+            # MinGW 경로 및 prefix 설정 - 다중 경로 시도
+            possible_prefixes = ['/usr', '/usr/bin', '']
+            mingw_found = False
+            
+            # 설치된 컴파일러 경로 탐지
+            gcc_options = ['x86_64-w64-mingw32-gcc-posix', 'x86_64-w64-mingw32-gcc']
+            gxx_options = ['x86_64-w64-mingw32-g++-posix', 'x86_64-w64-mingw32-g++']
+            
+            # MinGW 컴파일러 자동 탐지
+            for prefix in possible_prefixes:
+                test_path = f"{prefix}/bin/x86_64-w64-mingw32-gcc" if prefix else "x86_64-w64-mingw32-gcc"
+                try:
+                    import shutil
+                    if shutil.which("x86_64-w64-mingw32-gcc-posix") or shutil.which("x86_64-w64-mingw32-gcc"):
+                        mingw_env['MINGW_PREFIX'] = prefix if prefix else ''
+                        mingw_found = True
+                        print(f"    MinGW 탐지됨: prefix={prefix}")
+                        break
+                except:
+                    continue
+            
+            if not mingw_found:
+                # 기본값으로 설정
+                mingw_env['MINGW_PREFIX'] = '/usr'
+                print("    MinGW 자동 탐지 실패, 기본값 사용: /usr")
+            
+            mingw_gcc = None
+            mingw_gxx = None
+            
+            for gcc in gcc_options:
+                try:
+                    subprocess.run([gcc, '--version'], capture_output=True, check=True)
+                    mingw_env['CC'] = gcc
+                    mingw_gcc = gcc
+                    print(f"    CC 설정: {gcc}")
+                    break
+                except:
+                    continue
+            
+            for gxx in gxx_options:
+                try:
+                    subprocess.run([gxx, '--version'], capture_output=True, check=True)
+                    mingw_env['CXX'] = gxx
+                    mingw_gxx = gxx
+                    print(f"    CXX 설정: {gxx}")
+                    break
+                except:
+                    continue
+            
+            # 추가 환경 변수 설정 (Godot 감지 개선)
+            if mingw_gcc and mingw_gxx:
+                # 컴파일러 경로를 PATH에 추가
+                current_path = mingw_env.get('PATH', '')
+                mingw_env['PATH'] = f"/usr/bin:{current_path}"
+                
+                # Godot에서 찾는 환경 변수들 설정
+                mingw_env['CROSS_COMPILE'] = 'x86_64-w64-mingw32-'
+                mingw_env['AR'] = 'x86_64-w64-mingw32-ar'
+                mingw_env['RANLIB'] = 'x86_64-w64-mingw32-ranlib'
+                mingw_env['STRIP'] = 'x86_64-w64-mingw32-strip'
+                mingw_env['WINDRES'] = 'x86_64-w64-mingw32-windres'
+                
+                print("    추가 환경 변수 설정 완료")
+            
+            # MinGW 도구들 경로 확인 및 설정
+            mingw_tools = ['ar', 'ranlib', 'strip', 'windres']
+            for tool in mingw_tools:
+                tool_name = f'x86_64-w64-mingw32-{tool}'
+                try:
+                    tool_path = subprocess.run(['which', tool_name], capture_output=True, check=True, text=True).stdout.strip()
+                    print(f"    {tool.upper()} 확인: {tool_path}")
+                except:
+                    print(f"    ⚠️  {tool_name} 찾을 수 없음")
+            
+            print(f"    MINGW_PREFIX 설정: {mingw_env['MINGW_PREFIX']}")
+            
+            # 빌드 명령어 - Windows 크로스 컴파일 (posix threads 강제)
+            build_cmd = [
+                "scons", 
+                "platform=windows", 
+                "target=editor", 
+                "arch=x86_64", 
+                "use_mingw=yes",
+                "mingw_prefix=x86_64-w64-mingw32-",  # 실제 컴파일러 prefix
+                "debug_symbols=no",  # 빌드 시간 단축
+                "optimize=speed",    # 최적화
+                "-j2", 
+                "verbose=yes"
+            ]
+            
+            # 컴파일러가 명시적으로 설정된 경우 추가 옵션
+            if mingw_gcc and mingw_gxx:
+                build_cmd.extend([
+                    f"CC={mingw_gcc}",
+                    f"CXX={mingw_gxx}"
+                ])
             
             print(f"실행 명령: {' '.join(build_cmd)}")
+            print(f"MinGW 환경: CC={mingw_env.get('CC')}, CXX={mingw_env.get('CXX')}")
             
             # 로그 파일 준비
             log_file = self.logs_dir / f"build_{int(time.time())}.log"
@@ -231,7 +408,8 @@ public:
                     stdout=subprocess.PIPE,
                     stderr=subprocess.STDOUT,
                     text=True,
-                    bufsize=1
+                    bufsize=1,
+                    env=mingw_env  # posix threads 환경 변수 적용
                 )
                 
                 # 실시간 출력
@@ -247,15 +425,73 @@ public:
                 print(f"\n✅ 빌드 완료! ({build_time/60:.1f}분 소요)")
                 return True
             else:
-                print(f"\n❌ 빌드 실패 (종료 코드: {process.returncode})")
+                print(f"\n❌ Windows 빌드 실패 (종료 코드: {process.returncode})")
                 print(f"로그 파일: {log_file}")
-                return False
+                
+                # Linux 대안 빌드 제안
+                print("\n🔄 대안: Linux 버전으로 빌드 시도 중...")
+                return self._build_linux_alternative(mingw_env)
                 
         except Exception as e:
             print(f"❌ 빌드 중 예외 발생: {e}")
             return False
         finally:
             os.chdir(original_dir)
+    
+    def _build_linux_alternative(self, env):
+        """Windows 빌드 실패 시 Linux 대안 빌드"""
+        try:
+            print("🐧 Linux 버전 AI Godot 빌드 시도...")
+            
+            # Linux 빌드 명령어
+            build_cmd = [
+                "scons", 
+                "platform=linuxbsd", 
+                "target=editor", 
+                "arch=x86_64", 
+                "debug_symbols=no",
+                "optimize=speed",
+                "-j2", 
+                "verbose=yes"
+            ]
+            
+            log_file = self.logs_dir / f"build_linux_{int(time.time())}.log"
+            
+            print(f"실행 명령: {' '.join(build_cmd)}")
+            print("💡 Linux 버전은 WSL에서 X11 forwarding으로 실행 가능합니다")
+            
+            start_time = time.time()
+            
+            with open(log_file, 'w') as log:
+                process = subprocess.Popen(
+                    build_cmd,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=True,
+                    bufsize=1,
+                    env=env
+                )
+                
+                for line in process.stdout:
+                    print(line.rstrip())
+                    log.write(line)
+                
+                process.wait()
+            
+            build_time = time.time() - start_time
+            
+            if process.returncode == 0:
+                print(f"\n✅ Linux 빌드 완료! ({build_time/60:.1f}분 소요)")
+                print("💡 WSL에서 'export DISPLAY=:0'으로 Windows X11 서버 연결 후 실행 가능")
+                return True
+            else:
+                print(f"\n❌ Linux 빌드도 실패 (종료 코드: {process.returncode})")
+                print(f"로그 파일: {log_file}")
+                return False
+                
+        except Exception as e:
+            print(f"❌ Linux 대안 빌드 중 예외 발생: {e}")
+            return False
     
     def _finalize(self):
         """빌드 결과 정리"""
@@ -264,8 +500,8 @@ public:
         # 빌드된 실행 파일 찾기
         bin_dir = self.source_dir / "bin"
         
-        # 가능한 실행 파일 패턴들
-        patterns = ["godot*editor*", "godot*tools*", "godot.linuxbsd*"]
+        # 가능한 실행 파일 패턴들 - Windows용
+        patterns = ["godot*editor*.exe", "godot*tools*.exe", "godot.windows*.exe"]
         executables = []
         
         for pattern in patterns:
@@ -277,11 +513,10 @@ public:
         
         # 첫 번째 실행 파일 사용
         source_exe = executables[0]
-        target_exe = self.output_dir / "godot.ai.editor.linux.x86_64"
+        target_exe = self.output_dir / "godot.ai.editor.windows.x86_64.exe"
         
-        # 실행 파일 복사
+        # 실행 파일 복사 (Windows exe)
         shutil.copy2(source_exe, target_exe)
-        target_exe.chmod(0o755)
         
         # 설정 파일 생성
         config = {
@@ -307,23 +542,40 @@ public:
         return str(target_exe)
     
     def _fallback_to_regular_godot(self):
-        """일반 Godot으로 대체"""
-        print("\n💡 AI 빌드 실패 시 일반 Godot 사용")
-        print("=" * 50)
+        """AI 빌드 실패 시 대안책 제시"""
+        print("\n🔧 AI Godot Windows 빌드 실패 - 문제 해결 방법")
+        print("=" * 60)
         
-        # 기존 Godot 확인
-        regular_godot = self.project_root / "godot_engine" / "Godot_v4.3-stable_linux.x86_64"
+        print("🚫 일반 Godot은 사용하지 않습니다. AI 수정된 Godot만 사용합니다.")
+        print("\n📋 문제 해결 단계:")
         
-        if regular_godot.exists():
-            print(f"✅ 기존 Godot 발견: {regular_godot}")
-            print("💡 AutoCI에서 다음 경로를 사용하세요:")
-            print(f"   {regular_godot}")
-            return str(regular_godot)
-        else:
-            print("❌ 기존 Godot도 찾을 수 없습니다.")
-            print("🔧 다음 명령으로 Godot을 설치하세요:")
-            print("   autoci --setup")
-            return None
+        print("\n1️⃣ MinGW posix threads 수동 설정:")
+        print("   sudo update-alternatives --config x86_64-w64-mingw32-g++")
+        print("   → posix threads 버전 선택")
+        
+        print("\n2️⃣ 필수 패키지 재설치:")
+        print("   sudo apt update")
+        print("   sudo apt install --reinstall gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64")
+        
+        print("\n3️⃣ MinGW 설정 스크립트 실행:")
+        print("   chmod +x fix_mingw_posix.sh && ./fix_mingw_posix.sh")
+        
+        print("\n4️⃣ 빌드 재시도:")
+        print("   build-godot")
+        
+        print("\n💡 또는 Linux 버전 빌드:")
+        print("   build-godot-linux")
+        print("   (Windows에서 WSL X11로 실행 가능)")
+        
+        print("\n🔍 로그 확인:")
+        log_files = list(self.logs_dir.glob("build_*.log"))
+        if log_files:
+            latest_log = max(log_files, key=lambda x: x.stat().st_mtime)
+            print(f"   tail -f {latest_log}")
+        
+        print(f"\n⚠️  AI 수정된 Godot만 사용하므로, 빌드 성공이 필수입니다.")
+        print("   문제가 계속되면 GitHub Issues에 로그와 함께 문의하세요.")
+        return None
 
 def main():
     builder = AIGodotBuilder()
@@ -332,9 +584,12 @@ def main():
     if result:
         print(f"\n🎯 성공! AutoCI에서 사용할 경로:")
         print(f"   {result}")
+        print(f"\n다음 단계:")
+        print(f"1. {GREEN}autoci{RESET} 명령어로 실행")
+        print(f"2. AI 수정된 Godot이 자동으로 실행됩니다")
     else:
-        print(f"\n💡 일반 Godot을 먼저 설치하세요:")
-        print(f"   python3 setup_ai_godot.py")
+        print(f"\n❌ AI Godot 빌드 실패")
+        print(f"💡 문제 해결 후 다시 시도하세요: build-godot")
 
 if __name__ == "__main__":
     main()

@@ -1010,8 +1010,13 @@ func return_to_pool(obj: Node, pool_name: String):
             if len(parts) >= 3 and parts[2] == "game":
                 game_type = parts[1]
                 self.create_game(game_type)
+            elif len(parts) >= 3 and parts[1] == "multiplayer":
+                # 멀티플레이어 게임 생성
+                game_type = parts[2]
+                self.create_multiplayer_game(game_type)
             else:
                 print("사용법: create [racing|platformer|puzzle|rpg] game")
+                print("       create multiplayer [fps|moba|racing]")
         
         elif cmd == "learn":
             if len(parts) >= 2:
@@ -1077,6 +1082,63 @@ func return_to_pool(obj: Node, pool_name: String):
             self.godot_dashboard.task_completed()
         
         print(f"✅ {game_type} 게임 생성 작업을 시작했습니다.")
+
+    def create_multiplayer_game(self, game_type: str):
+        """멀티플레이어 게임 생성"""
+        print(f"🌐 {game_type} 멀티플레이어 게임을 생성하는 중...")
+        
+        # Godot 네트워킹 AI 통합 확인
+        try:
+            from modules.godot_networking_ai import GodotNetworkingAI
+            godot_net = GodotNetworkingAI()
+            
+            # 프로젝트 생성
+            project_name = f"multiplayer_{game_type}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            project_path = self.project_root / "game_projects" / project_name
+            project_path.mkdir(parents=True, exist_ok=True)
+            
+            # Godot 내장 네트워킹 설정
+            print("🔧 Godot 내장 네트워킹 설정 중...")
+            asyncio.create_task(godot_net.setup_multiplayer_project(game_type, project_path))
+            
+            # Godot 프로젝트 생성
+            if self.godot_project_manager:
+                success, _ = self.godot_project_manager.create_new_godot_project(
+                    f"Multiplayer {game_type.upper()} Game", 
+                    "3d" if game_type in ["fps", "moba"] else "2d"
+                )
+                if success:
+                    print(f"  ✅ Godot 멀티플레이어 프로젝트 생성 완료")
+            
+            self.projects[project_name] = {
+                "type": f"multiplayer_{game_type}",
+                "path": project_path,
+                "created": datetime.now(),
+                "features": ["godot_networking", "ai_network_control"],
+                "bugs_fixed": 0,
+                "is_multiplayer": True
+            }
+            
+            self.current_project = project_name
+            self.stats["games_created"] += 1
+            
+            # 실시간 대시보드 업데이트
+            if self.godot_dashboard:
+                self.godot_dashboard.update_status(
+                    f"멀티플레이어 {game_type} 게임 생성 중...",
+                    30,
+                    "활성"
+                )
+                self.godot_dashboard.add_log(f"🌐 {project_name} 멀티플레이어 프로젝트 생성")
+                self.godot_dashboard.add_log(f"🔧 Godot 내장 네트워킹 통합 중...")
+                self.godot_dashboard.task_completed()
+            
+            print(f"✅ 멀티플레이어 {game_type} 게임 생성 작업을 시작했습니다.")
+            print(f"🤖 AI가 Godot 내장 네트워킹을 제어하여 멀티플레이어 기능을 구현합니다.")
+            
+        except ImportError:
+            print("❌ Godot 네트워킹 AI 통합 모듈을 찾을 수 없습니다.")
+            print("먼저 'autoci godot-net install'을 실행하여 설치하세요.")
 
     async def learn_csharp_topic(self, topic: str) -> str:
         """C# 학습 콘텐츠 생성"""
@@ -1227,6 +1289,10 @@ public partial class Player : CharacterBody2D
         print("create [type] game  - 새 게임 프로젝트 생성")
         print("  예: create racing game")
         print("  타입: racing, platformer, puzzle, rpg")
+        print()
+        print("create multiplayer [type] - 멀티플레이어 게임 생성")
+        print("  예: create multiplayer fps")
+        print("  타입: fps, moba, racing")
         print()
         print("learn [topic]      - C# 주제 학습")
         print("  예: learn async programming")

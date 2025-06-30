@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "cs_basics_1_translate_1751271889",
+    "topic": "변수와 데이터 타입",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 1,
+    "question": "Translate and explain this Korean term in C# context: 선언",
+    "keywords": [
+      "int",
+      "string",
+      "bool",
+      "float",
+      "var"
+    ]
+  },
+  "answer": {
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "session_id": "20250630_165905"
+}

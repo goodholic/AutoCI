@@ -1,0 +1,24 @@
+{
+  "question": {
+    "id": "cs_intermediate_3_translate_1751265685",
+    "topic": "인터페이스",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Translate and explain this Korean term in C# context: 구현",
+    "keywords": [
+      "interface",
+      "implementation",
+      "IDisposable",
+      "IEnumerable"
+    ]
+  },
+  "answer": {
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model qwen2.5-coder-32b failed to load"
+  },
+  "session_id": "20250630_153003"
+}

@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "gamedev_3_example_1751271972",
+    "topic": "최적화",
+    "type": "example",
+    "language": "korean",
+    "difficulty": 5,
+    "question": "최적화을 사용하는 C# 코드 예제를 작성하고 한글로 설명해주세요.",
+    "keywords": [
+      "최적화",
+      "성능",
+      "프로파일링",
+      "메모리",
+      "렌더링"
+    ]
+  },
+  "answer": {
+    "error": "Model codellama-13b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model codellama-13b failed to load"
+  },
+  "session_id": "20250630_165905"
+}

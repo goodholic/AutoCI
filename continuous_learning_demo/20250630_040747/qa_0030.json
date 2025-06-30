@@ -1,0 +1,23 @@
+{
+  "cycle": 30,
+  "question": {
+    "id": "godot_signals_explain_1751224236",
+    "topic": "시그널 시스템",
+    "category": "Godot",
+    "type": "explain",
+    "question": "시그널 시스템에 대해 한글로 설명해주세요.",
+    "language": "korean",
+    "difficulty": 3
+  },
+  "answer": {
+    "model": "qwen2.5-coder-32b",
+    "question_id": "godot_signals_explain_1751224236",
+    "answer": "시그널 시스템에 대해 설명하면, 이는 Godot의 중요한 부분으로 이벤트이라고 합니다.\n\n[Qwen2.5: 고급 코드 분석 및 한글 지원 강화]",
+    "response_time": 0.6925841422075862,
+    "timestamp": "2025-06-30T04:10:36.774478"
+  },
+  "stats_snapshot": {
+    "total_questions": 30,
+    "topics_count": 6
+  }
+}
