@@ -1,0 +1,28 @@
+{
+  "question": {
+    "id": "core_godot_networking_example_1751282854",
+    "topic": "MultiplayerAPI 시스템",
+    "type": "example",
+    "language": "english",
+    "difficulty": 4,
+    "question": "Write a C# code example demonstrating MultiplayerAPI 시스템 with comments.",
+    "keywords": [
+      "MultiplayerAPI",
+      "server",
+      "client",
+      "sync",
+      "RPC",
+      "peer"
+    ]
+  },
+  "answer": {
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "analysis": {
+    "success": false,
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "session_id": "20250630_202404"
+}

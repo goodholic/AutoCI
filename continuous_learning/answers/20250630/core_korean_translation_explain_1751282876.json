@@ -1,0 +1,29 @@
+{
+  "question": {
+    "id": "core_korean_translation_explain_1751282876",
+    "topic": "프로그래밍 용어 번역",
+    "type": "explain",
+    "language": "english",
+    "difficulty": 2,
+    "question": "Explain 프로그래밍 용어 번역 in C# with focus on inheritance.",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance",
+      "interface",
+      "algorithm"
+    ]
+  },
+  "answer": {
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "analysis": {
+    "success": false,
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "session_id": "20250630_202404"
+}

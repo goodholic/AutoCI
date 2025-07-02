@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_godot_ai_network_optimize_1751282806",
+    "topic": "AI 네트워크 제어",
+    "type": "optimize",
+    "language": "korean",
+    "difficulty": 5,
+    "question": "AI 네트워크 제어을 사용할 때 성능 최적화 방법을 한글로 설명해주세요.",
+    "keywords": [
+      "AI제어",
+      "자동동기화",
+      "지능형매칭",
+      "예측보상",
+      "최적화"
+    ]
+  },
+  "answer": {
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "analysis": {
+    "success": false,
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "session_id": "20250630_202404"
+}

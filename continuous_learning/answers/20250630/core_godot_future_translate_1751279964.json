@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_godot_future_translate_1751279964",
+    "topic": "Godot 미래 방향성",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 5,
+    "question": "Translate and explain this Korean term in C# context: 클라우드",
+    "keywords": [
+      "WebAssembly",
+      "mobile",
+      "VR",
+      "AI",
+      "cloud",
+      "C# bindings"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

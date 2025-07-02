@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_oop_explain_1751281227",
+    "topic": "객체지향 프로그래밍",
+    "type": "explain",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Explain 객체지향 프로그래밍 in C# with focus on object.",
+    "keywords": [
+      "class",
+      "object",
+      "inheritance",
+      "polymorphism",
+      "interface",
+      "abstract"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

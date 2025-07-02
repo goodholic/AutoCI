@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_oop_translate_1751278594",
+    "topic": "객체지향 프로그래밍",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Translate and explain this Korean term in C# context: 클래스",
+    "keywords": [
+      "class",
+      "object",
+      "inheritance",
+      "polymorphism",
+      "interface",
+      "abstract"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

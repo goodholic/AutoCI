@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_nakama_ai_translate_1751282793",
+    "topic": "AI 통합 Nakama",
+    "type": "translate",
+    "language": "korean",
+    "difficulty": 5,
+    "question": "다음 C# 개념을 한글로 번역하고 설명하세요: AI matching",
+    "keywords": [
+      "AI매칭",
+      "지능형스토리지",
+      "자동스케일링",
+      "예측분석"
+    ]
+  },
+  "answer": {
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "analysis": {
+    "success": false,
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "session_id": "20250630_202404"
+}

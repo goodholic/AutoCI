@@ -1,0 +1,311 @@
+#!/usr/bin/env python3
+"""
+AutoCI 모니터링 시스템 명령어
+실시간으로 시스템 상태, 게임 개발 진행상황, AI 학습 상태를 모니터링합니다.
+"""
+
+import os
+import sys
+import asyncio
+import argparse
+import json
+import time
+from pathlib import Path
+from datetime import datetime, timedelta
+import psutil
+
+# 프로젝트 루트를 Python 경로에 추가
+project_root = Path(__file__).parent.absolute()
+sys.path.insert(0, str(project_root))
+
+try:
+    from modules.monitoring_system import ProductionMonitor, MetricType
+    from modules.enhanced_logging import setup_enhanced_logging
+except ImportError as e:
+    print(f"❌ 모듈 import 오류: {e}")
+    print("🔧 다음 명령어로 가상환경을 활성화해주세요:")
+    print("   source autoci_env/bin/activate")
+    sys.exit(1)
+
+class AutoCIMonitor:
+    """AutoCI 모니터링 인터페이스"""
+    
+    def __init__(self):
+        self.monitor = ProductionMonitor()
+        self.running = False
+        
+    async def start_monitoring(self):
+        """모니터링 시작"""
+        print("🚀 AutoCI 모니터링 시스템을 시작합니다...")
+        await self.monitor.start()
+        self.running = True
+        print("✅ 모니터링이 시작되었습니다!")
+        
+    async def stop_monitoring(self):
+        """모니터링 중지"""
+        if self.running:
+            print("🛑 모니터링을 중지합니다...")
+            await self.monitor.stop()
+            self.running = False
+            print("✅ 모니터링이 중지되었습니다!")
+    
+    async def show_status(self):
+        """실시간 상태 표시"""
+        print("\n" + "="*60)
+        print("📊 AutoCI 시스템 상태")
+        print("="*60)
+        
+        # 시스템 메트릭
+        cpu_percent = psutil.cpu_percent()
+        memory = psutil.virtual_memory()
+        disk = psutil.disk_usage('/')
+        
+        print(f"🖥️  CPU 사용률: {cpu_percent:.1f}%")
+        print(f"💾 메모리 사용률: {memory.percent:.1f}% ({memory.used // (1024**3):.1f}GB / {memory.total // (1024**3):.1f}GB)")
+        print(f"💿 디스크 사용률: {disk.percent:.1f}% ({disk.used // (1024**3):.1f}GB / {disk.total // (1024**3):.1f}GB)")
+        
+        # 헬스 체크 상태
+        health_summary = self.monitor.get_health_summary()
+        print(f"\n🏥 헬스 체크: {health_summary.get('overall_status', 'Unknown')}")
+        
+        # 카운터 정보
+        print(f"\n📈 게임 개발 통계:")
+        for name, count in self.monitor.counters.items():
+            display_name = {
+                "games_created": "생성된 게임",
+                "features_added": "추가된 기능", 
+                "bugs_fixed": "수정된 버그",
+                "errors_caught": "포착된 오류",
+                "ai_requests": "AI 요청",
+                "ai_tokens_used": "사용된 토큰"
+            }.get(name, name)
+            print(f"   {display_name}: {count}")
+        
+        # 최근 메트릭
+        metrics_summary = self.monitor.get_metrics_summary(duration_minutes=10)
+        print(f"\n📊 최근 10분 메트릭 요약:")
+        print(f"   수집된 메트릭: {metrics_summary.get('total_metrics', 0)}")
+        print(f"   평균 CPU: {metrics_summary.get('avg_cpu', 0):.1f}%")
+        print(f"   평균 메모리: {metrics_summary.get('avg_memory', 0):.1f}%")
+        
+        print("="*60)
+    
+    async def show_learning_status(self):
+        """AI 학습 상태 표시"""
+        print("\n" + "="*60)
+        print("🧠 AI 학습 상태")
+        print("="*60)
+        
+        # 학습 진행 상태 파일 확인
+        progress_files = [
+            "user_learning_data/continuous_learning/progress/learning_progress.json",
+            "continuous_learning/progress/learning_progress.json",
+            "user_learning_data/learning_summary_*.json"
+        ]
+        
+        learning_active = False
+        for progress_file in progress_files:
+            if Path(progress_file).exists():
+                try:
+                    with open(progress_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    learning_active = True
+                    
+                    print(f"📚 학습 파일: {progress_file}")
+                    if 'total_hours' in data:
+                        print(f"   총 학습 시간: {data['total_hours']:.1f}시간")
+                    if 'total_questions' in data:
+                        print(f"   총 질문 수: {data['total_questions']}")
+                    if 'total_successful' in data:
+                        print(f"   성공한 답변: {data['total_successful']}")
+                    break
+                except Exception as e:
+                    continue
+        
+        if not learning_active:
+            print("📖 현재 활성화된 학습 세션이 없습니다.")
+            print("💡 다음 명령어로 학습을 시작할 수 있습니다:")
+            print("   autoci learn")
+            print("   autoci learn low")
+        
+        print("="*60)
+    
+    async def show_game_projects(self):
+        """게임 프로젝트 상태 표시"""
+        print("\n" + "="*60)
+        print("🎮 게임 프로젝트 상태")
+        print("="*60)
+        
+        # 게임 프로젝트 디렉토리 확인
+        project_dirs = ["game_projects", "mvp_games", "accurate_games"]
+        
+        total_projects = 0
+        for project_dir in project_dirs:
+            if Path(project_dir).exists():
+                projects = list(Path(project_dir).iterdir())
+                if projects:
+                    print(f"📁 {project_dir}:")
+                    for project in projects[:5]:  # 최대 5개만 표시
+                        if project.is_dir():
+                            # 프로젝트 생성 시간 확인
+                            try:
+                                create_time = datetime.fromtimestamp(project.stat().st_ctime)
+                                print(f"   🎯 {project.name} - {create_time.strftime('%Y-%m-%d %H:%M')}")
+                                total_projects += 1
+                            except:
+                                print(f"   🎯 {project.name}")
+                                total_projects += 1
+                    
+                    if len(projects) > 5:
+                        print(f"   ... 및 {len(projects) - 5}개 더")
+        
+        if total_projects == 0:
+            print("🎮 생성된 게임 프로젝트가 없습니다.")
+            print("💡 다음 명령어로 게임을 만들 수 있습니다:")
+            print("   autoci")
+            print("   > create platformer game")
+        else:
+            print(f"\n📊 총 {total_projects}개의 게임 프로젝트")
+        
+        print("="*60)
+    
+    async def show_logs(self, lines=50):
+        """최근 로그 표시"""
+        print(f"\n📜 최근 로그 ({lines}줄)")
+        print("="*60)
+        
+        log_files = [
+            "logs/autoci.log",
+            "logs/monitoring.log", 
+            "continuous_learning.log",
+            "user_learning_data/continuous_learning/latest.log"
+        ]
+        
+        for log_file in log_files:
+            if Path(log_file).exists():
+                print(f"\n📄 {log_file}:")
+                try:
+                    with open(log_file, 'r', encoding='utf-8') as f:
+                        all_lines = f.readlines()
+                        recent_lines = all_lines[-lines:] if len(all_lines) > lines else all_lines
+                        
+                        for line in recent_lines[-10:]:  # 최근 10줄만
+                            print(f"   {line.rstrip()}")
+                        
+                        if len(recent_lines) > 10:
+                            print(f"   ... (총 {len(recent_lines)}줄)")
+                            
+                except Exception as e:
+                    print(f"   ❌ 로그 읽기 실패: {e}")
+        
+        print("="*60)
+    
+    async def interactive_mode(self):
+        """대화형 모드"""
+        print("\n🎛️ AutoCI 모니터링 대화형 모드")
+        print("명령어: status, learning, projects, logs, start, stop, help, quit")
+        
+        while True:
+            try:
+                command = input("\nmonitor> ").strip().lower()
+                
+                if command in ['quit', 'exit', 'q']:
+                    break
+                elif command in ['status', 's']:
+                    await self.show_status()
+                elif command in ['learning', 'learn', 'l']:
+                    await self.show_learning_status()
+                elif command in ['projects', 'games', 'p']:
+                    await self.show_game_projects()
+                elif command in ['logs', 'log']:
+                    await self.show_logs()
+                elif command == 'start':
+                    await self.start_monitoring()
+                elif command == 'stop':
+                    await self.stop_monitoring()
+                elif command in ['help', 'h']:
+                    print("""
+📖 사용 가능한 명령어:
+  status, s     - 시스템 상태 표시
+  learning, l   - AI 학습 상태 표시  
+  projects, p   - 게임 프로젝트 상태 표시
+  logs          - 최근 로그 표시
+  start         - 모니터링 시작
+  stop          - 모니터링 중지
+  help, h       - 도움말 표시
+  quit, q       - 종료
+                    """)
+                else:
+                    print(f"❌ 알 수 없는 명령어: {command}")
+                    print("💡 'help'를 입력하면 사용 가능한 명령어를 볼 수 있습니다.")
+                    
+            except KeyboardInterrupt:
+                print("\n\n👋 모니터링을 종료합니다.")
+                break
+            except Exception as e:
+                print(f"❌ 오류 발생: {e}")
+        
+        await self.stop_monitoring()
+
+async def main():
+    """메인 함수"""
+    parser = argparse.ArgumentParser(description="AutoCI 모니터링 시스템")
+    parser.add_argument('--status', action='store_true', help='시스템 상태 표시')
+    parser.add_argument('--learning', action='store_true', help='AI 학습 상태 표시')
+    parser.add_argument('--projects', action='store_true', help='게임 프로젝트 상태 표시')
+    parser.add_argument('--logs', action='store_true', help='최근 로그 표시')
+    parser.add_argument('--start', action='store_true', help='모니터링 시작')
+    parser.add_argument('--interactive', '-i', action='store_true', help='대화형 모드')
+    parser.add_argument('--watch', '-w', type=int, metavar='SECONDS', help='지정된 초마다 상태 새로고침')
+    
+    args = parser.parse_args()
+    
+    # 로깅 설정
+    setup_enhanced_logging()
+    
+    monitor = AutoCIMonitor()
+    
+    try:
+        if args.interactive:
+            await monitor.interactive_mode()
+        elif args.watch:
+            print(f"🔄 {args.watch}초마다 상태를 새로고침합니다. (Ctrl+C로 중지)")
+            while True:
+                os.system('clear' if os.name == 'posix' else 'cls')
+                await monitor.show_status()
+                await asyncio.sleep(args.watch)
+        elif args.start:
+            await monitor.start_monitoring()
+            print("💡 대화형 모드로 진입하려면 'autoci-monitor -i'를 사용하세요.")
+        elif args.status:
+            await monitor.show_status()
+        elif args.learning:
+            await monitor.show_learning_status()
+        elif args.projects:
+            await monitor.show_game_projects()
+        elif args.logs:
+            await monitor.show_logs()
+        else:
+            # 기본적으로 모든 상태 표시
+            await monitor.show_status()
+            await monitor.show_learning_status()
+            await monitor.show_game_projects()
+            
+            print(f"\n💡 사용법:")
+            print(f"  autoci-monitor -i          # 대화형 모드")
+            print(f"  autoci-monitor --status    # 시스템 상태만")
+            print(f"  autoci-monitor --learning  # 학습 상태만")
+            print(f"  autoci-monitor --projects  # 게임 프로젝트만")
+            print(f"  autoci-monitor -w 5        # 5초마다 새로고침")
+            
+    except KeyboardInterrupt:
+        print("\n\n👋 모니터링을 종료합니다.")
+    except Exception as e:
+        print(f"❌ 오류 발생: {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        await monitor.stop_monitoring()
+
+if __name__ == "__main__":
+    asyncio.run(main())

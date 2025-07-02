@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_korean_translation_explain_1751280793",
+    "topic": "프로그래밍 용어 번역",
+    "type": "explain",
+    "language": "english",
+    "difficulty": 2,
+    "question": "Explain 프로그래밍 용어 번역 in C# with focus on inheritance.",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance",
+      "interface",
+      "algorithm"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

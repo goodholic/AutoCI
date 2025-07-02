@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://ui_scene"]
+
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "Score: 0"
+theme_override_font_sizes/font_size = 24
+
+[node name="InstructionsLabel" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -100.0
+offset_right = -20.0
+offset_bottom = -20.0
+text = "Controls:
+A/D or Arrow Keys - Move
+Space - Jump"
+theme_override_font_sizes/font_size = 16

@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "core_nakama_basics_example_1751278651",
+    "topic": "Nakama 기본 구조",
+    "type": "example",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Write a C# code example demonstrating Nakama 기본 구조 with comments.",
+    "keywords": [
+      "game server",
+      "authentication",
+      "session",
+      "matchmaking",
+      "leaderboard"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

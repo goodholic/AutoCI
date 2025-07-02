@@ -1,0 +1,37 @@
+{
+  "question": {
+    "id": "core_godot_future_error_1751282054",
+    "topic": "Godot 미래 방향성",
+    "type": "error",
+    "language": "korean",
+    "difficulty": 5,
+    "question": "Godot 미래 방향성 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+    "keywords": [
+      "웹어셈블리",
+      "모바일최적화",
+      "VR지원",
+      "AI통합",
+      "클라우드"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_godot_future_error_1751282054",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.028931379318237305,
+    "timestamp": "2025-06-30T20:17:33.726854",
+    "memory_usage": {
+      "before_gb": 0.7154960632324219,
+      "after_gb": 0.7160186767578125,
+      "delta_gb": 0.000522613525390625
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_201414"
+}

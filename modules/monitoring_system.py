@@ -151,9 +151,14 @@ class ProductionMonitor:
                 timestamp DATETIME NOT NULL,
                 labels TEXT,
                 unit TEXT,
-                description TEXT,
-                INDEX idx_name_timestamp (name, timestamp)
+                description TEXT
             )
+        """)
+        
+        # 메트릭 인덱스
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_metrics_name_timestamp 
+            ON metrics (name, timestamp)
         """)
         
         # 이벤트 테이블
@@ -165,9 +170,14 @@ class ProductionMonitor:
                 message TEXT NOT NULL,
                 severity TEXT NOT NULL,
                 timestamp DATETIME NOT NULL,
-                details TEXT,
-                INDEX idx_timestamp (timestamp)
+                details TEXT
             )
+        """)
+        
+        # 이벤트 인덱스
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_events_timestamp 
+            ON events (timestamp)
         """)
         
         # 알림 테이블
@@ -179,9 +189,14 @@ class ProductionMonitor:
                 severity TEXT NOT NULL,
                 timestamp DATETIME NOT NULL,
                 resolved BOOLEAN DEFAULT FALSE,
-                resolved_at DATETIME,
-                INDEX idx_timestamp (timestamp)
+                resolved_at DATETIME
             )
+        """)
+        
+        # 알림 인덱스
+        cursor.execute("""
+            CREATE INDEX IF NOT EXISTS idx_alerts_timestamp 
+            ON alerts (timestamp)
         """)
         
         conn.commit()

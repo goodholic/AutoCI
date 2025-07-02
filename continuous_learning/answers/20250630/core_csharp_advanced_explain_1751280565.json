@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_explain_1751280565",
+    "topic": "고급 C# 기능",
+    "type": "explain",
+    "language": "english",
+    "difficulty": 4,
+    "question": "Explain 고급 C# 기능 in C# with focus on lambda.",
+    "keywords": [
+      "generics",
+      "async",
+      "await",
+      "Task",
+      "LINQ",
+      "delegate",
+      "lambda"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

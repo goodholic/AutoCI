@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_example_1751281067",
+    "topic": "고급 C# 기능",
+    "type": "example",
+    "language": "english",
+    "difficulty": 4,
+    "question": "Write a C# code example demonstrating 고급 C# 기능 with comments.",
+    "keywords": [
+      "generics",
+      "async",
+      "await",
+      "Task",
+      "LINQ",
+      "delegate",
+      "lambda"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

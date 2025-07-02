@@ -1,0 +1,24 @@
+{
+  "question": {
+    "id": "core_nakama_ai_error_1751280347",
+    "topic": "AI 통합 Nakama",
+    "type": "error",
+    "language": "english",
+    "difficulty": 5,
+    "question": "What are common errors with AI 통합 Nakama in C# and how to fix them?",
+    "keywords": [
+      "AI matching",
+      "intelligent storage",
+      "auto scaling",
+      "predictive analytics"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

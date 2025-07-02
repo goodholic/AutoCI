@@ -1,0 +1,37 @@
+{
+  "question": {
+    "id": "core_korean_concepts_optimize_1751282341",
+    "topic": "한국어 코딩 개념",
+    "type": "optimize",
+    "language": "english",
+    "difficulty": 3,
+    "question": "How to optimize performance when using 한국어 코딩 개념 in C#?",
+    "keywords": [
+      "data structure",
+      "design pattern",
+      "architecture",
+      "framework",
+      "library"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_korean_concepts_optimize_1751282341",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.002071857452392578,
+    "timestamp": "2025-06-30T20:19:01.339593",
+    "memory_usage": {
+      "before_gb": 0.7244873046875,
+      "after_gb": 0.7244873046875,
+      "delta_gb": 0.0
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_201414"
+}

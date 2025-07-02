@@ -1,0 +1,38 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_integrate_1751283247",
+    "topic": "고급 C# 기능",
+    "type": "integrate",
+    "language": "korean",
+    "difficulty": 4,
+    "question": "Godot에서 고급 C# 기능을 어떻게 활용하는지 C# 코드와 함께 설명해주세요.",
+    "keywords": [
+      "제네릭",
+      "비동기",
+      "LINQ",
+      "델리게이트",
+      "람다",
+      "속성"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_csharp_advanced_integrate_1751283247",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.002950906753540039,
+    "timestamp": "2025-06-30T20:34:07.070562",
+    "memory_usage": {
+      "before_gb": 0.7200851440429688,
+      "after_gb": 0.7200851440429688,
+      "delta_gb": 0.0
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_203109"
+}

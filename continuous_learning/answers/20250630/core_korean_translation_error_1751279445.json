@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_korean_translation_error_1751279445",
+    "topic": "프로그래밍 용어 번역",
+    "type": "error",
+    "language": "korean",
+    "difficulty": 2,
+    "question": "프로그래밍 용어 번역 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속",
+      "인터페이스",
+      "알고리즘"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

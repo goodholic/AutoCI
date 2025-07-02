@@ -296,31 +296,16 @@ public:
             # MinGW posix threads 환경 설정 (우선순위: posix -> 기본)
             mingw_env = os.environ.copy()
             
-            # MinGW 경로 및 prefix 설정 - 다중 경로 시도
-            possible_prefixes = ['/usr', '/usr/bin', '']
-            mingw_found = False
+            # MinGW 컴파일러 확인 및 환경 설정
+            import shutil
             
-            # 설치된 컴파일러 경로 탐지
+            # POSIX threads 컴파일러 우선 사용
             gcc_options = ['x86_64-w64-mingw32-gcc-posix', 'x86_64-w64-mingw32-gcc']
             gxx_options = ['x86_64-w64-mingw32-g++-posix', 'x86_64-w64-mingw32-g++']
             
-            # MinGW 컴파일러 자동 탐지
-            for prefix in possible_prefixes:
-                test_path = f"{prefix}/bin/x86_64-w64-mingw32-gcc" if prefix else "x86_64-w64-mingw32-gcc"
-                try:
-                    import shutil
-                    if shutil.which("x86_64-w64-mingw32-gcc-posix") or shutil.which("x86_64-w64-mingw32-gcc"):
-                        mingw_env['MINGW_PREFIX'] = prefix if prefix else ''
-                        mingw_found = True
-                        print(f"    MinGW 탐지됨: prefix={prefix}")
-                        break
-                except:
-                    continue
-            
-            if not mingw_found:
-                # 기본값으로 설정
-                mingw_env['MINGW_PREFIX'] = '/usr'
-                print("    MinGW 자동 탐지 실패, 기본값 사용: /usr")
+            # MINGW_PREFIX를 올바르게 설정 (중요!)
+            mingw_env['MINGW_PREFIX'] = '/usr'
+            print(f"    MINGW_PREFIX 설정: /usr")
             
             mingw_gcc = None
             mingw_gxx = None
@@ -345,20 +330,28 @@ public:
                 except:
                     continue
             
-            # 추가 환경 변수 설정 (Godot 감지 개선)
+            # 크로스 컴파일 환경 변수 설정 (Godot 감지 개선)
             if mingw_gcc and mingw_gxx:
                 # 컴파일러 경로를 PATH에 추가
                 current_path = mingw_env.get('PATH', '')
                 mingw_env['PATH'] = f"/usr/bin:{current_path}"
                 
-                # Godot에서 찾는 환경 변수들 설정
-                mingw_env['CROSS_COMPILE'] = 'x86_64-w64-mingw32-'
+                # Godot scons 시스템에서 사용하는 환경 변수들
+                mingw_env['MINGW_PREFIX'] = '/usr'
+                mingw_env['CC'] = mingw_gcc
+                mingw_env['CXX'] = mingw_gxx
                 mingw_env['AR'] = 'x86_64-w64-mingw32-ar'
-                mingw_env['RANLIB'] = 'x86_64-w64-mingw32-ranlib'
+                mingw_env['RANLIB'] = 'x86_64-w64-mingw32-ranlib' 
                 mingw_env['STRIP'] = 'x86_64-w64-mingw32-strip'
                 mingw_env['WINDRES'] = 'x86_64-w64-mingw32-windres'
                 
-                print("    추가 환경 변수 설정 완료")
+                print("    크로스 컴파일 환경 변수 설정 완료")
+            else:
+                # 컴파일러를 찾지 못한 경우, 기본값으로 시도
+                mingw_env['MINGW_PREFIX'] = '/usr'
+                mingw_env['CC'] = 'x86_64-w64-mingw32-gcc-posix'
+                mingw_env['CXX'] = 'x86_64-w64-mingw32-g++-posix'
+                print("    기본 MinGW 설정 적용")
             
             # MinGW 도구들 경로 확인 및 설정
             mingw_tools = ['ar', 'ranlib', 'strip', 'windres']
@@ -379,19 +372,13 @@ public:
                 "target=editor", 
                 "arch=x86_64", 
                 "use_mingw=yes",
-                "mingw_prefix=x86_64-w64-mingw32-",  # 실제 컴파일러 prefix
                 "debug_symbols=no",  # 빌드 시간 단축
                 "optimize=speed",    # 최적화
                 "-j2", 
                 "verbose=yes"
             ]
             
-            # 컴파일러가 명시적으로 설정된 경우 추가 옵션
-            if mingw_gcc and mingw_gxx:
-                build_cmd.extend([
-                    f"CC={mingw_gcc}",
-                    f"CXX={mingw_gxx}"
-                ])
+            # 컴파일러는 환경 변수로 설정됨 (중복 방지)
             
             print(f"실행 명령: {' '.join(build_cmd)}")
             print(f"MinGW 환경: CC={mingw_env.get('CC')}, CXX={mingw_env.get('CXX')}")

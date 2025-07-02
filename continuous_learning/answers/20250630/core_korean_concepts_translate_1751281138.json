@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "core_korean_concepts_translate_1751281138",
+    "topic": "한국어 코딩 개념",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Translate and explain this Korean term in C# context: 프레임워크",
+    "keywords": [
+      "data structure",
+      "design pattern",
+      "architecture",
+      "framework",
+      "library"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

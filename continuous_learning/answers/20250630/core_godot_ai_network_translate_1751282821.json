@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_godot_ai_network_translate_1751282821",
+    "topic": "AI 네트워크 제어",
+    "type": "translate",
+    "language": "korean",
+    "difficulty": 5,
+    "question": "다음 C# 개념을 한글로 번역하고 설명하세요: prediction",
+    "keywords": [
+      "AI제어",
+      "자동동기화",
+      "지능형매칭",
+      "예측보상",
+      "최적화"
+    ]
+  },
+  "answer": {
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "analysis": {
+    "success": false,
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "session_id": "20250630_202404"
+}

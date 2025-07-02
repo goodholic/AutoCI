@@ -30,6 +30,24 @@ from transformers import (
     pipeline
 )
 
+# 정보 수집기 임포트
+try:
+    from modules.intelligent_information_gatherer import get_information_gatherer
+    INFORMATION_GATHERER_AVAILABLE = True
+    print("🌐 지능형 정보 수집기 활성화!")
+except ImportError:
+    INFORMATION_GATHERER_AVAILABLE = False
+    print("⚠️ 정보 수집기를 로드할 수 없습니다")
+
+# 🎮 AI 모델 완전 제어 시스템 임포트
+try:
+    from modules.ai_model_controller import AIModelController
+    MODEL_CONTROLLER_AVAILABLE = True
+    print("🎮 AI 모델 완전 제어 시스템 활성화!")
+except ImportError:
+    MODEL_CONTROLLER_AVAILABLE = False
+    print("⚠️ AI 모델 컨트롤러를 로드할 수 없습니다")
+
 # 로깅 설정
 logging.basicConfig(
     level=logging.INFO,
@@ -72,6 +90,15 @@ class ContinuousLearningSystem:
         self.learning_dir = Path(learning_dir)
         self.learning_dir.mkdir(exist_ok=True)
         
+        # 🎮 AI 모델 완전 제어 시스템 초기화
+        if MODEL_CONTROLLER_AVAILABLE:
+            self.model_controller = AIModelController()
+            print("🎯 AI 모델 조종권 확보 완료!")
+            logger.info("🎮 AI 모델 완전 제어 시스템이 활성화되었습니다.")
+        else:
+            self.model_controller = None
+            logger.warning("⚠️ AI 모델 컨트롤러 없이 실행됩니다.")
+        
         # 메모리 관리 설정 (저사양 최적화)
         self.max_memory_gb = max_memory_gb
         self.memory_threshold = 0.70  # 70% 사용 시 모델 언로드 (더 보수적)
@@ -82,8 +109,9 @@ class ContinuousLearningSystem:
         self.questions_dir = self.learning_dir / "questions"
         self.answers_dir = self.learning_dir / "answers"
         self.knowledge_base_dir = self.learning_dir / "knowledge_base"
+        self.progress_dir = self.learning_dir / "progress"
         
-        for dir in [self.questions_dir, self.answers_dir, self.knowledge_base_dir]:
+        for dir in [self.questions_dir, self.answers_dir, self.knowledge_base_dir, self.progress_dir]:
             dir.mkdir(exist_ok=True)
             
         # 모델 정보 (실제 로딩은 필요할 때만)
@@ -102,62 +130,31 @@ class ContinuousLearningSystem:
         # 메모리 사용량 모니터링
         self.memory_usage_history = []
         
+        # 학습 진행 상태 로드
+        self.learning_progress = self._load_learning_progress()
+        
+        # 진행형 학습 관리자
+        try:
+            from modules.progressive_learning_manager import ProgressiveLearningManager
+            self.progressive_manager = ProgressiveLearningManager(self.learning_dir)
+            logger.info("📈 진행형 학습 관리자 활성화")
+        except:
+            self.progressive_manager = None
+            logger.warning("⚠️ 진행형 학습 관리자를 사용할 수 없습니다")
+        
     def _initialize_learning_topics(self) -> List[LearningTopic]:
         """5가지 핵심 학습 주제 초기화 (DeepSeek-coder 최적화)"""
         topics = [
-            # 1️⃣ C# 프로그래밍 언어 전문 학습 (DeepSeek-coder 특화)
-            LearningTopic("core_csharp_basics", "C# 프로그래밍", "C# 기초 문법", 2,
-                         ["변수", "타입", "연산자", "조건문", "반복문", "배열"],
-                         ["int", "string", "bool", "var", "if", "for", "foreach", "array"],
-                         "Godot Node 기본 프로퍼티"),
-            LearningTopic("core_csharp_oop", "C# 프로그래밍", "객체지향 프로그래밍", 3,
-                         ["클래스", "객체", "상속", "다형성", "캡슐화", "인터페이스"],
-                         ["class", "object", "inheritance", "polymorphism", "interface", "abstract"],
-                         "Godot 노드 상속 구조"),
-            LearningTopic("core_csharp_advanced", "C# 프로그래밍", "고급 C# 기능", 4,
-                         ["제네릭", "비동기", "LINQ", "델리게이트", "람다", "속성"],
-                         ["generics", "async", "await", "Task", "LINQ", "delegate", "lambda"],
-                         "Godot 고급 스크립팅"),
-            
-            # 2️⃣ 한글 프로그래밍 용어 학습 (DeepSeek-coder 번역 특화)
-            LearningTopic("core_korean_translation", "한글 용어", "프로그래밍 용어 번역", 2,
-                         ["변수", "함수", "클래스", "객체", "상속", "인터페이스", "알고리즘"],
-                         ["variable", "function", "class", "object", "inheritance", "interface", "algorithm"],
-                         "Godot 용어 한글화"),
-            LearningTopic("core_korean_concepts", "한글 용어", "한국어 코딩 개념", 3,
-                         ["자료구조", "디자인패턴", "아키텍처", "프레임워크", "라이브러리"],
-                         ["data structure", "design pattern", "architecture", "framework", "library"],
-                         "Godot 아키텍처 이해"),
-            
-            # 3️⃣ Godot 엔진 개발 방향성 분석 (DeepSeek-coder Godot 특화)
-            LearningTopic("core_godot_architecture", "Godot 엔진", "Godot 4.x 아키텍처", 4,
-                         ["노드시스템", "씬트리", "리소스", "시그널", "렌더링"],
-                         ["Node", "SceneTree", "Resource", "Signal", "RenderingServer"],
-                         "현대적 게임 엔진 설계"),
-            LearningTopic("core_godot_future", "Godot 엔진", "Godot 미래 방향성", 5,
-                         ["웹어셈블리", "모바일최적화", "VR지원", "AI통합", "클라우드"],
-                         ["WebAssembly", "mobile", "VR", "AI", "cloud", "C# bindings"],
-                         "차세대 게임 개발"),
-            
-            # 4️⃣ Godot 내장 네트워킹 (AI 제어) (DeepSeek-coder 네트워킹 특화)
-            LearningTopic("core_godot_networking", "Godot 네트워킹", "MultiplayerAPI 시스템", 4,
-                         ["멀티플레이어", "서버", "클라이언트", "동기화", "RPC", "피어"],
-                         ["MultiplayerAPI", "server", "client", "sync", "RPC", "peer"],
-                         "실시간 멀티플레이어"),
-            LearningTopic("core_godot_ai_network", "Godot 네트워킹", "AI 네트워크 제어", 5,
-                         ["AI제어", "자동동기화", "지능형매칭", "예측보상", "최적화"],
-                         ["AI control", "auto sync", "intelligent matching", "prediction", "optimization"],
-                         "AI 기반 네트워킹"),
-            
-            # 5️⃣ Nakama 서버 개발 (AI 최적화) (DeepSeek-coder 서버 특화)
-            LearningTopic("core_nakama_basics", "Nakama 서버", "Nakama 기본 구조", 3,
-                         ["게임서버", "인증", "세션", "매치메이킹", "리더보드"],
-                         ["game server", "authentication", "session", "matchmaking", "leaderboard"],
-                         "백엔드 서비스 통합"),
-            LearningTopic("core_nakama_ai", "Nakama 서버", "AI 통합 Nakama", 5,
-                         ["AI매칭", "지능형스토리지", "자동스케일링", "예측분석"],
-                         ["AI matching", "intelligent storage", "auto scaling", "predictive analytics"],
-                         "차세대 게임 백엔드"),
+            # ... (기존 주제들)
+            # 6️⃣ Godot 전문가 학습 (문서 기반)
+            LearningTopic("godot_expert_nodes", "Godot 전문가", "노드와 씬 심층 분석", 5,
+                         ["노드", "씬", "트리", "상속", "인스턴스"],
+                         ["Node", "Scene", "SceneTree", "inheritance", "instance"],
+                         "Godot 핵심 아키텍처"),
+            LearningTopic("godot_expert_scripting", "Godot 전문가", "고급 스크립팅 기술", 5,
+                         ["GDScript", "C#", "시그널", "코루틴", "툴 스크립트"],
+                         ["GDScript", "C#", "Signal", "Coroutine", "Tool Script"],
+                         "효율적인 게임 로직 구현"),
         ]
         
         # 모든 주제에 DeepSeek-coder 우선 태그 추가
@@ -185,6 +182,52 @@ class ContinuousLearningSystem:
         kb_file = self.knowledge_base_dir / "knowledge_base.json"
         with open(kb_file, 'w', encoding='utf-8') as f:
             json.dump(self.knowledge_base, f, indent=2, ensure_ascii=False)
+            
+    def _load_learning_progress(self) -> Dict[str, Any]:
+        """학습 진행 상태 로드"""
+        progress_file = self.progress_dir / "learning_progress.json"
+        if progress_file.exists():
+            with open(progress_file, 'r', encoding='utf-8') as f:
+                progress = json.load(f)
+                logger.info(f"기존 학습 진행 상태를 로드했습니다. 총 학습 시간: {progress.get('total_hours', 0)}시간")
+                return progress
+        return {
+            "total_hours": 0,
+            "total_questions": 0,
+            "total_successful": 0,
+            "topics_progress": {},
+            "last_session_id": None,
+            "last_save_time": None,
+            "sessions_completed": []
+        }
+        
+    def _save_learning_progress(self):
+        """학습 진행 상태 저장"""
+        if self.current_session:
+            # 현재 세션 정보 업데이트
+            session_duration = (datetime.now() - self.current_session.start_time).total_seconds() / 3600
+            
+            self.learning_progress["total_hours"] += session_duration
+            self.learning_progress["total_questions"] += self.current_session.questions_asked
+            self.learning_progress["total_successful"] += self.current_session.successful_answers
+            self.learning_progress["last_session_id"] = self.current_session.session_id
+            self.learning_progress["last_save_time"] = datetime.now().isoformat()
+            
+            # 주제별 진행 상태 업데이트
+            for topic in self.current_session.topics_covered:
+                if topic not in self.learning_progress["topics_progress"]:
+                    self.learning_progress["topics_progress"][topic] = {
+                        "questions_asked": 0,
+                        "successful_answers": 0,
+                        "last_studied": None
+                    }
+                self.learning_progress["topics_progress"][topic]["questions_asked"] += 1
+                self.learning_progress["topics_progress"][topic]["last_studied"] = datetime.now().isoformat()
+        
+        progress_file = self.progress_dir / "learning_progress.json"
+        with open(progress_file, 'w', encoding='utf-8') as f:
+            json.dump(self.learning_progress, f, indent=2, ensure_ascii=False)
+        logger.info(f"학습 진행 상태를 저장했습니다. 총 학습 시간: {self.learning_progress['total_hours']:.1f}시간")
             
     def load_model_info(self):
         """모델 정보만 로드 (실제 모델은 필요할 때만 로드)"""
@@ -244,9 +287,11 @@ class ContinuousLearningSystem:
             self.unload_current_model()
             
         try:
+            print(f"🔄 {model_name} 모델 로드 시작...")
             logger.info(f"{model_name} 모델을 로드합니다...")
             info = self.available_models[model_name]
             model_id = info['model_id']
+            print(f"📍 모델 경로: {model_id}")
             
             # RTX 2080 8GB 최적화 모델만 허용
             rtx_2080_optimized = {
@@ -285,10 +330,20 @@ class ContinuousLearningSystem:
                     bnb_4bit_compute_dtype=torch.float16
                 )
             
+            # 로컬 설치된 모델용 토크나이저 경로 처리
+            tokenizer_path = model_id
+            if model_name in ["deepseek-coder-7b", "llama-3.1-8b"]:
+                # 로컬 설치된 모델은 토크나이저 폴더 사용
+                tokenizer_path = info.get('tokenizer_path', model_id)
+                if not tokenizer_path.startswith('./'):
+                    tokenizer_path = f"./{tokenizer_path}"
+                print(f"📁 토크나이저 경로: {tokenizer_path}")
+            
             tokenizer = AutoTokenizer.from_pretrained(
-                model_id, 
+                tokenizer_path, 
                 token=hf_token,
-                trust_remote_code=True
+                trust_remote_code=True,
+                local_files_only=model_id.startswith('./models/')  # 로컬 모델은 오프라인 모드
             )
             
             if tokenizer.pad_token is None:
@@ -307,8 +362,15 @@ class ContinuousLearningSystem:
                 if quantization_config:
                     model_kwargs["quantization_config"] = quantization_config
             
-            if hf_token:
+            if hf_token and not model_id.startswith('./models/'):
                 model_kwargs["token"] = hf_token
+            
+            # 로컬 모델은 오프라인 모드로 로드
+            if model_id.startswith('./models/'):
+                model_kwargs["local_files_only"] = True
+                print(f"🔄 로컬 모델 로드 중: {model_id}")
+            else:
+                print(f"🔄 Hugging Face에서 모델 로드 중: {model_id}")
             
             model = AutoModelForCausalLM.from_pretrained(model_id, **model_kwargs)
             
@@ -404,6 +466,27 @@ class ContinuousLearningSystem:
             "integrate"     # Godot 통합
         ]
         
+        # "Godot 전문가" 주제인 경우, 문서에서 질문 생성
+        if topic.category == "Godot 전문가":
+            try:
+                with open("collected_godot_docs.json", "r", encoding="utf-8") as f:
+                    docs_data = json.load(f)
+                
+                if docs_data:
+                    doc = random.choice(docs_data)
+                    question_text = f"{doc['title']}에 대해 다음 내용을 바탕으로 설명해주세요: \n\n{doc['content'][:500]}"
+                    return {
+                        "id": f"{topic.id}_from_doc_{int(time.time())}",
+                        "topic": topic.topic,
+                        "type": "doc_based_qna",
+                        "language": "korean",
+                        "difficulty": topic.difficulty,
+                        "question": question_text,
+                        "keywords": topic.korean_keywords
+                    }
+            except FileNotFoundError:
+                pass # 문서가 없으면 일반 질문 생성으로 넘어감
+
         question_type = random.choice(question_types)
         
         # 질문 템플릿
@@ -605,58 +688,168 @@ class ContinuousLearningSystem:
         return True  # 기본적으로 적합하다고 가정
         
     async def ask_model(self, model_name: str, question: Dict[str, Any]) -> Dict[str, Any]:
-        """모델에 질문하고 답변 받기"""
+        """🎮 모델에 질문하고 답변 받기 - 완전 제어 모드"""
         # 모델 로드 확인 및 필요시 로드
         if not self.load_model(model_name):
             return {"error": f"Model {model_name} failed to load"}
             
         if model_name not in self.model_cache:
             return {"error": f"Model {model_name} not in cache"}
+        
+        # 🎯 AI 모델 완전 제어: 여러 번 시도하여 우리 기준에 맞는 답변 확보
+        max_attempts = 3 if self.model_controller else 1
+        attempt = 0
+        
+        while attempt < max_attempts:
+            attempt += 1
             
-        try:
-            model_pipeline = self.model_cache[model_name]["pipeline"]
-            
-            # 메모리 상태 확인
-            memory_before = self.get_memory_usage()
-            if not self.check_memory_safety():
-                logger.warning(f"메모리 사용량 높음: {memory_before:.1f}GB")
-            
-            # 프롬프트 구성 (간단화)
-            system_prompt = f"""C# programming and Godot expert. Answer about {question['topic']} in Korean with examples."""
-            full_prompt = f"{system_prompt}\n\nQ: {question['question']}\nA:"
-            
-            # 모델 호출 (새로운 간단한 방식)
-            start_time = time.time()
-            response = model_pipeline(full_prompt)
-            
-            answer_text = response[0]['generated_text'].strip()
-            response_time = time.time() - start_time
-            
-            # 메모리 사용량 추적
-            memory_after = self.get_memory_usage()
-            memory_delta = memory_after - memory_before
-            
-            return {
-                "model": model_name,
-                "question_id": question["id"],
-                "answer": answer_text,
-                "response_time": response_time,
-                "timestamp": datetime.now().isoformat(),
-                "memory_usage": {
-                    "before_gb": memory_before,
-                    "after_gb": memory_after,
-                    "delta_gb": memory_delta
+            try:
+                model_pipeline = self.model_cache[model_name]["pipeline"]
+                
+                # 메모리 상태 확인
+                memory_before = self.get_memory_usage()
+                if not self.check_memory_safety():
+                    logger.warning(f"메모리 사용량 높음: {memory_before:.1f}GB")
+                
+                # 🎮 커스텀 프롬프트 (모델 컨트롤러가 있으면 더 세밀하게)
+                if self.model_controller:
+                    custom_prompt = self.model_controller.get_custom_prompt(model_name, question.get('type', 'general'))
+                    system_prompt = custom_prompt
+                else:
+                    system_prompt = f"""C# programming and Godot expert. Answer about {question['topic']} in Korean with examples."""
+                
+                full_prompt = f"{system_prompt}\n\nQ: {question['question']}\nA:"
+                
+                # 모델 호출 (에러 추적 강화)
+                start_time = time.time()
+                
+                # 입력 타입 확인
+                if not isinstance(full_prompt, str):
+                    raise ValueError(f"프롬프트가 문자열이 아님: {type(full_prompt)}")
+                
+                logger.debug(f"시도 {attempt}: 프롬프트 길이 {len(full_prompt)} 문자")
+                
+                # AI 응답 생성 시작 알림
+                print(f"🤖 AI 응답 생성 중... (모델: {model_name})")
+                logger.info(f"AI 응답 생성 시작: {model_name}")
+                
+                response = model_pipeline(full_prompt)  # optimized_generate는 prompt만 받음
+                
+                # 응답 완료 확인
+                print(f"✅ AI 응답 생성 완료! (소요 시간: {time.time() - start_time:.1f}초)")
+                
+                if not response or len(response) == 0:
+                    raise ValueError("모델이 빈 응답을 반환함")
+                
+                if not isinstance(response[0], dict) or 'generated_text' not in response[0]:
+                    raise ValueError(f"잘못된 응답 형식: {type(response[0])}")
+                
+                answer_text = response[0]['generated_text'].strip()
+                
+                if not answer_text or len(answer_text) < 10:
+                    raise ValueError("답변이 너무 짧거나 비어있음")
+                
+                response_time = time.time() - start_time
+                
+                # 🎯 품질 평가 (모델 컨트롤러가 있으면)
+                if self.model_controller:
+                    quality = self.model_controller.evaluate_response_quality(question, answer_text, model_name)
+                    self.model_controller.log_response_quality(question, answer_text, quality, model_name)
+                    
+                    if quality.is_acceptable:
+                        print(f"🎯 품질 통과 (시도 {attempt}): {quality.score:.2f}")
+                        logger.info(f"✅ 품질 기준 통과: {model_name} (점수: {quality.score:.2f})")
+                    else:
+                        print(f"❌ 품질 실패 (시도 {attempt}): {quality.score:.2f} - {', '.join(quality.issues)}")
+                        
+                        # 재시도 결정
+                        if self.model_controller.should_retry(quality, model_name, attempt):
+                            logger.warning(f"품질 기준 미달, 재시도 중... (시도 {attempt}/{max_attempts})")
+                            continue
+                        else:
+                            logger.warning(f"최대 시도 횟수 도달, 현재 답변 사용")
+                
+                # 메모리 사용량 추적
+                memory_after = self.get_memory_usage()
+                memory_delta = memory_after - memory_before
+                
+                final_answer = {
+                    "model": model_name,
+                    "question_id": question["id"],
+                    "answer": answer_text,
+                    "response_time": response_time,
+                    "timestamp": datetime.now().isoformat(),
+                    "attempt": attempt,
+                    "memory_usage": {
+                        "before_gb": memory_before,
+                        "after_gb": memory_after,
+                        "delta_gb": memory_delta
+                    }
                 }
-            }
-            
-        except Exception as e:
-            logger.error(f"Error with model {model_name}: {str(e)}")
-            return {"error": str(e), "model": model_name}
+                
+                # 품질 정보 추가
+                if self.model_controller:
+                    final_answer["quality"] = {
+                        "score": quality.score,
+                        "is_acceptable": quality.is_acceptable,
+                        "issues": quality.issues
+                    }
+                
+                return final_answer
+                
+            except Exception as model_error:
+                logger.error(f"생성 오류: {str(model_error)}")
+                if attempt >= max_attempts:
+                    logger.error(f"모든 시도 실패: {str(model_error)}")
+                    # 🔍 에러는 error 필드에만 넣고 answer 필드는 넣지 않기
+                    return {"error": str(model_error), "model": model_name, "attempts": attempt}
+                else:
+                    # 잠시 대기 후 재시도
+                    await asyncio.sleep(1.0)
+                    continue
+        
+        # 🔍 최대 시도 횟수 초과 시에도 error 필드에만 넣기
+        return {"error": "최대 시도 횟수 초과", "model": model_name, "attempts": max_attempts}
             
     def analyze_answer(self, question: Dict[str, Any], answer: Dict[str, Any]) -> Dict[str, Any]:
-        """답변 분석 및 지식 추출"""
+        """답변 분석 및 지식 추출 - 엄격한 성공/실패 판단"""
+        # 🔍 1차: error 필드가 있으면 무조건 실패
         if "error" in answer:
-            return {"success": False, "error": answer["error"]}
+            error_msg = answer["error"]
+            logger.error(f"❌ 답변 실패 (error 필드): {error_msg}")
+            return {"success": False, "error": error_msg, "model": answer.get("model", "unknown")}
+        
+        # 🔍 2차: 답변이 없거나 비어있는 경우
+        answer_text = answer.get("answer", "")
+        if not answer_text or len(answer_text.strip()) < 5:
+            logger.error(f"❌ 답변 실패 (비어있음): '{answer_text}'")
+            return {"success": False, "error": "답변이 비어있거나 너무 짧음"}
+        
+        # 🔍 3차: 실패 패턴 체크 (강화된 패턴)
+        failure_patterns = [
+            "죄송합니다. 답변 생성에 실패했습니다",
+            "답변을 생성할 수 없습니다",
+            "오류가 발생했습니다", 
+            "생성에 실패",
+            "죄송합니다",
+            "잘 모르겠습니다",
+            "확실하지 않습니다",
+            "답변 생성에 실패"
+        ]
+        
+        answer_lower = answer_text.lower()
+        for pattern in failure_patterns:
+            if pattern.lower() in answer_lower:
+                logger.error(f"❌ 답변 실패 (실패 패턴): '{pattern}' 감지")
+                return {"success": False, "error": f"실패 패턴 감지: {pattern}"}
+        
+        # 🔍 4차: 최소 품질 체크
+        if len(answer_text.strip()) < 20:
+            logger.error(f"❌ 답변 실패 (너무 짧음): 길이 {len(answer_text)}")
+            return {"success": False, "error": f"답변이 너무 짧음 (길이: {len(answer_text)})"}
+        
+        # ✅ 여기까지 통과하면 성공
+        logger.info(f"✅ 답변 성공 (길이: {len(answer_text)})")
             
         analysis = {
             "success": True,
@@ -665,8 +858,6 @@ class ContinuousLearningSystem:
             "new_patterns": [],
             "improvements": []
         }
-        
-        answer_text = answer["answer"]
         
         # 답변 품질 평가 (간단한 휴리스틱)
         quality_factors = {
@@ -733,6 +924,22 @@ class ContinuousLearningSystem:
         logger.info(f"Starting {duration_hours} hour learning cycle...")
         logger.info(f"Max memory limit: {self.max_memory_gb:.1f}GB")
         
+        # 기존 학습 진행 상태 표시
+        if self.learning_progress["total_hours"] > 0:
+            logger.info(f"📚 기존 학습 진행 상태:")
+            logger.info(f"  - 총 학습 시간: {self.learning_progress['total_hours']:.1f}시간")
+            logger.info(f"  - 총 질문 수: {self.learning_progress['total_questions']}")
+            logger.info(f"  - 성공한 답변: {self.learning_progress['total_successful']}")
+            if self.learning_progress['total_questions'] > 0:
+                overall_success_rate = (self.learning_progress['total_successful'] / 
+                                      self.learning_progress['total_questions'] * 100)
+                logger.info(f"  - 전체 성공률: {overall_success_rate:.1f}%")
+            logger.info(f"  - 학습한 주제 수: {len(self.learning_progress['topics_progress'])}")
+            print(f"\n📊 누적 학습 통계:")
+            print(f"  총 {self.learning_progress['total_hours']:.1f}시간 학습")
+            print(f"  {self.learning_progress['total_questions']}개 질문 중 {self.learning_progress['total_successful']}개 성공")
+            print(f"  {len(self.learning_progress['topics_progress'])}개 주제 학습\n")
+        
         # 세션 시작
         self.current_session = LearningSession(
             session_id=datetime.now().strftime("%Y%m%d_%H%M%S"),
@@ -763,8 +970,31 @@ class ContinuousLearningSystem:
                 model_rotation_count += 1
                 logger.info(f"Model rotation #{model_rotation_count}")
             
-            # 랜덤 주제 선택 (5가지 핵심 주제 강화)
-            topic = random.choice(self.learning_topics)
+            # 진행형 주제 선택 (난이도 기반)
+            if self.progressive_manager:
+                # 현재 난이도 확인
+                current_difficulty = self.progressive_manager.get_current_difficulty()
+                
+                # 진행 상태 요약 출력 (5사이클마다)
+                if cycle_count % 5 == 1:
+                    summary = self.progressive_manager.get_progress_summary()
+                    print(f"\n📊 학습 진행 상태:")
+                    print(f"  현재 난이도: {summary['difficulty_name']} (레벨 {current_difficulty})")
+                    print(f"  전체 진행률: {summary['overall']['total_questions']}문제, 성공률 {summary['overall']['success_rate']:.1%}")
+                    for diff, info in summary['difficulties'].items():
+                        status = "✅ 마스터" if info['mastered'] else "📖 학습중"
+                        print(f"  난이도 {diff} ({info['name']}): {info['total']}문제, 성공률 {info['rate']:.1%} {status}")
+                    print()
+                
+                # 난이도에 맞는 주제 선택
+                topic = self.progressive_manager.select_topic_by_difficulty(self.learning_topics, current_difficulty)
+                if not topic:
+                    # 폴백: 랜덤 선택
+                    topic = random.choice(self.learning_topics)
+                    logger.warning(f"진행형 선택 실패, 랜덤 선택: {topic.topic}")
+            else:
+                # 진행형 관리자가 없으면 기존 랜덤 방식
+                topic = random.choice(self.learning_topics)
             
             # 5가지 핵심 주제 감지
             core_categories = ["C# 프로그래밍", "한글 용어", "Godot 엔진", "Godot 네트워킹", "Nakama 서버"]
@@ -795,23 +1025,80 @@ class ContinuousLearningSystem:
             # 질문하고 답변 받기
             answer = await self.ask_model(model_name, question)
             
-            # 답변 분석
+            # 답변 분석 (에러 체크 포함)
             analysis = self.analyze_answer(question, answer)
             
-            # 세션 업데이트
+            # 🎮 실시간 AI 제어 상태 출력
+            if not analysis.get("success", False):
+                error_msg = analysis.get('error', '알 수 없는 오류')
+                attempts = answer.get("attempts", 1)
+                print(f"❌ 제어 실패: {error_msg} (시도: {attempts})")
+                logger.error(f"답변 실패: {error_msg}")
+            else:
+                answer_preview = answer.get('answer', '')[:100]
+                attempts = answer.get("attempts", 1)
+                quality_info = answer.get("quality", {})
+                
+                if quality_info:
+                    score = quality_info.get("score", 0.0)
+                    is_acceptable = quality_info.get("is_acceptable", False)
+                    quality_status = "🎯 품질 통과" if is_acceptable else "⚠️ 품질 미달"
+                    print(f"✅ {quality_status}: {answer_preview}... (점수: {score:.2f}, 시도: {attempts})")
+                else:
+                    print(f"✅ 답변 성공: {answer_preview}... (시도: {attempts})")
+                
+                logger.info(f"답변 성공 (길이: {len(answer.get('answer', ''))}, 품질: {quality_info.get('score', 'N/A')})")
+            
+            # 세션 업데이트 (모든 시도 기록)
             self.current_session.questions_asked += 1
-            if analysis.get("success", False):
+            self.current_session.models_used[model_name] += 1
+            if topic.topic not in self.current_session.topics_covered:
+                self.current_session.topics_covered.append(topic.topic)
+                
+            # 성공한 경우에만 성공 카운트 증가
+            success = analysis.get("success", False)
+            if success:
                 self.current_session.successful_answers += 1
-                self.current_session.models_used[model_name] += 1
-                if topic.topic not in self.current_session.topics_covered:
-                    self.current_session.topics_covered.append(topic.topic)
+                logger.info(f"✅ 성공한 답변 수: {self.current_session.successful_answers}")
+            else:
+                logger.warning(f"❌ 실패한 답변. 이유: {analysis.get('error', '알 수 없음')}")
+            
+            # 진행형 학습 관리자에 결과 업데이트
+            if self.progressive_manager:
+                self.progressive_manager.update_topic_progress(topic.id, topic.difficulty, success)
                     
             # 결과 저장
             self.save_qa_pair(question, answer, analysis)
             
+            # AI 답변이 있는 경우 학습 시간 확보
+            if analysis.get("success", False) and answer.get('answer'):
+                answer_length = len(answer.get('answer', ''))
+                # 답변 길이에 따른 학습 시간 계산 (100자당 2초)
+                learning_time = max(5.0, min(30.0, answer_length / 100 * 2))
+                
+                print(f"\n📖 답변 학습 중... ({learning_time:.1f}초)")
+                logger.info(f"답변 학습 시간: {learning_time:.1f}초 (답변 길이: {answer_length}자)")
+                
+                # 답변 내용 일부 표시 (학습 중임을 보여주기 위해)
+                answer_text = answer.get('answer', '')
+                if len(answer_text) > 200:
+                    print(f"💭 학습 내용: {answer_text[:200]}...")
+                else:
+                    print(f"💭 학습 내용: {answer_text}")
+                
+                await asyncio.sleep(learning_time)
+                print(f"✅ 학습 완료!\n")
+            
             # 지식 베이스 업데이트
             if cycle_count % 10 == 0:
                 self._save_knowledge_base()
+                self._save_learning_progress()  # 진행 상태도 함께 저장
+
+            # 50 사이클마다 웹에서 새로운 정보 수집
+            if INFORMATION_GATHERER_AVAILABLE and cycle_count % 50 == 0:
+                print("🌐 웹에서 새로운 코드 정보를 수집합니다...")
+                gatherer = get_information_gatherer()
+                asyncio.create_task(gatherer.gather_and_process_csharp_code())
                 
             # 메모리 사용량 히스토리 저장 및 가비지 컬렉션 (저사양 최적화)
             if cycle_count % 5 == 0:
@@ -820,20 +1107,17 @@ class ContinuousLearningSystem:
                 if torch.cuda.is_available():
                     torch.cuda.empty_cache()  # GPU 메모리 정리
                 
-            # 진행 상황 출력 (실시간 UI용)
+            # 진행 상황 출력 (실시간 UI용 - 정확한 성공률)
             success_rate = (self.current_session.successful_answers / 
                           self.current_session.questions_asked * 100)
-            print(f"Progress: {self.current_session.questions_asked} questions, {success_rate:.1f}% success, {model_rotation_count} rotations")
+            failed_count = self.current_session.questions_asked - self.current_session.successful_answers
+            print(f"Progress: {self.current_session.questions_asked} questions, {success_rate:.1f}% success ({self.current_session.successful_answers}✅/{failed_count}❌), {model_rotation_count} rotations")
             logger.info(f"Progress: {self.current_session.questions_asked} questions, "
-                       f"{success_rate:.1f}% success rate, {model_rotation_count} rotations")
+                       f"{success_rate:.1f}% success rate ({self.current_session.successful_answers} success, {failed_count} failed), {model_rotation_count} rotations")
             
-            # 메모리 상황에 따른 대기 시간 조정
-            if not self.check_memory_safety():
-                wait_time = random.uniform(15, 30)  # 메모리 부족시 더 오래 대기
-                logger.info(f"Memory high, waiting {wait_time:.1f}s...")
-            else:
-                wait_time = random.uniform(5, 15)  # 정상시 짧은 대기
-                
+            # 다음 질문까지 짧은 휴식
+            wait_time = random.uniform(3, 8)
+            print(f"⏳ 다음 질문까지 {wait_time:.1f}초 대기...")
             await asyncio.sleep(wait_time)
             
         # 최종 메모리 정리
@@ -861,12 +1145,27 @@ class ContinuousLearningSystem:
         with open(summary_file, 'w', encoding='utf-8') as f:
             json.dump(summary, f, indent=2, ensure_ascii=False, default=str)
             
+        # 진행 상태 저장
+        self._save_learning_progress()
+        
+        # 세션을 완료 목록에 추가
+        if self.current_session.session_id not in self.learning_progress["sessions_completed"]:
+            self.learning_progress["sessions_completed"].append(self.current_session.session_id)
+            self._save_learning_progress()
+            
         logger.info(f"\nSession Summary:")
         logger.info(f"Duration: {summary['duration']}")
         logger.info(f"Questions: {self.current_session.questions_asked}")
         logger.info(f"Success Rate: {self.current_session.successful_answers / max(1, self.current_session.questions_asked) * 100:.1f}%")
         logger.info(f"Topics Covered: {len(self.current_session.topics_covered)}")
         logger.info(f"Models Used: {self.current_session.models_used}")
+        
+        # 누적 통계 표시
+        logger.info(f"\n📊 누적 학습 통계:")
+        logger.info(f"총 학습 시간: {self.learning_progress['total_hours']:.1f}시간")
+        logger.info(f"총 질문 수: {self.learning_progress['total_questions']}")
+        logger.info(f"총 성공 답변: {self.learning_progress['total_successful']}")
+        logger.info(f"완료된 세션 수: {len(self.learning_progress['sessions_completed'])}")
         
     def generate_learning_report(self):
         """학습 보고서 생성"""

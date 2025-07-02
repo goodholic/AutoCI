@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_integrate_1751279756",
+    "topic": "고급 C# 기능",
+    "type": "integrate",
+    "language": "korean",
+    "difficulty": 4,
+    "question": "Godot에서 고급 C# 기능을 어떻게 활용하는지 C# 코드와 함께 설명해주세요.",
+    "keywords": [
+      "제네릭",
+      "비동기",
+      "LINQ",
+      "델리게이트",
+      "람다",
+      "속성"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

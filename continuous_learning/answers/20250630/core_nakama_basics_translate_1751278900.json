@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "core_nakama_basics_translate_1751278900",
+    "topic": "Nakama 기본 구조",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Translate and explain this Korean term in C# context: 매치메이킹",
+    "keywords": [
+      "game server",
+      "authentication",
+      "session",
+      "matchmaking",
+      "leaderboard"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_error_1751280331",
+    "topic": "고급 C# 기능",
+    "type": "error",
+    "language": "korean",
+    "difficulty": 4,
+    "question": "고급 C# 기능 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+    "keywords": [
+      "제네릭",
+      "비동기",
+      "LINQ",
+      "델리게이트",
+      "람다",
+      "속성"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_korean_translation_integrate_1751280726",
+    "topic": "프로그래밍 용어 번역",
+    "type": "integrate",
+    "language": "korean",
+    "difficulty": 2,
+    "question": "Godot에서 프로그래밍 용어 번역을 어떻게 활용하는지 C# 코드와 함께 설명해주세요.",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속",
+      "인터페이스",
+      "알고리즘"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_oop_integrate_1751279076",
+    "topic": "객체지향 프로그래밍",
+    "type": "integrate",
+    "language": "korean",
+    "difficulty": 3,
+    "question": "Godot에서 객체지향 프로그래밍을 어떻게 활용하는지 C# 코드와 함께 설명해주세요.",
+    "keywords": [
+      "클래스",
+      "객체",
+      "상속",
+      "다형성",
+      "캡슐화",
+      "인터페이스"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

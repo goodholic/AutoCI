@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_godot_architecture_error_1751282828",
+    "topic": "Godot 4.x 아키텍처",
+    "type": "error",
+    "language": "english",
+    "difficulty": 4,
+    "question": "What are common errors with Godot 4.x 아키텍처 in C# and how to fix them?",
+    "keywords": [
+      "Node",
+      "SceneTree",
+      "Resource",
+      "Signal",
+      "RenderingServer"
+    ]
+  },
+  "answer": {
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "analysis": {
+    "success": false,
+    "error": "ContinuousLearningSystem.load_model.<locals>.optimized_generate() got an unexpected keyword argument 'max_length'",
+    "model": "deepseek-coder-7b"
+  },
+  "session_id": "20250630_202404"
+}

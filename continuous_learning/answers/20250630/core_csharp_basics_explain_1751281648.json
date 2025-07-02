@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_basics_explain_1751281648",
+    "topic": "C# 기초 문법",
+    "type": "explain",
+    "language": "korean",
+    "difficulty": 2,
+    "question": "C# 기초 문법에 대해 한글로 자세히 설명해주세요. 특히 타입에 초점을 맞춰주세요.",
+    "keywords": [
+      "변수",
+      "타입",
+      "연산자",
+      "조건문",
+      "반복문",
+      "배열"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

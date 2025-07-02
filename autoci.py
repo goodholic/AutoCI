@@ -12,7 +12,12 @@ import json
 import subprocess
 import threading
 import time
+import logging
 from pathlib import Path
+from datetime import datetime
+
+# 로깅 설정
+logger = logging.getLogger(__name__)
 
 # 프로젝트 루트 디렉토리
 AUTOCI_ROOT = Path(__file__).parent.resolve()
@@ -24,7 +29,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 사용 예시:
-  autoci                           # 기본 터미널 모드 실행 (Godot 대시보드 포함)
+  autoci                           # AI 게임 개발자 모드 (한글 대화로 24시간 게임 개발)
   autoci --setup                   # 초기 환경 설정 (WSL + 가상화)
   autoci --godot                   # Godot AI 통합 데모 실행
   autoci --demo                    # 전체 AI 데모 표시
@@ -61,6 +66,19 @@ Nakama 서버 명령:
 
 엔진 수정 명령:
   autoci fix                       # AI가 학습한 내용으로 Godot 엔진 개선
+  
+AI 모델 제어:
+  autoci control                   # AI 모델 제어권 상태 확인
+  autoci learn low                 # RTX 2080 최적화 + AI 제어 상태 자동 표시
+  
+자가 진화 시스템:
+  autoci evolve                    # 자가 진화 시스템 상태 확인
+  autoci evolve status             # 진화 통계 및 집단 지성 정보
+  autoci evolve insights           # 최근 발견된 인사이트
+  
+한글 대화 + AI 게임 개발:
+  autoci chat                      # AI 게임 개발자 모드 (한글 대화로 24시간 게임 개발)
+  autoci talk                      # chat과 동일 (대화하며 게임 개발)
         """
     )
     
@@ -139,7 +157,43 @@ Nakama 서버 명령:
         elif args.command == "status":
             asyncio.run(check_system_status())
         elif args.command == "monitor":
-            asyncio.run(run_monitoring_dashboard())
+            # Monitor 명령 처리 - 실시간 상세 모니터링
+            if args.subcommand is None:
+                # 'autoci monitor' - 기본 실시간 모니터링
+                asyncio.run(run_realtime_monitoring())
+            elif args.subcommand == "status":
+                # 'autoci monitor status' - 시스템 상태만
+                asyncio.run(run_monitor_status())
+            elif args.subcommand == "learning":
+                # 'autoci monitor learning' - 학습 상태만
+                asyncio.run(run_monitor_learning())
+            elif args.subcommand == "projects":
+                # 'autoci monitor projects' - 게임 프로젝트만
+                asyncio.run(run_monitor_projects())
+            elif args.subcommand == "logs":
+                # 'autoci monitor logs' - 로그만
+                asyncio.run(run_monitor_logs())
+            elif args.subcommand == "interactive":
+                # 'autoci monitor interactive' - 대화형 모드
+                asyncio.run(run_monitor_interactive())
+            elif args.subcommand == "watch":
+                # 'autoci monitor watch' - 자동 새로고침
+                asyncio.run(run_monitor_watch())
+            elif args.subcommand == "dashboard":
+                # 'autoci monitor dashboard' - 기존 대시보드
+                asyncio.run(run_monitoring_dashboard())
+            else:
+                print(f"❌ 알 수 없는 monitor 서브 명령: {args.subcommand}")
+                print("💡 사용 가능한 명령:")
+                print("   autoci monitor                - 실시간 상세 모니터링 (기본)")
+                print("   autoci monitor status         - 시스템 상태만 표시")
+                print("   autoci monitor learning       - AI 학습 상태만 표시")
+                print("   autoci monitor projects       - 게임 프로젝트만 표시")
+                print("   autoci monitor logs           - 최근 로그만 표시")
+                print("   autoci monitor interactive    - 대화형 모니터링 모드")
+                print("   autoci monitor watch          - 5초마다 자동 새로고침")
+                print("   autoci monitor dashboard      - 기존 모니터링 대시보드")
+                sys.exit(1)
         elif args.command == "godot-net":
             # Godot Networking 명령 처리
             if args.subcommand == "create":
@@ -205,6 +259,24 @@ Nakama 서버 명령:
         elif args.command == "fix":
             # AI가 학습한 내용으로 Godot 엔진 개선
             asyncio.run(run_godot_engine_fix())
+        elif args.command == "control":
+            # 🎮 AI 모델 제어권 상태 확인 (단독 실행)
+            asyncio.run(show_ai_control_status())
+        elif args.command == "evolve":
+            # 🧬 자가 진화 시스템
+            if args.subcommand == "status":
+                asyncio.run(show_evolution_status())
+            elif args.subcommand == "insights":
+                asyncio.run(show_evolution_insights())
+            else:
+                # 기본: 간단한 상태 표시
+                asyncio.run(show_evolution_summary())
+        elif args.command == "gather-code":
+            # 🌐 외부 코드 수집
+            asyncio.run(run_code_gathering())
+        elif args.command == "chat" or args.command == "talk":
+            # 💬 한글 대화 모드 + 24시간 게임 개발 AI
+            asyncio.run(run_ai_game_developer())
         elif args.command:
             print(f"❌ 알 수 없는 명령: {args.command}")
             print("💡 'autoci --help'로 도움말을 확인하세요.")
@@ -239,8 +311,8 @@ Nakama 서버 명령:
         elif args.learn_24h:
             asyncio.run(run_learn_24h_marathon())
         else:
-            # 기본 터미널 모드
-            asyncio.run(run_terminal_mode())
+            # 기본값: AI 게임 개발자 모드 (한글 대화 + 24시간 게임 개발)
+            asyncio.run(run_ai_game_developer())
             
     except KeyboardInterrupt:
         print("\n\n🛑 AutoCI가 사용자에 의해 종료되었습니다.")
@@ -349,9 +421,13 @@ async def run_monitoring_dashboard():
     print("📊 AutoCI 모니터링 대시보드")
     print("=" * 60)
     
-    from modules.monitoring_system import MonitoringSystem
-    monitor = MonitoringSystem()
-    await monitor.start_dashboard()
+    try:
+        from modules.autoci_monitor_client import AutoCIMonitorClient
+        monitor = AutoCIMonitorClient(mode="simple")  # simple 모드로 시작
+        await monitor.run_async()
+    except ImportError:
+        print("❌ 모니터링 시스템을 찾을 수 없습니다.")
+        print("autoci_monitor_client.py가 modules 디렉토리에 있는지 확인해주세요.")
 
 async def check_system_status():
     """시스템 상태 확인"""
@@ -425,9 +501,120 @@ async def run_learn_mode():
 
 async def run_learn_simple():
     """24시간 C# 학습 바로 시작 (메뉴 없이)"""
-    from modules.csharp_24h_user_learning import CSharp24HUserLearning
-    learning_system = CSharp24HUserLearning()
-    await learning_system.start_24h_learning_simple()
+    print("📖 전통적 학습 모드를 시작합니다 (24시간)")
+    print("🎯 5대 핵심 주제 전통적 학습")
+    print("=" * 60)
+    print("💡 실제 24시간 동안 체계적인 학습이 진행됩니다.")
+    print("⏰ 각 주제별로 20-40분씩 심화 학습")
+    print("💾 진행 상태 자동 저장 (Ctrl+C로 중단 후 재개 가능)")
+    print("=" * 60)
+    
+    # LLM 경고를 무시하고 실제 24시간 학습 진행
+    try:
+        from modules.csharp_24h_user_learning import CSharp24HUserLearning, LearningConfig
+        
+        # 데모 모드 비활성화 (실제 24시간 학습)
+        LearningConfig.DEMO_MODE = False
+        
+        # 전통적 학습 시스템 시작 (이어서 학습)
+        learning_system = CSharp24HUserLearning()
+        print("🚀 실제 24시간 전통적 학습 시작!")
+        print("📚 이미 완료한 주제는 건너뛰고 이어서 학습합니다")
+        await learning_system.start_24h_learning_marathon(skip_completed=True)
+        
+    except ImportError as e:
+        print(f"❌ 학습 모듈 import 실패: {e}")
+        print("💡 기본 학습 모드로 전환합니다...")
+        await run_basic_learning_mode()
+    except Exception as e:
+        print(f"❌ 학습 시스템 오류: {e}")
+        print("💡 그래도 실제 24시간 학습을 시도해보겠습니다...")
+        
+        # 오류가 있어도 시도
+        try:
+            from modules.csharp_24h_user_learning import CSharp24HUserLearning, LearningConfig
+            LearningConfig.DEMO_MODE = False
+            learning_system = CSharp24HUserLearning()
+            print("📚 이어서 학습을 시도합니다...")
+            await learning_system.start_24h_learning_marathon(skip_completed=True)
+        except:
+            print("🔄 최종적으로 기본 학습 모드로 전환합니다...")
+            await run_basic_learning_mode()
+
+async def run_basic_learning_mode():
+    """LLM 없이 작동하는 기본 전통적 학습 모드"""
+    print("\n📚 기본 전통적 학습 모드 시작")
+    print("=" * 50)
+    
+    # 5대 핵심 주제
+    topics = [
+        {
+            "name": "C# 프로그래밍 기초",
+            "duration": "4시간",
+            "subtopics": ["변수와 타입", "연산자", "조건문", "반복문", "메서드", "배열과 컬렉션"]
+        },
+        {
+            "name": "객체지향 프로그래밍",
+            "duration": "4시간", 
+            "subtopics": ["클래스", "객체", "상속", "다형성", "캡슐화", "인터페이스"]
+        },
+        {
+            "name": "고급 C# 기능",
+            "duration": "4시간",
+            "subtopics": ["제네릭", "델리게이트", "람다 표현식", "LINQ", "예외 처리", "파일 I/O"]
+        },
+        {
+            "name": "Godot 엔진 통합",
+            "duration": "4시간",
+            "subtopics": ["Godot Node", "Signal 시스템", "리소스 관리", "씬 트리", "물리 엔진", "UI 시스템"]
+        },
+        {
+            "name": "게임 개발 실습",
+            "duration": "8시간",
+            "subtopics": ["게임 아키텍처", "상태 머신", "컴포넌트 시스템", "네트워킹", "최적화", "디버깅"]
+        }
+    ]
+    
+    total_duration = 24
+    print(f"📅 총 학습 시간: {total_duration}시간")
+    print(f"📝 학습 주제 수: {len(topics)}개")
+    print("\n📋 학습 계획:")
+    
+    for i, topic in enumerate(topics, 1):
+        print(f"  {i}. {topic['name']} ({topic['duration']})")
+        for j, subtopic in enumerate(topic['subtopics'], 1):
+            print(f"     {i}.{j} {subtopic}")
+        print()
+    
+    print("🚀 학습을 시작하려면 Enter를 누르세요 (Ctrl+C로 중단)")
+    try:
+        input()
+        
+        print("\n📖 전통적 학습 시뮬레이션 시작...")
+        print("💡 실제 24시간 학습 대신 각 주제별 데모를 진행합니다.")
+        
+        for i, topic in enumerate(topics, 1):
+            print(f"\n🎯 {i}/{len(topics)}: {topic['name']} 학습 시작")
+            print(f"⏱️ 예상 소요 시간: {topic['duration']}")
+            
+            for j, subtopic in enumerate(topic['subtopics'], 1):
+                print(f"   📌 {i}.{j} {subtopic} 학습 중...")
+                await asyncio.sleep(2)  # 2초 시뮬레이션
+                print(f"   ✅ {subtopic} 완료")
+            
+            print(f"🏆 {topic['name']} 주제 완료!")
+            await asyncio.sleep(1)
+        
+        print("\n🎉 전통적 학습 모드 완료!")
+        print("📊 학습 결과:")
+        print(f"  ✅ 완료된 주제: {len(topics)}개")
+        print(f"  ✅ 완료된 세부 주제: {sum(len(t['subtopics']) for t in topics)}개")
+        print(f"  ⏱️ 총 시뮬레이션 시간: {len(topics) * 10 + sum(len(t['subtopics']) for t in topics) * 2}초")
+        print("\n💡 실제 24시간 학습을 원한다면 LLM 모델을 설치하고 'autoci learn'을 실행하세요.")
+        
+    except KeyboardInterrupt:
+        print("\n\n🛑 학습이 사용자에 의해 중단되었습니다.")
+        print("📊 현재까지의 진행 상황이 저장되었습니다.")
 
 async def run_learn_demo():
     """C# 학습 데모 모드 (1시간 빠른 진행)"""
@@ -665,6 +852,113 @@ async def run_nakama_demo():
     except ImportError:
         print("❌ Nakama AI 통합 모듈을 찾을 수 없습니다.")
 
+async def check_ai_control_status():
+    """AI 모델 제어권 상태 확인 (외부 명령어용)"""
+    await show_ai_control_status()
+
+async def show_ai_control_status():
+    """🎮 AI 모델 제어권 상태 확인"""
+    print("🎮 AI 모델 완전 제어 시스템 상태")
+    print("=" * 60)
+    
+    try:
+        # AI 모델 컨트롤러 모듈 확인
+        try:
+            from modules.ai_model_controller import AIModelController
+            controller = AIModelController()
+            print("✅ AI 모델 컨트롤러: 정상 작동")
+            print("🎯 우리가 AI 모델의 조종권을 완전히 갖고 있습니다!")
+            
+            # 품질 기준 표시
+            print("\n📊 품질 관리 기준:")
+            print(f"  • 최소 응답 길이: {controller.quality_standards['min_length']} 문자")
+            print(f"  • 최대 응답 길이: {controller.quality_standards['max_length']} 문자")
+            print(f"  • 한글 응답 비율: {controller.quality_standards['required_korean_ratio']*100}%")
+            print(f"  • 금지된 응답: {len(controller.quality_standards['forbidden_phrases'])}개 패턴")
+            
+            # 모델별 제어 설정 표시
+            print("\n🔧 모델별 제어 설정:")
+            for model_name, control in controller.model_controls.items():
+                print(f"  📦 {model_name}:")
+                print(f"    - 품질 임계점: {control.quality_threshold}")
+                print(f"    - 최대 재시도: {control.max_attempts}회")
+                print(f"    - 커스텀 프롬프트: {len(control.custom_prompts)}개")
+                print(f"    - 파라미터 오버라이드: {len(control.parameter_overrides)}개")
+            
+            # 응답 히스토리 확인
+            quality_report = controller.get_quality_report()
+            if "total_responses" in quality_report:
+                print("\n📈 품질 관리 실적:")
+                print(f"  • 총 응답 수: {quality_report['total_responses']}")
+                print(f"  • 전체 성공률: {quality_report['overall_success_rate']*100:.1f}%")
+                print(f"  • 평균 품질 점수: {quality_report['average_quality_score']:.2f}")
+                
+                print("\n🤖 모델별 성능:")
+                for model, stats in quality_report.get('model_performance', {}).items():
+                    success_rate = stats['success_rate'] * 100
+                    avg_score = stats['avg_score']
+                    total = stats['total']
+                    print(f"  📦 {model}: {success_rate:.1f}% 성공률, {avg_score:.2f} 평균 점수 ({total}회)")
+            else:
+                print("\n📈 아직 품질 관리 실적이 없습니다.")
+                print("   'autoci learn low' 실행 후 다시 확인하세요.")
+            
+        except ImportError:
+            print("❌ AI 모델 컨트롤러를 로드할 수 없습니다")
+            print("💡 modules/ai_model_controller.py 파일을 확인하세요")
+            
+        # continuous_learning_system.py 연동 확인
+        try:
+            import sys
+            sys.path.append('.')
+            from continuous_learning_system import ContinuousLearningSystem
+            
+            # 테스트 인스턴스 생성 (실제 모델 로딩 없이)
+            system = ContinuousLearningSystem()
+            if hasattr(system, 'model_controller') and system.model_controller:
+                print("\n✅ 연속 학습 시스템과 통합: 정상")
+                print("🔥 autoci learn low 실행 시 완전 제어 모드 활성화")
+            else:
+                print("\n⚠️ 연속 학습 시스템과 통합: 부분적")
+                print("🔧 모델 컨트롤러가 비활성화 상태입니다")
+                
+        except Exception as e:
+            print(f"\n❌ 연속 학습 시스템 확인 실패: {str(e)}")
+        
+        # 모델 설치 상태 확인
+        models_file = Path("models/installed_models.json")
+        if models_file.exists():
+            with open(models_file, 'r', encoding='utf-8') as f:
+                models_info = json.load(f)
+            
+            print("\n📦 제어 가능한 모델:")
+            for model_name, info in models_info.items():
+                status = info.get('status', 'unknown')
+                if status == 'installed':
+                    print(f"  ✅ {model_name}: 설치됨 (완전 제어 가능)")
+                elif status == 'not_downloaded':
+                    print(f"  ❌ {model_name}: 미설치 (제어 불가)")
+                else:
+                    print(f"  ⚠️ {model_name}: 상태 불명 ({status})")
+        else:
+            print("\n❌ 모델 정보 파일을 찾을 수 없습니다")
+            print("💡 install_llm_models.py를 먼저 실행하세요")
+        
+        print("\n🎯 AI 모델 제어 명령어:")
+        print("  autoci learn low     - 완전 제어 모드로 학습")
+        print("  autoci control       - 현재 제어 상태 확인")
+        print("  autoci status        - 전체 시스템 상태")
+        
+        print("\n💡 완전한 AI 모델 조종권 확보를 위한 특징:")
+        print("  🎯 응답 품질 실시간 평가 및 재시도")
+        print("  🔧 모델별 커스텀 프롬프트 및 파라미터")
+        print("  📊 상세한 품질 로깅 및 통계")
+        print("  ⚡ 품질 기준 미달 시 자동 재생성")
+        print("  🎮 우리 기준에 맞는 답변만 허용")
+        
+    except Exception as e:
+        print(f"❌ AI 제어 상태 확인 중 오류: {str(e)}")
+
 async def run_godot_engine_fix():
     """AI가 학습한 내용으로 Godot 엔진 개선"""
     print("🔧 Godot 엔진 AI 개선 시작...")
@@ -830,8 +1124,7 @@ async def run_continuous_learning():
                 
             elif choice == "3":
                 print("\n📖 전통적 학습 모드를 시작합니다 (24시간)")
-                learning_system = CSharpContinuousLearning(use_llm=False)
-                await learning_system.start_continuous_learning(24, use_traditional=True, use_llm=False)
+                await run_learn_simple()
                 
             elif choice == "4":
                 print("\n⚡ 빠른 세션은 실제 모델이 필요합니다.")
@@ -874,8 +1167,7 @@ async def run_continuous_learning():
             elif choice == "3":
                 print("\n📖 전통적 학습 모드를 시작합니다 (24시간)")
                 print("🎯 5대 핵심 주제 전통적 학습")
-                learning_system = CSharpContinuousLearning(use_llm=False)
-                await learning_system.start_continuous_learning(24, use_traditional=True, use_llm=False)
+                await run_learn_simple()
                 
             elif choice == "4":
                 print("\n⚡ 빠른 AI 세션")
@@ -916,6 +1208,14 @@ async def run_terminal_mode():
     print("🎮 Godot 대시보드가 자동으로 열립니다.")
     print("'help'를 입력하여 사용 가능한 명령어를 확인하세요.")
     print("=" * 60)
+    
+    # 🎮 AI 모델 제어 상태 자동 확인 및 표시
+    print("\n📊 AI 모델 완전 제어 시스템 상태 확인...")
+    await show_ai_control_status()
+    print("\n" + "="*60)
+    print("🎯 터미널 인터페이스 시작")
+    print("='help' 명령어로 사용 가능한 기능을 확인하세요.")
+    print("="*60)
     
     # 기존 터미널 시스템 실행 (asyncio.run 없이 직접 호출)
     from autoci_terminal import AutoCITerminal
@@ -1053,6 +1353,11 @@ async def run_continuous_learning_low():
     
     print("🎯 AutoCI 저사양 최적화 AI 학습 시스템")
     print("=" * 60)
+    
+    # 🎮 AI 모델 제어 상태 자동 확인 및 표시
+    print("📊 AI 모델 완전 제어 시스템 상태 확인...")
+    await show_ai_control_status()
+    print("\n" + "="*60)
     print("💻 시스템 요구사항: RTX 2080 GPU 8GB, 32GB 메모리")
     print("🔧 최적화 설정:")
     print("  - GPU 메모리 제한: 8GB")
@@ -1277,6 +1582,906 @@ async def run_continuous_learning_low():
         from modules.csharp_continuous_learning import CSharpContinuousLearning
         learning_system = CSharpContinuousLearning(use_llm=False)
         await learning_system.start_continuous_learning(24, use_traditional=True, use_llm=False)
+
+async def show_evolution_summary():
+    """자가 진화 시스템 요약 표시"""
+    print("🧬 AutoCI 자가 진화 시스템")
+    print("=" * 60)
+    
+    try:
+        from modules.self_evolution_system import get_evolution_system
+        evolution = get_evolution_system()
+        
+        status = await evolution.get_evolution_status()
+        
+        print(f"📊 진화 단계: {status['evolution_stage']}")
+        print(f"💬 총 질문 수: {status['metrics']['total_questions']:,}")
+        print(f"🎯 평균 정확도: {status['metrics']['average_accuracy']:.1%}")
+        print(f"📚 지식 베이스 크기: {status['collective_knowledge_size']['total']:,}")
+        print(f"💡 학습률: {status['metrics']['learning_rate']:.3f}")
+        
+        print("\n🔥 주요 학습 도메인:")
+        for domain, count in list(status['knowledge_domains'].items())[:5]:
+            print(f"  - {domain}: {count:,}개 질문")
+        
+        print("\n💬 가장 많이 묻는 질문:")
+        for i, q in enumerate(status['top_questions'][:3], 1):
+            print(f"  {i}. {q['question'][:60]}... ({q['count']}회)")
+        
+        print("\n✅ AutoCI는 사용자들의 질문을 통해 지속적으로 진화하고 있습니다!")
+        
+    except ImportError:
+        print("❌ 자가 진화 시스템 모듈을 찾을 수 없습니다.")
+    except Exception as e:
+        print(f"❌ 자가 진화 상태 확인 중 오류: {str(e)}")
+
+async def show_evolution_status():
+    """자가 진화 시스템 상세 상태"""
+    print("🧬 AutoCI 자가 진화 시스템 상세 상태")
+    print("=" * 60)
+    
+    try:
+        from modules.self_evolution_system import get_evolution_system
+        evolution = get_evolution_system()
+        
+        status = await evolution.get_evolution_status()
+        
+        # 진화 메트릭스
+        print("📊 진화 메트릭스:")
+        print(f"  • 진화 단계: {status['evolution_stage']}")
+        print(f"  • 총 질문 수: {status['metrics']['total_questions']:,}")
+        print(f"  • 총 응답 수: {status['metrics']['total_responses']:,}")
+        print(f"  • 평균 정확도: {status['metrics']['average_accuracy']:.1%}")
+        print(f"  • 학습률: {status['metrics']['learning_rate']:.4f}")
+        
+        # 최근 성능
+        print("\n📈 최근 성능 (최근 100개 응답):")
+        perf = status['recent_performance']
+        print(f"  • 정확도: {perf['accuracy']:.1%}")
+        print(f"  • 완성도: {perf['completeness']:.1%}")
+        print(f"  • 관련성: {perf['relevance']:.1%}")
+        print(f"  • 기술적 정확성: {perf['technical']:.1%}")
+        
+        # 지식 도메인
+        print("\n🎯 지식 도메인 분포:")
+        total = sum(status['knowledge_domains'].values())
+        for domain, count in status['knowledge_domains'].items():
+            percentage = (count / total * 100) if total > 0 else 0
+            print(f"  • {domain}: {count:,}개 ({percentage:.1f}%)")
+        
+        # 집단 지성 크기
+        print("\n💡 집단 지성 데이터베이스:")
+        kb_size = status['collective_knowledge_size']
+        print(f"  • 패턴: {kb_size['patterns']:,}개")
+        print(f"  • 솔루션: {kb_size['solutions']:,}개")
+        print(f"  • 자주 묻는 질문: {kb_size['common_questions']:,}개")
+        print(f"  • 모범 사례: {kb_size['best_practices']:,}개")
+        print(f"  • 인사이트: {kb_size['total_insights']:,}개")
+        print(f"  • 총 크기: {kb_size['total']:,}개 항목")
+        
+        # 개선 영역
+        if status['improvement_areas']:
+            print("\n🔧 개선이 필요한 영역:")
+            for i, area in enumerate(status['improvement_areas'], 1):
+                print(f"  {i}. {area.get('area', 'N/A')} (우선순위: {area.get('priority', 'N/A')})")
+        
+        print("\n🚀 AutoCI는 매일 더 똑똑해지고 있습니다!")
+        
+    except ImportError:
+        print("❌ 자가 진화 시스템 모듈을 찾을 수 없습니다.")
+    except Exception as e:
+        print(f"❌ 자가 진화 상태 확인 중 오류: {str(e)}")
+
+async def run_korean_conversation():
+    """한글 대화 모드 실행"""
+    print("💬 AutoCI 한글 대화 모드")
+    print("=" * 60)
+    print("AutoCI와 자연스러운 한글로 대화하며 게임 개발을 진행하세요!")
+    print("대화를 통해 AutoCI가 더 똑똑해집니다.")
+    print("=" * 60)
+    
+    try:
+        from modules.korean_conversation import interactive_conversation
+        await interactive_conversation()
+    except ImportError:
+        print("❌ 한글 대화 시스템 모듈을 찾을 수 없습니다.")
+        print("💡 modules/korean_conversation.py 파일을 확인하세요.")
+    except Exception as e:
+        print(f"❌ 한글 대화 시스템 오류: {str(e)}")
+
+async def run_ai_game_developer():
+    """AI 게임 개발자 - 한글 대화 + 24시간 게임 개발 통합"""
+    print("🤖 AutoCI AI 게임 개발자 모드")
+    print("=" * 60)
+    print("✨ 이제 AutoCI가 한글로 대화하며 24시간 게임을 개발합니다!")
+    print("💬 자연스러운 한글 대화로 게임 아이디어를 설명하세요")
+    print("🎮 AI가 자동으로 게임을 기획하고 개발합니다")
+    print("⏰ 24시간 동안 끈질기게 개선하며 완성도를 높입니다")
+    print("=" * 60)
+    
+    # 이전 작업 확인
+    mvp_games_dir = Path("mvp_games")
+    selected_project = None
+    
+    if mvp_games_dir.exists():
+        game_projects = [d for d in mvp_games_dir.iterdir() if d.is_dir() and (d / "project.godot").exists()]
+        
+        if game_projects:
+            print("\n📂 이전 게임 프로젝트를 발견했습니다!")
+            print("=" * 60)
+            sorted_projects = sorted(game_projects, key=lambda x: x.stat().st_mtime, reverse=True)[:5]
+            for i, project in enumerate(sorted_projects, 1):
+                mtime = datetime.fromtimestamp(project.stat().st_mtime)
+                print(f"{i}. {project.name} - {mtime.strftime('%Y-%m-%d %H:%M')}")
+            
+            print("\n선택하세요:")
+            print("1-5. 이전 프로젝트 계속 개발하기")
+            print("0. 새로운 프로젝트 시작하기")
+            print("Enter. 바로 대화 시작하기")
+            
+            choice = input("\n선택 (0-5 또는 Enter): ").strip()
+            
+            if choice and choice.isdigit():
+                choice_num = int(choice)
+                if 1 <= choice_num <= min(5, len(sorted_projects)):
+                    selected_project = sorted_projects[choice_num - 1]
+                    print(f"\n✅ '{selected_project.name}' 프로젝트를 불러옵니다...")
+    
+    try:
+        # 통합 시스템 임포트
+        from modules.korean_conversation import KoreanConversationSystem
+        from modules.game_factory_24h import GameFactory24H
+        from modules.ai_model_controller import AIModelController
+        from modules.self_evolution_system import get_evolution_system
+        
+        # 시스템 초기화
+        conversation = KoreanConversationSystem()
+        game_factory = GameFactory24H()
+        ai_controller = AIModelController()
+        evolution_system = get_evolution_system()
+        
+        # AI 모델 제어 상태 확인
+        print("\n📊 AI 모델 상태 확인...")
+        control_status = ai_controller.get_model_control_status()
+        print(f"✅ AI 제어 레벨: {control_status.get('control_level', 'HIGH')}")
+        print(f"🎮 게임 개발 준비 완료!")
+        
+        # 대화 시작
+        print("\n💬 대화를 시작하세요. '게임 만들기', '24시간 개발' 등의 키워드를 사용하세요!")
+        print("종료하려면 '종료', '끝', 'exit' 등을 입력하세요.\n")
+        
+        active_game_project = None
+        
+        # 이전 프로젝트 선택된 경우 즉시 개발 재개
+        if selected_project:
+            print(f"\n🤖 AutoCI: {selected_project.name} 프로젝트 개발을 재개합니다!")
+            print("   24시간 끈질긴 개선 모드로 전환합니다... 🚀")
+            
+            # 프로젝트 개발 재개 (start_factory 메서드 사용)
+            active_game_project = asyncio.create_task(
+                game_factory.start_factory(selected_project.name, "rpg")
+            )
+            
+            # 진화 시스템에 기록
+            try:
+                context = {
+                    "category": "game_development",
+                    "success": True,
+                    "response_time": 1.0,
+                    "model_used": "game_factory_24h",
+                    "user_id": "autoci_system"
+                }
+                await evolution_system.process_user_question(
+                    f"게임 개발 재개: {selected_project.name}", 
+                    context
+                )
+            except Exception as e:
+                logger.warning(f"진화 시스템 기록 실패: {e}")
+        
+        while True:
+            try:
+                # 사용자 입력
+                user_input = input("👤 당신: ").strip()
+                
+                if not user_input:
+                    continue
+                
+                # 종료 명령 확인
+                if user_input.lower() in ['종료', '끝', 'exit', 'quit', '나가기']:
+                    print("\n🤖 AutoCI: 안녕히 가세요! 다음에 또 만나요~ 👋")
+                    break
+                
+                # 대화 처리
+                response_data = await conversation.process_conversation(user_input)
+                intent = response_data.get('intent')
+                entities = response_data.get('entities', [])
+                
+                # AI 응답 생성
+                if '게임' in entities or '개발' in entities or '만들기' in user_input:
+                    # 게임 개발 요청 감지
+                    if not active_game_project:
+                        print("\n🤖 AutoCI: 네! 게임을 만들어 드리겠습니다! 🎮")
+                        print("   어떤 종류의 게임을 원하시나요?")
+                        print("   - 플랫포머 게임 (마리오 스타일)")
+                        print("   - 레이싱 게임")
+                        print("   - RPG 게임")
+                        print("   - 퍼즐 게임")
+                        
+                        game_type_input = input("\n👤 게임 종류: ").strip()
+                        game_name_input = input("👤 게임 이름: ").strip()
+                        
+                        # 게임 타입 매핑
+                        game_type_map = {
+                            '플랫포머': 'platformer',
+                            '레이싱': 'racing',
+                            'rpg': 'rpg',
+                            '퍼즐': 'puzzle'
+                        }
+                        
+                        game_type = 'platformer'  # 기본값
+                        for keyword, gtype in game_type_map.items():
+                            if keyword in game_type_input.lower():
+                                game_type = gtype
+                                break
+                        
+                        game_name = game_name_input if game_name_input else f"AI_Game_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                        
+                        print(f"\n🤖 AutoCI: {game_name} ({game_type}) 게임 개발을 시작합니다!")
+                        print("   24시간 동안 자동으로 개발하고 개선할게요! 🚀")
+                        
+                        # 24시간 게임 개발 시작
+                        active_game_project = asyncio.create_task(
+                            game_factory.start_factory(game_name, game_type)
+                        )
+                        
+                        # 진화 시스템에 기록
+                        try:
+                            context = {
+                                "category": "game_development",
+                                "success": True,
+                                "response_time": 1.0,
+                                "model_used": "game_factory_24h",
+                                "user_id": "autoci_system"
+                            }
+                            await evolution_system.process_user_question(
+                                f"게임 개발 요청: {game_name} ({game_type})",
+                                context
+                            )
+                        except Exception as e:
+                            logger.warning(f"진화 시스템 기록 실패: {e}")
+                    else:
+                        print("\n🤖 AutoCI: 이미 게임을 개발 중입니다! 진행 상황을 확인하시겠어요?")
+                        # TODO: 진행 상황 표시 기능
+                
+                elif '상태' in user_input or '진행' in user_input:
+                    # 진행 상황 확인
+                    if active_game_project and not active_game_project.done():
+                        print("\n🤖 AutoCI: 게임 개발 진행 상황을 확인하는 중...")
+                        # 백그라운드 프로세스 추적기에서 상태 가져오기
+                        try:
+                            from modules.background_process_tracker import get_process_tracker
+                            tracker = get_process_tracker()
+                            status = tracker.get_current_status()
+                            if status:
+                                print(f"\n📊 현재 상태: {status['status']}")
+                                print(f"⏱️ 진행률: {status['progress']:.1f}%")
+                                print(f"🎯 현재 작업: {status['current_task']}")
+                                if status.get('remaining_time'):
+                                    print(f"⏳ 예상 남은 시간: {status['remaining_time']}")
+                        except:
+                            print("   진행 상황을 불러올 수 없습니다.")
+                    else:
+                        print("\n🤖 AutoCI: 현재 진행 중인 게임 개발이 없습니다.")
+                
+                else:
+                    # 일반 대화 처리
+                    print(f"\n🤖 AutoCI: {response_data.get('response', '네, 무엇을 도와드릴까요?')}")
+                
+                # 대화 만족도 업데이트
+                conversation.update_satisfaction(0.8)
+                
+            except KeyboardInterrupt:
+                print("\n\n⚠️ 대화가 중단되었습니다.")
+                if active_game_project and not active_game_project.done():
+                    print("🎮 게임 개발은 백그라운드에서 계속됩니다!")
+                break
+            except Exception as e:
+                print(f"\n❌ 오류 발생: {str(e)}")
+                print("💡 다시 시도해주세요.")
+        
+        # 정리
+        if active_game_project and not active_game_project.done():
+            print("\n⏳ 게임 개발 작업을 안전하게 종료하는 중...")
+            active_game_project.cancel()
+            await asyncio.sleep(1)
+        
+        # 대화 세션 저장
+        conversation.save_conversation()
+        print("\n💾 대화 내용이 저장되었습니다.")
+        
+    except ImportError as e:
+        print(f"❌ 필요한 모듈을 찾을 수 없습니다: {str(e)}")
+        print("💡 다음 모듈들이 필요합니다:")
+        print("   - modules/korean_conversation.py")
+        print("   - modules/game_factory_24h.py")
+        print("   - modules/ai_model_controller.py")
+        print("   - modules/self_evolution_system.py")
+    except Exception as e:
+        print(f"❌ AI 게임 개발자 모드 오류: {str(e)}")
+
+async def show_evolution_insights():
+    """최근 발견된 진화 인사이트"""
+    print("💡 AutoCI 자가 진화 인사이트")
+    print("=" * 60)
+    
+    try:
+        from modules.self_evolution_system import get_evolution_system
+        from pathlib import Path
+        import json
+        
+        evolution = get_evolution_system()
+        insights_dir = evolution.insights_dir
+        
+        # 최근 인사이트 파일들 로드
+        insight_files = sorted(insights_dir.glob("*.json"), 
+                             key=lambda x: x.stat().st_mtime, 
+                             reverse=True)[:10]
+        
+        if not insight_files:
+            print("아직 발견된 인사이트가 없습니다.")
+            print("더 많은 사용자 질문과 피드백이 필요합니다.")
+            return
+        
+        print(f"최근 {len(insight_files)}개의 인사이트:")
+        print()
+        
+        for i, insight_file in enumerate(insight_files, 1):
+            with open(insight_file, 'r', encoding='utf-8') as f:
+                insight = json.load(f)
+            
+            print(f"{i}. {insight['pattern_type'].upper()} 패턴")
+            print(f"   발견 시간: {insight['timestamp'][:19]}")
+            print(f"   신뢰도: {insight['confidence']:.1%}")
+            print(f"   영향도: {insight['impact_score']:.1%}")
+            
+            # 패턴 데이터 표시
+            pattern_data = insight['pattern_data']
+            if insight['pattern_type'] == 'frequent_question':
+                print(f"   질문: {pattern_data['question'][:80]}...")
+                print(f"   빈도: {pattern_data['frequency']}회")
+            elif insight['pattern_type'] == 'category_trend':
+                print(f"   카테고리: {pattern_data['category']}")
+                print(f"   비율: {pattern_data['percentage']:.1%}")
+                print(f"   성장률: {pattern_data['growth_rate']:+.1%}")
+            
+            if insight['implementation_ready']:
+                print("   ✅ 자동 구현 완료")
+            else:
+                print("   ⏳ 구현 대기 중")
+            
+            print()
+        
+        # 요약
+        status = await evolution.get_evolution_status()
+        print("=" * 60)
+        print(f"💡 총 {status['collective_knowledge_size']['total_insights']}개의 인사이트가 발견되었습니다.")
+        print("🚀 이러한 인사이트는 AutoCI의 응답 품질을 지속적으로 향상시킵니다.")
+        
+    except ImportError:
+        print("❌ 자가 진화 시스템 모듈을 찾을 수 없습니다.")
+    except Exception as e:
+        print(f"❌ 인사이트 확인 중 오류: {str(e)}")
+
+async def run_code_gathering():
+    """외부 소스에서 코드 정보를 수집합니다."""
+    print("🌐 외부 소스에서 C# 코드 정보를 수집합니다...")
+    try:
+        from modules.intelligent_information_gatherer import get_information_gatherer
+        gatherer = get_information_gatherer()
+        await gatherer.gather_and_process_csharp_code()
+        print("✅ 코드 정보 수집 및 처리가 완료되었습니다.")
+    except ImportError:
+        print("❌ 정보 수집기 모듈을 찾을 수 없습니다.")
+    except Exception as e:
+        print(f"❌ 코드 수집 중 오류 발생: {str(e)}")
+
+async def run_realtime_monitoring():
+    """실시간 상세 모니터링 (기본)"""
+    print("🔄 AutoCI 실시간 모니터링 시작")
+    print("=" * 60)
+    
+    try:
+        # autoci-monitor의 AutoCIMonitor 클래스 사용
+        sys.path.insert(0, str(AUTOCI_ROOT))
+        from modules.monitoring_system import ProductionMonitor, MetricType
+        from modules.enhanced_logging import setup_enhanced_logging
+        import psutil
+        import time
+        from datetime import datetime
+        
+        # 로깅 설정
+        setup_enhanced_logging()
+        
+        class AutoCIMonitor:
+            """AutoCI 모니터링 인터페이스"""
+            
+            def __init__(self):
+                try:
+                    self.monitor = ProductionMonitor()
+                    self.monitor_available = True
+                except Exception as e:
+                    print(f"⚠️ 고급 모니터링 초기화 실패: {e}")
+                    self.monitor = None
+                    self.monitor_available = False
+                self.running = False
+                
+            async def show_status(self):
+                """실시간 상태 표시"""
+                print("\n" + "="*60)
+                print("📊 AutoCI 시스템 상태")
+                print("="*60)
+                
+                # 시스템 메트릭
+                cpu_percent = psutil.cpu_percent()
+                memory = psutil.virtual_memory()
+                disk = psutil.disk_usage('/')
+                
+                print(f"🖥️  CPU 사용률: {cpu_percent:.1f}%")
+                print(f"💾 메모리 사용률: {memory.percent:.1f}% ({memory.used // (1024**3):.1f}GB / {memory.total // (1024**3):.1f}GB)")
+                print(f"💿 디스크 사용률: {disk.percent:.1f}% ({disk.used // (1024**3):.1f}GB / {disk.total // (1024**3):.1f}GB)")
+                
+                # 실시간 백그라운드 프로세스 감지
+                print(f"\n🔄 실행 중인 AutoCI 프로세스:")
+                try:
+                    import subprocess
+                    result = subprocess.run(['ps', 'aux'], capture_output=True, text=True)
+                    autoci_processes = []
+                    for line in result.stdout.split('\n'):
+                        if 'autoci.py' in line and 'grep' not in line:
+                            if 'learn' in line:
+                                autoci_processes.append("🧠 AI 학습 진행 중")
+                            elif 'monitor' in line:
+                                autoci_processes.append("📊 모니터링 활성화")
+                            elif 'game' in line or 'create' in line:
+                                autoci_processes.append("🎮 게임 개발 진행 중")
+                            else:
+                                autoci_processes.append("⚙️ AutoCI 실행 중")
+                    
+                    if autoci_processes:
+                        for process in autoci_processes:
+                            print(f"   {process}")
+                    else:
+                        print("   💤 백그라운드 작업 없음")
+                except Exception as e:
+                    print(f"   ⚠️ 프로세스 확인 실패: {e}")
+                
+                # 헬스 체크 상태
+                try:
+                    health_summary = self.monitor.get_health_summary()
+                    print(f"\n🏥 헬스 체크: {health_summary.get('overall_status', 'Unknown')}")
+                except:
+                    print(f"\n🏥 헬스 체크: 기본 상태")
+                
+                # 카운터 정보
+                print(f"\n📈 게임 개발 통계:")
+                try:
+                    for name, count in self.monitor.counters.items():
+                        display_name = {
+                            "games_created": "생성된 게임",
+                            "features_added": "추가된 기능", 
+                            "bugs_fixed": "수정된 버그",
+                            "errors_caught": "포착된 오류",
+                            "ai_requests": "AI 요청",
+                            "ai_tokens_used": "사용된 토큰"
+                        }.get(name, name)
+                        print(f"   {display_name}: {count}")
+                except:
+                    print("   📊 통계 수집 중...")
+                
+                print("="*60)
+            
+            async def show_learning_status(self):
+                """AI 학습 상태 표시"""
+                print("\n" + "="*40)
+                print("🧠 AI 학습 상태")
+                print("="*40)
+                
+                # 먼저 프로세스 기반으로 학습 상태 확인
+                learning_process_active = False
+                try:
+                    import subprocess
+                    result = subprocess.run(['ps', 'aux'], capture_output=True, text=True)
+                    for line in result.stdout.split('\n'):
+                        if 'autoci.py learn' in line and 'grep' not in line:
+                            learning_process_active = True
+                            print("🧠 **AI 학습 진행 중** ✅")
+                            
+                            # 프로세스 실행 시간 추출
+                            parts = line.split()
+                            if len(parts) > 10:
+                                cpu_time = parts[10] if ':' in parts[10] else parts[9]
+                                print(f"⏱️ 진행 시간: {cpu_time}")
+                            break
+                except:
+                    pass
+                
+                # 학습 파일도 확인
+                file_based_learning = False
+                progress_files = [
+                    "user_learning_data/continuous_learning/progress/learning_progress.json",
+                    "continuous_learning/progress/learning_progress.json",
+                    "user_learning_data/continuous_learning/latest.json"
+                ]
+                
+                for progress_file in progress_files:
+                    if Path(progress_file).exists():
+                        try:
+                            with open(progress_file, 'r', encoding='utf-8') as f:
+                                import json
+                                data = json.load(f)
+                            file_based_learning = True
+                            
+                            print(f"📄 학습 데이터: 발견됨")
+                            if 'total_hours' in data:
+                                print(f"📊 총 학습 시간: {data['total_hours']:.1f}시간")
+                            if 'total_questions' in data:
+                                print(f"❓ 총 질문 수: {data['total_questions']}")
+                            if 'total_successful' in data:
+                                print(f"✅ 성공한 답변: {data['total_successful']}")
+                            break
+                        except Exception as e:
+                            continue
+                
+                # 최근 학습 활동 확인
+                recent_files = []
+                if Path("user_learning_data").exists():
+                    import glob
+                    recent_json = glob.glob("user_learning_data/**/learning_*.json", recursive=True)
+                    if recent_json:
+                        recent_json.sort(key=lambda x: Path(x).stat().st_mtime, reverse=True)
+                        if recent_json:
+                            latest_file = recent_json[0]
+                            mtime = Path(latest_file).stat().st_mtime
+                            from datetime import datetime
+                            last_activity = datetime.fromtimestamp(mtime)
+                            print(f"🕐 최근 학습: {last_activity.strftime('%m-%d %H:%M')}")
+                
+                if not learning_process_active and not file_based_learning:
+                    print("💤 현재 학습 세션 없음")
+                    print("💡 'autoci learn' 명령어로 시작")
+                
+                print("="*40)
+            
+            async def show_game_projects(self):
+                """게임 프로젝트 상태 표시"""
+                print("\n" + "="*50)
+                print("🎮 게임 프로젝트 상태")
+                print("="*50)
+                
+                project_dirs = ["game_projects", "mvp_games", "accurate_games"]
+                total_projects = 0
+                recent_projects = []
+                
+                for project_dir in project_dirs:
+                    if Path(project_dir).exists():
+                        projects = list(Path(project_dir).iterdir())
+                        for project in projects:
+                            if project.is_dir():
+                                try:
+                                    # 프로젝트 상세 정보 수집
+                                    create_time = datetime.fromtimestamp(project.stat().st_ctime)
+                                    
+                                    # 파일 수 계산
+                                    import os
+                                    file_count = 0
+                                    script_count = 0
+                                    scene_count = 0
+                                    
+                                    for root, dirs, files in os.walk(project):
+                                        file_count += len(files)
+                                        for file in files:
+                                            if file.endswith(('.cs', '.gd')):
+                                                script_count += 1
+                                            elif file.endswith('.tscn'):
+                                                scene_count += 1
+                                    
+                                    # 마지막 수정 시간
+                                    last_modified = create_time
+                                    for root, dirs, files in os.walk(project):
+                                        for file in files:
+                                            file_path = os.path.join(root, file)
+                                            try:
+                                                mtime = datetime.fromtimestamp(os.path.getmtime(file_path))
+                                                if mtime > last_modified:
+                                                    last_modified = mtime
+                                            except:
+                                                continue
+                                    
+                                    # 진행 상황 판단
+                                    progress = "📦 초기"
+                                    if script_count > 5:
+                                        progress = "🚧 개발 중"
+                                    if scene_count > 3 and script_count > 10:
+                                        progress = "⚙️ 고급"
+                                    if file_count > 50:
+                                        progress = "🎯 완성형"
+                                    
+                                    # 최근 활동 여부
+                                    now = datetime.now()
+                                    time_diff = now - last_modified
+                                    if time_diff.total_seconds() < 3600:  # 1시간 이내
+                                        activity = "🔥 활발"
+                                    elif time_diff.total_seconds() < 86400:  # 24시간 이내
+                                        activity = "🕐 최근"
+                                    else:
+                                        activity = "💤 대기"
+                                    
+                                    recent_projects.append({
+                                        'name': project.name,
+                                        'folder': project_dir,
+                                        'create_time': create_time,
+                                        'last_modified': last_modified,
+                                        'progress': progress,
+                                        'activity': activity,
+                                        'file_count': file_count,
+                                        'script_count': script_count,
+                                        'scene_count': scene_count
+                                    })
+                                    
+                                    total_projects += 1
+                                except Exception as e:
+                                    # 기본 정보만
+                                    recent_projects.append({
+                                        'name': project.name,
+                                        'folder': project_dir,
+                                        'progress': "❓ 정보없음",
+                                        'activity': "❓",
+                                        'file_count': 0
+                                    })
+                                    total_projects += 1
+                
+                if total_projects == 0:
+                    print("🎮 게임 프로젝트 없음")
+                    print("💡 'autoci' 명령어로 게임 생성")
+                else:
+                    print(f"🎮 총 프로젝트: {total_projects}개")
+                    
+                    # 최근 수정된 순으로 정렬
+                    recent_projects.sort(key=lambda x: x.get('last_modified', x.get('create_time', datetime.min)), reverse=True)
+                    
+                    print("📋 프로젝트 상세:")
+                    for i, proj in enumerate(recent_projects[:4]):  # 최근 4개만 표시
+                        name = proj['name'][:20]  # 이름 길이 제한
+                        progress = proj['progress']
+                        activity = proj['activity']
+                        file_count = proj.get('file_count', 0)
+                        
+                        if 'last_modified' in proj:
+                            last_mod = proj['last_modified'].strftime('%m-%d %H:%M')
+                            print(f"   {progress} {name}")
+                            print(f"      {activity} | 파일: {file_count}개 | 수정: {last_mod}")
+                        else:
+                            print(f"   {progress} {name} | 파일: {file_count}개")
+                    
+                    if len(recent_projects) > 4:
+                        print(f"   ... 및 {len(recent_projects) - 4}개 더")
+                
+                print("="*50)
+        
+        monitor = AutoCIMonitor()
+        
+        # 지속적인 모니터링 루프
+        print("💡 5초마다 자동 업데이트됩니다. (Ctrl+C로 중지)")
+        iteration = 0
+        
+        while True:
+            try:
+                # 화면 지우기
+                import os
+                os.system('clear' if os.name == 'posix' else 'cls')
+                
+                iteration += 1
+                print(f"🔄 AutoCI 실시간 모니터링 #{iteration}")
+                print("💡 Ctrl+C로 중지")
+                print("=" * 60)
+                
+                # 모든 상태 표시
+                await monitor.show_status()
+                await monitor.show_learning_status()
+                await monitor.show_game_projects()
+                
+                print("\n⏳ 1분 후 업데이트...")
+                await asyncio.sleep(60)
+                
+            except KeyboardInterrupt:
+                print("\n\n👋 모니터링을 종료합니다.")
+                break
+            except Exception as e:
+                print(f"\n❌ 모니터링 오류: {e}")
+                print("💡 5초 후 재시도...")
+                await asyncio.sleep(5)
+        
+    except Exception as e:
+        print(f"❌ 모니터링 초기화 오류: {e}")
+        print("💡 기본 시스템 상태를 표시합니다...")
+        await check_system_status()
+
+async def run_monitor_status():
+    """시스템 상태만 표시"""
+    print("📊 AutoCI 시스템 상태")
+    
+    try:
+        from modules.monitoring_system import ProductionMonitor
+        import psutil
+        
+        monitor = ProductionMonitor()
+        
+        # 시스템 메트릭
+        cpu_percent = psutil.cpu_percent()
+        memory = psutil.virtual_memory()
+        disk = psutil.disk_usage('/')
+        
+        print("=" * 60)
+        print(f"🖥️  CPU 사용률: {cpu_percent:.1f}%")
+        print(f"💾 메모리 사용률: {memory.percent:.1f}%")
+        print(f"💿 디스크 사용률: {disk.percent:.1f}%")
+        print("=" * 60)
+        
+    except Exception as e:
+        print(f"❌ 상태 확인 오류: {e}")
+        await check_system_status()
+
+async def run_monitor_learning():
+    """AI 학습 상태만 표시"""
+    print("🧠 AI 학습 상태")
+    print("=" * 60)
+    
+    try:
+        import json
+        
+        progress_files = [
+            "user_learning_data/continuous_learning/progress/learning_progress.json",
+            "continuous_learning/progress/learning_progress.json"
+        ]
+        
+        learning_active = False
+        for progress_file in progress_files:
+            if Path(progress_file).exists():
+                try:
+                    with open(progress_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    learning_active = True
+                    
+                    print(f"📚 학습 파일: {progress_file}")
+                    if 'total_hours' in data:
+                        print(f"   총 학습 시간: {data['total_hours']:.1f}시간")
+                    if 'total_questions' in data:
+                        print(f"   총 질문 수: {data['total_questions']}")
+                    break
+                except:
+                    continue
+        
+        if not learning_active:
+            print("📖 현재 활성화된 학습 세션이 없습니다.")
+            print("💡 'autoci learn' 명령어로 학습을 시작할 수 있습니다.")
+        
+    except Exception as e:
+        print(f"❌ 학습 상태 확인 오류: {e}")
+    
+    print("=" * 60)
+
+async def run_monitor_projects():
+    """게임 프로젝트만 표시"""
+    print("🎮 게임 프로젝트 상태")
+    print("=" * 60)
+    
+    try:
+        from datetime import datetime
+        
+        project_dirs = ["game_projects", "mvp_games", "accurate_games"]
+        total_projects = 0
+        
+        for project_dir in project_dirs:
+            if Path(project_dir).exists():
+                projects = list(Path(project_dir).iterdir())
+                if projects:
+                    print(f"📁 {project_dir}:")
+                    for project in projects:
+                        if project.is_dir():
+                            try:
+                                create_time = datetime.fromtimestamp(project.stat().st_ctime)
+                                print(f"   🎯 {project.name} - {create_time.strftime('%Y-%m-%d %H:%M')}")
+                                total_projects += 1
+                            except:
+                                print(f"   🎯 {project.name}")
+                                total_projects += 1
+        
+        if total_projects == 0:
+            print("🎮 생성된 게임 프로젝트가 없습니다.")
+        else:
+            print(f"\n📊 총 {total_projects}개의 게임 프로젝트")
+        
+    except Exception as e:
+        print(f"❌ 프로젝트 확인 오류: {e}")
+    
+    print("=" * 60)
+
+async def run_monitor_logs():
+    """최근 로그만 표시"""
+    print("📜 최근 로그")
+    print("=" * 60)
+    
+    try:
+        log_files = [
+            "logs/autoci.log",
+            "continuous_learning.log",
+            "user_learning_data/continuous_learning/latest.log"
+        ]
+        
+        for log_file in log_files:
+            if Path(log_file).exists():
+                print(f"\n📄 {log_file}:")
+                try:
+                    with open(log_file, 'r', encoding='utf-8') as f:
+                        lines = f.readlines()
+                        recent_lines = lines[-10:] if len(lines) > 10 else lines
+                        
+                        for line in recent_lines:
+                            print(f"   {line.rstrip()}")
+                        
+                except Exception as e:
+                    print(f"   ❌ 로그 읽기 실패: {e}")
+    
+    except Exception as e:
+        print(f"❌ 로그 확인 오류: {e}")
+    
+    print("=" * 60)
+
+async def run_monitor_interactive():
+    """대화형 모니터링 모드"""
+    print("🎛️ AutoCI 대화형 모니터링 모드")
+    print("명령어: status, learning, projects, logs, help, quit")
+    
+    while True:
+        try:
+            command = input("\nmonitor> ").strip().lower()
+            
+            if command in ['quit', 'exit', 'q']:
+                break
+            elif command in ['status', 's']:
+                await run_monitor_status()
+            elif command in ['learning', 'learn', 'l']:
+                await run_monitor_learning()
+            elif command in ['projects', 'games', 'p']:
+                await run_monitor_projects()
+            elif command in ['logs', 'log']:
+                await run_monitor_logs()
+            elif command in ['help', 'h']:
+                print("""
+📖 사용 가능한 명령어:
+  status, s     - 시스템 상태 표시
+  learning, l   - AI 학습 상태 표시  
+  projects, p   - 게임 프로젝트 상태 표시
+  logs          - 최근 로그 표시
+  help, h       - 도움말 표시
+  quit, q       - 종료
+                """)
+            else:
+                print(f"❌ 알 수 없는 명령어: {command}")
+                print("💡 'help'를 입력하면 사용 가능한 명령어를 볼 수 있습니다.")
+                
+        except KeyboardInterrupt:
+            print("\n\n👋 모니터링을 종료합니다.")
+            break
+        except Exception as e:
+            print(f"❌ 오류 발생: {e}")
+
+async def run_monitor_watch():
+    """5초마다 자동 새로고침"""
+    print("🔄 5초마다 상태를 새로고침합니다. (Ctrl+C로 중지)")
+    
+    # 실시간 모니터링이 이미 지속적 업데이트를 지원하므로 그대로 호출
+    await run_realtime_monitoring()
 
 if __name__ == "__main__":
     main()

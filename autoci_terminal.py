@@ -104,6 +104,83 @@ class AutoCITerminal:
             "csharp_concepts_learned": 0,
             "commands_executed": 0
         }
+        
+        # 자가 진화 시스템 초기화
+        self.evolution_system = None
+        try:
+            from modules.self_evolution_system import get_evolution_system
+            self.evolution_system = get_evolution_system()
+            self.logger.info("🧬 자가 진화 시스템이 활성화되었습니다.")
+        except ImportError:
+            self.logger.warning("자가 진화 시스템을 로드할 수 없습니다.")
+        
+        # 실시간 게임 수정 시스템 초기화
+        self.game_modifier = None
+        try:
+            from modules.realtime_game_modifier import get_game_modifier
+            self.game_modifier = get_game_modifier()
+            self.logger.info("🎮 실시간 게임 수정 시스템이 활성화되었습니다.")
+        except ImportError:
+            self.logger.warning("실시간 게임 수정 시스템을 로드할 수 없습니다.")
+        
+        # 게임 제작 과정 시각화 시스템 초기화
+        self.game_visualizer = None
+        try:
+            from modules.game_creation_visualizer import get_game_creation_visualizer
+            self.game_visualizer = get_game_creation_visualizer()
+            self.logger.info("🎨 게임 제작 과정 시각화 시스템이 활성화되었습니다.")
+        except ImportError:
+            self.logger.warning("게임 제작 과정 시각화 시스템을 로드할 수 없습니다.")
+        
+        # Godot 게임 빌더 초기화 (실제 게임 제작)
+        self.game_builder = None
+        self.progressive_builder = None
+        try:
+            from modules.godot_game_builder import get_game_builder
+            self.game_builder = get_game_builder()
+            self.logger.info("🔨 Godot 게임 빌더가 활성화되었습니다.")
+        except ImportError:
+            self.logger.warning("Godot 게임 빌더를 로드할 수 없습니다.")
+        
+        # 진행형 게임 빌더 초기화
+        try:
+            from modules.progressive_game_builder import get_progressive_builder
+            self.progressive_builder = get_progressive_builder()
+            self.logger.info("🎬 진행형 게임 빌더가 활성화되었습니다.")
+        except ImportError:
+            self.logger.warning("진행형 게임 빌더를 로드할 수 없습니다.")
+        
+        # AI 컨트롤러 초기화
+        self.ai_controller = None
+        try:
+            from modules.godot_ai_controller import get_ai_controller
+            self.ai_controller = get_ai_controller()
+            self.logger.info("🤖 Godot AI 컨트롤러가 활성화되었습니다.")
+        except ImportError:
+            self.logger.warning("Godot AI 컨트롤러를 로드할 수 없습니다.")
+        
+        # 터미널 UI 초기화
+        self.terminal_ui = None
+        try:
+            from modules.terminal_ui import get_terminal_ui
+            self.terminal_ui = get_terminal_ui()
+            self.logger.info("📺 터미널 UI가 활성화되었습니다.")
+        except ImportError:
+            self.logger.warning("터미널 UI를 로드할 수 없습니다.")
+        
+        # 24시간 실시간 모니터 초기화 (간단한 버전 우선 시도)
+        self.realtime_monitor = None
+        try:
+            from modules.simple_realtime_monitor import get_simple_realtime_monitor
+            self.realtime_monitor = get_simple_realtime_monitor()
+            self.logger.info("🎯 24시간 간단한 실시간 모니터가 활성화되었습니다.")
+        except ImportError:
+            try:
+                from modules.realtime_24h_monitor import get_realtime_monitor
+                self.realtime_monitor = get_realtime_monitor()
+                self.logger.info("🎯 24시간 실시간 모니터가 활성화되었습니다.")
+            except ImportError:
+                self.logger.warning("24시간 실시간 모니터를 로드할 수 없습니다.")
 
     def setup_directories(self):
         """필요한 디렉토리 생성"""
@@ -156,6 +233,10 @@ class AutoCITerminal:
             self.csharp_learning_loop()      # 지속적 C# 학습
         ]
         
+        # 실시간 게임 수정 큐 처리 태스크 추가
+        if self.game_modifier:
+            tasks.append(self.game_modifier.process_modification_queue())
+        
         try:
             await asyncio.gather(*tasks)
         except asyncio.CancelledError:
@@ -196,8 +277,20 @@ class AutoCITerminal:
                 self.current_project = project_name
                 self.stats["games_created"] += 1
                 
+                # 실시간 게임 수정 시스템에 게임 정보 설정
+                if self.game_modifier:
+                    self.game_modifier.set_game_info(project_name, game_type)
+                
                 self.logger.info(f"✅ {project_name} 프로젝트 생성 완료")
                 
+                # 게임 제작 과정 시각화 시작
+                if self.game_visualizer:
+                    # 비동기 시각화 작업 시작
+                    visualization_task = asyncio.create_task(
+                        self.game_visualizer.start_visualization(game_type, project_name)
+                    )
+                    # 시각화가 백그라운드에서 실행되도록 함
+                    
                 # Godot 대시보드 업데이트
                 if self.godot_integration:
                     await self.godot_integration.update_dashboard({
@@ -208,9 +301,14 @@ class AutoCITerminal:
                         "color": "ffff00"
                     })
                 
-                # 2-4시간 대기
-                wait_time = 2 * 3600 + (len(self.projects) % 3) * 3600
-                await asyncio.sleep(wait_time)
+                # 게임 제작 시간 (시각화와 함께 진행)
+                if self.game_visualizer:
+                    # 시각화가 진행되는 동안 대기 (약 2-3분)
+                    await asyncio.sleep(180)  # 3분
+                else:
+                    # 시각화 없이는 기존대로 긴 시간 대기
+                    wait_time = 2 * 3600 + (len(self.projects) % 3) * 3600
+                    await asyncio.sleep(wait_time)
                 
             except Exception as e:
                 self.logger.error(f"게임 생성 중 오류: {e}")
@@ -1009,7 +1107,8 @@ func return_to_pool(obj: Node, pool_name: String):
         if cmd == "create":
             if len(parts) >= 3 and parts[2] == "game":
                 game_type = parts[1]
-                self.create_game(game_type)
+                # 진행형 빌더를 사용하여 README대로 단계별 시각화
+                asyncio.create_task(self.create_game_progressively(game_type))
             elif len(parts) >= 3 and parts[1] == "multiplayer":
                 # 멀티플레이어 게임 생성
                 game_type = parts[2]
@@ -1034,13 +1133,107 @@ func return_to_pool(obj: Node, pool_name: String):
         elif cmd == "help":
             self.show_help()
         
+        elif cmd == "ai" and len(parts) > 1 and parts[1] == "demo":
+            # AI 데모 명령어
+            if self.ai_controller:
+                asyncio.create_task(self.ai_controller.start_ai_control_demo())
+            else:
+                print("❌ AI 컨트롤러가 활성화되지 않았습니다.")
+        
+        elif cmd == "control":
+            # 🎮 AI 모델 제어권 상태 확인
+            self.show_ai_control_status()
+        
+        elif cmd == "chat" or cmd == "대화":
+            # 한글 대화 모드 시작
+            print("💬 한글 대화 모드로 전환합니다...")
+            asyncio.create_task(self.start_korean_conversation())
+        
+        elif cmd == "modify" or cmd == "수정":
+            # 실시간 게임 수정
+            if self.game_modifier and self.current_project:
+                asyncio.create_task(self.handle_game_modification(command))
+            else:
+                print("❌ 현재 진행 중인 게임 프로젝트가 없습니다.")
+        
+        elif cmd == "add" and len(parts) > 1:
+            # 빠른 기능 추가
+            if self.game_modifier and self.current_project:
+                asyncio.create_task(self.handle_game_modification(command))
+            else:
+                print("❌ 현재 진행 중인 게임 프로젝트가 없습니다.")
+        
+        elif cmd == "history":
+            # 수정 히스토리 보기
+            self.show_modification_history()
+        
+        elif cmd == "create_game":
+            # create_game 명령어 (create game과 별도)
+            if len(parts) >= 2:
+                game_type = parts[1]
+                # 진행형 빌더를 사용하여 README대로 단계별 시각화
+                asyncio.create_task(self.create_game_progressively(game_type))
+            else:
+                print("사용법: create_game [racing|platformer|puzzle|rpg]")
+        
+        elif cmd == "open_godot":
+            # Godot 에디터 열기
+            self.open_godot_editor()
+        
+        elif cmd == "stop" or cmd == "stop24h":
+            # 24시간 모니터링 중지
+            if self.realtime_monitor and hasattr(self.realtime_monitor, 'stop_monitoring'):
+                self.realtime_monitor.stop_monitoring()
+            else:
+                print("❌ 24시간 모니터링이 활성화되어 있지 않습니다.")
+        
+        elif cmd == "list" or cmd == "목록":
+            # 게임 프로젝트 목록 표시
+            self.show_game_list()
+        
+        elif cmd == "resume" or cmd == "계속":
+            # 게임 프로젝트 재개
+            if len(parts) >= 2:
+                project_name = " ".join(parts[1:])
+                asyncio.create_task(self.resume_game_project(project_name))
+            else:
+                # 목록에서 선택
+                asyncio.create_task(self.resume_game_from_list())
+        
+        elif cmd == "monitor" or cmd == "모니터":
+            # 실시간 모니터링 표시
+            if self.realtime_monitor:
+                asyncio.create_task(self.show_realtime_monitor())
+            else:
+                print("❌ 실시간 모니터링이 활성화되지 않았습니다.")
+        
         elif cmd == "exit" or cmd == "quit":
             self.running = False
             print("👋 AutoCI를 종료합니다.")
         
         else:
-            print(f"알 수 없는 명령어: {cmd}")
-            print("'help'를 입력하여 사용 가능한 명령어를 확인하세요.")
+            # 한글 명령어 처리
+            korean_commands = {
+                "만들기": "create",
+                "게임": "game",
+                "학습": "learn",
+                "상태": "status",
+                "최적화": "optimize",
+                "도움말": "help",
+                "종료": "exit"
+            }
+            
+            # 한글 명령어를 영어로 변환
+            converted_parts = []
+            for part in command.split():
+                converted_parts.append(korean_commands.get(part, part))
+            
+            converted_command = " ".join(converted_parts)
+            if converted_command != command:
+                self.handle_command(converted_command)
+            else:
+                print(f"알 수 없는 명령어: {cmd}")
+                print("'help'를 입력하여 사용 가능한 명령어를 확인하세요.")
 
     def create_game(self, game_type: str):
         """게임 생성"""
@@ -1071,6 +1264,32 @@ func return_to_pool(obj: Node, pool_name: String):
         self.current_project = project_name
         self.stats["games_created"] += 1
         
+        # 실시간 게임 수정 시스템에 게임 정보 설정
+        if self.game_modifier:
+            self.game_modifier.set_game_info(project_name, game_type)
+        
+        # 🎨 게임 제작 과정 시각화 시작 - 이것이 핵심!
+        if self.game_builder:
+            # 실제 게임을 만들고 Godot에서 열기
+            asyncio.create_task(self.game_builder.build_and_show_game(project_name, game_type))
+        elif self.game_visualizer:
+            print("\n" + "="*60)
+            print("🎬 이제 게임 제작 과정을 실시간으로 보여드립니다!")
+            print("💬 제작 중 언제든지 명령어를 입력하여 게임을 수정할 수 있습니다.")
+            print("="*60 + "\n")
+            
+            # 비동기로 시각화 시작
+            asyncio.create_task(self.game_visualizer.start_visualization(game_type, project_name))
+        
+        # 🎯 24시간 실시간 모니터링 시작
+        if self.realtime_monitor:
+            # 실시간 모니터링 시작
+            self.realtime_monitor.start_monitoring(project_name)
+            self.realtime_monitor.add_log(f"🎮 {game_type} 게임 생성 완료")
+            self.realtime_monitor.add_log("🏭 24시간 자동 개선을 시작합니다...")
+            print("🎯 24시간 실시간 모니터링이 시작되었습니다!")
+            print("💡 터미널 상단에서 실시간 진행 상황을 확인할 수 있습니다.")
+            
         # 실시간 대시보드 업데이트
         if self.godot_dashboard:
             self.godot_dashboard.update_status(
@@ -1079,9 +1298,63 @@ func return_to_pool(obj: Node, pool_name: String):
                 "활성"
             )
             self.godot_dashboard.add_log(f"🎮 {project_name} 프로젝트 생성 시작")
+            self.godot_dashboard.add_log(f"🎨 게임 제작 과정 시각화가 시작되었습니다")
             self.godot_dashboard.task_completed()
         
-        print(f"✅ {game_type} 게임 생성 작업을 시작했습니다.")
+        print(f"✅ {game_type} 게임 제작이 시작되었습니다.")
+    
+    async def create_game_progressively(self, game_type: str):
+        """게임을 단계별로 생성하며 과정을 보여줌"""
+        print(f"🎮 {game_type} 게임을 단계별로 생성합니다...")
+        
+        # 프로젝트 생성
+        project_name = f"{game_type}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        
+        self.projects[project_name] = {
+            "type": game_type,
+            "path": None,  # 진행형 빌더가 경로 생성
+            "created": datetime.now(),
+            "features": [],
+            "bugs_fixed": 0
+        }
+        
+        self.current_project = project_name
+        self.stats["games_created"] += 1
+        
+        # 실시간 게임 수정 시스템에 게임 정보 설정
+        if self.game_modifier:
+            self.game_modifier.set_game_info(project_name, game_type)
+        
+        # 🎬 진행형 게임 빌더 사용 - README대로 단계별 시각화!
+        if self.progressive_builder:
+            print("\n" + "="*60)
+            print("🎬 이제 README에 명시된 대로 게임 제작 과정을")
+            print("   단계별로 실시간으로 보여드립니다!")
+            print("💬 각 단계에서 대화하며 게임을 수정할 수 있습니다.")
+            print("="*60 + "\n")
+            
+            # 진행형 빌더로 게임 제작 (단계별 시각화)
+            success = await self.progressive_builder.build_game_with_visualization(project_name, game_type)
+            
+            if success and self.projects[project_name].get("path"):
+                print("\n🎮 Godot 에디터에서 완성된 게임을 확인하세요!")
+            
+        elif self.game_builder:
+            # 폴백: 기존 빌더 사용
+            print("⚠️ 진행형 빌더를 사용할 수 없어 기본 빌더를 사용합니다.")
+            await self.game_builder.build_and_show_game(project_name, game_type)
+        else:
+            print("❌ 게임 빌더를 사용할 수 없습니다.")
+            
+        # 실시간 대시보드 업데이트
+        if self.godot_dashboard:
+            self.godot_dashboard.update_status(
+                f"{game_type} 게임 제작 완료!",
+                100,
+                "완료"
+            )
+            self.godot_dashboard.add_log(f"🎮 {project_name} 프로젝트 생성 완료")
+            self.godot_dashboard.task_completed()
 
     def create_multiplayer_game(self, game_type: str):
         """멀티플레이어 게임 생성"""
@@ -1281,7 +1554,324 @@ public partial class Player : CharacterBody2D
         print(f"⚡ {self.current_project} 프로젝트를 최적화하는 중...")
         time.sleep(1)  # 시뮬레이션
         print("✅ 최적화 작업을 시작했습니다.")
+    
+    async def start_korean_conversation(self):
+        """한글 대화 모드 시작"""
+        try:
+            # 한글 대화 시스템 임포트
+            from modules.korean_conversation import get_korean_conversation
+            from modules.self_evolution_system import get_evolution_system
+            
+            conversation = get_korean_conversation()
+            evolution = get_evolution_system() if self.evolution_system else None
+            
+            print("\n🤖 AutoCI 한글 대화 모드")
+            print("=" * 50)
+            print("자연스러운 한글로 대화하며 게임 개발을 진행하세요!")
+            print("대화를 통해 AutoCI가 더 똑똑해집니다.")
+            print("(대화를 종료하려면 '종료' 또는 'exit'를 입력하세요)")
+            print("=" * 50)
+            
+            while True:
+                try:
+                    # 사용자 입력
+                    user_input = await asyncio.get_event_loop().run_in_executor(
+                        None, input, "\n👤 사용자: "
+                    )
+                    user_input = user_input.strip()
+                    
+                    # 종료 조건
+                    if user_input.lower() in ["종료", "exit", "quit", "bye"]:
+                        print("\n🤖 AutoCI: 대화를 종료하고 터미널 모드로 돌아갑니다.")
+                        
+                        # 대화 요약
+                        summary = conversation.get_conversation_summary()
+                        if summary['total_turns'] > 0:
+                            print("\n📊 대화 요약:")
+                            print(f"  • 총 대화 수: {summary['total_turns']}")
+                            print(f"  • 논의된 주제: {', '.join(summary['topics_discussed'])}")
+                            print(f"  • 사용자 만족도: {summary['user_satisfaction']:.1%}")
+                        break
+                    
+                    # 응답 생성
+                    print("\n🤖 AutoCI: ", end="", flush=True)
+                    response = await conversation.process_user_input(user_input, evolution)
+                    print(response)
+                    
+                    # 명령어 실행 체크
+                    if "빌드" in user_input:
+                        if "godot" in user_input.lower() or "고도" in user_input:
+                            print("\n[실행 중] Godot 빌드를 시작합니다...")
+                            self.handle_command("build")
+                    elif "학습" in user_input:
+                        if "시작" in user_input or "해줘" in user_input:
+                            print("\n[실행 중] AI 학습을 시작합니다...")
+                            self.handle_command("learn")
+                    elif "게임" in user_input and ("만들" in user_input or "생성" in user_input):
+                        game_types = ["racing", "platformer", "puzzle", "rpg"]
+                        for game_type in game_types:
+                            if game_type in user_input.lower():
+                                print(f"\n[실행 중] {game_type} 게임을 생성합니다...")
+                                self.handle_command(f"create {game_type} game")
+                                break
+                    
+                except KeyboardInterrupt:
+                    print("\n\n대화가 중단되었습니다.")
+                    break
+                except Exception as e:
+                    print(f"\n오류가 발생했습니다: {str(e)}")
+                    self.logger.error(f"한글 대화 처리 중 오류: {str(e)}")
+            
+            print("\n터미널 모드로 돌아왔습니다. 명령어를 입력하세요.")
+            
+        except ImportError:
+            print("❌ 한글 대화 시스템 모듈을 찾을 수 없습니다.")
+            print("💡 modules/korean_conversation.py 파일을 확인하세요.")
+        except Exception as e:
+            print(f"❌ 한글 대화 시스템 오류: {str(e)}")
+            self.logger.error(f"한글 대화 시스템 오류: {str(e)}")
 
+    async def handle_game_modification(self, command: str):
+        """실시간 게임 수정 처리"""
+        if not self.game_modifier:
+            print("❌ 실시간 게임 수정 시스템이 활성화되지 않았습니다.")
+            return
+        
+        print(f"🔧 게임 수정 요청: {command}")
+        
+        # 수정 처리
+        result = await self.game_modifier.process_user_command(command)
+        
+        if result["success"]:
+            print(f"✅ {result['message']}")
+            
+            # 수정 결과 표시
+            if "result" in result:
+                mod_result = result["result"]
+                if "feature" in mod_result:
+                    print(f"   추가된 기능: {mod_result['feature']}")
+                if "level" in mod_result:
+                    print(f"   추가된 레벨: {mod_result['level']['name']}")
+                if "changes" in mod_result:
+                    print(f"   변경사항: {', '.join(mod_result['changes'])}")
+            
+            # 대시보드 업데이트
+            if self.godot_dashboard:
+                self.godot_dashboard.add_log(f"🔧 게임 수정: {result['message']}")
+        else:
+            print(f"❌ {result['message']}")
+    
+    def show_modification_history(self):
+        """수정 히스토리 표시"""
+        if not self.game_modifier:
+            print("❌ 실시간 게임 수정 시스템이 활성화되지 않았습니다.")
+            return
+        
+        history = self.game_modifier.get_modification_history()
+        
+        if not history:
+            print("📝 수정 히스토리가 없습니다.")
+            return
+        
+        print("\n📝 게임 수정 히스토리")
+        print("=" * 50)
+        
+        for i, mod in enumerate(history[-10:], 1):  # 최근 10개만
+            print(f"{i}. [{mod['timestamp'][:19]}] {mod['type'].value}")
+            print(f"   대상: {mod['target']}")
+            print(f"   상태: {mod['status']}")
+            if mod.get('result') and 'message' in mod['result']:
+                print(f"   결과: {mod['result']['message']}")
+            print()
+    
+    def show_game_list(self):
+        """게임 프로젝트 목록 표시"""
+        print("\n🎮 게임 프로젝트 목록")
+        print("=" * 60)
+        
+        # mvp_games 디렉토리의 프로젝트들
+        mvp_path = Path("/mnt/d/AutoCI/AutoCI/mvp_games")
+        if mvp_path.exists():
+            projects = [d for d in mvp_path.iterdir() if d.is_dir() and (d / "project.godot").exists()]
+            
+            if projects:
+                for i, project in enumerate(sorted(projects), 1):
+                    # 프로젝트 정보 읽기
+                    project_info = self._get_project_info(project)
+                    print(f"{i}. {project.name}")
+                    print(f"   타입: {project_info.get('type', '알 수 없음')}")
+                    print(f"   생성일: {project_info.get('created', '알 수 없음')}")
+                    print(f"   상태: {project_info.get('status', '대기중')}")
+                    print()
+            else:
+                print("생성된 게임 프로젝트가 없습니다.")
+        else:
+            print("게임 프로젝트 디렉토리를 찾을 수 없습니다.")
+        
+        print("=" * 60)
+        print("💡 게임을 재개하려면: resume [프로젝트명]")
+        print("💡 새 게임을 만들려면: create [타입] game")
+    
+    async def resume_game_project(self, project_name: str):
+        """특정 게임 프로젝트 재개"""
+        project_path = Path(f"/mnt/d/AutoCI/AutoCI/mvp_games/{project_name}")
+        
+        if not project_path.exists():
+            print(f"❌ 프로젝트를 찾을 수 없습니다: {project_name}")
+            self.show_game_list()
+            return
+        
+        print(f"\n🎮 프로젝트를 재개합니다: {project_name}")
+        self.current_project = str(project_path)
+        
+        # 프로젝트 정보 표시
+        project_info = self._get_project_info(project_path)
+        print(f"타입: {project_info.get('type', '알 수 없음')}")
+        print(f"생성일: {project_info.get('created', '알 수 없음')}")
+        print(f"마지막 수정: {project_info.get('last_modified', '알 수 없음')}")
+        
+        # Godot 에디터 열기
+        if self.godot_editor_visualizer:
+            print("\n🚀 Godot 에디터를 여는 중...")
+            await self.godot_editor_visualizer.open_project(str(project_path))
+        
+        # 실시간 수정 기능 활성화
+        if self.game_modifier:
+            self.game_modifier.set_current_project(str(project_path))
+            print("\n✅ 실시간 수정 기능이 활성화되었습니다.")
+            print("💡 add, modify 명령어로 게임을 수정할 수 있습니다.")
+    
+    async def resume_game_from_list(self):
+        """목록에서 게임 선택하여 재개"""
+        self.show_game_list()
+        
+        mvp_path = Path("/mnt/d/AutoCI/AutoCI/mvp_games")
+        if not mvp_path.exists():
+            return
+        
+        projects = [d for d in mvp_path.iterdir() if d.is_dir() and (d / "project.godot").exists()]
+        if not projects:
+            return
+        
+        print("\n재개할 프로젝트 번호를 선택하세요 (취소: 0): ", end="")
+        try:
+            choice = await asyncio.get_event_loop().run_in_executor(None, input)
+            choice = int(choice)
+            
+            if choice == 0:
+                print("취소되었습니다.")
+                return
+            
+            if 1 <= choice <= len(projects):
+                selected = sorted(projects)[choice - 1]
+                await self.resume_game_project(selected.name)
+            else:
+                print("잘못된 번호입니다.")
+        except ValueError:
+            print("숫자를 입력해주세요.")
+    
+    def _get_project_info(self, project_path: Path) -> dict:
+        """프로젝트 정보 읽기"""
+        info = {
+            "type": "unknown",
+            "created": "unknown",
+            "last_modified": "unknown",
+            "status": "대기중"
+        }
+        
+        # 프로젝트 이름에서 타입 추출
+        name = project_path.name
+        for game_type in ["racing", "platformer", "puzzle", "rpg"]:
+            if game_type in name:
+                info["type"] = game_type
+                break
+        
+        # 생성 시간 파싱
+        if "_" in name:
+            date_parts = name.split("_")
+            if len(date_parts) >= 3:
+                try:
+                    date_str = f"{date_parts[-2]}_{date_parts[-1]}"
+                    info["created"] = date_str
+                except:
+                    pass
+        
+        # 마지막 수정 시간
+        if (project_path / "project.godot").exists():
+            mtime = (project_path / "project.godot").stat().st_mtime
+            info["last_modified"] = datetime.fromtimestamp(mtime).strftime("%Y%m%d_%H%M%S")
+        
+        return info
+    
+    async def show_realtime_monitor(self):
+        """실시간 모니터링 표시"""
+        if not self.realtime_monitor:
+            print("❌ 실시간 모니터가 초기화되지 않았습니다.")
+            return
+        
+        print("\n🔄 실시간 모니터링을 시작합니다...")
+        print("종료하려면 Ctrl+C를 누르세요.\n")
+        
+        try:
+            while True:
+                # 모니터 상태 표시
+                if hasattr(self.realtime_monitor, 'display_status'):
+                    self.realtime_monitor.display_status()
+                elif hasattr(self.realtime_monitor, 'show_simple_status'):
+                    self.realtime_monitor.show_simple_status()
+                
+                await asyncio.sleep(1)
+        except KeyboardInterrupt:
+            print("\n모니터링을 종료합니다.")
+    
+    def show_ai_control_status(self):
+        """🎮 AI 모델 제어권 상태 확인"""
+        try:
+            # autoci.py의 show_ai_control_status() 함수 호출
+            import subprocess
+            result = subprocess.run(
+                ["python", "autoci.py", "control"], 
+                capture_output=True, 
+                text=True, 
+                cwd=self.project_root
+            )
+            
+            if result.returncode == 0:
+                print(result.stdout)
+            else:
+                print("❌ AI 제어 상태 확인 중 오류 발생")
+                print(result.stderr)
+        except Exception as e:
+            print(f"❌ AI 제어 상태 확인 실패: {str(e)}")
+            print("💡 'autoci control' 명령어를 터미널에서 직접 실행해보세요.")
+
+    def open_godot_editor(self):
+        """Godot 에디터 열기"""
+        print("🚀 Godot 에디터를 엽니다...")
+        
+        if self.game_builder:
+            # 현재 프로젝트가 있으면 해당 프로젝트 열기
+            if self.current_project and self.current_project in self.projects:
+                project = self.projects[self.current_project]
+                project_path = project["path"]
+                print(f"📂 현재 프로젝트 열기: {self.current_project}")
+                asyncio.create_task(self.game_builder.open_in_godot(project_path))
+            else:
+                # 프로젝트가 없으면 빈 에디터 열기
+                print("📂 새 프로젝트를 위한 Godot 에디터 열기...")
+                godot_exe = self.game_builder.find_godot_executable()
+                if godot_exe:
+                    cmd = ["cmd.exe", "/c", "start", "", godot_exe.replace("/mnt/c", "C:").replace("/mnt/d", "D:").replace("/", "\\"), "--editor"]
+                    try:
+                        subprocess.run(cmd, check=True)
+                        print("✅ Godot 에디터가 열렸습니다!")
+                    except Exception as e:
+                        print(f"❌ Godot 실행 중 오류: {e}")
+                else:
+                    print("❌ Godot을 찾을 수 없습니다.")
+        else:
+            print("❌ 게임 빌더가 초기화되지 않았습니다.")
+    
     def show_help(self):
         """도움말 표시"""
         print("\n📖 AutoCI 명령어 도움말")
@@ -1289,6 +1879,13 @@ public partial class Player : CharacterBody2D
         print("create [type] game  - 새 게임 프로젝트 생성")
         print("  예: create racing game")
         print("  타입: racing, platformer, puzzle, rpg")
+        print()
+        print("ai demo           - AI가 Godot을 제어하는 데모")
+        print()
+        print("create_game [type] - 게임 프로젝트 생성 (간단한 형식)")
+        print("  예: create_game platformer")
+        print()
+        print("open_godot        - Godot 에디터 열기")
         print()
         print("create multiplayer [type] - 멀티플레이어 게임 생성")
         print("  예: create multiplayer fps")
@@ -1300,19 +1897,61 @@ public partial class Player : CharacterBody2D
         print("  예: learn delegates")
         print()
         print("status            - 시스템 상태 확인")
+        print("control           - AI 모델 제어권 상태 확인")
         print("optimize          - 현재 프로젝트 최적화")
+        print("chat/대화         - 한글 대화 모드 시작")
+        print()
+        print("📂 프로젝트 관리 명령어:")
+        print("list/목록         - 게임 프로젝트 목록 보기")
+        print("resume/계속       - 이전 게임 프로젝트 재개")
+        print("  예: resume rpg_20250702_155542")
+        print("monitor/모니터    - 실시간 개발 상태 모니터링")
+        print()
+        print("🔧 실시간 게임 수정 명령어:")
+        print("add feature [name] - 게임에 새 기능 추가")
+        print("add level [name]   - 새 레벨 추가")
+        print("modify [target]    - 게임 요소 수정")
+        print("update ai          - AI 동작 업데이트")
+        print("change graphics    - 그래픽 설정 변경")
+        print("optimize           - 게임 최적화")
+        print("history            - 수정 히스토리 보기")
+        print()
+        print("🎯 24시간 모니터링 명령어:")
+        print("stop/stop24h       - 24시간 모니터링 중지")
+        print()
+        print("🎮 빠른 명령어:")
+        print("  [1-9] - 메뉴 번호로 빠른 실행")
+        print("  [p] platformer, [r] racing, [z] puzzle")
+        print("  [m] modify, [s] status, [h] help")
+        print()
         print("help              - 이 도움말 표시")
         print("exit              - 시스템 종료")
         print("=" * 50 + "\n")
 
     async def run_terminal_interface(self):
         """터미널 인터페이스 실행"""
-        print("🚀 AutoCI 24시간 AI 게임 개발 시스템")
-        print("============================================================")
-        print("WSL 환경에서 24시간 자동으로 게임을 개발합니다.")
-        print("'help'를 입력하여 사용 가능한 명령어를 확인하세요.")
-        print("============================================================")
-        print()
+        # 터미널 UI 초기화
+        if self.terminal_ui:
+            self.terminal_ui.clear_screen()
+            self.terminal_ui.show_welcome_animation()
+            self.terminal_ui.show_header()
+        else:
+            print("🚀 AutoCI - AI와 함께하는 실시간 게임 개발 시스템")
+            print("============================================================")
+        
+        # AI 컨트롤러로 Godot 데모 시작
+        if self.ai_controller:
+            print("\n🤖 AI가 Godot을 직접 제어하여 게임을 만드는 과정을 보여드립니다!")
+            choice = await asyncio.get_event_loop().run_in_executor(
+                None, input, "\nAI 데모를 시작하시겠습니까? (Y/n): "
+            )
+            
+            if choice.lower() != 'n':
+                await self.ai_controller.start_ai_control_demo()
+                self.ai_controller.show_ai_summary()
+                print("\n💬 이제 AutoCI로 직접 게임을 만들어보세요!")
+            else:
+                print("\n🎮 AI 데모를 건너뛰고 직접 게임을 만들어보세요!")
         
         # Godot 프로젝트 선택
         selected_project = None
@@ -1372,13 +2011,40 @@ public partial class Player : CharacterBody2D
         # 명령어 입력 루프
         while self.running:
             try:
+                # 24시간 실시간 모니터링 상태 표시
+                if self.realtime_monitor and hasattr(self.realtime_monitor, 'show_simple_status'):
+                    self.realtime_monitor.show_simple_status()
+                
+                # UI 표시
+                if self.terminal_ui:
+                    self.terminal_ui.show_current_status(
+                        self.current_project,
+                        "AI 대기중" if self.ai_controller else "비활성"
+                    )
+                    self.terminal_ui.show_main_menu()
+                    self.terminal_ui.show_quick_commands()
+                    prompt = self.terminal_ui.show_input_prompt()
+                else:
+                    prompt = "autoci> "
+                
                 # 비동기 입력 처리
                 command = await asyncio.get_event_loop().run_in_executor(
-                    None, input, "autoci> "
+                    None, input, prompt
                 )
                 
                 if command.strip():
-                    self.handle_command(command.strip())
+                    # 숫자 명령어 처리
+                    if command.strip() in "123456789":
+                        cmd_index = int(command.strip()) - 1
+                        if cmd_index < len(self.terminal_ui.commands):
+                            actual_command = self.terminal_ui.commands[cmd_index][2]
+                            self.handle_command(actual_command)
+                    # 빠른 명령어 처리
+                    elif command.strip() in self.terminal_ui.quick_commands:
+                        actual_command = self.terminal_ui.quick_commands[command.strip()]
+                        self.handle_command(actual_command)
+                    else:
+                        self.handle_command(command.strip())
                     
             except KeyboardInterrupt:
                 print("\n\n중단 신호를 받았습니다...")

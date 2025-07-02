@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_korean_translation_error_1751280525",
+    "topic": "프로그래밍 용어 번역",
+    "type": "error",
+    "language": "english",
+    "difficulty": 2,
+    "question": "What are common errors with 프로그래밍 용어 번역 in C# and how to fix them?",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance",
+      "interface",
+      "algorithm"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_translate_1751280683",
+    "topic": "고급 C# 기능",
+    "type": "translate",
+    "language": "korean",
+    "difficulty": 4,
+    "question": "다음 C# 개념을 한글로 번역하고 설명하세요: generics",
+    "keywords": [
+      "제네릭",
+      "비동기",
+      "LINQ",
+      "델리게이트",
+      "람다",
+      "속성"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

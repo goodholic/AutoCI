@@ -1,0 +1,26 @@
+{
+  "question": {
+    "id": "core_csharp_oop_explain_1751281049",
+    "topic": "객체지향 프로그래밍",
+    "type": "explain",
+    "language": "korean",
+    "difficulty": 3,
+    "question": "객체지향 프로그래밍에 대해 한글로 자세히 설명해주세요. 특히 캡슐화에 초점을 맞춰주세요.",
+    "keywords": [
+      "클래스",
+      "객체",
+      "상속",
+      "다형성",
+      "캡슐화",
+      "인터페이스"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

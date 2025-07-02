@@ -1,0 +1,27 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_translate_1751279500",
+    "topic": "고급 C# 기능",
+    "type": "translate",
+    "language": "english",
+    "difficulty": 4,
+    "question": "Translate and explain this Korean term in C# context: 속성",
+    "keywords": [
+      "generics",
+      "async",
+      "await",
+      "Task",
+      "LINQ",
+      "delegate",
+      "lambda"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

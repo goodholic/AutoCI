@@ -1,0 +1,39 @@
+{
+  "question": {
+    "id": "core_csharp_advanced_optimize_1751283069",
+    "topic": "고급 C# 기능",
+    "type": "optimize",
+    "language": "english",
+    "difficulty": 4,
+    "question": "How to optimize performance when using 고급 C# 기능 in C#?",
+    "keywords": [
+      "generics",
+      "async",
+      "await",
+      "Task",
+      "LINQ",
+      "delegate",
+      "lambda"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_csharp_advanced_optimize_1751283069",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.027766942977905273,
+    "timestamp": "2025-06-30T20:33:35.701424",
+    "memory_usage": {
+      "before_gb": 0.7139625549316406,
+      "after_gb": 0.7146720886230469,
+      "delta_gb": 0.00070953369140625
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_203109"
+}

@@ -1,0 +1,32 @@
+{
+  "session": {
+    "session_id": "20250630_190722",
+    "start_time": "2025-06-30 19:07:22.146957",
+    "topics_covered": [
+      "객체지향 프로그래밍",
+      "AI 네트워크 제어",
+      "AI 통합 Nakama",
+      "MultiplayerAPI 시스템",
+      "Godot 4.x 아키텍처",
+      "Godot 미래 방향성",
+      "고급 C# 기능"
+    ],
+    "questions_asked": 212,
+    "successful_answers": 9,
+    "models_used": {
+      "deepseek-coder-7b": 9,
+      "phi3-mini": 0,
+      "gemma-4b": 0,
+      "llama-3.1-8b": 0,
+      "codellama-13b": 0,
+      "qwen2.5-coder-32b": 0
+    },
+    "knowledge_gained": []
+  },
+  "duration": "1:04:33.645748",
+  "knowledge_base_size": {
+    "patterns": 0,
+    "translations": 0,
+    "errors": 0
+  }
+}

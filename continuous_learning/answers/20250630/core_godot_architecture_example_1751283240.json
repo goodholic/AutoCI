@@ -1,0 +1,37 @@
+{
+  "question": {
+    "id": "core_godot_architecture_example_1751283240",
+    "topic": "Godot 4.x 아키텍처",
+    "type": "example",
+    "language": "korean",
+    "difficulty": 4,
+    "question": "Godot 4.x 아키텍처을 사용하는 C# 코드 예제를 작성하고 한글로 설명해주세요.",
+    "keywords": [
+      "노드시스템",
+      "씬트리",
+      "리소스",
+      "시그널",
+      "렌더링"
+    ]
+  },
+  "answer": {
+    "model": "deepseek-coder-7b",
+    "question_id": "core_godot_architecture_example_1751283240",
+    "answer": "죄송합니다. 답변 생성에 실패했습니다.",
+    "response_time": 0.0022437572479248047,
+    "timestamp": "2025-06-30T20:34:00.227411",
+    "memory_usage": {
+      "before_gb": 0.7200851440429688,
+      "after_gb": 0.7200851440429688,
+      "delta_gb": 0.0
+    }
+  },
+  "analysis": {
+    "success": true,
+    "quality_score": 0.2,
+    "extracted_knowledge": {},
+    "new_patterns": [],
+    "improvements": []
+  },
+  "session_id": "20250630_203109"
+}

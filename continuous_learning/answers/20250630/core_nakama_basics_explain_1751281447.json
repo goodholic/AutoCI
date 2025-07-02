@@ -1,0 +1,25 @@
+{
+  "question": {
+    "id": "core_nakama_basics_explain_1751281447",
+    "topic": "Nakama 기본 구조",
+    "type": "explain",
+    "language": "english",
+    "difficulty": 3,
+    "question": "Explain Nakama 기본 구조 in C# with focus on authentication.",
+    "keywords": [
+      "game server",
+      "authentication",
+      "session",
+      "matchmaking",
+      "leaderboard"
+    ]
+  },
+  "answer": {
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "analysis": {
+    "success": false,
+    "error": "Model deepseek-coder-7b failed to load"
+  },
+  "session_id": "20250630_190722"
+}

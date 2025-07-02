@@ -1,0 +1,52 @@
+using System;
+using System.Linq;
+using System.Text;
+
+namespace StringProcessing
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("문자열 처리 프로그램
+");
+            
+            Console.Write("문자열을 입력하세요: ");
+            string input = Console.ReadLine();
+            
+            Console.WriteLine("
+=== 문자열 분석 ===");
+            Console.WriteLine($"원본 문자열: {input}");
+            Console.WriteLine($"길이: {input.Length}자");
+            Console.WriteLine($"대문자 변환: {input.ToUpper()}");
+            Console.WriteLine($"소문자 변환: {input.ToLower()}");
+            Console.WriteLine($"공백 제거: {input.Trim()}");
+            Console.WriteLine($"역순: {new string(input.Reverse().ToArray())}");
+            
+            // 단어 수 계산
+            string[] words = input.Split(new[] { ' ', '	', '
+' }, StringSplitOptions.RemoveEmptyEntries);
+            Console.WriteLine($"단어 수: {words.Length}개");
+            
+            // 문자 빈도 분석
+            Console.WriteLine("
+=== 문자 빈도 ===");
+            var charFrequency = input
+                .Where(c => !char.IsWhiteSpace(c))
+                .GroupBy(c => char.ToLower(c))
+                .OrderByDescending(g => g.Count())
+                .Take(5);
+            
+            foreach (var group in charFrequency)
+            {
+                Console.WriteLine($"'{group.Key}': {group.Count()}회");
+            }
+            
+            // 회문 검사
+            string cleanedInput = new string(input.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+            bool isPalindrome = cleanedInput == new string(cleanedInput.Reverse().ToArray());
+            Console.WriteLine($"
+회문 여부: {(isPalindrome ? "예" : "아니오")}");
+        }
+    }
+}

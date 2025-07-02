@@ -73,6 +73,10 @@ class CSharpContinuousLearning(CSharp24HUserLearning):
         self.qa_dir = self.continuous_learning_dir / "qa_sessions"
         self.qa_dir.mkdir(exist_ok=True)
         
+        # 진행 상태 디렉토리
+        self.progress_dir = self.continuous_learning_dir / "progress"
+        self.progress_dir.mkdir(exist_ok=True)
+        
         # LLM 모델
         self.llm_models = {}
         if self.use_llm:
@@ -86,6 +90,9 @@ class CSharpContinuousLearning(CSharp24HUserLearning):
         
         # 지식 베이스
         self.knowledge_base = self._load_knowledge_base()
+        
+        # 통합 진행 상태
+        self.integrated_progress = self._load_integrated_progress()
         
     def _create_integrated_topics(self) -> List[LearningTopic]:
         """기존 커리큘럼과 LLM 학습 주제 통합"""
@@ -511,6 +518,75 @@ class CSharpContinuousLearning(CSharp24HUserLearning):
         with open(kb_file, 'w', encoding='utf-8') as f:
             json.dump(self.knowledge_base, f, indent=2, ensure_ascii=False)
             
+    def _load_integrated_progress(self) -> Dict[str, Any]:
+        """통합 진행 상태 로드"""
+        progress_file = self.progress_dir / "integrated_progress.json"
+        if progress_file.exists():
+            with open(progress_file, 'r', encoding='utf-8') as f:
+                progress = json.load(f)
+                self.logger.info(f"📚 기존 통합 학습 진행 상태를 로드했습니다.")
+                self.logger.info(f"  - 총 학습 시간: {progress.get('total_hours', 0):.1f}시간")
+                self.logger.info(f"  - 완료된 주제: {progress.get('topics_completed', 0)}개")
+                return progress
+        return {
+            "total_hours": 0,
+            "total_questions": 0,
+            "total_successful": 0,
+            "topics_completed": 0,
+            "topics_progress": {},
+            "sessions_history": [],
+            "last_session_time": None,
+            "knowledge_gained": {
+                "csharp_basics": 0,
+                "csharp_oop": 0,
+                "csharp_advanced": 0,
+                "korean_translation": 0,
+                "korean_concepts": 0,
+                "godot_architecture": 0,
+                "godot_future": 0,
+                "godot_networking": 0,
+                "godot_ai_network": 0,
+                "nakama_basics": 0,
+                "nakama_ai": 0
+            }
+        }
+        
+    def _save_integrated_progress(self):
+        """통합 진행 상태 저장"""
+        # 현재 세션 정보 추가
+        if hasattr(self, 'current_session_start'):
+            session_duration = time.time() - self.current_session_start
+            self.integrated_progress["total_hours"] += session_duration / 3600
+            
+        # 주제별 진행도 업데이트
+        for topic in self.integrated_topics:
+            if self._is_topic_completed(topic):
+                topic_key = topic.category
+                if topic_key not in self.integrated_progress["topics_progress"]:
+                    self.integrated_progress["topics_progress"][topic_key] = {
+                        "completed": 0,
+                        "total": 0,
+                        "last_studied": None
+                    }
+                self.integrated_progress["topics_progress"][topic_key]["completed"] += 1
+                self.integrated_progress["topics_progress"][topic_key]["last_studied"] = datetime.now().isoformat()
+        
+        # 완료된 총 주제 수 계산
+        self.integrated_progress["topics_completed"] = sum(
+            info["completed"] for info in self.integrated_progress["topics_progress"].values()
+        )
+        
+        self.integrated_progress["last_session_time"] = datetime.now().isoformat()
+        
+        # 파일로 저장
+        progress_file = self.progress_dir / "integrated_progress.json"
+        with open(progress_file, 'w', encoding='utf-8') as f:
+            json.dump(self.integrated_progress, f, indent=2, ensure_ascii=False)
+            
+        self.logger.info(f"💾 통합 학습 진행 상태를 저장했습니다.")
+        self.logger.info(f"  - 누적 학습 시간: {self.integrated_progress['total_hours']:.1f}시간")
+        self.logger.info(f"  - 완료된 주제: {self.integrated_progress['topics_completed']}개")
+            
     def load_llm_models(self):
         """LLM 모델 로드"""
         models_info_file = self.models_dir / "installed_models.json"
@@ -684,6 +760,11 @@ If the question involves Mirror Networking or game servers, include specific imp
             
             # 모델 호출
             start_time = time.time()
+            
+            # AI 응답 생성 시작 알림
+            self.logger.info(f"🤖 AI 응답 생성 시작: {model_name}")
+            print(f"🤖 AI 응답 생성 중... (모델: {model_name})")
+            
             response = model_pipeline(
                 full_prompt,
                 max_new_tokens=500,
@@ -692,8 +773,13 @@ If the question involves Mirror Networking or game servers, include specific imp
                 pad_token_id=model_pipeline.tokenizer.eos_token_id
             )
             
-            answer_text = response[0]['generated_text'].split("Answer:")[-1].strip()
             response_time = time.time() - start_time
+            
+            # 응답 완료 알림
+            print(f"✅ AI 응답 생성 완료! (소요 시간: {response_time:.1f}초)")
+            self.logger.info(f"AI 응답 완료: {response_time:.1f}초")
+            
+            answer_text = response[0]['generated_text'].split("Answer:")[-1].strip()
             
             return {
                 "model": model_name,
@@ -873,8 +959,28 @@ If the question involves Mirror Networking or game servers, include specific imp
                 self.qa_sessions.append(qa_session)
                 self._save_qa_session(qa_session)
                 
-            # 짧은 대기
-            await asyncio.sleep(random.uniform(2, 5))
+                # AI 답변 학습 시간 확보
+                if analysis['quality_score'] > 0.5 and answer.get('answer'):
+                    answer_length = len(answer['answer'])
+                    # 답변 길이에 따른 학습 시간 (100자당 2초, 최소 5초, 최대 30초)
+                    learning_time = max(5.0, min(30.0, answer_length / 100 * 2))
+                    
+                    self.logger.info(f"\n📖 답변 학습 중... ({learning_time:.1f}초)")
+                    print(f"📖 답변 학습 중... ({learning_time:.1f}초)")
+                    
+                    # 답변 내용 일부 표시
+                    answer_preview = answer['answer'][:200]
+                    if len(answer['answer']) > 200:
+                        print(f"💭 학습 내용: {answer_preview}...")
+                    else:
+                        print(f"💭 학습 내용: {answer_preview}")
+                    
+                    await asyncio.sleep(learning_time)
+                    print(f"✅ 학습 완료!")
+                    self.logger.info(f"답변 학습 완료")
+                
+            # 다음 질문까지 짧은 대기
+            await asyncio.sleep(random.uniform(3, 8))
             
     def _select_model_for_question(self, question: Dict[str, Any], available_models: List[str]) -> str:
         """질문에 적합한 모델 선택"""
@@ -957,9 +1063,39 @@ If the question involves Mirror Networking or game servers, include specific imp
         self.logger.info(f"🤖 AI Q&A 학습: {'활성화' if use_llm and self.use_llm else '비활성화'}")
         if self.use_llm:
             self.logger.info(f"🔧 사용 가능한 모델: {list(self.llm_models.keys())}")
+        
+        # 기존 진행 상태 표시
+        if self.integrated_progress["total_hours"] > 0:
+            self.logger.info(f"\n📊 기존 학습 진행 상태:")
+            self.logger.info(f"  - 누적 학습 시간: {self.integrated_progress['total_hours']:.1f}시간")
+            self.logger.info(f"  - 완료된 주제: {self.integrated_progress['topics_completed']}개")
+            self.logger.info(f"  - 총 질문 수: {self.integrated_progress['total_questions']}")
+            if self.integrated_progress['total_questions'] > 0:
+                success_rate = (self.integrated_progress['total_successful'] / 
+                              self.integrated_progress['total_questions'] * 100)
+                self.logger.info(f"  - 전체 성공률: {success_rate:.1f}%")
+            
+            # 5가지 핵심 주제별 진행도
+            self.logger.info(f"\n📚 5가지 핵심 주제 진행도:")
+            core_categories = {
+                "C# 프로그래밍": ["csharp_basics", "csharp_oop", "csharp_advanced"],
+                "한글 용어": ["korean_translation", "korean_concepts"],
+                "Godot 엔진": ["godot_architecture", "godot_future"],
+                "Godot 네트워킹": ["godot_networking", "godot_ai_network"],
+                "Nakama 서버": ["nakama_basics", "nakama_ai"]
+            }
+            
+            for core_name, sub_categories in core_categories.items():
+                total_progress = sum(
+                    self.integrated_progress["knowledge_gained"].get(cat, 0) 
+                    for cat in sub_categories
+                )
+                self.logger.info(f"  - {core_name}: {total_progress}개 학습")
+                
         self.logger.info(f"{'='*60}\n")
         
         self.is_learning = True
+        self.current_session_start = time.time()
         start_time = time.time()
         end_time = start_time + (hours * 3600)
         
@@ -969,6 +1105,7 @@ If the question involves Mirror Networking or game servers, include specific imp
             remaining_topics = self.integrated_topics  # 모두 완료했으면 처음부터
             
         topic_index = 0
+        save_counter = 0
         
         try:
             while time.time() < end_time and self.is_learning:
@@ -984,6 +1121,30 @@ If the question involves Mirror Networking or game servers, include specific imp
                 
                 # 다음 주제로
                 topic_index += 1
+                save_counter += 1
+                
+                # Q&A 세션 통계 업데이트
+                if self.qa_sessions:
+                    recent_qa = len([s for s in self.qa_sessions if s.timestamp > datetime.now() - timedelta(hours=1)])
+                    self.integrated_progress["total_questions"] += recent_qa
+                    # 성공한 Q&A 계산 (품질 점수 0.6 이상)
+                    successful_qa = len([s for s in self.qa_sessions 
+                                       if s.timestamp > datetime.now() - timedelta(hours=1) 
+                                       and s.analysis.get("quality_score", 0) >= 0.6])
+                    self.integrated_progress["total_successful"] += successful_qa
+                
+                # 주제별 지식 증가 추적
+                if current_topic.category in ["csharp_basics", "csharp_oop", "csharp_advanced",
+                                            "korean_translation", "korean_concepts",
+                                            "godot_architecture", "godot_future",
+                                            "godot_networking", "godot_ai_network",
+                                            "nakama_basics", "nakama_ai"]:
+                    self.integrated_progress["knowledge_gained"][current_topic.category] += 1
+                
+                # 10개 주제마다 진행 상태 저장
+                if save_counter % 10 == 0:
+                    self._save_integrated_progress()
+                    self.logger.info(f"\n💾 진행 상태 자동 저장 완료")
                 
                 # 휴식 시간
                 if topic_index % 3 == 0:  # 3개 주제마다 긴 휴식
@@ -1008,12 +1169,27 @@ If the question involves Mirror Networking or game servers, include specific imp
         finally:
             self.is_learning = False
             total_time = time.time() - start_time
+            
+            # 최종 진행 상태 저장
+            self._save_integrated_progress()
+            
             self.logger.info(f"\n{'='*60}")
             self.logger.info(f"🎉 학습 세션 종료!")
             self.logger.info(f"⏱️  총 학습 시간: {LearningConfig.format_duration(total_time)}")
             self.logger.info(f"📚 완료한 주제: {topic_index}개")
             if self.qa_sessions:
                 self.logger.info(f"🤖 Q&A 세션: {len(self.qa_sessions)}개")
+                
+            # 누적 통계 표시
+            self.logger.info(f"\n📊 누적 학습 통계:")
+            self.logger.info(f"  - 총 누적 시간: {self.integrated_progress['total_hours']:.1f}시간")
+            self.logger.info(f"  - 전체 완료 주제: {self.integrated_progress['topics_completed']}개")
+            self.logger.info(f"  - 전체 질문 수: {self.integrated_progress['total_questions']}")
+            if self.integrated_progress['total_questions'] > 0:
+                overall_success = (self.integrated_progress['total_successful'] / 
+                                 self.integrated_progress['total_questions'] * 100)
+                self.logger.info(f"  - 전체 성공률: {overall_success:.1f}%")
+            
             self.logger.info(f"{'='*60}\n")
             
             # 최종 보고서 생성

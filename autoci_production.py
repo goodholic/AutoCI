@@ -761,8 +761,34 @@ class ProductionAutoCI:
 
 async def main():
     """메인 함수"""
-    autoci = ProductionAutoCI()
-    await autoci.start()
+    autoci = None
+    try:
+        autoci = ProductionAutoCI()
+        await autoci.start()
+    except Exception as e:
+        # 로깅 시스템이 초기화되었는지 확인
+        logger = logging.getLogger("AutoCI")
+        if not logger.handlers:
+            # 초기화되지 않았다면 기본 로거 설정
+            logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+            logger = logging.getLogger("AutoCI")
+        
+        logger.critical("AutoCI 초기화 또는 실행 중 치명적 오류 발생", exc_info=True)
+        
+        # autoci 객체가 생성되었다면 종료 처리
+        if autoci and autoci.running:
+            autoci.running = False
+            autoci.shutdown_event.set()
+            # 비동기 종료 함수를 직접 호출하지 않고, 이벤트 설정으로 자연스럽게 종료되도록 유도
+            # await autoci.shutdown() 
+        
+        # 콘솔에도 에러 메시지 출력
+        print(f"치명적 오류 발생. 자세한 내용은 로그 파일을 확인하세요: {e}", file=sys.stderr)
+        
+        # 에러 발생 후 잠시 대기 (로그가 기록될 시간 확보)
+        await asyncio.sleep(1)
+        
+        sys.exit(1)
 
 
 if __name__ == "__main__":
@@ -770,6 +796,9 @@ if __name__ == "__main__":
         asyncio.run(main())
     except KeyboardInterrupt:
         print("\n\n시스템이 종료되었습니다.")
+    # main 함수 내부에서 모든 예외를 처리하므로, 최상위 레벨에서는 KeyboardInterrupt 외에 다른 예외가 거의 발생하지 않음
+    # 하지만 만약을 위해 로깅
     except Exception as e:
-        print(f"치명적 오류: {e}")
+        logging.getLogger("AutoCI").critical("예상치 못한 최상위 레벨 오류", exc_info=True)
+        print(f"예상치 못한 최상위 레벨 오류: {e}", file=sys.stderr)
         sys.exit(1)
