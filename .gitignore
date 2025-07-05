@@ -117,3 +117,10 @@ godot_ai_build/output/
 *.mat
 models/
 .fake
+
+# .gitignore
+
+# 기타 무시할 파일들...
+
+# 대용량 파일 제외
+archive/legacy_code/legacy_development/legacy_godot_native_plugin/bin/godot.ai.editor.linux
