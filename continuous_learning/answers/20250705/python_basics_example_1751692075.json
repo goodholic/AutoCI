@@ -1,0 +1,11 @@
+{
+  "question_id": "python_basics_example_1751692075",
+  "question": "Python 기초 문법을 사용하는 Python 코드 예제를 작성하고 한글로 설명해주세요.",
+  "answer": "```python\n# 1부터 100까지의 수 중 짝수만 출력하는 코드\nfor num in range(1, 101):\n    if num % 2 == 0:\n        print(num)\n```\n위의 코드는 Python 코드로, 1부터 100까지의 수를",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 145.44701504707336,
+  "timestamp": "2025-07-05T14:10:21.323948",
+  "topic": "Python 기초 문법",
+  "language": "korean"
+}

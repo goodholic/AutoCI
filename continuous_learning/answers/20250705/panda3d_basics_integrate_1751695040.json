@@ -1,0 +1,11 @@
+{
+  "question_id": "panda3d_basics_integrate_1751695040",
+  "question": "How to use Panda3D 기초 in Panda3D with Python? Provide examples.",
+  "answer": "Panda3D is a game engine developed by Disney and released under the open source MIT license. It's a powerful tool for game developers, providing a wide range of functionalities, including 3D graphics, physics, AI, and more.\n\nTo install Panda3D, follow the steps mentioned in the official documentation. After installation, you can start using Panda3D with Python.\n\nHere is a basic example of how to use Panda3D with Python:\n\n```python\nfrom direct.showbase.ShowBase import ShowBase\n\nclass MyApp(ShowBase):\n    def __init__(self):\n        ShowBase.__init__(self)\n\n        # Load",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 143.2049596309662,
+  "timestamp": "2025-07-05T14:59:43.813495",
+  "topic": "Panda3D 기초",
+  "language": "english"
+}

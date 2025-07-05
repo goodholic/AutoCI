@@ -1,22 +1,156 @@
 #!/usr/bin/env python3
 """
-AutoCI 전역 실행 스크립트
+AutoCI - AI 게임 개발 시스템
+24시간 자동 게임 개발 AI
 """
+
 import sys
 import os
+import asyncio
 from pathlib import Path
 
-# AutoCI 디렉토리 경로 찾기
-autoci_dir = Path(__file__).parent.resolve()
+# 프로젝트 경로 추가
+PROJECT_ROOT = Path("/mnt/d/AutoCI/AutoCI")
+sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / 'core_system'))
+sys.path.insert(0, str(PROJECT_ROOT / 'modules'))
+sys.path.insert(0, str(PROJECT_ROOT / 'modules_active'))
 
-# Python 경로에 추가
-sys.path.insert(0, str(autoci_dir))
+# Xlib 경고 억제
+from core.xlib_suppressor import suppress_all_xlib_warnings
+suppress_all_xlib_warnings()
 
-# 작업 디렉토리 변경
-os.chdir(autoci_dir)
+# 가상환경 활성화 체크
+def check_virtualenv():
+    """가상환경 체크 및 활성화 안내"""
+    if not hasattr(sys, 'real_prefix') and not (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
+        print("⚠️  가상환경이 활성화되지 않았습니다.")
+        print("다음 명령어로 가상환경을 활성화하세요:")
+        print("  source autoci_env/bin/activate  # Linux/WSL")
+        print("  autoci_env\\Scripts\\activate.bat  # Windows")
+        return False
+    return True
 
-# autoci.py 실행
-from autoci import main
+
+def main():
+    """메인 실행 함수"""
+    # 가상환경 체크
+    if not check_virtualenv():
+        print("\n가상환경 없이 계속 진행하시겠습니까? (y/N): ", end='')
+        if input().lower() != 'y':
+            sys.exit(1)
+    
+    # 명령줄 인자 처리
+    if len(sys.argv) > 1:
+        command = sys.argv[1].lower()
+        
+        if command == 'learn':
+            # AI 학습 모드
+            if len(sys.argv) > 2 and sys.argv[2] == 'low':
+                print("🧠 메모리 최적화 학습 모드 시작...")
+                os.system(f"python {PROJECT_ROOT}/core_system/continuous_learning_system.py --low-memory")
+            else:
+                print("🧠 통합 학습 모드 시작...")
+                os.system(f"python {PROJECT_ROOT}/core_system/continuous_learning_system.py")
+        
+        elif command == 'monitor':
+            # 모니터링 대시보드
+            print("📊 모니터링 대시보드 시작...")
+            os.system(f"python {PROJECT_ROOT}/modules/realtime_monitoring_system.py")
+        
+        elif command == 'fix':
+            # 학습 기반 엔진 개선
+            print("🔧 학습 기반 엔진 개선 시작...")
+            os.system(f"python {PROJECT_ROOT}/core_system/ai_engine_updater.py")
+        
+        elif command == 'chat':
+            # 한글 대화 모드
+            print("💬 한글 대화 모드 시작...")
+            asyncio.run(chat_mode())
+        
+        elif command == '--help' or command == '-h':
+            show_help()
+        
+        else:
+            print(f"❌ 알 수 없는 명령어: {command}")
+            show_help()
+    
+    else:
+        # 기본 실행 (대화형 모드)
+        try:
+            from core_system.autoci_panda3d_main import AutoCIPanda3DMain
+            asyncio.run(interactive_mode())
+        except ImportError as e:
+            print(f"❌ 모듈 임포트 오류: {e}")
+            print("\n필요한 패키지를 설치하세요:")
+            print("  pip install -r requirements.txt")
+            sys.exit(1)
+
+
+async def interactive_mode():
+    """대화형 모드"""
+    from core_system.autoci_panda3d_main import AutoCIPanda3DMain
+    autoci = AutoCIPanda3DMain()
+    await autoci.start()
+
+
+async def chat_mode():
+    """한글 대화 전용 모드"""
+    try:
+        from modules.korean_conversation_interface import KoreanConversationInterface
+        from modules.ai_model_integration import AIModelIntegration
+    except ImportError as e:
+        print(f"❌ 모듈 임포트 오류: {e}")
+        return
+    
+    ai_model = AIModelIntegration()
+    chat_interface = KoreanConversationInterface(ai_model)
+    
+    print("\n💬 AutoCI 한글 대화 모드")
+    print("=" * 50)
+    print("자연스러운 한국어로 대화하세요. '종료'를 입력하면 끝납니다.")
+    print("=" * 50)
+    
+    while True:
+        user_input = input("\n사용자: ")
+        if user_input.lower() in ['종료', 'exit', 'quit']:
+            print("대화를 종료합니다.")
+            break
+        
+        response = await chat_interface.process_input(user_input)
+        print(f"\nAutoCI: {response}")
+
+
+def show_help():
+    """도움말 표시"""
+    print("""
+AutoCI - AI 게임 개발 시스템 v5.0
+
+사용법:
+  autoci                    대화형 모드 시작
+  autoci learn              AI 통합 학습 시작
+  autoci learn low          메모리 최적화 학습 (8GB VRAM)
+  autoci monitor            실시간 모니터링 대시보드
+  autoci fix                학습 기반 엔진 개선
+  autoci chat               한글 대화 전용 모드
+  autoci --help             도움말 표시
+
+대화형 모드 명령어:
+  create [type] game        게임 생성 (platformer, racing, rpg, puzzle)
+  add feature [name]        기능 추가
+  modify [aspect]           게임 수정
+  open_panda3d             Panda3D 에디터 열기
+  status                    시스템 상태
+  help                      도움말
+  exit/quit/종료           종료
+
+예제:
+  autoci
+  > create platformer game  # 플랫폼 게임 생성
+  > add feature double_jump # 더블 점프 기능 추가
+  > status                  # 개발 상태 확인
+""")
+
 
 if __name__ == "__main__":
     main()

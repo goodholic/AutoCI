@@ -1,147 +1,199 @@
-#!/usr/bin/env python3
-"""
-AutoCI 터미널 UI - 하단에 명령어 인터페이스를 제공
-"""
-
-import os
-import sys
-from typing import List, Optional
+import curses
+import time
+import threading
+import queue
 from datetime import datetime
+from typing import Optional, Dict, Any, List
 
 class TerminalUI:
-    """터미널 하단에 표시되는 UI 시스템"""
-    
     def __init__(self):
-        self.commands = [
-            ("1", "🎮 새 게임 만들기", "create [type] game"),
-            ("2", "🤖 AI 제어 데모", "ai demo"),
-            ("3", "💬 한글 대화 모드", "chat"),
-            ("4", "📊 시스템 상태", "status"),
-            ("5", "🔧 게임 수정", "modify"),
-            ("6", "📚 AI 학습", "learn"),
-            ("7", "🌐 멀티플레이어", "create multiplayer"),
-            ("8", "❓ 도움말", "help"),
-            ("9", "🚪 종료", "exit"),
-        ]
-        self.quick_commands = {
-            "p": "create platformer game",
-            "r": "create racing game",
-            "z": "create puzzle game",
-            "m": "modify",
-            "s": "status",
-            "h": "help",
+        self.stdscr = None
+        self.log_window = None
+        self.status_window = None
+        self.input_window = None
+        self.header_window = None
+        self.cot_window = None # Chain of Thought (사고의 사슬) 윈도우
+
+        self.log_messages = []
+        self.status_data: Dict[str, Any] = {
+            "project_name": "없음",
+            "ai_status": "대기중",
+            "current_task": "초기화 중",
+            "progress_percent": 0,
+            "quality_score": 0,
+            "elapsed_time": "00:00:00"
         }
-    
-    def clear_screen(self):
-        """화면 지우기"""
-        os.system('cls' if os.name == 'nt' else 'clear')
-    
-    def show_header(self):
-        """상단 헤더 표시"""
-        print("╔" + "═"*78 + "╗")
-        print("║" + " "*25 + "🤖 AutoCI - AI 게임 개발 시스템" + " "*22 + "║")
-        print("║" + " "*20 + "AI가 실시간으로 Godot을 제어하여 게임을 만듭니다" + " "*11 + "║")
-        print("╚" + "═"*78 + "╝")
-    
-    def show_main_menu(self):
-        """메인 메뉴 표시"""
-        print("\n┌─ 주요 명령어 " + "─"*64 + "┐")
-        
-        # 두 열로 명령어 표시
-        for i in range(0, len(self.commands), 2):
-            left = self.commands[i]
-            right = self.commands[i+1] if i+1 < len(self.commands) else None
-            
-            left_text = f"│ [{left[0]}] {left[1]:<20}"
-            if right:
-                right_text = f"[{right[0]}] {right[1]:<20}"
-                print(f"{left_text} {right_text:>35} │")
-            else:
-                print(f"{left_text}" + " "*38 + "│")
-        
-        print("└" + "─"*78 + "┘")
-    
-    def show_quick_commands(self):
-        """빠른 명령어 표시"""
-        print("\n┌─ 빠른 명령어 " + "─"*64 + "┐")
-        print("│ ", end="")
-        for key, desc in self.quick_commands.items():
-            print(f"[{key}] {desc.split()[1][:8]:<8} ", end="")
-        print(" │")
-        print("└" + "─"*78 + "┘")
-    
-    def show_current_status(self, project_name: Optional[str] = None, ai_status: str = "대기중"):
-        """현재 상태 표시"""
-        print("\n┌─ 현재 상태 " + "─"*66 + "┐")
-        if project_name:
-            print(f"│ 🎮 현재 프로젝트: {project_name:<58} │")
-        else:
-            print(f"│ 🎮 현재 프로젝트: {'없음':<58} │")
-        print(f"│ 🤖 AI 상태: {ai_status:<62} │")
-        print(f"│ ⏰ 시간: {datetime.now().strftime('%Y-%m-%d %H:%M:%S'):<64} │")
-        print("└" + "─"*78 + "┘")
-    
-    def show_input_prompt(self) -> str:
-        """입력 프롬프트 표시"""
-        print("\n" + "─"*80)
-        return "AutoCI > "
-    
-    def show_ai_action(self, action: str):
-        """AI 액션 표시"""
-        print(f"\n🤖 AI: {action}")
-    
-    def show_progress(self, task: str, progress: int, max_progress: int = 100):
-        """진행률 표시"""
-        bar_length = 40
-        filled = int(bar_length * progress / max_progress)
-        bar = "█" * filled + "░" * (bar_length - filled)
-        print(f"\r{task}: [{bar}] {progress}/{max_progress}", end="", flush=True)
-    
-    def show_error(self, message: str):
-        """에러 메시지 표시"""
-        print(f"\n❌ 오류: {message}")
-    
-    def show_success(self, message: str):
-        """성공 메시지 표시"""
-        print(f"\n✅ {message}")
-    
-    def show_info(self, message: str):
-        """정보 메시지 표시"""
-        print(f"\nℹ️ {message}")
-    
-    def show_game_creation_ui(self):
-        """게임 생성 UI 표시"""
-        print("\n┌─ 게임 타입 선택 " + "─"*62 + "┐")
-        print("│ [1] 🏃 Platformer - 점프와 달리기가 있는 2D 플랫폼 게임" + " "*22 + "│")
-        print("│ [2] 🏎️  Racing     - 스피드를 즐기는 레이싱 게임" + " "*28 + "│")
-        print("│ [3] 🧩 Puzzle     - 머리를 쓰는 퍼즐 게임" + " "*35 + "│")
-        print("│ [4] ⚔️  RPG        - 모험과 성장이 있는 롤플레잉 게임" + " "*23 + "│")
-        print("│ [5] 🔫 FPS        - 1인칭 슈팅 게임" + " "*42 + "│")
-        print("│ [6] 🏰 Strategy   - 전략적 사고가 필요한 전략 게임" + " "*26 + "│")
-        print("└" + "─"*78 + "┘")
-    
-    def format_command_help(self, command: str, description: str) -> str:
-        """명령어 도움말 포맷"""
-        return f"  {command:<25} - {description}"
-    
-    def show_welcome_animation(self):
-        """환영 애니메이션"""
-        frames = [
-            "🤖", "🤖💭", "🤖💭🎮", "🤖💭🎮✨"
-        ]
-        import time
-        for frame in frames:
-            print(f"\r{frame} AutoCI 시작 중...", end="", flush=True)
-            time.sleep(0.3)
-        print("\r" + " "*30 + "\r", end="")
+        self.input_queue = queue.Queue()
+        self.output_queue = queue.Queue()
+        self.running = True
+        self.input_thread = None
+        self.cot_messages = []
 
+    def _input_loop(self):
+        while self.running:
+            try:
+                user_input = self.input_window.getstr().decode('utf-8')
+                self.input_queue.put(user_input)
+                self._clear_input_line()
+            except Exception:
+                # 윈도우가 닫히거나 다른 오류 발생 시 스레드 종료
+                break
 
-# 전역 인스턴스
-_ui = None
+    def _clear_input_line(self):
+        h, w = self.input_window.getmaxyx()
+        self.input_window.move(0, 0)
+        self.input_window.clrtoeol()
+        self.input_window.addstr(0, 0, "AutoCI > ")
+        self.input_window.refresh()
+
+    def _draw_header(self):
+        self.header_window.erase()
+        h, w = self.header_window.getmaxyx()
+        title = "🤖 AutoCI - AI 게임 개발 시스템 🎮"
+        subtitle = "AI가 실시간으로 Godot을 제어하여 게임을 만듭니다"
+        self.header_window.addstr(0, (w - len(title)) // 2, title, curses.A_BOLD)
+        self.header_window.addstr(1, (w - len(subtitle)) // 2, subtitle)
+        self.header_window.box()
+        self.header_window.refresh()
+
+    def _draw_status(self):
+        self.status_window.erase()
+        self.status_window.box()
+        h, w = self.status_window.getmaxyx()
+
+        self.status_window.addstr(1, 2, f"프로젝트: {self.status_data['project_name']}")
+        self.status_window.addstr(2, 2, f"AI 상태: {self.status_data['ai_status']}")
+        self.status_window.addstr(3, 2, f"현재 작업: {self.status_data['current_task']}")
+
+        # 진행률 바
+        progress_bar_len = w - 20
+        progress_filled = int(progress_bar_len * self.status_data['progress_percent'] / 100)
+        progress_bar = "█" * progress_filled + "░" * (progress_bar_len - progress_filled)
+        self.status_window.addstr(4, 2, f"진행률: [{progress_bar}] {self.status_data['progress_percent']:.1f}%")
+
+        self.status_window.addstr(5, 2, f"품질 점수: {self.status_data['quality_score']}/100")
+        self.status_window.addstr(6, 2, f"경과 시간: {self.status_data['elapsed_time']}")
+        self.status_window.refresh()
+
+    def _draw_log(self):
+        self.log_window.erase()
+        self.log_window.box()
+        h, w = self.log_window.getmaxyx()
+        self.log_window.addstr(0, 2, "로그")
+
+        display_logs = self.log_messages[-h + 2:] # 화면 크기에 맞춰 최신 로그 표시
+        for i, msg in enumerate(display_logs):
+            self.log_window.addstr(i + 1, 1, msg[:w-2]) # 윈도우 너비에 맞춰 자르기
+        self.log_window.refresh()
+
+    def _draw_cot(self):
+        self.cot_window.erase()
+        self.cot_window.box()
+        h, w = self.cot_window.getmaxyx()
+        self.cot_window.addstr(0, 2, "AI 사고 과정 (Chain of Thought)")
+
+        display_cots = self.cot_messages[-h + 2:]
+        for i, msg in enumerate(display_cots):
+            self.cot_window.addstr(i + 1, 1, msg[:w-2])
+        self.cot_window.refresh()
+
+    def _update_all_windows(self):
+        self._draw_header()
+        self._draw_status()
+        self._draw_log()
+        self._draw_cot()
+        self._clear_input_line()
+
+    def _main_loop(self, stdscr):
+        self.stdscr = stdscr
+        curses.curs_set(1) # 커서 보이게
+        self.stdscr.nodelay(True) # Non-blocking input
+
+        # 윈도우 분할
+        sh, sw = self.stdscr.getmaxyx()
+        
+        # 헤더 (3줄)
+        self.header_window = curses.newwin(3, sw, 0, 0)
+        
+        # 상태 (8줄)
+        self.status_window = curses.newwin(8, sw, 3, 0)
+        
+        # 사고 과정 (Chain of Thought) 윈도우 (로그 윈도우의 절반)
+        cot_height = (sh - 3 - 8 - 2) // 2 # 전체 높이 - 헤더 - 상태 - 입력 - 로그 제목
+        self.cot_window = curses.newwin(cot_height, sw, 3 + 8, 0)
+
+        # 로그 윈도우 (나머지 공간)
+        log_height = sh - 3 - 8 - cot_height - 2 # 전체 높이 - 헤더 - 상태 - cot - 입력
+        self.log_window = curses.newwin(log_height, sw, 3 + 8 + cot_height, 0)
+        
+        # 입력 (2줄)
+        self.input_window = curses.newwin(2, sw, sh - 2, 0)
+
+        self.input_thread = threading.Thread(target=self._input_loop)
+        self.input_thread.daemon = True
+        self.input_thread.start()
+
+        self._update_all_windows()
+
+        while self.running:
+            self._draw_log()
+            self._draw_status()
+            self._draw_cot()
+            self.stdscr.refresh()
+            time.sleep(0.1) # 100ms마다 업데이트
+
+    def start(self):
+        curses.wrapper(self._main_loop)
+
+    def stop(self):
+        self.running = False
+        if self.input_thread and self.input_thread.is_alive():
+            # 스레드 종료를 위해 입력 윈도우를 닫음
+            self.input_window.nodelay(False) # Blocking mode for getstr to allow interrupt
+            self.input_window.keypad(True)
+            curses.endwin()
+            self.input_thread.join(timeout=1)
+        
+    def add_log(self, message: str):
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        self.log_messages.append(f"[{timestamp}] {message}")
+        self._draw_log()
+
+    def update_status(self, data: Dict[str, Any]):
+        self.status_data.update(data)
+        self._draw_status()
+
+    def get_user_input(self) -> Optional[str]:
+        try:
+            return self.input_queue.get_nowait()
+        except queue.Empty:
+            return None
+
+    def add_cot_message(self, message: str):
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        self.cot_messages.append(f"[{timestamp}] {message}")
+        self._draw_cot()
+
+# Singleton instance
+_ui_instance = None
 
 def get_terminal_ui() -> TerminalUI:
-    """터미널 UI 싱글톤 인스턴스 반환"""
-    global _ui
-    if _ui is None:
-        _ui = TerminalUI()
-    return _ui
+    global _ui_instance
+    if _ui_instance is None:
+        _ui_instance = TerminalUI()
+    return _ui_instance
+
+if __name__ == "__main__":
+    ui = get_terminal_ui()
+    ui.start()
+    # 테스트를 위해 잠시 대기
+    ui.add_log("시스템 초기화 중...")
+    ui.update_status({"project_name": "TestGame", "ai_status": "작업 중", "current_task": "게임 생성", "progress_percent": 25, "quality_score": 50, "elapsed_time": "00:01:30"})
+    ui.add_cot_message("문제 분석: 플레이어 점프가 너무 낮음.")
+    ui.add_cot_message("해결 계획: Player.gd의 JUMP_VELOCITY를 증가.")
+    time.sleep(5)
+    ui.add_log("게임 생성 완료.")
+    ui.update_status({"progress_percent": 100, "current_task": "완료", "quality_score": 80})
+    ui.add_cot_message("최종 해결책: JUMP_VELOCITY = -500.0으로 변경.")
+    time.sleep(5)
+    ui.stop()

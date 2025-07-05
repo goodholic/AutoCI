@@ -50,7 +50,10 @@
       "Bash(sudo ln:*)",
       "Bash(dpkg:*)",
       "Bash(pip3 install:*)",
-      "Bash(./autoci-monitor --simple)"
+      "Bash(./autoci-monitor --simple)",
+      "Bash(true)",
+      "Bash(diff:*)",
+      "Bash(cmp:*)"
     ],
     "deny": []
   }

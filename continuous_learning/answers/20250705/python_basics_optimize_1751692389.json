@@ -1,0 +1,11 @@
+{
+  "question_id": "python_basics_optimize_1751692389",
+  "question": "How to optimize performance when using Python 기초 문법 in Python?",
+  "answer": "The main goal is to learn how to optimize performance while using Python's basic syntax. \n\nThe question is not exactly about Python's libraries, but about Python's basic syntax and how to write code that runs faster.\n\n1. Loops: Are there any other ways to replace for loops in Python?\n\n2. List comprehensions: Are they faster than traditional for loops?\n\n3. Using built-in functions: Are there any functions in Python that are faster than for loops?\n\n4. Using built-in data types: Are there any built-in data types in Python that are faster?\n\n5. Using local variables: Are local variables faster than global variables?",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 144.35692882537842,
+  "timestamp": "2025-07-05T14:15:33.587578",
+  "topic": "Python 기초 문법",
+  "language": "english"
+}

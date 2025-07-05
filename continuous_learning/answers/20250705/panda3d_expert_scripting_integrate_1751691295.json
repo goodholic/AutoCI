@@ -1,0 +1,11 @@
+{
+  "question_id": "panda3d_expert_scripting_integrate_1751691295",
+  "question": "How to use 고급 스크립팅 기술 in Panda3D with Python? Provide examples.",
+  "answer": "When using Panda3D, Python is your primary language of choice. Panda3D uses its own scripting language called PandaScript, which is derived from the Python language. You can use it to create interactive applications and games.\n\nTo use PandaScript, you will need to write scripts in Python and then run them with the Panda3D engine.\n\nHere's an example of a simple PandaScript script.\n\n```python\n# Import the necessary libraries\nfrom direct.showbase.ShowBase import ShowBase\n\n# Define a class that inherits from ShowBase\nclass MyGame(ShowBase):\n    def __init__(self):\n        #",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 143.81869339942932,
+  "timestamp": "2025-07-05T13:57:19.355940",
+  "topic": "고급 스크립팅 기술",
+  "language": "english"
+}

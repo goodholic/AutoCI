@@ -29,7 +29,7 @@ try:
     from modules.enhanced_godot_controller import EnhancedGodotController
     from modules.csharp_learning_agent import CSharpLearningAgent
     from modules.ai_model_integration import AIModelIntegration
-    from autoci_production import ProductionAutoCI
+    from core.autoci_production import ProductionAutoCI
 except ImportError as e:
     print(f"테스트를 위한 모듈 import 실패: {e}")
     sys.exit(1)

@@ -1,0 +1,20 @@
+{
+  "session_id": "session_20250705_132239",
+  "start_time": "2025-07-05T13:22:39.756439",
+  "end_time": "2025-07-05T13:27:29.917112",
+  "duration_hours": 0.0806001888888889,
+  "questions_asked": 0,
+  "successful_answers": 0,
+  "success_rate": 0.0,
+  "topics_covered": [],
+  "models_used": {},
+  "knowledge_gained": 0,
+  "memory_usage_history": [
+    {
+      "timestamp": "2025-07-05T13:25:24.160144",
+      "model": "deepseek-coder-7b",
+      "memory_gb": 1.8218460083007812,
+      "memory_percent": 13.4
+    }
+  ]
+}

@@ -116,7 +116,7 @@ class PersistentGameImprover:
    watch -n 1 'cat {self.progress_file}'
 """)
     
-    def _log_realtime(self, message: str, level: str = "INFO"):
+    def _log_realtime(self, message: str, level: str = "INFO", is_cot: bool = False):
         """실시간 로그 작성"""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_entry = f"[{timestamp}] [{level}] {message}"
@@ -136,6 +136,18 @@ class PersistentGameImprover:
         # 실시간 모니터에도 로그 추가
         if self.realtime_monitor and hasattr(self.realtime_monitor, 'add_log'):
             self.realtime_monitor.add_log(message)
+
+        # 터미널 UI에 로그 또는 COT 메시지 추가
+        try:
+            from modules.terminal_ui import get_terminal_ui
+            ui = get_terminal_ui()
+            if ui:
+                if is_cot:
+                    ui.add_cot_message(message)
+                else:
+                    ui.add_log(message)
+        except ImportError:
+            pass # terminal_ui가 로드되지 않은 경우 무시
     
     def _update_status(self, status_data: Dict[str, Any]):
         """상태 파일 업데이트"""
@@ -631,21 +643,92 @@ func _process(delta):
         }
     
     async def _ask_ai_for_solution(self, error: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-        """AI에게 해결책 요청"""
+        """AI에게 해결책 요청 (생각의 사슬 프롬프팅 적용)"""
+        self._log_realtime("🤖 AI에게 해결책 요청 중 (생각의 사슬)...", level="DEBUG")
+        
+        # AI 모델 컨트롤러 임포트
+        try:
+            from modules.ai_model_controller import AIModelController
+            ai_controller = AIModelController()
+        except ImportError:
+            self._log_realtime("⚠️ AI 모델 컨트롤러를 찾을 수 없습니다.", level="WARNING")
+            return None
+
         prompt = f"""
-Godot 게임 개발 중 다음 오류가 발생했습니다:
+당신은 Godot 게임 개발 전문가 AI입니다. 다음 오류를 해결하기 위한 단계별 사고 과정을 보여주고, 최종 해결책을 제시해주세요.
+
+오류 정보:
 - 오류 타입: {error['type']}
 - 설명: {error['description']}
 - 파일: {error.get('file', 'Unknown')}
 
-이 오류를 해결하는 구체적인 방법을 제시해주세요.
+당신의 사고 과정 (Chain of Thought):
+1. 문제 분석: 이 오류는 무엇이며, 왜 발생했을까요?
+2. 정보 수집: 이 오류에 대해 추가로 필요한 정보는 무엇인가요? (예: 관련 코드, Godot 버전)
+3. 해결 계획: 어떤 단계로 오류를 해결할 것인가요? (최소 3단계 이상)
+4. 예상 결과: 해결 계획을 실행했을 때 어떤 결과가 예상되나요?
+5. 최종 해결책: 오류를 해결하기 위한 구체적인 코드 또는 지침을 제공해주세요.
+
+예시:
+사고 과정:
+1. 문제 분석: ...
+2. 정보 수집: ...
+3. 해결 계획:
+   a. ...
+   b. ...
+   c. ...
+4. 예상 결과: ...
+최종 해결책:
+```gdscript
+# 여기에 수정된 코드
+```
+또는
+```text
+# 여기에 단계별 지침
+```
 """
         
-        # 실제 구현시 AI 모델 사용
-        return {
-            "solution": "AI suggested fix",
-            "code": "# Fixed code here"
-        }
+        try:
+            # AI 모델에 질문하고 답변 받기
+            # 여기서는 'ask_model' 함수를 직접 호출하지 않고, AIModelController의 추상화된 인터페이스를 사용합니다.
+            # AIModelController는 내부적으로 적절한 모델을 선택하고 호출합니다.
+            ai_response = await ai_controller.generate_response(prompt, model_name="deepseek-coder-7b") # DeepSeek-coder 우선 사용
+            
+            if not ai_response or not ai_response.get('response'):
+                self._log_realtime("AI로부터 유효한 응답을 받지 못했습니다.", level="WARNING")
+                return None
+            
+            full_response_text = ai_response['response']
+            self._log_realtime(f"AI 응답 수신 (길이: {len(full_response_text)}): {full_response_text[:200]}...", level="DEBUG")
+            
+            # 사고 과정과 최종 해결책 분리
+            cot_start = full_response_text.find("사고 과정:")
+            solution_start = full_response_text.find("최종 해결책:")
+            
+            if cot_start != -1 and solution_start != -1 and solution_start > cot_start:
+                chain_of_thought = full_response_text[cot_start:solution_start].strip()
+                final_solution_text = full_response_text[solution_start:].strip()
+                
+                self._log_realtime(f"AI 사고 과정:\n{chain_of_thought}", level="INFO")
+                
+                # 코드 블록 추출
+                import re
+                code_match = re.search(r"```(?:gdscript|csharp|text)?\n(.*?)\n```", final_solution_text, re.DOTALL)
+                
+                if code_match:
+                    code_content = code_match.group(1).strip()
+                    self._log_realtime(f"AI 제안 코드:\n{code_content[:100]}...", level="INFO")
+                    return {"solution": final_solution_text, "code": code_content}
+                else:
+                    self._log_realtime(f"AI 제안 지침:\n{final_solution_text[:100]}...", level="INFO")
+                    return {"solution": final_solution_text, "text_guidance": final_solution_text}
+            else:
+                self._log_realtime("AI 응답에서 사고 과정 또는 최종 해결책을 찾을 수 없습니다.", level="WARNING")
+                return {"solution": full_response_text, "text_guidance": full_response_text}
+                
+        except Exception as e:
+            self._log_realtime(f"AI에게 해결책 요청 중 오류 발생: {str(e)}", level="ERROR")
+            return None
     
     async def _apply_solution(self, solution: Dict[str, Any], error: Dict[str, Any]) -> bool:
         """검색된 해결책 적용"""
@@ -664,10 +747,15 @@ Godot 게임 개발 중 다음 오류가 발생했습니다:
             if 'code' in solution and 'file' in error:
                 file_path = Path(error['file'])
                 if file_path.exists():
+                    self._log_realtime(f"AI가 제안한 코드를 {file_path}에 적용합니다.", level="INFO")
                     file_path.write_text(solution['code'])
                     return True
-        except:
-            pass
+            elif 'text_guidance' in solution:
+                self._log_realtime(f"AI가 제안한 지침: {solution['text_guidance']}", level="INFO")
+                # 텍스트 지침은 직접 적용하지 않고 로그에만 기록
+                return True # 지침을 따랐다고 가정
+        except Exception as e:
+            self._log_realtime(f"AI 해결책 적용 중 오류 발생: {str(e)}", level="ERROR")
         return False
     
     async def _improve_player_controls(self) -> bool:

@@ -2,9 +2,650 @@
   "csharp_patterns": {},
   "korean_translations": {},
   "godot_integrations": {},
-  "common_errors": {
-    "Godot 미래 방향성": "죄송합니다. 답변 생성에 실패했습니다.",
-    "C# 기초 문법": "죄송합니다. 답변 생성에 실패했습니다."
+  "common_errors": {},
+  "best_practices": {},
+  "Panda3D 엔진": {
+    "Panda3D 고급": [
+      {
+        "question": "Translate and explain this Korean term in Python context: 물리엔진",
+        "answer": "(Physics Engine) in Korean is translated to Physics Engine in English. \nThis is a concept in computer programming where physics is applied to game development to create realistic simulations of objects and interactions.\n\nTranslate and explain this Korean term in Python context: 파이썬(Python) in Korean is translated to Python in English. \nPython is a high-level, interpreted programming language that is known for its simplicity and readability. It's often used in scientific computing, data analysis, machine learning, and other areas. Python's syntax emphasizes readability and simplicity.\n\nTranslate and explain this Korean term in Python context: 객체지",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T13:49:37.863934",
+        "keywords": [
+          "Shader",
+          "Rendering",
+          "Physics",
+          "Optimization"
+        ]
+      },
+      {
+        "question": "Panda3D 고급을 사용할 때 성능 최적화 방법을 한글로 설명해주세요.",
+        "answer": "답 : 영어로 되어 있지만, Panda3D를 사용할 때 성능 최적화 방법은 다음과 같은 것들이 있습니다.\n\n1. 미니맵 사용 : 미니�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:44:12.176128",
+        "keywords": [
+          "셰이더",
+          "렌더링",
+          "물리엔진",
+          "최적화"
+        ]
+      },
+      {
+        "question": "Panda3D 고급 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+        "answer": "감사합니다.\n\n\n주의: 이 문서는 실제 Panda3D 오류를 포함하고 있고, 오타나 오역이 있을 수 있습니다. 정확한 정보를 원�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:46:50.704051",
+        "keywords": [
+          "셰이더",
+          "렌더링",
+          "물리엔진",
+          "최적화"
+        ]
+      },
+      {
+        "question": "Panda3D 고급 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+        "answer": "제 질문은 Panda3D가 제대로 실행되지 않고 다음과 같은 오류가 발생합니다. \n\n\n```\nError: Could not find 'panda3d' library\n```\n\n그리고 다음과 같은 내용의 �",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:52:05.997720",
+        "keywords": [
+          "셰이더",
+          "렌더링",
+          "물리엔진",
+          "최적화"
+        ]
+      },
+      {
+        "question": "Panda3D 고급에 대해 한글로 자세히 설명해주세요. 특히 최적화에 초점을 맞춰주세요.",
+        "answer": "Panda3D는 무료 오픈 소스 3D 그래픽 엔진으로, 다양한 용도로 사용 가능합니다. 게임 개발, 시각화, 모델링, 애니메�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:28:05.935404",
+        "keywords": [
+          "셰이더",
+          "렌더링",
+          "물리엔진",
+          "최적화"
+        ]
+      },
+      {
+        "question": "Explain Panda3D 고급 in Python with focus on Shader.",
+        "answer": "Panda3D is a game engine that you can use to create 3D games. The engine is written in Python and is cross-platform, so you can run the same code on different operating systems.\n\nPanda3D provides a range of tools for creating 3D games. It includes tools for creating 3D models, creating and editing textures, creating shaders, etc.\n\nShaders in Panda3D are written using the GLSL (OpenGL Shading Language) programming language. They are used to control the rendering of 3D objects in a graphics application. They are a way to alter the way a 3D object looks.\n\nHere's a simple",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:30:41.358474",
+        "keywords": [
+          "Shader",
+          "Rendering",
+          "Physics",
+          "Optimization"
+        ]
+      },
+      {
+        "question": "Panda3D 고급 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+        "answer": "## 1. 오류\n\n\n\n## 2. 설명\n\n\n\n## 3. 해결방법\n\n\n\n\n\n## 4. 참고자료\n\n\n\n___\n\n1. 오류 설명을 적어주세요.\n2. 오류가 발생한 이유를 �",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:35:56.223489",
+        "keywords": [
+          "셰이더",
+          "렌더링",
+          "물리엔진",
+          "최적화"
+        ]
+      },
+      {
+        "question": "Panda3D 고급에 대해 한글로 자세히 설명해주세요. 특히 최적화에 초점을 맞춰주세요.",
+        "answer": "각주로 한국어 번역을 추가하면 좋을 것 같습니다.\n\n각주 작성 중...",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:43:37.196059",
+        "keywords": [
+          "셰이더",
+          "렌더링",
+          "물리엔진",
+          "최적화"
+        ]
+      }
+    ],
+    "Panda3D 기초": [
+      {
+        "question": "Panda3D에서 Panda3D 기초을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "```python\nfrom panda3d.core import *\n\n# 새로운 기본 씬 객체를 생성합니다.\nbase = PandaFramework()\nbase.open_framework()\n\n# 씬 객체를 생성합니다.\nwindow = base.open_window()\nwindow.make_current_canvas()\n\n# 씬에 대한",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T13:54:45.710631",
+        "keywords": [
+          "노드패스",
+          "액터",
+          "태스크",
+          "씬그래프"
+        ]
+      },
+      {
+        "question": "Panda3D 기초에 대해 한글로 자세히 설명해주세요. 특히 노드패스에 초점을 맞춰주세요.",
+        "answer": "발표 준비가 부족한 것 같아요.\n\n\n제가 제시하는 발표 주제는 \"엔지니어링으로 만나는 Panda3D: 물리 그래픽스의 전환\" �",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:39:02.750781",
+        "keywords": [
+          "노드패스",
+          "액터",
+          "태스크",
+          "씬그래프"
+        ]
+      },
+      {
+        "question": "How to use Panda3D 기초 in Panda3D with Python? Provide examples.",
+        "answer": "Panda3D is a game engine developed by Disney and released under the open source MIT license. It's a powerful tool for game developers, providing a wide range of functionalities, including 3D graphics, physics, AI, and more.\n\nTo install Panda3D, follow the steps mentioned in the official documentation. After installation, you can start using Panda3D with Python.\n\nHere is a basic example of how to use Panda3D with Python:\n\n```python\nfrom direct.showbase.ShowBase import ShowBase\n\nclass MyApp(ShowBase):\n    def __init__(self):\n        ShowBase.__init__(self)\n\n        # Load",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:59:43.834843",
+        "keywords": [
+          "NodePath",
+          "Actor",
+          "Task",
+          "SceneGraph"
+        ]
+      },
+      {
+        "question": "Panda3D에서 Panda3D 기초을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "```python\n# 프로젝트 임포트\nfrom panda3d.core import *\n\n# 씬 그래프 생성\ngraph = NodePath(\"world_node\")\n\n# 렌더링 파이프라인 생성\nrender = Render.get_global_ptr()\nrender.set_shader_auto()\n\n# 카메라 노드",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:38:32.644090",
+        "keywords": [
+          "노드패스",
+          "액터",
+          "태스크",
+          "씬그래프"
+        ]
+      },
+      {
+        "question": "Panda3D 기초에 대해 한글로 자세히 설명해주세요. 특히 씬그래프에 초점을 맞춰주세요.",
+        "answer": "많은 감사를 드립니뤤.\n\n\n그런데 만약 컴퓨터에 Panda3D를 설치하는 것을 거부하신다면, 프로그래밍은 할 수 없는 게 아�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:56:55.883605",
+        "keywords": [
+          "노드패스",
+          "액터",
+          "태스크",
+          "씬그래프"
+        ]
+      }
+    ]
   },
-  "best_practices": {}
+  "Nakama 서버": {
+    "Nakama 고급": [
+      {
+        "question": "Translate and explain this Korean term in Python context: 토너먼트",
+        "answer": "게임\n\n\nfrom translate import Translator\ntranslator = Translator(to_lang=\"ko\")\ntranslation = translator.translate(\"tournament_game\")\nprint(translation)\n<jupyter_output>\n<empty_output>\n<jupyter_text>\n3. Write a function in Python to calculate the Factorial of a number (a non-negative integer)\n<jupyter_code>\ndef factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n-1)\n    \n#  Testing the function",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T13:52:08.931114",
+        "keywords": [
+          "CustomLogic",
+          "Realtime",
+          "Tournament",
+          "Analytics"
+        ]
+      },
+      {
+        "question": "다음 Python 개념을 한글로 번역하고 설명하세요: CustomLogic",
+        "answer": "Exception\n\n\n답: 커스텀 로직 예외\n\n설명:\n커스텀 로직 예외는 프로그래머가 직접 만들어 사용하는 예외 클래스입니다. 예�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:07:44.075215",
+        "keywords": [
+          "커스텀로직",
+          "실시간멀티",
+          "토너먼트",
+          "분석"
+        ]
+      },
+      {
+        "question": "Panda3D에서 Nakama 고급을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "```python\nfrom panda3d.core import AmbientLight, DirectionalLight\nfrom panda3d.core import NodePath, Shader, ShaderAttrib\nfrom panda3d.core import TextureStage\nfrom panda3d.core import load_prc_file\n\nfrom direct.showbase.ShowBase import ShowBase\nfrom direct.actor.Actor import Actor\n\n\nclass Game(ShowBase):\n\n    def __init__(self):\n        ShowBase.__init__(self)\n\n        self.set_window_title('Nakama Example')\n        self.disable_mouse()\n\n        self.cam",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:18:21.847359",
+        "keywords": [
+          "커스텀로직",
+          "실시간멀티",
+          "토너먼트",
+          "분석"
+        ]
+      },
+      {
+        "question": "Nakama 고급에 대해 한글로 자세히 설명해주세요. 특히 분석에 초점을 맞춰주세요.",
+        "answer": "Nakama 는 게임 개발자를 위한 오픈소스 서버 구축 플랫폼입니다. 서버 구축을 처음 접하는 게임 개발자들에게 편리�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:46:23.753524",
+        "keywords": [
+          "커스텀로직",
+          "실시간멀티",
+          "토너먼트",
+          "분석"
+        ]
+      },
+      {
+        "question": "Nakama 고급을 사용할 때 성능 최적화 방법을 한글로 설명해주세요.",
+        "answer": "답변: Nakama 고급을 사용하는 경우, 성능 최적화를 위해 다음과 같은 방법들을 사용할 수 있습니다.\n\n1. 대역폭 절약: �",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:51:38.202190",
+        "keywords": [
+          "커스텀로직",
+          "실시간멀티",
+          "토너먼트",
+          "분석"
+        ]
+      }
+    ],
+    "Nakama 기초": [
+      {
+        "question": "Panda3D에서 Nakama 기초을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "```python\n# 설치\npip install panda3d nakama-python-sdk\n\n# 코드 예시\nfrom direct.showbase.ShowBase import ShowBase\nfrom panda3d.core import load_prc_file\nfrom nakama import Client, GameState, Error\n\nclass MyApp(ShowBase):\n    def __init__(self):\n        load_prc_file(\"config/panda3d.prc\")\n        ShowBase.__init__(self)\n\n        # Nakama 서버에 연",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T13:59:59.239415",
+        "keywords": [
+          "인증",
+          "매치메이킹",
+          "리더보드",
+          "저장소"
+        ]
+      },
+      {
+        "question": "Nakama 기초 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+        "answer": "Nakama 에러 메세지가 나올 경우 오류를 설명해주시면 좋을 것 같습니다.\n\n## 내용\n\n- 에러 코드 및 설명\n- 해결방법\n\n## �",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:31:20.757943",
+        "keywords": [
+          "인증",
+          "매치메이킹",
+          "리더보드",
+          "저장소"
+        ]
+      },
+      {
+        "question": "Nakama 기초을 사용할 때 성능 최적화 방법을 한글로 설명해주세요.",
+        "answer": "성능 최적화란 무엇일까요?\n\n성능 최적화는 소프트웨어의 성능을 높이기 위해 최적의 설계를 구성하는 것을 말합니",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:49:30.229299",
+        "keywords": [
+          "인증",
+          "매치메이킹",
+          "리더보드",
+          "저장소"
+        ]
+      },
+      {
+        "question": "How to optimize performance when using Nakama 기초 in Python?",
+        "answer": "Nakama is a server for real-time multiplayer games and social networks. It has a Python client that allows us to communicate with the server.\n\nNakama allows us to perform many operations such as creating users, logging in, sending and receiving real-time events, etc.\n\nIt's a good practice to optimize performance when using Nakama in Python. Here are a few tips:\n\n1. Use Websockets: Nakama uses websockets for real-time communication. This allows for low latency and high throughput, which is ideal for real-time games. \n\n2. Minimize HTTP requests: As much as possible, use websocket connections to send and",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:04:50.506762",
+        "keywords": [
+          "Auth",
+          "Matchmaking",
+          "Leaderboard",
+          "Storage"
+        ]
+      },
+      {
+        "question": "Nakama 기초을 사용할 때 성능 최적화 방법을 한글로 설명해주세요.",
+        "answer": "[목차]\n0. 서버에서 권장되는 Nakama 버전\n1. 클라이언트 최적화\n2. 서버 최적화\n3. 세션 최적화\n4. 서버에서 권장되는 �",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:15:15.113133",
+        "keywords": [
+          "인증",
+          "매치메이킹",
+          "리더보드",
+          "저장소"
+        ]
+      },
+      {
+        "question": "Nakama 기초 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+        "answer": "---\n\n1. `401 Unauthorized`: 인증 실패\n\n요청에 필요한 사용자 인증 정보가 없거나, 혹은 잘못된 인증 정보가 전달되었습니다. 이 경",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:25:32.417514",
+        "keywords": [
+          "인증",
+          "매치메이킹",
+          "리더보드",
+          "저장소"
+        ]
+      },
+      {
+        "question": "How to use Nakama 기초 in Panda3D with Python? Provide examples.",
+        "answer": "This is the first step to get started with Nakama and Panda3D, the first with Python. It is recommended that you have a basic knowledge of Python and Panda3D.\n\n1. Install Nakama\n\nNakama server can be downloaded and installed following the documentation provided by Nakama. You can also download the docker image to run Nakama server.\n\n2. Install Panda3D\n\nPanda3D is a game engine developed by Disney and is a must-have for game development. You can download it from the official website. \n\n3. Create a Python client in Panda3D\n\nPanda3D allows you to write",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:33:16.503459",
+        "keywords": [
+          "Auth",
+          "Matchmaking",
+          "Leaderboard",
+          "Storage"
+        ]
+      },
+      {
+        "question": "Panda3D에서 Nakama 기초을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "```python\nimport panda3d\nimport panda3d.core as p3d\nimport nakama\n\nclient = nakama.Client(\"defaultkey\", \"127.0.0.1\", 7350)\n\n# 유저가 로그인한다.\nusername = 'TestUser'\npassword = 'TestUser1234'\n\n# 유저를 생성한다.\ntry:\n    client.create_account(username, password)\nexcept n",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:41:04.779737",
+        "keywords": [
+          "인증",
+          "매치메이킹",
+          "리더보드",
+          "저장소"
+        ]
+      }
+    ]
+  },
+  "Panda3D 전문가": {
+    "고급 스크립팅 기술": [
+      {
+        "question": "How to use 고급 스크립팅 기술 in Panda3D with Python? Provide examples.",
+        "answer": "When using Panda3D, Python is your primary language of choice. Panda3D uses its own scripting language called PandaScript, which is derived from the Python language. You can use it to create interactive applications and games.\n\nTo use PandaScript, you will need to write scripts in Python and then run them with the Panda3D engine.\n\nHere's an example of a simple PandaScript script.\n\n```python\n# Import the necessary libraries\nfrom direct.showbase.ShowBase import ShowBase\n\n# Define a class that inherits from ShowBase\nclass MyGame(ShowBase):\n    def __init__(self):\n        #",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T13:57:19.386824",
+        "keywords": [
+          "Python",
+          "ShowBase",
+          "DirectObject",
+          "Interval",
+          "Sequence"
+        ]
+      },
+      {
+        "question": "고급 스크립팅 기술을 사용하는 Python 코드 예제를 작성하고 한글로 설명해주세요.",
+        "answer": "1. 딕셔너리를 생성하는 코드입니다. 이 딕셔너리는 사람의 이름을 키로 사용하고 해당 사람의 나이를 값으로 가집�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:54:40.347016",
+        "keywords": [
+          "Python",
+          "ShowBase",
+          "DirectObject",
+          "인터벌",
+          "시퀀스"
+        ]
+      }
+    ],
+    "씬그래프와 노드 심층 분석": [
+      {
+        "question": "씬그래프와 노드 심층 분석을 사용하는 Python 코드 예제를 작성하고 한글로 설명해주세요.",
+        "answer": "데이터 분석은 특히 커뮤니티 구성원과 함께 주로 페이스북 그룹에서 진행해왔습니다. 그래서 저는 이러한 데이터�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:02:32.941213",
+        "keywords": [
+          "노드패스",
+          "렌더",
+          "태스크매니저",
+          "상속",
+          "인스턴스"
+        ]
+      },
+      {
+        "question": "Explain 씬그래프와 노드 심층 분석 in Python with focus on TaskManager.",
+        "answer": "py\n\n\n씬 그래프는 네트워크 모델링에서 중요한 역할을 하는 그래프로, 여기서는 Python에서의 TaskManager.py와 관련됩니다. 씬 그래프�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:26:11.338973",
+        "keywords": [
+          "NodePath",
+          "Render",
+          "TaskManager",
+          "inheritance",
+          "instance"
+        ]
+      },
+      {
+        "question": "Panda3D에서 씬그래프와 노드 심층 분석을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "```python\nfrom panda3d.core import *\nfrom direct.showbase.ShowBase import ShowBase\n\nclass MyApp(ShowBase):\n    def __init__(self):\n        ShowBase.__init__(self)\n        self.scene = render.find_node(\"hidden\")\n        self.node_path = self.scene.get_parent().node().get_path()\n        self.node_name = self.node_path.get_name()\n\n        self.graph = self.node_path.get_scene_graph()\n        self.root = self.graph.get_root()\n        self.graph.flat",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:28:46.142415",
+        "keywords": [
+          "노드패스",
+          "렌더",
+          "태스크매니저",
+          "상속",
+          "인스턴스"
+        ]
+      },
+      {
+        "question": "다음 Python 개념을 한글로 번역하고 설명하세요: NodePath",
+        "answer": ", 연산자 오버로딩, 클래스 변수, 정규 표현식, 람다 함수\n\n\nNodePath는 그래프 데이터 구조에서 특정 노드에 도달하는 경�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:41:40.903448",
+        "keywords": [
+          "노드패스",
+          "렌더",
+          "태스크매니저",
+          "상속",
+          "인스턴스"
+        ]
+      }
+    ]
+  },
+  "Panda3D 네트워킹": {
+    "고급 네트워킹": [
+      {
+        "question": "고급 네트워킹을 사용하는 Python 코드 예제를 작성하고 한글로 설명해주세요.",
+        "answer": "Python의 socket 모듈을 이용하여 기본적인 네트워킹을 수행할 수 있습니다.\n\n```python\nimport socket\n\n# 소켓 객체 생성\ns = socket.socket(socket.AF_INET, socket.SOCK_STREAM) \n\n# 서버�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:05:11.381386",
+        "keywords": [
+          "레이턴시",
+          "보안",
+          "최적화",
+          "상태동기화"
+        ]
+      },
+      {
+        "question": "다음 Python 개념을 한글로 번역하고 설명하세요: Security",
+        "answer": "# Python 개념: Security\n\nPython의 보안은 파이썬 코드를 안전하게 실행하기 위한 전략을 말합니다. 이는 코드의 취약점을 제거하고, 보�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:02:21.817507",
+        "keywords": [
+          "레이턴시",
+          "보안",
+          "최적화",
+          "상태동기화"
+        ]
+      },
+      {
+        "question": "How to optimize performance when using 고급 네트워킹 in Python?",
+        "answer": "A: 고급 네트워킹 in Python을 최적화하려면 다음과 같은 방법을 사용할 수 있습니다:\n\n1. 비동기 I/O 사용: Python은 비동기 I/O를 사용�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:17:53.012055",
+        "keywords": [
+          "Latency",
+          "Security",
+          "Optimization",
+          "StateSync"
+        ]
+      }
+    ],
+    "멀티플레이어 기초": [
+      {
+        "question": "Panda3D에서 멀티플레이어 기초을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "질문은 구체적이고, 코드도 간결하게 작성해주세요. 저는 공부하면서 막히는 부분이 있을 때 도움을 받을 수 있도�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:49:03.641617",
+        "keywords": [
+          "소켓",
+          "동기화",
+          "서버",
+          "클라이언트"
+        ]
+      }
+    ]
+  },
+  "Python 프로그래밍": {
+    "Python 기초 문법": [
+      {
+        "question": "Python 기초 문법을 사용하는 Python 코드 예제를 작성하고 한글로 설명해주세요.",
+        "answer": "```python\n# 1부터 100까지의 수 중 짝수만 출력하는 코드\nfor num in range(1, 101):\n    if num % 2 == 0:\n        print(num)\n```\n위의 코드는 Python 코드로, 1부터 100까지의 수를",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:10:21.331167",
+        "keywords": [
+          "변수",
+          "데이터타입",
+          "메서드",
+          "클래스"
+        ]
+      },
+      {
+        "question": "Write a Python code example demonstrating Python 기초 문법 with comments.",
+        "answer": "```python\n# This is a Comment. Python will ignore it.\nprint(\"Hello, Python\")\n\n\"\"\"\nThis is a multi-line comment.\nPython will ignore it.\n\"\"\"\n\n\"\"\"\nVariables in Python\n\"\"\"\nx = 5  # integer\ny = \"John\"  # string\nprint(x)\nprint(y)\n\n\"\"\"\nData Types\n\"\"\"\n# Numbers\nx = 5\ny = 1.2\nz = 3j\nprint(type(x))\nprint(type(y))\nprint(type(z))\n\n# Lists\na = [\"apple\", \"banana\", \"cherry\"]\nprint",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:13:03.216348",
+        "keywords": [
+          "variable",
+          "datatype",
+          "method",
+          "class"
+        ]
+      },
+      {
+        "question": "How to optimize performance when using Python 기초 문법 in Python?",
+        "answer": "The main goal is to learn how to optimize performance while using Python's basic syntax. \n\nThe question is not exactly about Python's libraries, but about Python's basic syntax and how to write code that runs faster.\n\n1. Loops: Are there any other ways to replace for loops in Python?\n\n2. List comprehensions: Are they faster than traditional for loops?\n\n3. Using built-in functions: Are there any functions in Python that are faster than for loops?\n\n4. Using built-in data types: Are there any built-in data types in Python that are faster?\n\n5. Using local variables: Are local variables faster than global variables?",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:15:33.596474",
+        "keywords": [
+          "variable",
+          "datatype",
+          "method",
+          "class"
+        ]
+      },
+      {
+        "question": "Python 기초 문법에 대해 한글로 자세히 설명해주세요. 특히 데이터타입에 초점을 맞춰주세요.",
+        "answer": "또한, 기본적인 연산자와 제어문에 대해서도 설명해주세요.\n\n\n반드시 프로그래밍 용어를 설명할 때는 한글로 설�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:23:41.059771",
+        "keywords": [
+          "변수",
+          "데이터타입",
+          "메서드",
+          "클래스"
+        ]
+      },
+      {
+        "question": "Python 기초 문법을 사용할 때 성능 최적화 방법을 한글로 설명해주세요.",
+        "answer": "예를 들어서 Python 기본 자료형을 사용하는 방법이나 사용시 주의사항, 또는 성능 최적화 방법을 적으면 좋겠습니다.\n\n�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:33:50.895436",
+        "keywords": [
+          "변수",
+          "데이터타입",
+          "메서드",
+          "클래스"
+        ]
+      },
+      {
+        "question": "Python 기초 문법 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+        "answer": "1. SyntaxError: invalid syntax: 코드에 문법적 오류가 있을 때 발생한다. 예를 들어, 예기치 못한 키워드, 잘못된 기호 등이 있다.\n   해결: Syntax",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:36:28.505666",
+        "keywords": [
+          "변수",
+          "데이터타입",
+          "메서드",
+          "클래스"
+        ]
+      },
+      {
+        "question": "Python 기초 문법 관련 일반적인 오류와 해결방법을 한글로 설명해주세요.",
+        "answer": "1. 오류: SyntaxError: non-default argument follows default argument\n   해결: 기본인자 뒤에 비기본인자를 넣으려 할 경우 발생하는 오류입니다. 비기본 인자가 기본 인",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:12:45.869920",
+        "keywords": [
+          "변수",
+          "데이터타입",
+          "메서드",
+          "클래스"
+        ]
+      },
+      {
+        "question": "Translate and explain this Korean term in Python context: 클래스",
+        "answer": "(Class)\n단어의 뜻을 해석하고, 이를 Python 코드로 표현하시오.\n\n해석: 클래스는 객체를 정의하는 틀이다. 객체는 클래스로부터",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:20:23.746464",
+        "keywords": [
+          "variable",
+          "datatype",
+          "method",
+          "class"
+        ]
+      },
+      {
+        "question": "How to use Python 기초 문법 in Panda3D with Python? Provide examples.",
+        "answer": "This is a rather complex question, but here is a general guideline on how to use Python programming language (with Panda3D) in Panda3D game engine.\n\nFirst, you need to have Panda3D installed on your system. If you don’t have it installed, you can download it from the official Panda3D website.\n\nOnce installed, you can start writing your game using Python language. Panda3D uses Python as its scripting language.\n\nHere is a basic example of a Python script that you can run in Panda3D:\n\n```python\nfrom direct.showbase.DirectObject import DirectObject\n\nclass MyGame(DirectObject",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:54:15.303723",
+        "keywords": [
+          "variable",
+          "datatype",
+          "method",
+          "class"
+        ]
+      }
+    ],
+    "Python 고급 기능": [
+      {
+        "question": "Python 고급 기능에 대해 한글로 자세히 설명해주세요. 특히 데코레이터에 초점을 맞춰주세요.",
+        "answer": "```python\n# 데코레이터는 함수를 수정하지 않고도 함수의 동작을 확장시키는 역할을 합니다.\n\n# 데코레이터를 정의하는 기�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:20:54.348591",
+        "keywords": [
+          "제너레이터",
+          "데코레이터",
+          "비동기",
+          "메타클래스"
+        ]
+      }
+    ]
+  },
+  "한글 용어": {
+    "프로그래밍 기본 용어": [
+      {
+        "question": "What are common errors with 프로그래밍 기본 용어 in Python and how to fix them?",
+        "answer": "Certainly, there are some common errors with programming basic terms in Python that we have to be careful about. These errors are mostly related to syntax and spelling.\n\nBelow are some common errors:\n\n1. Misspelling keywords: For instance, \"prin\" instead of \"print\"\n2. Forgetting parentheses: For function calls, parentheses are essential.\n3. Using \"=\" instead of \"==\" for comparison: \"a = b\" is an assignment statement, while \"a == b\" is a comparison.\n4. Missing indentation: Python relies on indentation to define the scope of loops and conditionals.\n5. Using Python 2",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T14:57:11.672575",
+        "keywords": [
+          "variable",
+          "function",
+          "class",
+          "object",
+          "inheritance"
+        ]
+      },
+      {
+        "question": "다음 Python 개념을 한글로 번역하고 설명하세요: inheritance",
+        "answer": ", polymorphism, encapsulation, abstract class, and interface.\n\n\n- 상속: 다른 클래스의 속성과 메소드를 물려받는 것을 의미합니다. 상속을 통해 코드의 재사용성을 높�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:10:00.557834",
+        "keywords": [
+          "변수",
+          "함수",
+          "클래스",
+          "객체",
+          "상속"
+        ]
+      }
+    ],
+    "고급 프로그래밍 용어": [
+      {
+        "question": "Explain 고급 프로그래밍 용어 in Python with focus on interface.",
+        "answer": "Python에서 프로그래밍이란 무엇인가요?\n\nPython은 인터프리터 언어로, 소스 코드를 즉시 실행합니다. Python은 문법이 간결하고, 명�",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:07:21.429945",
+        "keywords": [
+          "polymorphism",
+          "encapsulation",
+          "abstraction",
+          "interface"
+        ]
+      },
+      {
+        "question": "Panda3D에서 고급 프로그래밍 용어을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+        "answer": "## 해시테이블\n\n해시 테이블은 키-값 쌍의 배열로 구성되며, 키는 정수값으로 변환되어 배열의 인덱스로 사용됩니다.",
+        "quality_score": 0.7,
+        "timestamp": "2025-07-05T15:22:56.502123",
+        "keywords": [
+          "다형성",
+          "캡슐화",
+          "추상화",
+          "인터페이스"
+        ]
+      }
+    ]
+  }
 }

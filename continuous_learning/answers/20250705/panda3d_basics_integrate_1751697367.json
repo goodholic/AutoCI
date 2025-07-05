@@ -1,0 +1,11 @@
+{
+  "question_id": "panda3d_basics_integrate_1751697367",
+  "question": "Panda3D에서 Panda3D 기초을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+  "answer": "```python\n# 프로젝트 임포트\nfrom panda3d.core import *\n\n# 씬 그래프 생성\ngraph = NodePath(\"world_node\")\n\n# 렌더링 파이프라인 생성\nrender = Render.get_global_ptr()\nrender.set_shader_auto()\n\n# 카메라 노드",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 145.53855752944946,
+  "timestamp": "2025-07-05T15:38:32.636238",
+  "topic": "Panda3D 기초",
+  "language": "korean"
+}

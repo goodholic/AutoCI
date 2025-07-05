@@ -1,0 +1,35 @@
+{
+  "session_id": "session_20250705_134512",
+  "start_time": "2025-07-05T13:45:12.259159",
+  "end_time": "2025-07-05T15:59:01.424652",
+  "duration_hours": 2.2303237505555553,
+  "questions_asked": 50,
+  "successful_answers": 0,
+  "success_rate": 0.0,
+  "topics_covered": [
+    "panda3d_advanced",
+    "nakama_advanced",
+    "panda3d_basics",
+    "panda3d_expert_scripting",
+    "nakama_basics",
+    "panda3d_expert_nodes",
+    "panda3d_networking_advanced",
+    "python_basics",
+    "python_advanced",
+    "korean_terms_basic",
+    "korean_terms_advanced",
+    "panda3d_networking_basic"
+  ],
+  "models_used": {
+    "deepseek-coder-7b": 50
+  },
+  "knowledge_gained": 50,
+  "memory_usage_history": [
+    {
+      "timestamp": "2025-07-05T13:47:07.832967",
+      "model": "deepseek-coder-7b",
+      "memory_gb": 1.632171630859375,
+      "memory_percent": 12.2
+    }
+  ]
+}

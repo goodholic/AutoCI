@@ -21,6 +21,13 @@ try:
     import torch
 except ImportError:
     torch = None  # Handle missing torch gracefully
+
+try:
+    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+except ImportError:
+    AutoModelForCausalLM = None
+    AutoTokenizer = None
+    BitsAndBytesConfig = None
     
     # Mock torch for development
     class MockTorch:
@@ -47,6 +54,7 @@ except ImportError:
 
 class ModelType(Enum):
     """지원하는 AI 모델 타입"""
+    DEEPSEEK_CODER_7B = "DeepSeek-Coder-6.7B"
     QWEN_32B = "Qwen2.5-Coder-32B"
     CODELLAMA_13B = "CodeLlama-13B"
     LLAMA_8B = "Llama-3.1-8B"
@@ -71,9 +79,19 @@ class AIModelIntegration:
         self.tokenizer = None
         self.model_type = None
         self.device = self._get_device()
+        self._initialized = False
         
         # 모델 설정
         self.model_configs = {
+            ModelType.DEEPSEEK_CODER_7B: ModelConfig(
+                name="deepseek-coder-7b",
+                model_id="deepseek-ai/deepseek-coder-6.7b-instruct",
+                memory_required=14,  # RTX 2080 최적화, bfloat16 사용 시
+                max_tokens=16384,
+                temperature=0.6,
+                quantization="bfloat16",
+                device_map="auto"
+            ),
             ModelType.QWEN_32B: ModelConfig(
                 name="Qwen2.5-Coder-32B",
                 model_id="Qwen/Qwen2.5-Coder-32B-Instruct",
@@ -102,22 +120,23 @@ class AIModelIntegration:
         
         # 코드 생성 전문 프롬프트
         self.system_prompts = {
-            "game_dev": """You are an expert game developer AI assistant specializing in Godot Engine and C#.
+            "game_dev": """You are an expert game developer AI assistant specializing in Panda3D Engine and Python.
 Your role is to:
-1. Generate high-quality, production-ready game code
-2. Follow Godot best practices and C# conventions
+1. Generate high-quality, production-ready game code for 2.5D/3D games
+2. Follow Panda3D best practices and Python conventions
 3. Optimize for performance and maintainability
 4. Include appropriate comments in Korean
-5. Handle edge cases and errors gracefully""",
+5. Handle edge cases and errors gracefully
+6. Integrate Socket.IO for networking capabilities""",
             
-            "code_review": """You are a senior code reviewer specializing in game development.
+            "code_review": """You are a senior code reviewer specializing in Panda3D game development.
 Analyze the provided code for:
 1. Performance bottlenecks
 2. Memory leaks
 3. Security vulnerabilities
 4. Code style violations
-5. Godot-specific anti-patterns
-Provide specific, actionable feedback.""",
+5. Panda3D-specific anti-patterns
+Provide specific, actionable feedback in Korean.""",
             
             "bug_fix": """You are a debugging expert for game development.
 Your task is to:
@@ -127,17 +146,18 @@ Your task is to:
 4. Add appropriate error handling
 5. Document the fix clearly""",
             
-            "optimization": """You are a performance optimization specialist.
+            "optimization": """You are a performance optimization specialist for Panda3D.
 Focus on:
-1. Reducing draw calls and physics calculations
-2. Optimizing memory usage
-3. Improving frame rates
-4. Efficient resource loading
-5. Godot-specific optimizations"""
+1. Reducing draw calls and physics calculations in Panda3D
+2. Optimizing memory usage for Python applications
+3. Improving frame rates in 2.5D/3D games
+4. Efficient resource loading and texture management
+5. Panda3D-specific optimizations (LOD, culling, instancing)
+6. Python performance optimization techniques"""
         }
         
-        # 모델 초기화
-        self.initialize_model()
+        # 싱글톤에서는 초기화를 지연시킴
+        # self.initialize_model() 제거
     
     def _get_device(self) -> str:
         """사용 가능한 디바이스 확인"""
@@ -167,12 +187,17 @@ Focus on:
             
             self.logger.info(f"사용 가능 메모리: {total_memory:.1f}GB (RAM: {available_memory:.1f}GB, GPU: {gpu_memory:.1f}GB)")
             
-            # 메모리에 따른 모델 선택
-            if total_memory >= 32:
+            # 메모리에 따른 모델 선택 - DeepSeek-Coder 우선
+            # RTX 2080 8GB 환경에 최적화
+            if gpu_memory >= 6 and total_memory >= 14:
+                # DeepSeek-Coder는 RTX 2080에 최적화됨
+                return ModelType.DEEPSEEK_CODER_7B
+            elif total_memory >= 32:
                 return ModelType.QWEN_32B
             elif total_memory >= 16:
                 return ModelType.CODELLAMA_13B
             else:
+                # 메모리가 부족하면 Llama-3.1-8B 사용
                 return ModelType.LLAMA_8B
                 
         except Exception as e:
@@ -181,6 +206,9 @@ Focus on:
     
     def initialize_model(self):
         """모델 초기화"""
+        if self._initialized:
+            return  # 이미 초기화된 경우 스킵
+            
         self.model_type = self.select_model_based_on_memory()
         config = self.model_configs[self.model_type]
         
@@ -204,6 +232,8 @@ Focus on:
         except Exception as e:
             self.logger.error(f"모델 초기화 실패: {e}")
             self._initialize_dummy_model(config)
+        
+        self._initialized = True
     
     def _initialize_dummy_model(self, config: ModelConfig):
         """개발/테스트용 더미 모델"""
@@ -212,8 +242,12 @@ Focus on:
         self.tokenizer = DummyTokenizer()
     
     async def generate_code(self, prompt: str, context: Dict[str, Any], 
-                          task_type: str = "game_dev") -> Dict[str, Any]:
+                          task_type: str = "game_dev", max_length: int = 200) -> Dict[str, Any]:
         """AI를 사용한 코드 생성"""
+        # 첫 사용 시 초기화
+        if not self._initialized:
+            self.initialize_model()
+            
         try:
             # 시스템 프롬프트 선택
             system_prompt = self.system_prompts.get(task_type, self.system_prompts["game_dev"])
@@ -450,6 +484,10 @@ func _process(delta):
     
     async def analyze_code(self, code: str, analysis_type: str = "comprehensive") -> Dict[str, Any]:
         """코드 분석"""
+        # 첫 사용 시 초기화
+        if not self._initialized:
+            self.initialize_model()
+            
         prompt = f"""Analyze the following code for {analysis_type} review:
 
 ```
@@ -508,6 +546,13 @@ Provide detailed analysis including:
                     analysis[current_section].append(line[1:].strip())
         
         return analysis
+
+    def is_model_loaded(self):
+        """모델이 로드되었는지 여부 반환"""
+        # 첫 사용 시 초기화
+        if not self._initialized:
+            self.initialize_model()
+        return True
 
 
 class DummyModel:
@@ -648,6 +693,51 @@ This implementation includes:
 
 You can customize this further based on your specific needs."""
 
+    def _load_local_model(self, model_path: Path, config: ModelConfig):
+        """로컬에 저장된 모델 로드"""
+        if not AutoModelForCausalLM or not AutoTokenizer:
+            self.logger.warning("Transformers library not available, using dummy model")
+            self._dummy_init()
+            return
+            
+        try:
+            self.logger.info(f"Loading model from {model_path}")
+            
+            # Quantization config for RTX 2080 optimization
+            if BitsAndBytesConfig and self.device == "cuda":
+                quantization_config = BitsAndBytesConfig(
+                    load_in_8bit=False,
+                    load_in_4bit=True,
+                    bnb_4bit_compute_dtype=torch.bfloat16 if torch else None,
+                    bnb_4bit_use_double_quant=True,
+                    bnb_4bit_quant_type="nf4"
+                )
+            else:
+                quantization_config = None
+            
+            # Load tokenizer
+            self.tokenizer = AutoTokenizer.from_pretrained(
+                str(model_path),
+                trust_remote_code=True
+            )
+            
+            # Load model
+            self.model = AutoModelForCausalLM.from_pretrained(
+                str(model_path),
+                quantization_config=quantization_config,
+                device_map="auto" if self.device == "cuda" else None,
+                torch_dtype=torch.bfloat16 if torch and self.device == "cuda" else None,
+                trust_remote_code=True
+            )
+            
+            self._initialized = True
+            self.logger.info(f"✅ Model loaded successfully: {config.name}")
+            
+        except Exception as e:
+            self.logger.error(f"Failed to load model: {e}")
+            self.logger.info("Falling back to dummy model")
+            self._dummy_init()
+
 
 class DummyTokenizer:
     """더미 토크나이저"""
@@ -677,5 +767,8 @@ def get_ai_integration() -> AIModelIntegration:
     """AI 통합 싱글톤 인스턴스 반환"""
     global _ai_integration
     if _ai_integration is None:
+        logging.getLogger(__name__).info("🤖 AI 모델 싱글톤 생성")
         _ai_integration = AIModelIntegration()
+    else:
+        logging.getLogger(__name__).debug("♻️  AI 모델 싱글톤 재사용")
     return _ai_integration

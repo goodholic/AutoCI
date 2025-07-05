@@ -3,7 +3,14 @@
 import asyncio
 import json
 from typing import List, Dict, Any
-from googlesearch import search
+try:
+    from googlesearch import search
+except ImportError:
+    try:
+        from googlesearch_python import search
+    except ImportError:
+        search = None
+        print("⚠️ Google 검색 기능을 사용할 수 없습니다")
 import requests
 from bs4 import BeautifulSoup
 
@@ -54,12 +61,12 @@ class IntelligentInformationGatherer:
                     print(f"URL {url} 처리 중 오류 발생: {e}")
         return code_snippets
 
-    async def scrape_godot_docs(self, url: str) -> List[Dict[str, Any]]:
+    async def scrape_panda3d_docs(self, url: str) -> List[Dict[str, Any]]:
         """
-        Godot 공식 문서에서 정보를 스크래핑합니다.
+        Panda3D 공식 문서에서 정보를 스크래핑합니다.
 
         Args:
-            url: 스크래핑할 Godot 문서 URL
+            url: 스크래핑할 Panda3D 문서 URL
 
         Returns:
             스크래핑된 정보 리스트
@@ -70,7 +77,7 @@ class IntelligentInformationGatherer:
             
             docs_data = []
             # This is a simplified example. A real implementation would need to be
-            # more robust to handle the specific structure of the Godot documentation.
+            # more robust to handle the specific structure of the Panda3D documentation.
             title = soup.find('h1').get_text() if soup.find('h1') else "Untitled"
             paragraphs = soup.find_all('p')
             for p in paragraphs:
@@ -81,17 +88,17 @@ class IntelligentInformationGatherer:
                 })
             return docs_data
         except Exception as e:
-            print(f"Godot 문서 스크래핑 중 오류 발생: {e}")
+            print(f"Panda3D 문서 스크래핑 중 오류 발생: {e}")
             return []
 
-    async def gather_and_process_csharp_code(self) -> None:
+    async def gather_and_process_python_code(self) -> None:
         """
-        C# 코드 관련 정보를 수집하고 처리합니다.
+        Python 코드 관련 정보를 수집하고 처리합니다.
         """
         queries = [
-            "C# Godot best practices",
-            "C# design patterns examples",
-            "C# performance optimization tips"
+            "Python Panda3D best practices",
+            "Python game development patterns",
+            "Panda3D performance optimization tips"
         ]
         
         all_code_data = []
@@ -99,24 +106,24 @@ class IntelligentInformationGatherer:
             results = await self.search_web_for_code(query)
             all_code_data.extend(results)
 
-        with open("collected_csharp_code.json", "w", encoding="utf-8") as f:
+        with open("collected_python_code.json", "w", encoding="utf-8") as f:
             json.dump(all_code_data, f, indent=2, ensure_ascii=False)
 
-    async def gather_and_process_godot_docs(self) -> None:
+    async def gather_and_process_panda3d_docs(self) -> None:
         """
-        Godot 문서를 수집하고 처리합니다.
+        Panda3D 문서를 수집하고 처리합니다.
         """
         urls = [
-            "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scenes_and_nodes.html",
-            "https://docs.godotengine.org/en/stable/getting_started/step_by_step/scripting_continued.html",
+            "https://docs.panda3d.org/1.10/python/programming/scene-graph/index",
+            "https://docs.panda3d.org/1.10/python/programming/render-to-texture",
         ]
         
         all_docs_data = []
         for url in urls:
-            results = await self.scrape_godot_docs(url)
+            results = await self.scrape_panda3d_docs(url)
             all_docs_data.extend(results)
 
-        with open("collected_godot_docs.json", "w", encoding="utf-8") as f:
+        with open("collected_panda3d_docs.json", "w", encoding="utf-8") as f:
             json.dump(all_docs_data, f, indent=2, ensure_ascii=False)
 
 # Singleton instance
@@ -134,8 +141,8 @@ def get_information_gatherer() -> IntelligentInformationGatherer:
 if __name__ == "__main__":
     async def main():
         gatherer = get_information_gatherer()
-        await gatherer.gather_and_process_csharp_code()
-        await gatherer.gather_and_process_godot_docs()
-        print("C# code and Godot docs gathering and processing complete.")
+        await gatherer.gather_and_process_python_code()
+        await gatherer.gather_and_process_panda3d_docs()
+        print("Python code and Panda3D docs gathering and processing complete.")
 
     asyncio.run(main())

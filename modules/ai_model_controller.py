@@ -1,15 +1,3 @@
-"""
-AI 모델 완전 제어 시스템 - 응답 품질 관리자
-우리가 AI 모델의 조종권을 완전히 갖기 위한 핵심 시스템
-
-주요 제어 기능:
-1. 응답 품질 실시간 검증 및 자동 재시도
-2. 모델별 커스텀 프롬프트 및 파라미터 완전 제어
-3. 금지된 응답 패턴 자동 차단
-4. 우리 기준에 맞는 답변만 허용
-5. 상세한 품질 로깅 및 통계 분석
-"""
-
 import json
 import re
 import time
@@ -17,6 +5,7 @@ from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 from datetime import datetime
 import logging
+import asyncio # asyncio 임포트 추가
 
 logger = logging.getLogger(__name__)
 
@@ -82,10 +71,11 @@ class AIModelController:
                 max_attempts=3,
                 quality_threshold=0.7,
                 custom_prompts={
-                    "system": "You are an expert C# and Godot developer. Always provide detailed, practical answers in Korean with code examples.",
-                    "code_request": "Write clean, well-commented C# code. Explain each part in Korean.",
+                    "system": "You are an expert Panda3D and Python developer. Always provide detailed, practical answers in Korean with code examples.",
+                    "code_request": "Write clean, well-commented Python code for Panda3D. Explain each part in Korean.",
                     "korean_terms": "Provide accurate Korean translations for programming terms with examples.",
-                    "quality_enforcer": "You MUST provide complete, working examples. Never say 'I don't know' or 'I'm not sure'."
+                    "quality_enforcer": "You MUST provide complete, working examples. Never say 'I don't know' or 'I'm not sure'.",
+                    "panda3d_expert": "Focus on Panda3D-specific best practices, 2.5D/3D game development, and performance optimization."
                 },
                 parameter_overrides={
                     "temperature": 0.6,  # 더 일관된 응답
@@ -115,9 +105,10 @@ class AIModelController:
                 max_attempts=3,
                 quality_threshold=0.75,
                 custom_prompts={
-                    "system": "You are a code generation expert. Provide production-ready code with Korean explanations.",
-                    "code_request": "Generate optimized, well-structured code with detailed comments in Korean.",
-                    "quality_enforcer": "Always provide complete, runnable code examples."
+                    "system": "You are a code generation expert for Panda3D and Python. Provide production-ready code with Korean explanations.",
+                    "code_request": "Generate optimized, well-structured Panda3D code with detailed comments in Korean.",
+                    "quality_enforcer": "Always provide complete, runnable code examples.",
+                    "panda3d_focus": "Focus on Panda3D engine features, rendering pipeline, and game mechanics."
                 },
                 parameter_overrides={
                     "temperature": 0.5,
@@ -131,9 +122,10 @@ class AIModelController:
                 max_attempts=2,
                 quality_threshold=0.8,
                 custom_prompts={
-                    "system": "You are an advanced coding assistant specializing in C#, Godot, and game development.",
+                    "system": "You are an advanced coding assistant specializing in Python, Panda3D, and game development.",
                     "korean_mode": "한국어로 질문받으면 반드시 한국어로 답변하세요. 코드는 영어로, 설명은 한국어로.",
-                    "quality_enforcer": "Provide expert-level, detailed solutions. Never give incomplete answers."
+                    "quality_enforcer": "Provide expert-level, detailed solutions. Never give incomplete answers.",
+                    "panda3d_expert": "Expert in Panda3D engine, 2.5D/3D game development, Socket.IO networking, and AI integration."
                 },
                 parameter_overrides={
                     "temperature": 0.55,
@@ -391,6 +383,64 @@ class AIModelController:
             "generated_at": datetime.now().isoformat()
         }
     
+    async def generate_response(self, prompt: str, model_name: str = "deepseek-coder-7b", question_type: str = "general", language: str = "korean") -> Dict[str, Any]:
+        """
+        AI 모델로부터 응답을 생성하고 품질을 관리합니다.
+        실제 모델 호출은 여기에 통합되거나, 외부 API를 통해 이루어집니다.
+        현재는 시뮬레이션 응답을 반환합니다.
+        """
+        model_control = self.model_controls.get(model_name)
+        if not model_control:
+            logger.warning(f"알 수 없는 모델: {model_name}. 기본 설정으로 진행합니다.")
+            model_control = ModelControl(model_name, 2, 0.5, {}, {})
+
+        question = {
+            "id": f"q_{datetime.now().timestamp()}",
+            "type": question_type,
+            "language": language,
+            "prompt": prompt
+        }
+
+        for attempt in range(1, model_control.max_attempts + 1):
+            logger.info(f"모델 {model_name} 호출 시도 {attempt}/{model_control.max_attempts}")
+
+            # 모델별 커스텀 프롬프트 적용
+            full_prompt = self.get_custom_prompt(model_name, question_type) + "\n" + prompt
+            
+            # 모델별 파라미터 오버라이드 적용
+            params = self.get_parameter_overrides(model_name)
+            
+            # 실제 모델 호출 로직 (현재는 시뮬레이션)
+            # 여기에 실제 LLM API 호출 코드가 들어갑니다.
+            # 예: response_text = await call_llm_api(full_prompt, model_name, params)
+            
+            # 시뮬레이션 응답
+            if "코드" in prompt or "code" in prompt:
+                response_text = f"```csharp\n// {model_name}이(가) 생성한 코드 (시도 {attempt})\npublic class Example {{ public void Method() {{ /* ... */ }} }}\n```\n\n이것은 {model_name} 모델이 {attempt}번째 시도에서 생성한 코드입니다. 요청하신 내용에 대한 설명입니다."
+            elif "한글" in prompt or "korean" in prompt:
+                response_text = f"안녕하세요! {model_name} 모델입니다. {attempt}번째 시도에서 한국어로 답변드립니다. 요청하신 내용에 대한 자세한 설명입니다."
+            else:
+                response_text = f"이것은 {model_name} 모델이 {attempt}번째 시도에서 생성한 응답입니다. 요청하신 내용에 대한 답변입니다."
+            
+            # 응답 품질 평가
+            quality = self.evaluate_response_quality(question, response_text, model_name)
+            self.log_response_quality(question, response_text, quality, model_name)
+
+            if quality.is_acceptable:
+                logger.info(f"✅ 모델 {model_name} 응답 품질 통과 (점수: {quality.score:.2f})")
+                return {"response": response_text, "quality": quality.score, "model": model_name}
+            else:
+                logger.warning(f"❌ 모델 {model_name} 응답 품질 실패 (점수: {quality.score:.2f}) - 문제점: {', '.join(quality.issues)}")
+                if attempt < model_control.max_attempts:
+                    logger.info("재시도합니다...")
+                    await asyncio.sleep(1) # 재시도 전 잠시 대기
+                else:
+                    logger.error(f"⚠️ {model_control.max_attempts}회 시도 후에도 품질 기준 미달. 최신 응답 반환.")
+                    return {"response": response_text, "quality": quality.score, "model": model_name, "issues": quality.issues}
+        
+        # 모든 시도 실패 시 마지막 응답 반환 (도달하지 않아야 함)
+        return {"response": "응답 생성에 실패했습니다.", "quality": 0.0, "model": model_name, "issues": ["응답 생성 실패"]}
+
     def force_quality_response(self, question: Dict[str, Any], model_name: str, max_attempts: int = 5) -> Tuple[str, ResponseQuality]:
         """품질 기준을 만족할 때까지 강제로 재시도"""
         logger.info(f"🎯 품질 응답 강제 실행: {model_name}")
@@ -466,4 +516,4 @@ class AIModelController:
         status["total_models_controlled"] = len(self.model_controls)
         status["control_message"] = "🎯 우리가 AI 모델의 완전한 조종권을 갖고 있습니다!"
         
-        return status 
+        return status

@@ -24,7 +24,7 @@ from realtime_24h_monitor import Realtime24HMonitor
 from self_evolution_system import SelfEvolutionSystem
 from realtime_learning_integrator import RealtimeLearningIntegrator
 from development_experience_collector import DevelopmentExperienceCollector
-from autoci_monitor_client import AutoCIMonitorClient
+from core.autoci_monitor_client import AutoCIMonitorClient
 from ai_model_controller import AIModelController
 from progressive_learning_manager import ProgressiveLearningManager
 

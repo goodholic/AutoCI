@@ -1,0 +1,309 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "legacy", "legacy", "{871BE218-8F83-E3CD-0B70-B1CC1745EA7C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "legacy_godot_nakama", "legacy_godot_nakama", "{98039567-0F2E-56CD-FCFC-70A1A4F088D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "godot_modified", "godot_modified", "{9A1F8045-A549-02A4-7180-297C5DF3DDCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "godot-source", "godot-source", "{B2AD68DB-6ECF-455B-2864-BC98383C57DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{464FC048-34F1-699A-EAA9-7CEA63355006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mono", "mono", "{A3474E69-3DD5-5E43-9ACD-D4A75B35B0C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "editor", "editor", "{0CDD5617-D0AB-7B91-EBC8-9FD0F3072C82}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Godot.NET.Sdk", "Godot.NET.Sdk", "{933957FC-36A4-49AB-FD70-9784B7C7EA91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.NET.Sdk", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.NET.Sdk\Godot.NET.Sdk.csproj", "{BE7B8288-47EE-3EA3-BB65-DC426E505B4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.SourceGenerators\Godot.SourceGenerators.csproj", "{4C6064B3-2C8C-ABF6-8A56-30A6BD41DD8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators.Sample", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.SourceGenerators.Sample\Godot.SourceGenerators.Sample.csproj", "{1F41DD60-A783-3B03-9D26-83C13BD2AE37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators.Tests", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.SourceGenerators.Tests\Godot.SourceGenerators.Tests.csproj", "{C0399313-3945-3823-9DA8-BE3BD7F6B703}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GodotTools", "GodotTools", "{9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools\GodotTools.csproj", "{4AA0A6F1-50D8-227C-815C-2E14BE87CA22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.BuildLogger", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools.BuildLogger\GodotTools.BuildLogger.csproj", "{9894DEA1-2523-12F1-6F95-716D05F02DEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.Core", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools.Core\GodotTools.Core.csproj", "{B418C75E-2BDD-C62F-D424-B6A119DFCEFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.IdeMessaging", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools.IdeMessaging\GodotTools.IdeMessaging.csproj", "{8B925D56-630B-99ED-F3F6-DFD70A86AC6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.IdeMessaging.CLI", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools.IdeMessaging.CLI\GodotTools.IdeMessaging.CLI.csproj", "{C4C92812-A1D9-F8FB-BA01-A8C2801B6678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.OpenVisualStudio", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools.OpenVisualStudio\GodotTools.OpenVisualStudio.csproj", "{66DF71C0-D6EC-00E4-0583-AB6DCB1C3737}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.ProjectEditor", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools.ProjectEditor\GodotTools.ProjectEditor.csproj", "{82833AD7-7049-2899-96EA-3A2FF27DA46A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.Shared", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\editor\GodotTools\GodotTools.Shared\GodotTools.Shared.csproj", "{2983DC6E-A75A-EAF6-61EA-D2E9B1171D21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glue", "glue", "{29E0191E-C8D9-0A41-D088-E4AD51BEA48B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GodotSharp", "GodotSharp", "{E1286B56-F599-3052-F7C4-56E0BA8BACAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators.Internal", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\glue\GodotSharp\Godot.SourceGenerators.Internal\Godot.SourceGenerators.Internal.csproj", "{E7771789-B2CA-068F-06B7-4B69414A52EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotPlugins", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\glue\GodotSharp\GodotPlugins\GodotPlugins.csproj", "{566763B5-330D-08D8-D959-E0253185C5D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotSharp", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\glue\GodotSharp\GodotSharp\GodotSharp.csproj", "{B5BE724E-A861-2CCB-B46D-3B2192F77840}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotSharpEditor", "legacy\legacy_godot_nakama\godot_modified\godot-source\modules\mono\glue\GodotSharp\GodotSharpEditor\GodotSharpEditor.csproj", "{4F445041-E755-26DD-BBBC-062C93B87A2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "legacy_development", "legacy_development", "{2DDDC7B1-3B20-3C57-BE32-4F4BE48A61DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "legacy_godot_nakama", "legacy_godot_nakama", "{29038C35-7E4B-DF05-03A8-7FDDEF3D08DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "godot_ai_build", "godot_ai_build", "{F445957C-FEE2-1088-937C-343476384531}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "godot-source", "godot-source", "{9920B549-3811-E211-3BE7-47EA2A8AD7AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules", "modules", "{F3F05B7F-44A0-07D3-3E1D-019EC5D5E2C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mono", "mono", "{304B000C-1E5D-600F-B9B7-329DEEBA88C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "editor", "editor", "{D59F7060-955C-19AD-455F-B72C986F302A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Godot.NET.Sdk", "Godot.NET.Sdk", "{F6FE3E22-E20C-446C-0EF3-08E1E63224DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.NET.Sdk", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.NET.Sdk\Godot.NET.Sdk.csproj", "{61F78579-2D18-843A-279B-76ED34A31153}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.SourceGenerators\Godot.SourceGenerators.csproj", "{1744B65A-F141-639F-D372-5F0448F10099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators.Sample", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.SourceGenerators.Sample\Godot.SourceGenerators.Sample.csproj", "{28765F75-DF45-E1CD-CA67-233569C2A87D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators.Tests", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\Godot.NET.Sdk\Godot.SourceGenerators.Tests\Godot.SourceGenerators.Tests.csproj", "{D292D170-AEBE-7A9E-B860-DDF6051FD5AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GodotTools", "GodotTools", "{AA928D51-F51F-BDAC-796D-26ED38AC8BE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools\GodotTools.csproj", "{BBDEBD7E-6ED2-226C-E0AC-56362A42A8FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.BuildLogger", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools.BuildLogger\GodotTools.BuildLogger.csproj", "{AE464C88-E7F9-655D-7DE8-8B38CE9356B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.Core", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools.Core\GodotTools.Core.csproj", "{B1314D6B-DA11-B8C3-351D-1EAF34CC5FE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.IdeMessaging", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools.IdeMessaging\GodotTools.IdeMessaging.csproj", "{5E2D7A7C-A111-0B82-73C2-9BD6B0357CF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.IdeMessaging.CLI", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools.IdeMessaging.CLI\GodotTools.IdeMessaging.CLI.csproj", "{2FA0294A-DDAC-096E-7394-9D7335637A43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.OpenVisualStudio", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools.OpenVisualStudio\GodotTools.OpenVisualStudio.csproj", "{2E9E63CE-B304-A5BE-B473-7A4A2F323636}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.ProjectEditor", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools.ProjectEditor\GodotTools.ProjectEditor.csproj", "{3130AB6D-0F88-460C-723A-45586FFE2606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotTools.Shared", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\editor\GodotTools\GodotTools.Shared\GodotTools.Shared.csproj", "{11C13CEC-78EB-3E48-7E45-87FD51A66ACD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glue", "glue", "{A2261275-9150-842F-1C2A-0977B63AF1C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GodotSharp", "GodotSharp", "{AFA2BECC-0354-7A9E-8D57-A5142DEDD6FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Godot.SourceGenerators.Internal", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\glue\GodotSharp\Godot.SourceGenerators.Internal\Godot.SourceGenerators.Internal.csproj", "{231BD1E8-3AC4-1F72-D050-EC37753FBE2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotPlugins", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\glue\GodotSharp\GodotPlugins\GodotPlugins.csproj", "{26DC7B8A-4022-FE32-7D77-BD5F9AE8B095}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotSharp", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\glue\GodotSharp\GodotSharp\GodotSharp.csproj", "{D6B9C02A-7E7B-F21B-F699-3B7AC1ADE500}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotSharpEditor", "legacy\legacy_development\legacy_godot_nakama\godot_ai_build\godot-source\modules\mono\glue\GodotSharp\GodotSharpEditor\GodotSharpEditor.csproj", "{B83E5282-590A-48C1-ACFF-EBDD1A60615E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE7B8288-47EE-3EA3-BB65-DC426E505B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7B8288-47EE-3EA3-BB65-DC426E505B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7B8288-47EE-3EA3-BB65-DC426E505B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7B8288-47EE-3EA3-BB65-DC426E505B4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C6064B3-2C8C-ABF6-8A56-30A6BD41DD8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C6064B3-2C8C-ABF6-8A56-30A6BD41DD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C6064B3-2C8C-ABF6-8A56-30A6BD41DD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C6064B3-2C8C-ABF6-8A56-30A6BD41DD8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F41DD60-A783-3B03-9D26-83C13BD2AE37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F41DD60-A783-3B03-9D26-83C13BD2AE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F41DD60-A783-3B03-9D26-83C13BD2AE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F41DD60-A783-3B03-9D26-83C13BD2AE37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0399313-3945-3823-9DA8-BE3BD7F6B703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0399313-3945-3823-9DA8-BE3BD7F6B703}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0399313-3945-3823-9DA8-BE3BD7F6B703}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0399313-3945-3823-9DA8-BE3BD7F6B703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AA0A6F1-50D8-227C-815C-2E14BE87CA22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AA0A6F1-50D8-227C-815C-2E14BE87CA22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AA0A6F1-50D8-227C-815C-2E14BE87CA22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AA0A6F1-50D8-227C-815C-2E14BE87CA22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9894DEA1-2523-12F1-6F95-716D05F02DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9894DEA1-2523-12F1-6F95-716D05F02DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9894DEA1-2523-12F1-6F95-716D05F02DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9894DEA1-2523-12F1-6F95-716D05F02DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B418C75E-2BDD-C62F-D424-B6A119DFCEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B418C75E-2BDD-C62F-D424-B6A119DFCEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B418C75E-2BDD-C62F-D424-B6A119DFCEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B418C75E-2BDD-C62F-D424-B6A119DFCEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B925D56-630B-99ED-F3F6-DFD70A86AC6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B925D56-630B-99ED-F3F6-DFD70A86AC6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B925D56-630B-99ED-F3F6-DFD70A86AC6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B925D56-630B-99ED-F3F6-DFD70A86AC6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4C92812-A1D9-F8FB-BA01-A8C2801B6678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4C92812-A1D9-F8FB-BA01-A8C2801B6678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4C92812-A1D9-F8FB-BA01-A8C2801B6678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4C92812-A1D9-F8FB-BA01-A8C2801B6678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66DF71C0-D6EC-00E4-0583-AB6DCB1C3737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66DF71C0-D6EC-00E4-0583-AB6DCB1C3737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66DF71C0-D6EC-00E4-0583-AB6DCB1C3737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66DF71C0-D6EC-00E4-0583-AB6DCB1C3737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82833AD7-7049-2899-96EA-3A2FF27DA46A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82833AD7-7049-2899-96EA-3A2FF27DA46A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82833AD7-7049-2899-96EA-3A2FF27DA46A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82833AD7-7049-2899-96EA-3A2FF27DA46A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2983DC6E-A75A-EAF6-61EA-D2E9B1171D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2983DC6E-A75A-EAF6-61EA-D2E9B1171D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2983DC6E-A75A-EAF6-61EA-D2E9B1171D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2983DC6E-A75A-EAF6-61EA-D2E9B1171D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7771789-B2CA-068F-06B7-4B69414A52EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7771789-B2CA-068F-06B7-4B69414A52EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7771789-B2CA-068F-06B7-4B69414A52EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7771789-B2CA-068F-06B7-4B69414A52EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{566763B5-330D-08D8-D959-E0253185C5D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566763B5-330D-08D8-D959-E0253185C5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566763B5-330D-08D8-D959-E0253185C5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566763B5-330D-08D8-D959-E0253185C5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5BE724E-A861-2CCB-B46D-3B2192F77840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5BE724E-A861-2CCB-B46D-3B2192F77840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5BE724E-A861-2CCB-B46D-3B2192F77840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5BE724E-A861-2CCB-B46D-3B2192F77840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F445041-E755-26DD-BBBC-062C93B87A2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F445041-E755-26DD-BBBC-062C93B87A2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F445041-E755-26DD-BBBC-062C93B87A2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F445041-E755-26DD-BBBC-062C93B87A2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F78579-2D18-843A-279B-76ED34A31153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F78579-2D18-843A-279B-76ED34A31153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F78579-2D18-843A-279B-76ED34A31153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F78579-2D18-843A-279B-76ED34A31153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1744B65A-F141-639F-D372-5F0448F10099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1744B65A-F141-639F-D372-5F0448F10099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1744B65A-F141-639F-D372-5F0448F10099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1744B65A-F141-639F-D372-5F0448F10099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28765F75-DF45-E1CD-CA67-233569C2A87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28765F75-DF45-E1CD-CA67-233569C2A87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28765F75-DF45-E1CD-CA67-233569C2A87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28765F75-DF45-E1CD-CA67-233569C2A87D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D292D170-AEBE-7A9E-B860-DDF6051FD5AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D292D170-AEBE-7A9E-B860-DDF6051FD5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D292D170-AEBE-7A9E-B860-DDF6051FD5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D292D170-AEBE-7A9E-B860-DDF6051FD5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBDEBD7E-6ED2-226C-E0AC-56362A42A8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBDEBD7E-6ED2-226C-E0AC-56362A42A8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBDEBD7E-6ED2-226C-E0AC-56362A42A8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBDEBD7E-6ED2-226C-E0AC-56362A42A8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE464C88-E7F9-655D-7DE8-8B38CE9356B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE464C88-E7F9-655D-7DE8-8B38CE9356B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE464C88-E7F9-655D-7DE8-8B38CE9356B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE464C88-E7F9-655D-7DE8-8B38CE9356B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1314D6B-DA11-B8C3-351D-1EAF34CC5FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1314D6B-DA11-B8C3-351D-1EAF34CC5FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1314D6B-DA11-B8C3-351D-1EAF34CC5FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1314D6B-DA11-B8C3-351D-1EAF34CC5FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E2D7A7C-A111-0B82-73C2-9BD6B0357CF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E2D7A7C-A111-0B82-73C2-9BD6B0357CF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E2D7A7C-A111-0B82-73C2-9BD6B0357CF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E2D7A7C-A111-0B82-73C2-9BD6B0357CF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FA0294A-DDAC-096E-7394-9D7335637A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FA0294A-DDAC-096E-7394-9D7335637A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FA0294A-DDAC-096E-7394-9D7335637A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FA0294A-DDAC-096E-7394-9D7335637A43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9E63CE-B304-A5BE-B473-7A4A2F323636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9E63CE-B304-A5BE-B473-7A4A2F323636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9E63CE-B304-A5BE-B473-7A4A2F323636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9E63CE-B304-A5BE-B473-7A4A2F323636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3130AB6D-0F88-460C-723A-45586FFE2606}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3130AB6D-0F88-460C-723A-45586FFE2606}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3130AB6D-0F88-460C-723A-45586FFE2606}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3130AB6D-0F88-460C-723A-45586FFE2606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11C13CEC-78EB-3E48-7E45-87FD51A66ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11C13CEC-78EB-3E48-7E45-87FD51A66ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11C13CEC-78EB-3E48-7E45-87FD51A66ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11C13CEC-78EB-3E48-7E45-87FD51A66ACD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{231BD1E8-3AC4-1F72-D050-EC37753FBE2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{231BD1E8-3AC4-1F72-D050-EC37753FBE2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{231BD1E8-3AC4-1F72-D050-EC37753FBE2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{231BD1E8-3AC4-1F72-D050-EC37753FBE2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26DC7B8A-4022-FE32-7D77-BD5F9AE8B095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26DC7B8A-4022-FE32-7D77-BD5F9AE8B095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26DC7B8A-4022-FE32-7D77-BD5F9AE8B095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26DC7B8A-4022-FE32-7D77-BD5F9AE8B095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B9C02A-7E7B-F21B-F699-3B7AC1ADE500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B9C02A-7E7B-F21B-F699-3B7AC1ADE500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B9C02A-7E7B-F21B-F699-3B7AC1ADE500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B9C02A-7E7B-F21B-F699-3B7AC1ADE500}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B83E5282-590A-48C1-ACFF-EBDD1A60615E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B83E5282-590A-48C1-ACFF-EBDD1A60615E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B83E5282-590A-48C1-ACFF-EBDD1A60615E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B83E5282-590A-48C1-ACFF-EBDD1A60615E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{98039567-0F2E-56CD-FCFC-70A1A4F088D7} = {871BE218-8F83-E3CD-0B70-B1CC1745EA7C}
+		{9A1F8045-A549-02A4-7180-297C5DF3DDCA} = {98039567-0F2E-56CD-FCFC-70A1A4F088D7}
+		{B2AD68DB-6ECF-455B-2864-BC98383C57DB} = {9A1F8045-A549-02A4-7180-297C5DF3DDCA}
+		{464FC048-34F1-699A-EAA9-7CEA63355006} = {B2AD68DB-6ECF-455B-2864-BC98383C57DB}
+		{A3474E69-3DD5-5E43-9ACD-D4A75B35B0C8} = {464FC048-34F1-699A-EAA9-7CEA63355006}
+		{0CDD5617-D0AB-7B91-EBC8-9FD0F3072C82} = {A3474E69-3DD5-5E43-9ACD-D4A75B35B0C8}
+		{933957FC-36A4-49AB-FD70-9784B7C7EA91} = {0CDD5617-D0AB-7B91-EBC8-9FD0F3072C82}
+		{BE7B8288-47EE-3EA3-BB65-DC426E505B4F} = {933957FC-36A4-49AB-FD70-9784B7C7EA91}
+		{4C6064B3-2C8C-ABF6-8A56-30A6BD41DD8B} = {933957FC-36A4-49AB-FD70-9784B7C7EA91}
+		{1F41DD60-A783-3B03-9D26-83C13BD2AE37} = {933957FC-36A4-49AB-FD70-9784B7C7EA91}
+		{C0399313-3945-3823-9DA8-BE3BD7F6B703} = {933957FC-36A4-49AB-FD70-9784B7C7EA91}
+		{9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F} = {0CDD5617-D0AB-7B91-EBC8-9FD0F3072C82}
+		{4AA0A6F1-50D8-227C-815C-2E14BE87CA22} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{9894DEA1-2523-12F1-6F95-716D05F02DEE} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{B418C75E-2BDD-C62F-D424-B6A119DFCEFD} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{8B925D56-630B-99ED-F3F6-DFD70A86AC6B} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{C4C92812-A1D9-F8FB-BA01-A8C2801B6678} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{66DF71C0-D6EC-00E4-0583-AB6DCB1C3737} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{82833AD7-7049-2899-96EA-3A2FF27DA46A} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{2983DC6E-A75A-EAF6-61EA-D2E9B1171D21} = {9BCC768B-ED0D-D9D2-47A0-C526F4E3FE9F}
+		{29E0191E-C8D9-0A41-D088-E4AD51BEA48B} = {A3474E69-3DD5-5E43-9ACD-D4A75B35B0C8}
+		{E1286B56-F599-3052-F7C4-56E0BA8BACAF} = {29E0191E-C8D9-0A41-D088-E4AD51BEA48B}
+		{E7771789-B2CA-068F-06B7-4B69414A52EF} = {E1286B56-F599-3052-F7C4-56E0BA8BACAF}
+		{566763B5-330D-08D8-D959-E0253185C5D0} = {E1286B56-F599-3052-F7C4-56E0BA8BACAF}
+		{B5BE724E-A861-2CCB-B46D-3B2192F77840} = {E1286B56-F599-3052-F7C4-56E0BA8BACAF}
+		{4F445041-E755-26DD-BBBC-062C93B87A2D} = {E1286B56-F599-3052-F7C4-56E0BA8BACAF}
+		{2DDDC7B1-3B20-3C57-BE32-4F4BE48A61DE} = {871BE218-8F83-E3CD-0B70-B1CC1745EA7C}
+		{29038C35-7E4B-DF05-03A8-7FDDEF3D08DE} = {2DDDC7B1-3B20-3C57-BE32-4F4BE48A61DE}
+		{F445957C-FEE2-1088-937C-343476384531} = {29038C35-7E4B-DF05-03A8-7FDDEF3D08DE}
+		{9920B549-3811-E211-3BE7-47EA2A8AD7AA} = {F445957C-FEE2-1088-937C-343476384531}
+		{F3F05B7F-44A0-07D3-3E1D-019EC5D5E2C5} = {9920B549-3811-E211-3BE7-47EA2A8AD7AA}
+		{304B000C-1E5D-600F-B9B7-329DEEBA88C4} = {F3F05B7F-44A0-07D3-3E1D-019EC5D5E2C5}
+		{D59F7060-955C-19AD-455F-B72C986F302A} = {304B000C-1E5D-600F-B9B7-329DEEBA88C4}
+		{F6FE3E22-E20C-446C-0EF3-08E1E63224DB} = {D59F7060-955C-19AD-455F-B72C986F302A}
+		{61F78579-2D18-843A-279B-76ED34A31153} = {F6FE3E22-E20C-446C-0EF3-08E1E63224DB}
+		{1744B65A-F141-639F-D372-5F0448F10099} = {F6FE3E22-E20C-446C-0EF3-08E1E63224DB}
+		{28765F75-DF45-E1CD-CA67-233569C2A87D} = {F6FE3E22-E20C-446C-0EF3-08E1E63224DB}
+		{D292D170-AEBE-7A9E-B860-DDF6051FD5AB} = {F6FE3E22-E20C-446C-0EF3-08E1E63224DB}
+		{AA928D51-F51F-BDAC-796D-26ED38AC8BE1} = {D59F7060-955C-19AD-455F-B72C986F302A}
+		{BBDEBD7E-6ED2-226C-E0AC-56362A42A8FD} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{AE464C88-E7F9-655D-7DE8-8B38CE9356B9} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{B1314D6B-DA11-B8C3-351D-1EAF34CC5FE0} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{5E2D7A7C-A111-0B82-73C2-9BD6B0357CF4} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{2FA0294A-DDAC-096E-7394-9D7335637A43} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{2E9E63CE-B304-A5BE-B473-7A4A2F323636} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{3130AB6D-0F88-460C-723A-45586FFE2606} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{11C13CEC-78EB-3E48-7E45-87FD51A66ACD} = {AA928D51-F51F-BDAC-796D-26ED38AC8BE1}
+		{A2261275-9150-842F-1C2A-0977B63AF1C0} = {304B000C-1E5D-600F-B9B7-329DEEBA88C4}
+		{AFA2BECC-0354-7A9E-8D57-A5142DEDD6FC} = {A2261275-9150-842F-1C2A-0977B63AF1C0}
+		{231BD1E8-3AC4-1F72-D050-EC37753FBE2C} = {AFA2BECC-0354-7A9E-8D57-A5142DEDD6FC}
+		{26DC7B8A-4022-FE32-7D77-BD5F9AE8B095} = {AFA2BECC-0354-7A9E-8D57-A5142DEDD6FC}
+		{D6B9C02A-7E7B-F21B-F699-3B7AC1ADE500} = {AFA2BECC-0354-7A9E-8D57-A5142DEDD6FC}
+		{B83E5282-590A-48C1-ACFF-EBDD1A60615E} = {AFA2BECC-0354-7A9E-8D57-A5142DEDD6FC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FA1D757-839A-494C-A5F1-81512A77D7E0}
+	EndGlobalSection
+EndGlobal

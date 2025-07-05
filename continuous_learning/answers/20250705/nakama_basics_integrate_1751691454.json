@@ -1,0 +1,11 @@
+{
+  "question_id": "nakama_basics_integrate_1751691454",
+  "question": "Panda3D에서 Nakama 기초을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+  "answer": "```python\n# 설치\npip install panda3d nakama-python-sdk\n\n# 코드 예시\nfrom direct.showbase.ShowBase import ShowBase\nfrom panda3d.core import load_prc_file\nfrom nakama import Client, GameState, Error\n\nclass MyApp(ShowBase):\n    def __init__(self):\n        load_prc_file(\"config/panda3d.prc\")\n        ShowBase.__init__(self)\n\n        # Nakama 서버에 연",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 144.3273241519928,
+  "timestamp": "2025-07-05T13:59:59.231881",
+  "topic": "Nakama 기초",
+  "language": "korean"
+}

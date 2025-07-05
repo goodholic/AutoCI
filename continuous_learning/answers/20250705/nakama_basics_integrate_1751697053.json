@@ -1,0 +1,11 @@
+{
+  "question_id": "nakama_basics_integrate_1751697053",
+  "question": "How to use Nakama 기초 in Panda3D with Python? Provide examples.",
+  "answer": "This is the first step to get started with Nakama and Panda3D, the first with Python. It is recommended that you have a basic knowledge of Python and Panda3D.\n\n1. Install Nakama\n\nNakama server can be downloaded and installed following the documentation provided by Nakama. You can also download the docker image to run Nakama server.\n\n2. Install Panda3D\n\nPanda3D is a game engine developed by Disney and is a must-have for game development. You can download it from the official website. \n\n3. Create a Python client in Panda3D\n\nPanda3D allows you to write",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 143.12977027893066,
+  "timestamp": "2025-07-05T15:33:16.495602",
+  "topic": "Nakama 기초",
+  "language": "english"
+}

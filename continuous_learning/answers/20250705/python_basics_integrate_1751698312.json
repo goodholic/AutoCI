@@ -1,0 +1,11 @@
+{
+  "question_id": "python_basics_integrate_1751698312",
+  "question": "How to use Python 기초 문법 in Panda3D with Python? Provide examples.",
+  "answer": "This is a rather complex question, but here is a general guideline on how to use Python programming language (with Panda3D) in Panda3D game engine.\n\nFirst, you need to have Panda3D installed on your system. If you don’t have it installed, you can download it from the official Panda3D website.\n\nOnce installed, you can start writing your game using Python language. Panda3D uses Python as its scripting language.\n\nHere is a basic example of a Python script that you can run in Panda3D:\n\n```python\nfrom direct.showbase.DirectObject import DirectObject\n\nclass MyGame(DirectObject",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 143.28308081626892,
+  "timestamp": "2025-07-05T15:54:15.297096",
+  "topic": "Python 기초 문법",
+  "language": "english"
+}

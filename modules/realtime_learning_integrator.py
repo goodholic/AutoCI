@@ -707,7 +707,7 @@ class RealtimeLearningIntegrator:
                     topic_id = f"frequent_error_{error_hash}"
                     if not any(t.id == topic_id for t in self.continuous_learning_system.learning_topics):
                         # 새 주제 추가
-                        from continuous_learning_system import LearningTopic
+                        from core.continuous_learning_system import LearningTopic
                         new_topic = LearningTopic(
                             id=topic_id,
                             category="자주 발생하는 오류",

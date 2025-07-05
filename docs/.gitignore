@@ -1,0 +1,119 @@
+# Python
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+__pycache__/
+
+# ML Models
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+CodeLlama-7b-Instruct-hf/
+
+# .NET
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.cache
+*.ilk
+*.log
+[Dd]ebug/
+[Rr]elease/
+
+# IDE
+.vscode/
+.vs/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python 가상환경
+llm_venv_wsl/
+venv/
+env/
+ENV/
+.venv/
+autoci_env/
+
+# AutoCI 설정
+.godot_config.json
+user_learning_progress.json
+
+# Logs
+logs/
+*.log
+
+# Godot
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Godot 바이너리
+godot_bin/
+godot_engine/
+*.exe
+*.zip
+
+# Python 캐시
+__pycache__/
+*.py[cod]
+*$py.class
+
+neural_venv/
+llm_venv/
+
+# Python 패키지 및 라이브러리
+site-packages/
+*.so
+*.so.*
+
+# NVIDIA CUDA 라이브러리
+**/nvidia/
+**/cublas/
+**/cudnn/
+**/cufft/
+**/cusolver/
+**/cusparse/
+**/nccl/
+
+# Python 환경
+env/
+venv/
+.env
+
+# Godot 엔진
+godot_engine
+godot_engine.exe
+*.tmp
+*.log
+
+# Godot 프로젝트 파일
+.import/
+export.cfg
+export_presets.cfg
+
+# 제외할 디렉토리
+gemini-cli/
+godot_analysis/
+llama/
+
+# .gitignore 파일에 추가
+*.x86_64
+godot_ai_build/output/
+
+# 3D Models
+*.fbx
+*.mat
+models/
+.fake

@@ -398,7 +398,7 @@ class TestIntegration:
         monkeypatch.setenv("AUTOCI_GAME_PROJECTS_ROOT", str(tmp_path / "projects"))
         
         # Import after env setup
-        from autoci_production import ProductionAutoCI
+        from core.autoci_production import ProductionAutoCI
         
         # Create system
         system = ProductionAutoCI()
@@ -412,7 +412,7 @@ class TestIntegration:
     @pytest.mark.asyncio
     async def test_error_recovery_integration(self):
         """Test error handling and recovery integration"""
-        from autoci_production import ProductionAutoCI
+        from core.autoci_production import ProductionAutoCI
         
         system = ProductionAutoCI()
         

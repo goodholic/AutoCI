@@ -1,258 +1,172 @@
 # AutoCI - AI 게임 개발 시스템 🎮
 
-더이상 Readme의 내용에서 더하지도 빼지도 마시길 바랍니다. 
-상용 AI모델이 되도록, 구현은 Readme의 내용을 깊숙히 구현하는 방향으로 진행합니다.
-  - 일단, godot 엔진에 대해 세부적으로 다 알아야할것같다.
-  - 정보 모으는 기능도 뛰어나야할것 같다.
-  - 학습 후 저장 및 검색 능력도 뛰어나야할것같다.
+**AI가 직접 변형된 Godot을 조작하여 24시간 동안 완전한 2.5D~3D 게임을 제작하는 시스템**
 
-**AI가 직접 Godot을 조작하여 24시간 동안 완전한 게임을 제작하는 시스템**
+## 🚀 빠른 시작
 
-
-## 🚀 핵심 기능
-
-### 1. 24시간 자동 게임 개발
-- **AI가 실제로 Godot 에디터를 조작**하는 모습을 직접 관찰
-- **마우스 클릭, 키보드 입력, 메뉴 조작**을 실시간으로 확인
-- **완전히 실행 가능한 게임** 생성 (MVP가 아닌 완성품)
-- **24시간 끈질긴 개선**: 오류 발견 → 해결 → 기능 추가 → 반복
-
-### 2. AI 모델 기반 학습 시스템
-- **5가지 핵심 주제**: C#, 한글 용어, Godot 엔진, 네트워킹, Nakama 서버
-- **10억+ 파라미터 AI 모델** 활용 (DeepSeek-Coder, Llama-3.1, CodeLlama 등)
-- **진행 상태 자동 저장**: 언제든지 중단하고 이어서 학습 가능
-- **자가 진화 시스템**: 사용자 질문을 통해 AI가 스스로 학습
-
-### 3. 한글 대화 인터페이스
-- **자연스러운 한국어**로 AI와 대화하며 게임 개발
-- **실시간 게임 수정**: 개발 중인 게임을 대화로 수정 가능
-- **의도 자동 분류**: 질문, 명령, 피드백을 자동으로 구분
-
-## 🎯 빠른 시작
-
-### 1. AutoCI 실행
+### 1. 설치
 ```bash
-# AutoCI 시작
-autoci
-
-# 게임 타입 선택 후 자동 개발 시작
-> 1  # 플랫폼 게임
-> create racing game  # 또는 직접 명령
-
-# → Godot 에디터가 자동으로 열리며 AI가 게임을 제작
-```
-
-### 2. AI 학습 시작
-```bash
-# 통합 학습 (권장)
-autoci learn
-
-# 메모리 최적화 학습 (RTX 2080 등)
-autoci learn low
-
-# 커스텀 시간 설정 (1시간, 16GB RAM)
-python continuous_learning_system.py 1 16.0
-```
-
-### 3. Godot 엔진 빌드
-```bash
-# Windows 버전
-build-godot
-
-# Linux 버전  
-build-godot-linux
-```
-
-## 🎮 지원하는 게임 타입
-
-모든 게임
-
-## 💬 주요 명령어
-
-### AutoCI 터미널 명령어
-```bash
-autoci                      # AutoCI 시작
-autoci learn                # AI 통합 학습
-autoci learn low            # 메모리 최적화 학습
-autoci fix                  # 학습 기반 엔진 개선
-autoci chat                 # 한글 대화 모드
-```
-
-### 터미널 내 명령어
-```bash
-create [type] game          # 게임 생성 (racing, platformer, rpg, puzzle)
-add feature [name]          # 기능 추가 (개발 중에도 가능)
-modify [aspect]             # 게임 수정
-open_godot                  # Godot 에디터 열기
-status                      # 시스템 상태
-help                        # 도움말
-```
-
-### Godot 빌드 명령어
-```bash
-build-godot                 # Windows용 AI 통합 Godot 빌드
-build-godot-linux           # Linux용 빌드
-```
-
-## 🧠 AI 모델 및 학습 시스템
-
-### 지원 AI 모델
-| 모델 | 파라미터 | VRAM | 특화 분야 |
-|------|----------|------|-----------|
-| DeepSeek-Coder-6.7B | 67억 | 8GB | C# 코딩, Godot |
-| Llama-3.1-8B | 80억 | 10GB | 일반 프로그래밍, 한글 |
-| CodeLlama-13B | 130억 | 16GB | 코드 생성 |
-| Qwen2.5-Coder-32B | 320억 | 40GB | 고급 아키텍처 |
-
-### 학습 주제 (5가지 핵심)
-1. **C# 프로그래밍**: 기초부터 고급까지 (async/await, LINQ, 제네릭)
-2. **한글 프로그래밍 용어**: 프로그래밍 개념의 한국어 번역
-3. **Godot 엔진**: 아키텍처, 렌더링, 성능 최적화
-4. **Godot 네트워킹**: MultiplayerAPI, RPC, 동기화
-5. **Nakama 서버**: 매치메이킹, 스토리지, AI 최적화
-
-### 자가 진화 시스템
-- **집단 지성 기반**: 사용자 질문으로 AI가 스스로 학습
-- **품질 자동 평가**: 응답을 4가지 기준으로 평가
-- **패턴 인식**: 성공적인 해결책을 자동으로 학습
-- **지식 베이스 확장**: 검증된 솔루션을 영구 저장
-
-## 🛠️ 설치 및 요구사항
-
-### 시스템 요구사항
-- **OS**: Windows 10/11 + WSL2 (Ubuntu 20.04+)
-- **RAM**: 16GB 이상 (32GB 권장)
-- **GPU**: CUDA 지원 GPU (8GB+ VRAM 권장)
-- **디스크**: 100GB 이상 여유 공간
-
-### 설치 과정
-```bash
-# 1. 저장소 클론
+# 저장소 클론
 git clone https://github.com/yourusername/AutoCI.git
 cd AutoCI
 
-# 2. 명령어 설치
-sudo ./install_global_autoci.sh
-chmod +x install_godot_commands.sh
-./install_godot_commands.sh
+# 설치 스크립트 실행
+dotnet run setup.cs
 
-# 3. AI 모델 설치
-python install_llm_models.py
-
-# 4. Godot 빌드
-build-godot
+# 가상환경 활성화
+source autoci_env/bin/activate  # Linux/WSL
+# autoci_env\Scripts\activate.bat  # Windows
 ```
 
-## 🔄 24시간 끈질긴 개발 과정
-
-### 개발 철학: "절대 포기하지 않는 AI"
-```
-오류 발견 → 기본 수정 시도 (1-10회)
-     ↓ 실패시
-웹 검색 + AI 솔루션 (11-50회)
-     ↓ 실패시  
-창의적 우회 + 커뮤니티 (51-100회)
-     ↓ 실패시
-실험적 접근 + 양자 디버깅 (101-∞회)
-```
-
-### 품질 향상 단계
-- **기본 기능** (0-30점): 플레이어 제어, 물리, 충돌
-- **중급 기능** (30-50점): 사운드, 점수, 메커니즘
-- **고급 기능** (50-70점): UI/UX, 저장, 레벨 디자인
-- **폴리싱** (70-100점): 파티클, 애니메이션, 최적화
-
-## 🎨 실시간 개발 과정 시각화
-
-### 단계별 게임 제작
-```
-🎯 1단계: 기획 (게임 컨셉 정의)
-🎨 2단계: 디자인 (아트 방향성 결정)  
-🔧 3단계: 프로토타입 (기본 시스템 구현)
-⚙️ 4단계: 메커니즘 (게임플레이 구현)
-🗺️ 5단계: 레벨 디자인 (콘텐츠 제작)
-🎵 6단계: 오디오 (사운드 및 음악)
-🎨 7단계: 비주얼 (그래픽 폴리싱)
-🧪 8단계: 테스트 (버그 수정)
-📦 9단계: 빌드 (배포 준비)
-📝 10단계: 문서화 (완성 보고서)
-```
-
-### 실시간 상태 표시
-```
-⏱️ 경과: 2:34:15 | 남은 시간: 21:25:45
-🔄 반복: 147 | 수정: 23 | 개선: 18  
-📊 현재 게임 품질 점수: 67/100
-🔧 현재 작업: 점프 메커니즘 개선 중...
-```
-
-## 🔧 문제 해결
-
-### 자주 발생하는 문제
-
-#### 1. 모듈 import 오류
+### 2. 실행
 ```bash
-# modules/__init__.py 파일이 없는 경우
-touch modules/__init__.py
+# AutoCI 시작
+./autoci  # 또는 dotnet run autoci
 
-# 또는 Python 경로 확인
-python -c "import sys; print(sys.path)"
+# 게임 생성 예제
+> create platformer game
+> add feature double_jump
+> status
 ```
 
-#### 2. AI 모델 로딩 실패
-```bash
-# CUDA 설치 확인
-nvidia-smi
+## 📁 프로젝트 구조 (핵심/보조 명확히 구분)
 
-# 메모리 부족 시 가벼운 모델 사용
-autoci learn low
-```
-
-#### 3. Godot 빌드 실패
-```bash
-# 필수 패키지 설치
-sudo apt update
-sudo apt install -y scons pkg-config libx11-dev libxcursor-dev
-
-# 로그 확인
-cat godot_ai_build/logs/build.log
-```
-
-## 📁 프로젝트 구조
-
+### 🔴 핵심/필수 폴더 (실행에 꼭 필요한 파일만)
 ```
 AutoCI/
-├── autoci.py                    # 메인 시스템
-├── autoci_terminal.py           # 터미널 인터페이스
-├── continuous_learning_system.py # AI 학습 시스템
-├── modules/                     # 핵심 모듈들
-├── user_learning_data/          # 학습 데이터
-├── game_projects/               # 생성된 게임들
-├── godot_ai_build/             # Godot 빌드 시스템
-└── mvp_games/                  # 완성된 게임들
+├── core_system/              # 시스템 핵심 실행 코드
+│   ├── autoci_godot_main.cs    # 메인 실행 파일
+│   ├── continuous_learning_system.cs
+│   └── ... (실행에 필수적인 파일만)
+├── modules/                  # 주요 기능 모듈
+│   ├── ai_model_integration.cs
+│   ├── godot_automation_controller.cs
+│   ├── godot_engine_integration.cs    # 변형된 Godot 직접 조작
+│   ├── socketio_realtime_system.cs    # Socket.IO 통신
+│   ├── korean_conversation_interface.cs
+│   └── ... (핵심 모듈만)
+├── config_active/            # 실제 사용되는 설정 파일
+│   └── (환경설정, 모델설정 등 필수 설정만)
+├── tools_utilities/          # 자주 쓰는 핵심 유틸리티
+│   └── (api_doc_generator.cs 등 필수 도구만)
+├── autoci                    # 실행 파일
+├── setup.cs                  # 설치 스크립트
+└── requirements.txt          # 의존성 패키지
 ```
 
-## 📈 성능 지표
+### 🔵 보조/비핵심 폴더 (그 외 모든 파일)
+```
+AutoCI/
+├── docs_guides/              # 문서 및 가이드
+│   └── README.md
+├── tests_active/             # 테스트 코드
+│   └── (모든 테스트 파일)
+├── logs_current/             # 현재 로그
+│   └── (실행/에러 로그 등)
+├── models_ai/                # AI 모델 파일
+│   └── (모델 가중치, 설정 등)
+├── data/                     # 데이터 저장소
+│   ├── learning/             # 학습 데이터
+│   ├── evolution/            # 진화 데이터
+│   └── feedback/             # 피드백 데이터
+├── game_projects/            # 생성된 게임 프로젝트
+│   └── (각 게임별 폴더)
+├── archive/                  # 보관/아카이브 (모든 구버전/백업)
+│   ├── old_files/
+│   ├── legacy_code/
+│   └── old_logs/
+├── models/modified-godot/    # 변형된 Godot 소스 코드
+└── README.md                 # 프로젝트 설명서
+```
 
-- **게임 제작 시간**: 5분 (MVP) → 24시간 (완성품)
-- **AI 응답 속도**: 초당 10-50 토큰
-- **학습 완료율**: 95%+
-- **오류 해결률**: 99%+ (끈질긴 모드)
+## 🎮 핵심 기능
+
+### 1. 변형된 Godot 엔진 직접 조작
+- AI가 변형된 Godot API를 직접 호출하여 게임 제작
+- 실시간 3D 오브젝트 생성 및 조작
+- 물리 엔진, 충돌 감지, 애니메이션 자동 구현
+
+### 2. Socket.IO 실시간 통신
+- 멀티플레이어 게임 지원
+- 실시간 개발 과정 모니터링
+- 웹 기반 대시보드 연동
+
+### 3. 24시간 끈질긴 개발
+- 오류 발생 시 자동 해결 (최대 ∞회 시도)
+- 품질 점수 기반 지속적 개선
+- 자가 진화 시스템으로 개발 패턴 학습
+
+### 4. 한국어 대화 인터페이스
+- 자연스러운 한국어로 게임 개발 지시
+- 실시간 게임 수정 및 기능 추가
+- AI와의 대화를 통한 창의적 아이디어 구현
+
+## 💡 주요 명령어
+
+### 터미널 명령어
+```bash
+autoci                    # 대화형 모드 시작
+autoci learn              # AI 학습 시작
+autoci learn low          # 메모리 최적화 학습
+autoci monitor            # 모니터링 대시보드
+autoci chat               # 한글 대화 모드
+```
+
+### 대화형 모드 명령어
+```
+create [type] game        # 게임 생성 (platformer, racing, rpg, puzzle)
+add feature [name]        # 기능 추가
+modify [aspect]           # 게임 수정
+open_godot               # 변형된 Godot 에디터 열기
+status                    # 시스템 상태
+help                      # 도움말
+```
+
+## 🧠 AI 모델 통합
+
+### 지원 모델
+- DeepSeek-Coder (6.7B) - C# 특화
+- Llama 3.1 (8B) - C# 및 한글
+- CodeLlama (13B) - C# 코드 생성
+- Qwen2.5-Coder (32B) - C# 고급 아키텍처
+
+### 자동 모델 선택
+시스템이 사용 가능한 VRAM에 따라 최적의 모델을 자동 선택합니다.
+
+## 📊 모니터링
+
+### 실시간 대시보드
+- http://localhost:5000 - 시스템 모니터링
+- http://localhost:5001 - Socket.IO 통신 상태
+
+### 메트릭
+- CPU/GPU 사용률
+- 메모리 사용량
+- 게임 개발 진행률
+- AI 응답 시간
+
+## 🔧 고급 설정
+
+### 변형된 Godot 소스 코드 활용
+`models/modified-godot/` 폴더의 소스 코드를 분석하여 AI가 더 깊은 수준의 게임 개발이 가능합니다.
+
+### 커스텀 게임 템플릿
+`modules/godot_engine_integration.cs`에서 게임 템플릿을 수정할 수 있습니다.
+
+## 📝 라이선스
+
+MIT License
 
 ## 🤝 기여하기
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing`)
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
 5. Open a Pull Request
-
-## 📄 라이선스
-
-AutoCI License 
 
 ---
 
-**버전**: 5.0 (2025년 6월)  
+**Version**: 5.0  
 **개발팀**: AutoCI Team  
 **문의**: GitHub Issues

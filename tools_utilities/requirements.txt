@@ -1,0 +1,54 @@
+# AutoCI Requirements
+
+# 기본 라이브러리
+asyncio-mqtt
+aiofiles
+psutil
+colorama
+rich
+
+# AI/ML 라이브러리
+torch>=2.0.0
+transformers>=4.30.0
+accelerate
+bitsandbytes
+sentencepiece
+protobuf
+
+# Godot 자동화 (Windows)
+pyautogui
+pywin32
+pillow
+opencv-python
+
+# 웹 관련
+aiohttp
+websockets
+requests
+
+# 데이터 처리
+pandas
+numpy
+pyyaml
+toml
+
+# 개발 도구
+pytest
+black
+flake8
+mypy
+
+# 모니터링
+prometheus-client
+grafana-api
+
+# 데이터베이스
+sqlalchemy
+aiosqlite
+
+# 로깅
+loguru
+
+# 한글 처리
+konlpy
+mecab-python3

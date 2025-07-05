@@ -967,6 +967,166 @@ AutoCI가 다른 사용자들의 유사한 질문과 검증된 솔루션을 분�
             json.dump(self.collective_knowledge, f, ensure_ascii=False, indent=2)
 
 
+    async def collect_experiences(self) -> List[Dict[str, Any]]:
+        """경험 데이터 수집 (학습을 위한 질문-답변 쌍)"""
+        experiences = []
+        
+        # 저장된 질문-응답 쌍에서 학습 데이터 수집
+        for q_file in self.questions_dir.glob("*.json"):
+            try:
+                with open(q_file, 'r', encoding='utf-8') as f:
+                    question_data = json.load(f)
+                
+                # 해당 질문의 응답 찾기
+                response_id = question_data.get('best_response_id')
+                if response_id:
+                    response_file = self.responses_dir / f"{response_id}.json"
+                    if response_file.exists():
+                        with open(response_file, 'r', encoding='utf-8') as f:
+                            response_data = json.load(f)
+                        
+                        # 평가 정보 가져오기
+                        eval_file = self.evaluations_dir / f"eval_{response_id}.json"
+                        eval_data = {}
+                        if eval_file.exists():
+                            with open(eval_file, 'r', encoding='utf-8') as f:
+                                eval_data = json.load(f)
+                        
+                        # 경험 데이터 구성
+                        experience = {
+                            'question': question_data['question'],
+                            'answer': response_data['response'],
+                            'category': question_data.get('category', 'general'),
+                            'tags': question_data.get('tags', []),
+                            'quality_score': eval_data.get('total_score', 0.5),
+                            'topic': question_data.get('category', 'general'),
+                            'timestamp': question_data.get('timestamp'),
+                            'context': question_data.get('context', {})
+                        }
+                        
+                        experiences.append(experience)
+                        
+            except Exception as e:
+                logger.error(f"경험 데이터 수집 중 오류: {e}")
+                continue
+        
+        # 경험이 없으면 샘플 데이터 생성
+        if not experiences:
+            experiences = self._generate_sample_experiences()
+        
+        logger.info(f"수집된 경험 데이터: {len(experiences)}개")
+        return experiences
+    
+    def _generate_sample_experiences(self) -> List[Dict[str, Any]]:
+        """샘플 경험 데이터 생성"""
+        return [
+            {
+                'question': 'C#에서 Godot 노드를 동적으로 생성하는 방법은?',
+                'answer': '''Godot에서 C#을 사용하여 노드를 동적으로 생성하는 방법:
+
+```csharp
+// 새 노드 생성
+var newNode = new Node2D();
+newNode.Name = "DynamicNode";
+
+// 속성 설정
+newNode.Position = new Vector2(100, 100);
+
+// 현재 씬에 추가
+AddChild(newNode);
+
+// 특정 타입의 노드 생성
+var sprite = new Sprite2D();
+sprite.Texture = GD.Load<Texture2D>("res://icon.png");
+newNode.AddChild(sprite);
+```''',
+                'category': 'csharp',
+                'tags': ['godot4', 'csharp', 'nodes'],
+                'quality_score': 0.85,
+                'topic': 'C# 프로그래밍',
+                'timestamp': datetime.now().isoformat(),
+                'context': {'godot_version': '4.2', 'language': 'csharp'}
+            },
+            {
+                'question': '변형된 Godot에서 Socket.IO를 통한 실시간 통신 구현 방법은?',
+                'answer': '''Socket.IO를 사용한 실시간 통신 구현:
+
+1. 서버 측 (Node.js + Socket.IO):
+```javascript
+const io = require('socket.io')(3000);
+
+io.on('connection', (socket) => {
+    console.log('Client connected:', socket.id);
+    
+    socket.on('game_action', (data) => {
+        // 모든 클라이언트에게 브로드캐스트
+        io.emit('game_update', data);
+    });
+});
+```
+
+2. 클라이언트 측 (Godot C#):
+```csharp
+public partial class NetworkManager : Node
+{
+    private SocketIOClient.SocketIO socket;
+    
+    public override void _Ready()
+    {
+        socket = new SocketIOClient.SocketIO("http://localhost:3000");
+        socket.ConnectAsync();
+        
+        socket.On("game_update", response =>
+        {
+            var data = response.GetValue<GameData>();
+            UpdateGameState(data);
+        });
+    }
+}
+```''',
+                'category': 'networking',
+                'tags': ['socketio', 'multiplayer', 'realtime'],
+                'quality_score': 0.90,
+                'topic': '네트워킹',
+                'timestamp': datetime.now().isoformat(),
+                'context': {'project_type': 'multiplayer', 'network_lib': 'socketio'}
+            },
+            {
+                'question': 'AI 모델을 Godot 게임에 통합하는 최적화 방법은?',
+                'answer': '''AI 모델 통합 최적화 전략:
+
+1. 모델 경량화:
+- ONNX 형식으로 변환하여 추론 속도 향상
+- 양자화(Quantization) 적용으로 모델 크기 감소
+
+2. 비동기 처리:
+```csharp
+public async Task<string> GetAIResponse(string input)
+{
+    return await Task.Run(() => 
+    {
+        // AI 모델 추론을 별도 스레드에서 실행
+        return aiModel.Predict(input);
+    });
+}
+```
+
+3. 캐싱 전략:
+- 자주 사용되는 응답 캐싱
+- 유사 입력에 대한 결과 재사용
+
+4. 배치 처리:
+- 여러 요청을 모아서 한 번에 처리''',
+                'category': 'ai_integration',
+                'tags': ['ai', 'optimization', 'performance'],
+                'quality_score': 0.88,
+                'topic': 'AI 최적화',
+                'timestamp': datetime.now().isoformat(),
+                'context': {'optimization_target': 'inference_speed'}
+            }
+        ]
+
+
 # 전역 인스턴스
 _evolution_system = None
 

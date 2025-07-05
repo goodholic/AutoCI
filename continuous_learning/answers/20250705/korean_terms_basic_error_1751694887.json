@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_error_1751694887",
+  "question": "What are common errors with 프로그래밍 기본 용어 in Python and how to fix them?",
+  "answer": "Certainly, there are some common errors with programming basic terms in Python that we have to be careful about. These errors are mostly related to syntax and spelling.\n\nBelow are some common errors:\n\n1. Misspelling keywords: For instance, \"prin\" instead of \"print\"\n2. Forgetting parentheses: For function calls, parentheses are essential.\n3. Using \"=\" instead of \"==\" for comparison: \"a = b\" is an assignment statement, while \"a == b\" is a comparison.\n4. Missing indentation: Python relies on indentation to define the scope of loops and conditionals.\n5. Using Python 2",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 144.50256872177124,
+  "timestamp": "2025-07-05T14:57:11.663660",
+  "topic": "프로그래밍 기본 용어",
+  "language": "english"
+}

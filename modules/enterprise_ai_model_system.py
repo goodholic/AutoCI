@@ -425,7 +425,7 @@ class EnterpriseAIModelSystem:
                 device="auto",
                 precision="fp16",
                 max_length=4096,
-                specialized_tasks=["code_generation", "code_review", "debugging"],
+                specialized_tasks=["code_generation", "code_review", "debugging", "panda3d_development", "python_optimization"],
                 memory_limit_gb=8.0,
                 priority=1
             ),
@@ -447,7 +447,7 @@ class EnterpriseAIModelSystem:
                 device="auto",
                 precision="fp16",
                 max_length=8192,
-                specialized_tasks=["code_generation", "godot_scripting"],
+                specialized_tasks=["code_generation", "panda3d_scripting", "socketio_networking"],
                 memory_limit_gb=7.0,
                 priority=1
             )

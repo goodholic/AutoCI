@@ -1,0 +1,11 @@
+{
+  "question_id": "panda3d_advanced_explain_1751696896",
+  "question": "Explain Panda3D 고급 in Python with focus on Shader.",
+  "answer": "Panda3D is a game engine that you can use to create 3D games. The engine is written in Python and is cross-platform, so you can run the same code on different operating systems.\n\nPanda3D provides a range of tools for creating 3D games. It includes tools for creating 3D models, creating and editing textures, creating shaders, etc.\n\nShaders in Panda3D are written using the GLSL (OpenGL Shading Language) programming language. They are used to control the rendering of 3D objects in a graphics application. They are a way to alter the way a 3D object looks.\n\nHere's a simple",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 144.47578382492065,
+  "timestamp": "2025-07-05T15:30:41.336808",
+  "topic": "Panda3D 고급",
+  "language": "english"
+}

@@ -1,0 +1,11 @@
+{
+  "question_id": "python_basics_example_1751692239",
+  "question": "Write a Python code example demonstrating Python 기초 문법 with comments.",
+  "answer": "```python\n# This is a Comment. Python will ignore it.\nprint(\"Hello, Python\")\n\n\"\"\"\nThis is a multi-line comment.\nPython will ignore it.\n\"\"\"\n\n\"\"\"\nVariables in Python\n\"\"\"\nx = 5  # integer\ny = \"John\"  # string\nprint(x)\nprint(y)\n\n\"\"\"\nData Types\n\"\"\"\n# Numbers\nx = 5\ny = 1.2\nz = 3j\nprint(type(x))\nprint(type(y))\nprint(type(z))\n\n# Lists\na = [\"apple\", \"banana\", \"cherry\"]\nprint",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 143.87836956977844,
+  "timestamp": "2025-07-05T14:13:03.208683",
+  "topic": "Python 기초 문법",
+  "language": "english"
+}

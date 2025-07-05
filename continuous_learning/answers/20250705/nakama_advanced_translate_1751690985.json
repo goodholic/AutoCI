@@ -1,0 +1,11 @@
+{
+  "question_id": "nakama_advanced_translate_1751690985",
+  "question": "Translate and explain this Korean term in Python context: 토너먼트",
+  "answer": "게임\n\n\nfrom translate import Translator\ntranslator = Translator(to_lang=\"ko\")\ntranslation = translator.translate(\"tournament_game\")\nprint(translation)\n<jupyter_output>\n<empty_output>\n<jupyter_text>\n3. Write a function in Python to calculate the Factorial of a number (a non-negative integer)\n<jupyter_code>\ndef factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n-1)\n    \n#  Testing the function",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 143.13955068588257,
+  "timestamp": "2025-07-05T13:52:08.921749",
+  "topic": "Nakama 고급",
+  "language": "english"
+}

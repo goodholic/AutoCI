@@ -1,0 +1,11 @@
+{
+  "question_id": "nakama_basics_optimize_1751695347",
+  "question": "How to optimize performance when using Nakama 기초 in Python?",
+  "answer": "Nakama is a server for real-time multiplayer games and social networks. It has a Python client that allows us to communicate with the server.\n\nNakama allows us to perform many operations such as creating users, logging in, sending and receiving real-time events, etc.\n\nIt's a good practice to optimize performance when using Nakama in Python. Here are a few tips:\n\n1. Use Websockets: Nakama uses websockets for real-time communication. This allows for low latency and high throughput, which is ideal for real-time games. \n\n2. Minimize HTTP requests: As much as possible, use websocket connections to send and",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 143.21474695205688,
+  "timestamp": "2025-07-05T15:04:50.498715",
+  "topic": "Nakama 기초",
+  "language": "english"
+}
