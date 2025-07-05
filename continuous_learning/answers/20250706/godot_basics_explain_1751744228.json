@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_explain_1751744228",
+  "question": "Godot 기초에 대해 한글로 자세히 설명해주세요. 특히 스크립트에 초점을 맞춰주세요.",
+  "answer": "- 예시 1: 간단한 스크립트 작성\n\n```python\n# 스크립트 시작\nprint(\"Hello, World\")\n# 스크립트 끝\n```\n\n- 예시 2: 함수 만들기\n\n```python\n# 함수 정의\ndef add_numbers(a, b):\n    return a + b\n\n# 함수 호출\nresult = add_numbers(5, 3)\nprint(result)  # 8 출력\n```\n\n- 예시 3: 클래스 만들기\n\n```python\n# 클래스 정의\nclass MyClass:\n    def __init__(self, value):\n        self.value = value\n\n    def print_value(self):",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 432.4292597770691,
+  "timestamp": "2025-07-06T04:44:20.683593",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

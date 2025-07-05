@@ -1,0 +1,144 @@
+{
+  "timestamp": "2025-07-06T05:00:19.165908",
+  "query": "Panda3D rpg prototype structure",
+  "context": {
+    "game_type": "rpg",
+    "phase": "prototype",
+    "task": "create_game_loop"
+  },
+  "results_count": 16,
+  "best_practices": [
+    {
+      "source": "documentation",
+      "title": "Godot UI Implementation",
+      "relevance": 0.8754787160859774,
+      "tags": [
+        "godot",
+        "ui",
+        "interface",
+        "hud"
+      ],
+      "has_code": true
+    },
+    {
+      "source": "stackoverflow",
+      "title": "Godot UI Implementation",
+      "relevance": 0.8451738042864156,
+      "tags": [
+        "godot",
+        "ui",
+        "interface",
+        "hud"
+      ],
+      "has_code": true
+    },
+    {
+      "source": "github",
+      "title": "Godot UI Implementation",
+      "relevance": 0.7375081657595173,
+      "tags": [
+        "godot",
+        "ui",
+        "interface",
+        "hud"
+      ],
+      "has_code": true
+    },
+    {
+      "source": "godot_forums",
+      "title": "Godot UI Implementation",
+      "relevance": 0.6797950063888063,
+      "tags": [
+        "godot",
+        "ui",
+        "interface",
+        "hud"
+      ],
+      "has_code": true
+    },
+    {
+      "source": "documentation",
+      "title": "Solution for prototype phase implementation patterns",
+      "relevance": 0.4357942096938425,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "documentation",
+      "title": "Solution for avoid common mistakes rpg development",
+      "relevance": 0.43401886609367896,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "stackoverflow",
+      "title": "Solution for rpg game development best practices",
+      "relevance": 0.39798784126735015,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "github",
+      "title": "Solution for prototype phase implementation patterns",
+      "relevance": 0.3964296279039342,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "stackoverflow",
+      "title": "Solution for prototype phase implementation patterns",
+      "relevance": 0.39282121899716294,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "github",
+      "title": "Solution for avoid common mistakes rpg development",
+      "relevance": 0.3861250702227166,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "stackoverflow",
+      "title": "Solution for avoid common mistakes rpg development",
+      "relevance": 0.36280564875678395,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "documentation",
+      "title": "Solution for rpg game development best practices",
+      "relevance": 0.35831848593302384,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "github",
+      "title": "Solution for rpg game development best practices",
+      "relevance": 0.34003358122898597,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "godot_forums",
+      "title": "Solution for prototype phase implementation patterns",
+      "relevance": 0.3151511528054728,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "godot_forums",
+      "title": "Solution for avoid common mistakes rpg development",
+      "relevance": 0.2772027756793565,
+      "tags": [],
+      "has_code": false
+    },
+    {
+      "source": "godot_forums",
+      "title": "Solution for rpg game development best practices",
+      "relevance": 0.239255234941896,
+      "tags": [],
+      "has_code": false
+    }
+  ]
+}

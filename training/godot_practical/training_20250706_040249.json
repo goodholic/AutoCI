@@ -1,0 +1,32 @@
+{
+  "exercise": "엔진 시작 및 종료",
+  "difficulty": 1,
+  "tasks": [
+    {
+      "task": "Godot 엔진 실행",
+      "success": true,
+      "duration": 1.0019729137420654,
+      "error": null
+    },
+    {
+      "task": "새 프로젝트 생성",
+      "success": true,
+      "duration": 0.003414630889892578,
+      "error": null
+    },
+    {
+      "task": "프로젝트 저장",
+      "success": true,
+      "duration": 0.0003237724304199219,
+      "error": null
+    },
+    {
+      "task": "엔진 종료",
+      "success": true,
+      "duration": 0.5003006458282471,
+      "error": null
+    }
+  ],
+  "success_rate": 1.0,
+  "timestamp": "2025-07-06T04:02:49.461090"
+}

@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_advanced_error_1751746323",
+  "question": "What are common errors with 고급 프로그래밍 용어 in Python and how to fix them?",
+  "answer": "1. Syntax Error: \nThis is the most common type of error. It occurs when the Python parser detects an incorrect statement. The error message will tell you the line number and the exact place in the code where the error is. For example, missing a colon at the end of a function definition or forgetting to close a parenthesis.\n\n2. Name Error: \nThis error occurs when you use a variable that hasn't been defined. Make sure you have all your variable names correct and define them before you use them.\n\n3. Type Error:\nThis error occurs when the type of a value is not what a function expects. For example, if you try to use a string function on an integer.\n\n4. Index Error: \nThis error occurs when you try to access an element of an array or list that doesn't exist. Arrays and lists are zero-indexed, meaning the first element is at index 0.\n\n5. Division by Zero Error:\nThis error occurs when you try to divide by zero. You can handle this error in Python using a try/except block.\n\n6. Value Error: \nThis error occurs when a function receives an argument of the correct type but inappropriate value. For example, using the int() function to convert a string that doesn't represent an integer.\n\n7. Key Error: \nThis error occurs when",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 406.0155916213989,
+  "timestamp": "2025-07-06T05:18:49.687090",
+  "topic": "고급 프로그래밍 용어",
+  "language": "english"
+}

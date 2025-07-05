@@ -1,0 +1,38 @@
+{
+  "exercise": "스크립트 작성",
+  "difficulty": 3,
+  "tasks": [
+    {
+      "task": "C# 스크립트 생성",
+      "success": true,
+      "duration": 0.01159214973449707,
+      "error": null
+    },
+    {
+      "task": "기본 이동 코드 작성",
+      "success": true,
+      "duration": 0.5006210803985596,
+      "error": null
+    },
+    {
+      "task": "시그널 연결",
+      "success": true,
+      "duration": 0.5003979206085205,
+      "error": null
+    },
+    {
+      "task": "스크립트 컴파일",
+      "success": true,
+      "duration": 2.86102294921875e-06,
+      "error": null
+    },
+    {
+      "task": "실행 테스트",
+      "success": true,
+      "duration": 0.5003437995910645,
+      "error": null
+    }
+  ],
+  "success_rate": 1.0,
+  "timestamp": "2025-07-06T04:02:57.028687"
+}

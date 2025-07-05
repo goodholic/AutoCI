@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_advanced_example_1751733894",
+  "question": "Write a Python code example demonstrating 고급 실시간 통신 with comments.",
+  "answer": "```python\n# Import required Libraries\nimport socket\nimport threading\n\n# Define server's IP address and port\nSERVER = '127.0.0.1'\nPORT = 55555\n\n# Create a new socket instance\nserver = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n\n# Bind the socket to the server's IP address and port\nserver.bind((SERVER, PORT))\n\n# List of clients connected to the server\nclients = []\nnicknames = []\n\n# Function to handle client connections\ndef handle(client):\n    while True:\n        try:\n            # Broadcast messages\n            message = client.recv(1024)\n            broadcast(message)\n        except:\n            # Remove and close the connection for the client\n            index = clients.index(client)\n            clients.remove(client)\n            client.close()\n            nickname = nicknames[index]\n            broadcast(f'{nickname} left the chat!\\n'.encode('ascii'))\n            nicknames.remove(nickname)\n            break\n\n# Function to receive and broadcast messages\ndef receive():\n    while True:\n        # Accept connection\n        client, address = server.accept()",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 373.31657218933105,
+  "timestamp": "2025-07-06T01:54:46.465538",
+  "topic": "고급 실시간 통신",
+  "language": "english"
+}

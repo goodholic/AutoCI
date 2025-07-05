@@ -195,21 +195,27 @@ def cli(ctx):
 
 
 @cli.command()
-@click.option('--name', required=True, help='프로젝트 이름')
+@click.argument('name', required=False)
 @click.option('--type', 'game_type', 
-              type=click.Choice(['platformer', 'racing', 'rpg', 'puzzle', 'shooter', 'adventure', 'simulation']),
-              default='platformer', help='게임 타입')
+              type=click.Choice(['platformer', 'racing', 'rpg', 'puzzle', 'shooter', 'strategy', 'adventure', 'simulation']),
+              required=False, help='게임 타입')
 @click.option('--hours', default=24.0, help='개발 시간 (기본 24시간)')
 def create(name, game_type, hours):
     """AI가 24시간 동안 자동으로 게임 개발"""
-    print(f"\n🎮 AutoCI 게임 자동 생성")
-    print(f"   프로젝트: {name}")
-    print(f"   타입: {game_type}")
-    print(f"   예상 시간: {hours}시간\n")
+    # name과 game_type이 모두 제공된 경우에만 출력
+    if name and game_type:
+        print(f"\n🎮 AutoCI 게임 자동 생성")
+        print(f"   프로젝트: {name}")
+        print(f"   타입: {game_type}")
+        print(f"   예상 시간: {hours}시간\n")
     
     # create 명령어를 autoci_main.py로 전달
-    # autoci_main.py는 단순히 게임 타입만 받음
-    args = [game_type]
+    # name과 game_type을 함께 전달
+    args = []
+    if name:
+        args.append(name)
+    if game_type:
+        args.append(game_type)
     run_command("create", args)
 
 

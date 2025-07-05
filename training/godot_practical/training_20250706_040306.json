@@ -1,0 +1,38 @@
+{
+  "exercise": "물리 시스템",
+  "difficulty": 4,
+  "tasks": [
+    {
+      "task": "RigidBody2D 생성",
+      "success": true,
+      "duration": 0.5008759498596191,
+      "error": null
+    },
+    {
+      "task": "CollisionShape2D 추가",
+      "success": true,
+      "duration": 0.5005109310150146,
+      "error": null
+    },
+    {
+      "task": "중력 설정",
+      "success": true,
+      "duration": 0.5003986358642578,
+      "error": null
+    },
+    {
+      "task": "충돌 감지",
+      "success": true,
+      "duration": 0.5013558864593506,
+      "error": null
+    },
+    {
+      "task": "물리 파라미터 조정",
+      "success": true,
+      "duration": 0.5007295608520508,
+      "error": null
+    }
+  ],
+  "success_rate": 1.0,
+  "timestamp": "2025-07-06T04:03:06.144936"
+}

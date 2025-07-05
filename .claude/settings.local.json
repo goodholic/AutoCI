@@ -53,7 +53,16 @@
       "Bash(./autoci-monitor --simple)",
       "Bash(true)",
       "Bash(diff:*)",
-      "Bash(cmp:*)"
+      "Bash(cmp:*)",
+      "Bash(sed:*)",
+      "Bash(git add:*)",
+      "Bash(pkill:*)",
+      "Bash(autoci create:*)",
+      "Bash(do python3 -m json.tool \"$f\")",
+      "Bash(/dev/null)",
+      "Bash(echo:*)",
+      "Bash(do echo -n \"$f: \")",
+      "Bash(tail:*)"
     ],
     "deny": []
   }

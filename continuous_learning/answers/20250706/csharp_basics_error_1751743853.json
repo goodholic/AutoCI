@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_error_1751743853",
+  "question": "What are common errors with C# 기초 문법 in Python and how to fix them?",
+  "answer": "In Python, you can use the same syntax as in C#, but there are some differences. Here are some common errors and how to fix them:\n\n1. Missing parentheses: Python uses parentheses `()` to call a function or method. If you forget them, you'll get a SyntaxError.\n\n```python\nprint \"Hello, World!\"  # Error: SyntaxError: Missing parentheses in call to 'print'. Did you mean print(\"Hello, World\")?\n```\n\n2. Indentation errors: Python uses indentation to define blocks of code. If you forget to indent, you'll get a SyntaxError.\n\n```python\nfor i in range(5):\nprint(\"Hello, World\")  # Error: unexpected indent (<string>, line 2)\n```\n\n3. Assignment errors: In C#, you can assign a value to a variable on the same line as its declaration. In Python, you can't do this. If you try, you'll get a SyntaxError.\n\n```python\nint i = 5  # Error: invalid syntax (<string>, line 1)\n```\n\n4. Mismatched quotes: Python uses single quotes `'` or double quotes `\"` to denote strings. If you mix them, you'll get a SyntaxError",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 366.7866744995117,
+  "timestamp": "2025-07-06T04:36:59.871221",
+  "topic": "C# 기초 문법",
+  "language": "english"
+}

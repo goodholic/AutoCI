@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_advanced_integrate_1751736103",
+  "question": "Godot에서 AI 고급 최적화을 어떻게 활용하는지 C# 코드와 함께 설명해주세요.",
+  "answer": "```csharp\npublic class AIController : Node2D\n{\n    // AI 최적화에 사용할 노드\n    private Navigation2D navigation;\n    private AnimationTree animationTree;\n\n    // AI의 상태\n    private enum State\n    {\n        Idle,\n        Walk,\n        Attack,\n    }\n    private State currentState;\n\n    // AI의 타겟\n    private Node2D target;\n\n    // AI의 속도\n    private Vector2 velocity = Vector2.Zero;\n\n    public override void _Ready()\n    {\n        navigation = GetNode<Navigation2D>(\"Navigation2D\");\n        animationTree = GetNode<AnimationTree>(\"AnimationTree\");\n        currentState = State.Idle;\n        target = GetTree().GetNodesInGroup(\"Player\")[0] as Node2D;\n    }\n\n    public override void _PhysicsProcess(float delta)\n    {\n        switch (currentState)\n        {\n            case State.Idle:\n                IdleState(delta);\n                break;\n            case State.Walk:\n                WalkState(",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 536.439790725708,
+  "timestamp": "2025-07-06T02:30:39.910937",
+  "topic": "AI 고급 최적화",
+  "language": "korean"
+}

@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_example_1751725676",
+  "question": "Write a Python code example demonstrating 프로그래밍 기본 용어 with comments.",
+  "answer": "Let's take the Python built-in function len() as an example. \n\n```python\n# The function len() takes a sequence (string, list, tuple, etc.) and returns the number of items in that sequence\n\n# Here is a string\nmy_string = \"Hello, World!\"\nprint(len(my_string))  # Outputs: 13\n\n# Here is a list\nmy_list = [1, 2, 3, 4, 5]\nprint(len(my_list))  # Outputs: 5\n```\n\nHere is a tuple\nmy_tuple = (1, 2, 3",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5050503015518188,
+  "generation_time": 187.49536561965942,
+  "timestamp": "2025-07-05T23:31:03.845377",
+  "topic": "프로그래밍 기본 용어",
+  "language": "english"
+}

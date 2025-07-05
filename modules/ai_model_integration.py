@@ -16,11 +16,14 @@ from typing import Dict, List, Optional, Any, Union
 from datetime import datetime
 from dataclasses import dataclass
 from enum import Enum
+import asyncio
 
 try:
     import torch
+    TORCH_AVAILABLE = True
 except ImportError:
     torch = None  # Handle missing torch gracefully
+    TORCH_AVAILABLE = False
 
 try:
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
@@ -75,11 +78,13 @@ class AIModelIntegration:
     
     def __init__(self):
         self.logger = logging.getLogger(__name__)
+        self.logger.info("AI 모델 통합 초기화 시작...")
         self.model = None
         self.tokenizer = None
         self.model_type = None
         self.device = self._get_device()
         self._initialized = False
+        self.logger.info(f"선택된 디바이스: {self.device}")
         
         # 모델 설정
         self.model_configs = {
@@ -161,10 +166,18 @@ Focus on:
     
     def _get_device(self) -> str:
         """사용 가능한 디바이스 확인"""
-        if torch.cuda.is_available():
-            return "cuda"
-        elif torch.backends.mps.is_available():
-            return "mps"
+        if not TORCH_AVAILABLE:
+            self.logger.warning("PyTorch가 설치되지 않음. CPU 모드 사용")
+            return "cpu"
+            
+        try:
+            # WSL 환경에서 CUDA 체크가 멈출 수 있으므로 안전하게 처리
+            if torch and hasattr(torch, 'cuda') and torch.cuda.is_available():
+                return "cuda"
+            elif torch and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+                return "mps"
+        except Exception as e:
+            self.logger.warning(f"디바이스 확인 중 오류: {e}")
         return "cpu"
     
     def select_model_based_on_memory(self) -> ModelType:
@@ -174,14 +187,19 @@ Focus on:
             gpu_memory = 0
             
             if self.device == "cuda":
-                # GPU 메모리 확인
-                result = subprocess.run(
-                    ["nvidia-smi", "--query-gpu=memory.free", "--format=csv,nounits,noheader"],
-                    capture_output=True,
-                    text=True
-                )
-                if result.returncode == 0:
-                    gpu_memory = int(result.stdout.strip()) / 1024  # GB
+                # GPU 메모리 확인 (타임아웃 추가)
+                try:
+                    result = subprocess.run(
+                        ["nvidia-smi", "--query-gpu=memory.free", "--format=csv,nounits,noheader"],
+                        capture_output=True,
+                        text=True,
+                        timeout=5  # 5초 타임아웃
+                    )
+                    if result.returncode == 0:
+                        gpu_memory = int(result.stdout.strip()) / 1024  # GB
+                except (subprocess.TimeoutExpired, FileNotFoundError) as e:
+                    self.logger.warning(f"nvidia-smi 실행 실패: {e}")
+                    gpu_memory = 0
             
             total_memory = available_memory + gpu_memory
             
@@ -240,6 +258,7 @@ Focus on:
         self.logger.info("더미 모델 모드로 실행")
         self.model = DummyModel(config)
         self.tokenizer = DummyTokenizer()
+        self._initialized = True  # 초기화 완료 표시
     
     async def generate_code(self, prompt: str, context: Dict[str, Any], 
                           task_type: str = "game_dev", max_length: int = 200) -> Dict[str, Any]:
@@ -295,7 +314,7 @@ Please generate high-quality code that follows best practices."""
         """모델 응답 생성"""
         if isinstance(self.model, DummyModel):
             # 더미 모델인 경우
-            return self.model.generate(prompt)
+            return await self.model.generate(prompt)
         
         # 실제 모델 사용
         inputs = self.tokenizer(prompt, return_tensors="pt").to(self.device)
@@ -657,8 +676,14 @@ public partial class Inventory : Node
 }"""
         }
     
-    def generate(self, prompt: str) -> str:
-        """더미 응답 생성"""
+    async def generate(self, prompt: str, **kwargs) -> str:
+        """더미 응답 생성 (async 지원)"""
+        # 로거를 사용하여 정보 출력 (print 대신)
+        logger = logging.getLogger(__name__)
+        logger.debug(f"AI 모델이 코드를 생성하고 있습니다... (프롬프트 길이: {len(prompt)} 문자)")
+        # async 시뮬레이션을 위한 지연
+        await asyncio.sleep(0.5)  # 0.5초로 감소
+        
         # 프롬프트에서 키워드 추출
         prompt_lower = prompt.lower()
         
@@ -668,6 +693,56 @@ public partial class Inventory : Node
             code = self.templates["shooting"]
         elif "inventory" in prompt_lower:
             code = self.templates["inventory"]
+        elif "design document" in prompt_lower:
+            # 게임 타입 확인
+            game_type = "rpg"  # 기본값
+            if "platformer" in prompt_lower:
+                game_type = "platformer"
+            elif "puzzle" in prompt_lower:
+                game_type = "puzzle"
+            elif "shooter" in prompt_lower:
+                game_type = "shooter"
+            elif "racing" in prompt_lower:
+                game_type = "racing"
+            
+            # 게임 타입별 디자인 문서
+            if game_type == "platformer":
+                code = """# 플랫폼 게임 디자인 문서
+
+## 게임 개요
+- **타이틀**: Auto Platformer
+- **장르**: 2.5D 플랫폼 액션
+- **대상**: 모든 연령층
+
+## 핵심 메커니즘
+1. **이동 시스템**: 달리기, 점프, 대시
+2. **장애물**: 함정, 움직이는 플랫폼
+3. **수집 요소**: 코인, 파워업
+4. **레벨 진행**: 스테이지별 난이도 상승
+
+## 기술 요구사항
+- 변형된 Godot 엔진 사용
+- C# 스크립팅
+- 물리 엔진 활용"""
+            else:
+                # RPG 기본 템플릿
+                code = """# RPG 게임 디자인 문서
+
+## 게임 개요
+- **타이틀**: AutoRPG
+- **장르**: 2.5D 액션 RPG
+- **대상**: 모든 연령층
+
+## 핵심 메커니즘
+1. **전투 시스템**: 실시간 액션 전투
+2. **성장 시스템**: 레벨, 스킬트리, 장비
+3. **퀘스트 시스템**: 메인/서브 퀘스트
+4. **인벤토리**: 아이템 수집 및 관리
+
+## 기술 요구사항
+- 변형된 Godot 엔진 사용
+- C# 스크립팅
+- Socket.IO 멀티플레이어 지원"""
         else:
             # 기본 템플릿
             code = """extends Node
@@ -697,7 +772,7 @@ You can customize this further based on your specific needs."""
         """로컬에 저장된 모델 로드"""
         if not AutoModelForCausalLM or not AutoTokenizer:
             self.logger.warning("Transformers library not available, using dummy model")
-            self._dummy_init()
+            self._initialize_dummy_model(config)
             return
             
         try:
@@ -736,7 +811,7 @@ You can customize this further based on your specific needs."""
         except Exception as e:
             self.logger.error(f"Failed to load model: {e}")
             self.logger.info("Falling back to dummy model")
-            self._dummy_init()
+            self._initialize_dummy_model(config)
 
 
 class DummyTokenizer:

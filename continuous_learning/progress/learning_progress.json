@@ -1,70 +1,80 @@
 {
-  "total_hours": 8.953255337222222,
-  "total_questions": 200,
+  "total_hours": 12.01111030861111,
+  "total_questions": 230,
   "total_successful": 0,
   "topics_progress": {
-    "panda3d_advanced": {
-      "questions_asked": 6,
+    "godot_advanced": {
+      "questions_asked": 9,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414467"
+      "last_studied": "2025-07-06T05:04:16.471307"
     },
     "nakama_advanced": {
-      "questions_asked": 6,
+      "questions_asked": 7,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414470"
+      "last_studied": "2025-07-05T23:51:46.502913"
     },
-    "panda3d_basics": {
-      "questions_asked": 6,
+    "godot_basics": {
+      "questions_asked": 9,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414492"
+      "last_studied": "2025-07-06T05:04:16.471427"
     },
-    "panda3d_expert_scripting": {
-      "questions_asked": 6,
+    "godot_expert_architecture": {
+      "questions_asked": 9,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414495"
+      "last_studied": "2025-07-06T05:04:16.471392"
     },
     "nakama_basics": {
       "questions_asked": 6,
       "successful_answers": 0,
       "last_studied": "2025-07-05T15:59:01.414497"
     },
-    "panda3d_expert_nodes": {
+    "godot_expert_csharp": {
       "questions_asked": 6,
       "successful_answers": 0,
       "last_studied": "2025-07-05T15:59:01.414499"
     },
-    "panda3d_networking_advanced": {
+    "socketio_advanced": {
+      "questions_asked": 7,
+      "successful_answers": 0,
+      "last_studied": "2025-07-06T03:00:04.201709"
+    },
+    "csharp_basics": {
+      "questions_asked": 9,
+      "successful_answers": 0,
+      "last_studied": "2025-07-06T05:04:16.471422"
+    },
+    "csharp_advanced": {
       "questions_asked": 6,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414501"
-    },
-    "python_basics": {
-      "questions_asked": 6,
-      "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414503"
-    },
-    "python_advanced": {
-      "questions_asked": 5,
-      "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414505"
+      "last_studied": "2025-07-06T05:04:16.471120"
     },
     "korean_terms_basic": {
-      "questions_asked": 4,
+      "questions_asked": 6,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414507"
+      "last_studied": "2025-07-06T03:00:04.201763"
     },
     "korean_terms_advanced": {
       "questions_asked": 3,
       "successful_answers": 0,
       "last_studied": "2025-07-05T15:59:01.414509"
     },
-    "panda3d_networking_basic": {
+    "socketio_basic": {
+      "questions_asked": 3,
+      "successful_answers": 0,
+      "last_studied": "2025-07-06T05:04:16.471429"
+    },
+    "godot_manipulation_advanced": {
+      "questions_asked": 1,
+      "successful_answers": 0,
+      "last_studied": "2025-07-06T03:00:04.201758"
+    },
+    "ai_optimization_advanced": {
       "questions_asked": 2,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414511"
+      "last_studied": "2025-07-06T05:04:16.471387"
     }
   },
-  "last_session_id": "session_20250705_134512",
-  "last_save_time": "2025-07-05T15:59:01.414444",
+  "last_session_id": "session_20250706_053450",
+  "last_save_time": "2025-07-06T05:34:50.908551",
   "sessions_completed": []
 }

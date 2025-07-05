@@ -1,0 +1,38 @@
+{
+  "exercise": "리소스 관리",
+  "difficulty": 5,
+  "tasks": [
+    {
+      "task": "텍스처 임포트",
+      "success": true,
+      "duration": 0.5004019737243652,
+      "error": null
+    },
+    {
+      "task": "오디오 파일 추가",
+      "success": true,
+      "duration": 0.5003876686096191,
+      "error": null
+    },
+    {
+      "task": "폰트 설정",
+      "success": true,
+      "duration": 0.5003094673156738,
+      "error": null
+    },
+    {
+      "task": "리소스 프리로드",
+      "success": true,
+      "duration": 0.5004589557647705,
+      "error": null
+    },
+    {
+      "task": "동적 로딩",
+      "success": true,
+      "duration": 0.5005552768707275,
+      "error": null
+    }
+  ],
+  "success_rate": 1.0,
+  "timestamp": "2025-07-06T04:03:15.262988"
+}

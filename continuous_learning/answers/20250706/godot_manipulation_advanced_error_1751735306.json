@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_manipulation_advanced_error_1751735306",
+  "question": "What are common errors with 고급 자동화 조작 in Python and how to fix them?",
+  "answer": "1. Mismatched parentheses, brackets, or braces: This is the most common error in programming. It might be a simple one-off typo, or it could be a deeper issue with the code.\n\n2. Syntax errors: These are usually due to misspelling a keyword or function name, or forgetting to include a colon at the end of a block of code.\n\n3. Type errors: This occurs when you try to perform an operation that is not allowed, such as trying to add a string and an integer together.\n\n4. Name errors: These are usually due to a variable or function name not being defined.\n\n5. Division by zero: This is a common error that can occur when you try to divide by zero.\n\n6. Indentation errors: These are caused by incorrect use of white space in your code. Python uses indentation to define the structure of your code, and if you don't get it right, you'll get an indentation error.\n\n7. Module not found error: This error occurs when Python can't find a module that your code is trying to import.\n\n8. Overflow errors: These are caused by numbers getting too large to fit into the available memory.\n\n9. Memory errors: These occur when a program runs out of memory. This is often caused by inefficient or improper use",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 360.9693865776062,
+  "timestamp": "2025-07-06T02:14:27.015775",
+  "topic": "고급 자동화 조작",
+  "language": "english"
+}

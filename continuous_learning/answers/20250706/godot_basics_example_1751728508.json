@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_example_1751728508",
+  "question": "Write a Python code example demonstrating Godot 기초 with comments.",
+  "answer": "import godot\n\n\nclass MyFirstGDScript(godot.Node2D):\n    def _init__(self):\n        super()._init__()\n\n    def _ready(self):\n        print(\"Hello, Godot with Python!!\")\n\n    def _process(self, delta):\n        self.position += godot.Vector2(1, 1) * delta\n\n# This is the main function that runs the script.\ndef main():\n    print(\"This is a basic example of using Godot with Python.\")\n    print(\"Godot uses nodes to create scenes and scripts to control the behavior of these nodes.\")\n    print(\"In this case, we",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5072948932647705,
+  "generation_time": 165.39841628074646,
+  "timestamp": "2025-07-06T00:17:54.353272",
+  "topic": "Godot 기초",
+  "language": "english"
+}

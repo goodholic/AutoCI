@@ -1,0 +1,11 @@
+{
+  "question_id": "panda3d_expert_scripting_example_1751725489",
+  "question": "Write a Python code example demonstrating 고급 스크립팅 기술 with comments.",
+  "answer": "```python\nimport requests\nfrom bs4 import BeautifulSoup\n\n# Making a request to the website\nr = requests.get(\"https://www.nytimes.com\")\nr.raise_for_status()\n\n# Parsing the page\nsoup = BeautifulSoup(r.text, 'html.parser')\n\n# Finding all the headlines on the page\nheadlines = soup.find_all(class_=\"e1e1d05411\")\n\n# Printing out the headlines\nfor headline in headlines:\n    print(headline.get_text())\n```\n\nYou will",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5050511360168457,
+  "generation_time": 180.84375190734863,
+  "timestamp": "2025-07-05T23:27:50.095678",
+  "topic": "고급 스크립팅 기술",
+  "language": "english"
+}

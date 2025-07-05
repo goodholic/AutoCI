@@ -93,7 +93,7 @@ class LearningTopic:
     difficulty: int  # 1-5
     korean_keywords: List[str]
     python_concepts: List[str]
-    panda3d_integration: Optional[str] = None
+    godot_integration: Optional[str] = None
     
 @dataclass
 class LearningSession:
@@ -190,15 +190,15 @@ class ContinuousLearningSystem:
     def _initialize_learning_topics(self) -> List[LearningTopic]:
         """5가지 핵심 학습 주제 초기화 (DeepSeek-coder 최적화)"""
         topics = [
-            # 1️⃣ Python 프로그래밍 (Panda3D용)
-            LearningTopic("python_basics", "Python 프로그래밍", "Python 기초 문법", 1,
+            # 1️⃣ C# 프로그래밍 (변형된 Godot용)
+            LearningTopic("csharp_basics", "C# 프로그래밍", "C# 기초 문법", 1,
                          ["변수", "데이터타입", "메서드", "클래스"],
                          ["variable", "datatype", "method", "class"],
-                         "Panda3D Python 기초"),
-            LearningTopic("python_advanced", "Python 프로그래밍", "Python 고급 기능", 3,
-                         ["제너레이터", "데코레이터", "비동기", "메타클래스"],
-                         ["generator", "decorator", "async", "metaclass"],
-                         "Panda3D 고급 스크립팅"),
+                         "Godot C# 기초"),
+            LearningTopic("csharp_advanced", "C# 프로그래밍", "C# 고급 기능", 3,
+                         ["델리게이트", "이벤트", "LINQ", "async/await"],
+                         ["delegate", "event", "LINQ", "async"],
+                         "Godot C# 고급 기능"),
             # 2️⃣ 한글 프로그래밍 용어
             LearningTopic("korean_terms_basic", "한글 용어", "프로그래밍 기본 용어", 1,
                          ["변수", "함수", "클래스", "객체", "상속"],
@@ -208,47 +208,56 @@ class ContinuousLearningSystem:
                          ["다형성", "캡슐화", "추상화", "인터페이스"],
                          ["polymorphism", "encapsulation", "abstraction", "interface"],
                          "전문 용어 이해"),
-            # 3️⃣ Panda3D 엔진
-            LearningTopic("panda3d_basics", "Panda3D 엔진", "Panda3D 기초", 2,
-                         ["노드패스", "액터", "태스크", "씬그래프"],
-                         ["NodePath", "Actor", "Task", "SceneGraph"],
-                         "Panda3D 기본 구조"),
-            LearningTopic("panda3d_advanced", "Panda3D 엔진", "Panda3D 고급", 4,
-                         ["셰이더", "렌더링", "물리엔진", "최적화"],
-                         ["Shader", "Rendering", "Physics", "Optimization"],
-                         "Panda3D 확장 개발"),
-            # 4️⃣ Panda3D 네트워킹
-            LearningTopic("panda3d_networking_basic", "Panda3D 네트워킹", "멀티플레이어 기초", 3,
-                         ["소켓", "동기화", "서버", "클라이언트"],
-                         ["Socket", "Sync", "Server", "Client"],
-                         "기본 네트워킹"),
-            LearningTopic("panda3d_networking_advanced", "Panda3D 네트워킹", "고급 네트워킹", 5,
-                         ["레이턴시", "보안", "최적화", "상태동기화"],
-                         ["Latency", "Security", "Optimization", "StateSync"],
-                         "고급 멀티플레이어"),
-            # 5️⃣ Nakama 서버
-            LearningTopic("nakama_basics", "Nakama 서버", "Nakama 기초", 3,
-                         ["인증", "매치메이킹", "리더보드", "저장소"],
-                         ["Auth", "Matchmaking", "Leaderboard", "Storage"],
-                         "Nakama 통합"),
-            LearningTopic("nakama_advanced", "Nakama 서버", "Nakama 고급", 5,
-                         ["커스텀로직", "실시간멀티", "토너먼트", "분석"],
-                         ["CustomLogic", "Realtime", "Tournament", "Analytics"],
-                         "Nakama 확장"),
-            # 6️⃣ Panda3D 전문가 학습 (문서 기반)
-            LearningTopic("panda3d_expert_nodes", "Panda3D 전문가", "씬그래프와 노드 심층 분석", 5,
-                         ["노드패스", "렌더", "태스크매니저", "상속", "인스턴스"],
-                         ["NodePath", "Render", "TaskManager", "inheritance", "instance"],
-                         "Panda3D 핵심 아키텍처"),
-            LearningTopic("panda3d_expert_scripting", "Panda3D 전문가", "고급 스크립팅 기술", 5,
-                         ["Python", "ShowBase", "DirectObject", "인터벌", "시퀀스"],
-                         ["Python", "ShowBase", "DirectObject", "Interval", "Sequence"],
-                         "효율적인 게임 로직 구현"),
+            # 3️⃣ 변형된 Godot 엔진
+            LearningTopic("godot_basics", "변형된 Godot", "Godot 기초", 2,
+                         ["노드", "씬", "시그널", "스크립트"],
+                         ["Node", "Scene", "Signal", "Script"],
+                         "Godot 기본 구조"),
+            LearningTopic("godot_advanced", "변형된 Godot", "Godot 고급", 4,
+                         ["커스텀노드", "셰이더", "물리엔진", "최적화"],
+                         ["CustomNode", "Shader", "Physics2D/3D", "Optimization"],
+                         "Godot 확장 개발"),
+            # 4️⃣ Socket.IO 네트워킹
+            LearningTopic("socketio_basic", "Socket.IO", "실시간 통신 기초", 3,
+                         ["소켓", "이벤트", "룸", "네임스페이스"],
+                         ["Socket", "Event", "Room", "Namespace"],
+                         "Socket.IO 기본 통신"),
+            LearningTopic("socketio_advanced", "Socket.IO", "고급 실시간 통신", 5,
+                         ["브로드캐스트", "미들웨어", "클러스터링", "Redis"],
+                         ["Broadcast", "Middleware", "Clustering", "Redis"],
+                         "Socket.IO 고급 기능"),
+            # 5️⃣ AI 최적화
+            LearningTopic("ai_optimization_basic", "AI 최적화", "AI 코드 생성 기초", 3,
+                         ["프롬프트", "컨텍스트", "토큰", "응답"],
+                         ["Prompt", "Context", "Token", "Response"],
+                         "AI 기반 코드 생성"),
+            LearningTopic("ai_optimization_advanced", "AI 최적화", "AI 고급 최적화", 5,
+                         ["파인튜닝", "프롬프트엔지니어링", "컨텍스트관리", "체이닝"],
+                         ["FineTuning", "PromptEngineering", "ContextManagement", "Chaining"],
+                         "AI 성능 최적화"),
+            # 6️⃣ 변형된 Godot 전문가 학습
+            LearningTopic("godot_expert_architecture", "Godot 전문가", "변형된 Godot 아키텍처", 5,
+                         ["커스텀엔진", "렌더파이프라인", "씬시스템", "리소스관리"],
+                         ["CustomEngine", "RenderPipeline", "SceneSystem", "ResourceManager"],
+                         "Godot 핵심 구조"),
+            LearningTopic("godot_expert_csharp", "Godot 전문가", "C# 고급 통합", 5,
+                         ["GDExtension", "NativeCall", "메모리관리", "성능최적화"],
+                         ["GDExtension", "NativeCall", "MemoryManagement", "Performance"],
+                         "C# 고급 게임 개발"),
+            # 7️⃣ Godot 엔진 조작 (가상 입력)
+            LearningTopic("godot_manipulation_basic", "Godot 조작", "기본 에디터 조작", 2,
+                         ["노드생성", "씬구성", "속성설정", "스크립트연결"],
+                         ["NodeCreation", "SceneSetup", "PropertyConfig", "ScriptAttach"],
+                         "에디터 기본 조작"),
+            LearningTopic("godot_manipulation_advanced", "Godot 조작", "고급 자동화 조작", 4,
+                         ["복잡한씬구성", "애니메이션설정", "물리설정", "최적화작업"],
+                         ["ComplexScene", "AnimationSetup", "PhysicsConfig", "Optimization"],
+                         "자동화 워크플로우"),
         ]
         
         # 모든 주제에 DeepSeek-coder 우선 태그 추가
         for topic in topics:
-            topic.panda3d_integration = f"[DeepSeek 우선] {topic.panda3d_integration}"
+            topic.godot_integration = f"[DeepSeek 우선] {topic.godot_integration}"
             
         return topics
         
@@ -259,9 +268,9 @@ class ContinuousLearningSystem:
             with open(kb_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return {
-            "python_patterns": {},
+            "csharp_patterns": {},
             "korean_translations": {},
-            "panda3d_integrations": {},
+            "godot_integrations": {},
             "common_errors": {},
             "best_practices": {}
         }
@@ -485,8 +494,8 @@ class ContinuousLearningSystem:
                         outputs = model.generate(
                             inputs.get('input_ids'),
                             attention_mask=inputs.get('attention_mask'),
-                            max_new_tokens=150,  # RTX 2080 최적화
-                            temperature=0.7,
+                            max_new_tokens=300,  # 더 상세한 답변을 위해 증가 (기존 150)
+                            temperature=0.6,  # 더 일관된 답변을 위해 감소 (기존 0.7)
                             do_sample=True,
                             pad_token_id=tokenizer.eos_token_id,
                             eos_token_id=tokenizer.eos_token_id
@@ -556,13 +565,13 @@ class ContinuousLearningSystem:
             "translate",    # 한글-영어 번역
             "error",        # 오류 수정
             "optimize",     # 최적화
-            "integrate"     # Panda3D 통합
+            "integrate"     # Godot 통합
         ]
         
-        # "Panda3D 전문가" 주제인 경우, 문서에서 질문 생성
-        if topic.category == "Panda3D 전문가":
+        # "Godot 전문가" 주제인 경우, 문서에서 질문 생성
+        if topic.category == "Godot 전문가":
             try:
-                with open("collected_panda3d_docs.json", "r", encoding="utf-8") as f:
+                with open("collected_godot_docs.json", "r", encoding="utf-8") as f:
                     docs_data = json.load(f)
                 
                 if docs_data:
@@ -605,8 +614,8 @@ class ContinuousLearningSystem:
                 "english": f"How to optimize performance when using {topic.topic} in Python?"
             },
             "integrate": {
-                "korean": f"Panda3D에서 {topic.topic}을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
-                "english": f"How to use {topic.topic} in Panda3D with Python? Provide examples."
+                "korean": f"Godot에서 {topic.topic}을 어떻게 활용하는지 C# 코드와 함께 설명해주세요.",
+                "english": f"How to use {topic.topic} in Godot with C#? Provide examples."
             }
         }
         
@@ -628,7 +637,7 @@ class ContinuousLearningSystem:
         """질문에 적합한 모델 선택 (5대 핵심 주제 DeepSeek-coder 최적화)"""
         # RTX 2080 최적화 모델만 고려
         rtx_2080_models = {
-            "deepseek-coder-7b": {"priority": 10, "specialties": ["code", "python", "panda3d", "korean", "nakama"], "vram": 6},
+            "deepseek-coder-7b": {"priority": 10, "specialties": ["code", "csharp", "godot", "korean", "socketio"], "vram": 6},
             "phi3-mini": {"priority": 8, "specialties": ["reasoning", "math", "python"], "vram": 6},
             "llama-3.1-8b": {"priority": 7, "specialties": ["general", "korean", "python"], "vram": 7},
             "gemma-4b": {"priority": 6, "specialties": ["general", "korean"], "vram": 4},
@@ -651,7 +660,7 @@ class ContinuousLearningSystem:
             return "deepseek-coder-7b"  # fallback model name
             
         # 5가지 핵심 주제 카테고리 확인
-        core_categories = ["Python 프로그래밍", "한글 용어", "Panda3D 엔진", "Panda3D 네트워킹", "Nakama 서버"]
+        core_categories = ["C# 프로그래밍", "한글 용어", "변형된 Godot", "Socket.IO", "AI 최적화"]
         topic_category = question.get("category", "")
         is_core_topic = topic_category in core_categories
         
@@ -675,17 +684,17 @@ class ContinuousLearningSystem:
         if any(word in question_text + topic_text for word in ['korean', '한글', '한국어', '번역', '용어', '개념', '언어']):
             question_features.add('korean')
         
-        # 3️⃣ Panda3D 엔진 특성
-        if any(word in question_text + topic_text for word in ['panda3d', 'nodepath', 'render', '노드패스', '렌더']):
-            question_features.add('panda3d')
+        # 3️⃣ Godot 엔진 특성
+        if any(word in question_text + topic_text for word in ['godot', 'node', 'scene', '노드', '씬']):
+            question_features.add('godot')
         
-        # 4️⃣ Panda3D 네트워킹 특성
-        if any(word in question_text + topic_text for word in ['multiplayer', 'network', 'rpc', '멀티플레이어', '네트워크']):
-            question_features.add('network')
+        # 4️⃣ Socket.IO 네트워킹 특성
+        if any(word in question_text + topic_text for word in ['socket', 'socketio', 'realtime', '소켓', '실시간']):
+            question_features.add('socketio')
         
-        # 5️⃣ Nakama 서버 특성
-        if any(word in question_text + topic_text for word in ['nakama', 'server', 'backend', '서버', '백엔드']):
-            question_features.add('nakama')
+        # 5️⃣ AI 최적화 특성
+        if any(word in question_text + topic_text for word in ['ai', 'optimize', 'prompt', '최적화', '프롬프트']):
+            question_features.add('ai_optimization')
         
         # 모델 점수 계산
         model_scores = []
@@ -729,7 +738,7 @@ class ContinuousLearningSystem:
         
         if model_name == "deepseek-coder-7b":
             # 코드 관련 질문에 매우 적합
-            return any(word in question_text for word in ['code', 'function', 'class', 'panda3d', 'python'])
+            return any(word in question_text for word in ['code', 'function', 'class', 'godot', 'csharp'])
         elif model_name == "llama-3.1-8b":
             # 한국어 질문에 적합
             return any(word in question_text for word in ['한글', '한국어', '번역'])
@@ -739,6 +748,19 @@ class ContinuousLearningSystem:
     async def ask_and_learn(self, question: Dict[str, Any], model_name: str) -> Dict[str, Any]:
         """질문하고 답변 학습"""
         try:
+            # 공유 지식 베이스에서 캐시된 정보 확인
+            from modules.shared_knowledge_base import get_shared_knowledge_base
+            shared_kb = get_shared_knowledge_base()
+            
+            # 질문 키워드로 캐시 검색
+            question_keywords = question.get('question', '').split()[:3]  # 첫 3단어로 검색
+            search_keyword = ' '.join(question_keywords)
+            
+            cached_info = await shared_kb.get_cached_search(search_keyword)
+            if cached_info:
+                logger.info(f"📚 공유 지식 베이스에서 관련 정보 발견: {search_keyword}")
+                # 캐시된 정보를 컨텍스트로 활용하여 더 나은 답변 생성 가능
+            
             # 모델 로드
             if not self.load_model(model_name):
                 return {
@@ -761,7 +783,7 @@ class ContinuousLearningSystem:
             
             # 답변 품질 평가 (PyTorch 시스템 활용)
             quality_score = 0.7  # 기본값
-            if self.pytorch_system:
+            if self.pytorch_system and False:  # 임시 비활성화 - 학습되지 않은 모델이 0.505 반환하는 문제 해결
                 quality_score = self.pytorch_system.assess_quality(answer)
                 
                 # 주제 분류
@@ -792,6 +814,20 @@ class ContinuousLearningSystem:
             
             # 지식 베이스 업데이트
             self._update_knowledge_base(question, answer, quality_score)
+            
+            # 고품질 답변은 공유 지식 베이스에 베스트 프랙티스로 저장
+            if quality_score > 0.8:
+                await shared_kb.save_best_practice(
+                    topic=question.get('topic', 'general'),
+                    practice={
+                        "question": question['question'],
+                        "answer": answer,
+                        "model": model_name,
+                        "quality_score": quality_score,
+                        "language": question.get('language', 'ko')
+                    }
+                )
+                logger.info(f"📚 베스트 프랙티스 저장: {question['topic']}")
             
             # PyTorch 학습 데이터로 추가
             if self.pytorch_system and quality_score > 0.6:

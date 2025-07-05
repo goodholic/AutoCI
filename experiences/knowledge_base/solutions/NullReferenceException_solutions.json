@@ -1,0 +1,11 @@
+[
+  {
+    "timestamp": "2025-07-06T05:25:06.881188",
+    "error_patterns": [
+      "Object reference not set to an instance"
+    ],
+    "solution": "null 체크 추가: if (myObject != null)",
+    "success": true,
+    "usage_count": 0
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_basic_example_1751728694",
+  "question": "Write a Python code example demonstrating 실시간 통신 기초 with comments.",
+  "answer": "In this example, we will use the socket programming to create a basic chat application.\n\n\n```python\n# Import the socket library\nimport socket\nimport threading\n\n# Define the server host and port\nSERVER_HOST = 'localhost'\nSERVER_PORT = 5000\n\n# Create a socket object\nserver_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)\n\n# Bind the socket to a specific address and port\nserver_socket.bind((SERVER_HOST, SERVER_PORT))\n\n# Start listening for connections\nserver_socket.listen(5)\nprint(f'Listening on {SERVER",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5073056221008301,
+  "generation_time": 171.0166552066803,
+  "timestamp": "2025-07-06T00:21:05.548786",
+  "topic": "실시간 통신 기초",
+  "language": "english"
+}

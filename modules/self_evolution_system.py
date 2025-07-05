@@ -16,7 +16,10 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass, asdict
 from collections import defaultdict
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    np = None
 from concurrent.futures import ThreadPoolExecutor
 
 # 로깅 설정
@@ -968,10 +971,39 @@ AutoCI가 다른 사용자들의 유사한 질문과 검증된 솔루션을 분�
 
 
     async def collect_experiences(self) -> List[Dict[str, Any]]:
-        """경험 데이터 수집 (학습을 위한 질문-답변 쌍)"""
+        """경험 데이터 수집 (학습을 위한 질문-답변 쌍 + 게임 개발 경험)"""
         experiences = []
         
-        # 저장된 질문-응답 쌍에서 학습 데이터 수집
+        # 1. 게임 개발 경험 수집
+        game_dev_dir = Path("experiences") / "game_development"
+        if game_dev_dir.exists():
+            for exp_file in game_dev_dir.glob("*.json"):
+                try:
+                    with open(exp_file, 'r', encoding='utf-8') as f:
+                        game_exp = json.load(f)
+                    
+                    # 게임 개발 경험을 학습 형식으로 변환
+                    experience = {
+                        'question': f"{game_exp['game_type']} 게임에서 {game_exp['feature']} 기능을 어떻게 구현하나요?",
+                        'answer': game_exp.get('code_generated', game_exp.get('lesson_learned', '')),
+                        'category': '게임 개발 실전',
+                        'tags': [game_exp['game_type'], game_exp['feature'], game_exp['phase']],
+                        'quality_score': game_exp.get('quality_score', 0.5),
+                        'topic': f"{game_exp['game_type']} - {game_exp['feature']}",
+                        'timestamp': game_exp.get('timestamp'),
+                        'context': {
+                            'success': game_exp.get('success', False),
+                            'error': game_exp.get('error', ''),
+                            'duration': game_exp.get('duration', 0)
+                        }
+                    }
+                    
+                    experiences.append(experience)
+                    
+                except Exception as e:
+                    logger.error(f"게임 개발 경험 로드 오류 {exp_file}: {e}")
+        
+        # 2. 저장된 질문-응답 쌍에서 학습 데이터 수집
         for q_file in self.questions_dir.glob("*.json"):
             try:
                 with open(q_file, 'r', encoding='utf-8') as f:
@@ -1014,7 +1046,10 @@ AutoCI가 다른 사용자들의 유사한 질문과 검증된 솔루션을 분�
         if not experiences:
             experiences = self._generate_sample_experiences()
         
-        logger.info(f"수집된 경험 데이터: {len(experiences)}개")
+        # 게임 개발 경험과 일반 학습 경험 통계
+        game_dev_exp = [exp for exp in experiences if exp.get('category') == '게임 개발 실전']
+        logger.info(f"수집된 경험 데이터: 총 {len(experiences)}개 (게임 개발: {len(game_dev_exp)}개)")
+        
         return experiences
     
     def _generate_sample_experiences(self) -> List[Dict[str, Any]]:

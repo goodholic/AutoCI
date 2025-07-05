@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_integrate_1751727659",
+  "question": "Panda3D에서 프로그래밍 기본 용어을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+  "answer": "```python\nfrom direct.showbase.ShowBase import ShowBase\nfrom panda3d.core import WindowProperties\n\nclass MyApp(ShowBase):\n    def __init__(self):\n        ShowBase.__init__(self)\n        self.cam.set_pos(0, -10, 5)\n        self.cam.look_at(0, 0, 0)\n        self.cam.set_fov(90)\n\n        properties = WindowProperties()\n        properties.set_size(800, 600)\n        self.win.request_properties(properties)\n\napp = MyApp()",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5050524473190308,
+  "generation_time": 323.8248269557953,
+  "timestamp": "2025-07-06T00:06:23.308942",
+  "topic": "프로그래밍 기본 용어",
+  "language": "korean"
+}

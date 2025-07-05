@@ -1,0 +1,24 @@
+{
+  "total_gaps": 2,
+  "auto_filled": 1,
+  "auto_actions": [
+    {
+      "gap": "learning_data_csharp_advanced",
+      "action": "auto_fixed",
+      "timestamp": "2025-07-06T05:02:45.249496"
+    }
+  ],
+  "manual_actions": [
+    {
+      "gap": "project_quality",
+      "reason": "manual_intervention_required",
+      "suggested_actions": [
+        "기초 학습 강화",
+        "단순한 프로젝트부터 시작",
+        "오류 패턴 분석 및 해결"
+      ]
+    }
+  ],
+  "success_rate": 0.5,
+  "timestamp": "2025-07-06T05:02:45.249781"
+}

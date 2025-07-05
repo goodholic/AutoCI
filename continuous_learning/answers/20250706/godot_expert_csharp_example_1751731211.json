@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_csharp_example_1751731211",
+  "question": "Write a Python code example demonstrating C# 고급 통합 with comments.",
+  "answer": "```csharp\nusing System;\nusing System.IO;\nusing System.Net;\nusing System.Net.Mail;\nusing System.Net.Mime;\nusing Microsoft.CSharp.RuntimeBinder;\n\nnamespace CSharpAdvancedIntegration\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            // 메일 보내기\n            SendEmail();\n\n            // 파일 읽기\n            ReadFile();\n\n            // 동적 바인딩 시도\n            try\n            {\n                var binder = (CallSite<Func<CallSite, object, object>>)DynamicBinding.Bind(null, typeof(Program), \"NotExistingProperty\");\n                var result = binder.Target(binder.Site, new Program());\n            }\n            catch (RuntimeBinderException)\n            {\n                Console.WriteLine(\"속성이 존재하지 않습니다.\");\n            }\n\n            Console.Read();\n        }\n\n        static void SendEmail()\n        {\n            var sm",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 356.11190128326416,
+  "timestamp": "2025-07-06T01:06:07.946744",
+  "topic": "C# 고급 통합",
+  "language": "english"
+}

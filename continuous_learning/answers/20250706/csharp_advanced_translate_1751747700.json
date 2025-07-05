@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_advanced_translate_1751747700",
+  "question": "Translate and explain this Korean term in Python context: LINQ",
+  "answer": "in C#.\n\nLexical translation: 임시 필터링\n\nTranslation: Temporarily filtering\n\nExplanation:\nThe term '임시 필터링' is a type of filtering data in a collection. It's a way to hide or exclude some elements from the collection based on certain conditions. This is done in a temporary manner, as the original data collection is not modified. \n\nIn Python, the concept is similar. We can use list comprehension or built-in functions like filter() or lambda functions to temporarily filter data in a list.\n\nHere is an example in Python:\n\n```python\n# Original data list\ndata = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n# Temporarily filter out even numbers\nfiltered_data = [num for num in data if num % 2 != 0]\n\nprint(filtered_data)  # Output: [1, 3, 5, 7, 9]\n```\n\nIn this example, we're using a list comprehension to create a new list that only includes the odd numbers from the original list. The condition `num % 2 != 0",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 329.6085591316223,
+  "timestamp": "2025-07-06T05:43:11.565544",
+  "topic": "C# 고급 기능",
+  "language": "english"
+}

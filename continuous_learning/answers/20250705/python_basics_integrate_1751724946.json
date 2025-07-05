@@ -1,0 +1,11 @@
+{
+  "question_id": "python_basics_integrate_1751724946",
+  "question": "Panda3D에서 Python 기초 문법을 어떻게 활용하는지 Python 코드와 함께 설명해주세요.",
+  "answer": "panda3d 에서 제공하는 기본 라이브러리를 사용하면서, 기본적인 문법을 학습하면서 설명을 드리겠습니다.\n\n```python\nfrom direct.showbase.ShowBase import ShowBase",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5050685405731201,
+  "generation_time": 185.04051184654236,
+  "timestamp": "2025-07-05T23:21:20.691038",
+  "topic": "Python 기초 문법",
+  "language": "korean"
+}

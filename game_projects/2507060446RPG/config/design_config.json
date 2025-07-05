@@ -1,0 +1,33 @@
+{
+  "color_palette": [
+    "#FF6B6B",
+    "#4ECDC4",
+    "#45B7D1",
+    "#96CEB4",
+    "#FECA57"
+  ],
+  "ui_layout": {
+    "main_menu": {
+      "buttons": [
+        "Play",
+        "Options",
+        "Exit"
+      ]
+    },
+    "hud": {
+      "elements": [
+        "score",
+        "lives",
+        "timer"
+      ]
+    },
+    "pause_menu": {
+      "buttons": [
+        "Resume",
+        "Restart",
+        "Main Menu"
+      ]
+    }
+  },
+  "art_style": "pixel"
+}

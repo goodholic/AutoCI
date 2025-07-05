@@ -1,0 +1,10 @@
+[
+  {
+    "title": "오브젝트 풀링",
+    "description": "자주 생성/삭제되는 오브젝트는 풀링 사용",
+    "code_example": "ObjectPool<Bullet> bulletPool = new ObjectPool<Bullet>();",
+    "performance_gain": "30-50% 성능 향상",
+    "timestamp": "2025-07-06T05:25:06.898204",
+    "topic": "Godot C# 최적화"
+  }
+]

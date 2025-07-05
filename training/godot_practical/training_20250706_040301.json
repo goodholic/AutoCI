@@ -1,0 +1,38 @@
+{
+  "exercise": "UI 구성",
+  "difficulty": 3,
+  "tasks": [
+    {
+      "task": "Control 노드 생성",
+      "success": true,
+      "duration": 0.5004003047943115,
+      "error": null
+    },
+    {
+      "task": "Button 추가",
+      "success": true,
+      "duration": 0.5005700588226318,
+      "error": null
+    },
+    {
+      "task": "Label 추가",
+      "success": true,
+      "duration": 0.5005152225494385,
+      "error": null
+    },
+    {
+      "task": "레이아웃 조정",
+      "success": true,
+      "duration": 0.500471830368042,
+      "error": null
+    },
+    {
+      "task": "버튼 클릭 이벤트 연결",
+      "success": true,
+      "duration": 0.501140832901001,
+      "error": null
+    }
+  ],
+  "success_rate": 1.0,
+  "timestamp": "2025-07-06T04:03:01.584896"
+}

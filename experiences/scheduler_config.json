@@ -1,0 +1,11 @@
+{
+  "next_learning_session": "2025-07-06T06:26:39.857648",
+  "learning_interval_hours": 2,
+  "auto_create_interval_hours": 6,
+  "scheduled_tasks": [
+    "autoci learn (매 2시간)",
+    "autoci create (매 6시간)",
+    "데이터 정리 (매 12시간)",
+    "조언 업데이트 (매 24시간)"
+  ]
+}

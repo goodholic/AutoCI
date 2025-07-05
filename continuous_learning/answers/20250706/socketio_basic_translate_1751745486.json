@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_basic_translate_1751745486",
+  "question": "다음 Python 개념을 한글로 번역하고 설명하세요: Room",
+  "answer": "ba\n\n\nRoomba는 로봇으로, 집안을 청소하고 정리하는 데 사용된다. 이 로봇은 자동으로 집을 청소하고 정리하는 기능을 가지고 있다. \n\n다음은 Roomba를 Python으로 설명하는 코드이다.\n\n```python\nclass Roomba:\n\n    def __init__(self):\n        self.battery_life = 100\n        self.is_on = False\n        self.is_dustbin_full = False\n        self.is_cleaning = False\n\n    def turn_on(self):\n        self.is_on = True\n\n    def turn_off(self):",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7,
+  "generation_time": 369.54224038124084,
+  "timestamp": "2025-07-06T05:04:16.461178",
+  "topic": "실시간 통신 기초",
+  "language": "korean"
+}
