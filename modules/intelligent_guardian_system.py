@@ -60,12 +60,15 @@ class SystemMonitoringState:
     """시스템 모니터링 상태"""
     autoci_learn_running: bool
     autoci_create_running: bool
+    autoci_resume_running: bool
     last_learn_session: Optional[datetime]
     last_create_session: Optional[datetime]
+    last_resume_session: Optional[datetime]
     total_monitored_time: float
     detected_repetitions: int
     filled_knowledge_gaps: int
     pytorch_training_sessions: int
+    godot_projects_monitored: List[str]
 
 class IntelligentGuardianSystem:
     """AutoCI 지능형 가디언 - 24시간 감시 및 최적화 시스템"""
@@ -90,12 +93,15 @@ class IntelligentGuardianSystem:
         self.monitoring_state = SystemMonitoringState(
             autoci_learn_running=False,
             autoci_create_running=False,
+            autoci_resume_running=False,
             last_learn_session=None,
             last_create_session=None,
+            last_resume_session=None,
             total_monitored_time=0.0,
             detected_repetitions=0,
             filled_knowledge_gaps=0,
-            pytorch_training_sessions=0
+            pytorch_training_sessions=0,
+            godot_projects_monitored=[]
         )
         
         # 학습 진행 상황 추적
@@ -153,6 +159,7 @@ class IntelligentGuardianSystem:
                 # learn/create 프로세스 확인
                 learn_running = any('learn' in str(proc['cmdline']) for proc in autoci_processes)
                 create_running = any('create' in str(proc['cmdline']) for proc in autoci_processes)
+                resume_running = any('resume' in str(proc['cmdline']) for proc in autoci_processes)
                 
                 # 상태 업데이트
                 if learn_running and not self.monitoring_state.autoci_learn_running:
@@ -167,6 +174,12 @@ class IntelligentGuardianSystem:
                     logger.info("🎮 autoci create 세션 감지됨")
                     await self._on_create_session_start()
                 
+                if resume_running and not self.monitoring_state.autoci_resume_running:
+                    self.monitoring_state.autoci_resume_running = True
+                    self.monitoring_state.last_resume_session = datetime.now()
+                    logger.info("🔄 autoci resume 세션 감지됨")
+                    await self._on_resume_session_start()
+                
                 if not learn_running and self.monitoring_state.autoci_learn_running:
                     self.monitoring_state.autoci_learn_running = False
                     logger.info("📚 autoci learn 세션 종료됨")
@@ -176,6 +189,11 @@ class IntelligentGuardianSystem:
                     self.monitoring_state.autoci_create_running = False
                     logger.info("🎮 autoci create 세션 종료됨")
                     await self._on_create_session_end()
+                
+                if not resume_running and self.monitoring_state.autoci_resume_running:
+                    self.monitoring_state.autoci_resume_running = False
+                    logger.info("🔄 autoci resume 세션 종료됨")
+                    await self._on_resume_session_end()
                 
                 # 모니터링 시간 업데이트
                 self.monitoring_state.total_monitored_time += 5
@@ -858,6 +876,101 @@ class IntelligentGuardianSystem:
         
         return advice
     
+    async def _on_learn_session_start(self):
+        """autoci learn 세션 시작 시 처리"""
+        logger.info("📚 학습 세션 모니터링 시작")
+        # 학습 데이터 디렉토리 모니터링 준비
+        self.current_learning_progress = LearningProgress(
+            session_id=f"learn_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            start_time=datetime.now(),
+            last_activity=datetime.now(),
+            total_learning_time=0.0,
+            quality_score=0.0,
+            repetitive_patterns=[],
+            knowledge_gaps=[],
+            learning_efficiency=1.0,
+            next_recommended_action="학습 진행 중..."
+        )
+    
+    async def _on_learn_session_end(self):
+        """autoci learn 세션 종료 시 처리"""
+        logger.info("📚 학습 세션 분석 중...")
+        if self.current_learning_progress:
+            # 학습 세션 결과 저장
+            session_file = self.guardian_dir / f"learn_session_{self.current_learning_progress.session_id}.json"
+            with open(session_file, 'w', encoding='utf-8') as f:
+                json.dump(asdict(self.current_learning_progress), f, indent=2, ensure_ascii=False)
+    
+    async def _on_create_session_start(self):
+        """autoci create 세션 시작 시 처리"""
+        logger.info("🎮 게임 생성 세션 모니터링 시작")
+        # 게임 프로젝트 모니터링 준비
+        self.create_session_data = {
+            "session_id": f"create_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            "start_time": datetime.now().isoformat(),
+            "game_type": "unknown",
+            "progress": []
+        }
+    
+    async def _on_create_session_end(self):
+        """autoci create 세션 종료 시 처리"""
+        logger.info("🎮 게임 생성 세션 분석 중...")
+        if hasattr(self, 'create_session_data'):
+            # 생성 세션 결과 저장
+            session_file = self.guardian_dir / f"create_session_{self.create_session_data['session_id']}.json"
+            with open(session_file, 'w', encoding='utf-8') as f:
+                json.dump(self.create_session_data, f, indent=2, ensure_ascii=False)
+    
+    async def _on_resume_session_start(self):
+        """autoci resume 세션 시작 시 처리"""
+        logger.info("🔄 기존 프로젝트 개발 세션 모니터링 시작")
+        # Godot 프로젝트 디렉토리 모니터링
+        self.resume_session_data = {
+            "session_id": f"resume_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+            "start_time": datetime.now().isoformat(),
+            "project_path": None,
+            "game_type": None,
+            "improvements": [],
+            "files_modified": []
+        }
+        
+        # Godot 프로젝트 경로 찾기
+        godot_projects_path = Path("/home/super3720/Documents/Godot/Projects")
+        if godot_projects_path.exists():
+            for project_dir in godot_projects_path.iterdir():
+                if project_dir.is_dir() and (project_dir / "project.godot").exists():
+                    # 가장 최근 수정된 프로젝트 추적
+                    if project_dir.name not in self.monitoring_state.godot_projects_monitored:
+                        self.monitoring_state.godot_projects_monitored.append(project_dir.name)
+                        self.resume_session_data["project_path"] = str(project_dir)
+                        logger.info(f"📁 Godot 프로젝트 감지: {project_dir.name}")
+    
+    async def _on_resume_session_end(self):
+        """autoci resume 세션 종료 시 처리"""
+        logger.info("🔄 기존 프로젝트 개발 세션 분석 중...")
+        if hasattr(self, 'resume_session_data'):
+            # 프로젝트 개선 사항 분석
+            if self.resume_session_data["project_path"]:
+                project_path = Path(self.resume_session_data["project_path"])
+                
+                # 수정된 파일 찾기
+                for file_path in project_path.rglob("*.gd"):  # GDScript files
+                    mod_time = datetime.fromtimestamp(file_path.stat().st_mtime)
+                    if mod_time > datetime.fromisoformat(self.resume_session_data["start_time"]):
+                        self.resume_session_data["files_modified"].append(str(file_path))
+                
+                for file_path in project_path.rglob("*.tscn"):  # Scene files
+                    mod_time = datetime.fromtimestamp(file_path.stat().st_mtime)
+                    if mod_time > datetime.fromisoformat(self.resume_session_data["start_time"]):
+                        self.resume_session_data["files_modified"].append(str(file_path))
+            
+            # 세션 결과 저장
+            session_file = self.guardian_dir / f"resume_session_{self.resume_session_data['session_id']}.json"
+            with open(session_file, 'w', encoding='utf-8') as f:
+                json.dump(self.resume_session_data, f, indent=2, ensure_ascii=False)
+            
+            logger.info(f"📝 수정된 파일 수: {len(self.resume_session_data['files_modified'])}")
+    
     async def stop_guardian_mode(self):
         """가디언 모드 종료"""
         logger.info("🛡️ 가디언 시스템 종료 중...")
@@ -870,9 +983,11 @@ class IntelligentGuardianSystem:
             "detected_repetitions": self.monitoring_state.detected_repetitions,
             "filled_knowledge_gaps": self.monitoring_state.filled_knowledge_gaps,
             "pytorch_training_sessions": self.monitoring_state.pytorch_training_sessions,
+            "godot_projects_monitored": self.monitoring_state.godot_projects_monitored,
             "final_summary": "AutoCI 지능형 가디언 세션 완료",
             "last_learn_session": self.monitoring_state.last_learn_session.isoformat() if self.monitoring_state.last_learn_session else None,
-            "last_create_session": self.monitoring_state.last_create_session.isoformat() if self.monitoring_state.last_create_session else None
+            "last_create_session": self.monitoring_state.last_create_session.isoformat() if self.monitoring_state.last_create_session else None,
+            "last_resume_session": self.monitoring_state.last_resume_session.isoformat() if self.monitoring_state.last_resume_session else None
         }
         
         final_report_file = self.guardian_dir / f"final_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"

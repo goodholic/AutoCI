@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_explain_1751816594",
+  "question": "초보자도 이해할 수 있도록 Godot 기초의 스크립트, 시그널를 비유를 들어 설명해주세요.",
+  "answer": "시그널은 안내장(Signal)과 같다고 할 수 있다. 어떤 일이 발생했는지 알려주는 안내장이라고 생각하면 된다. 예를 들어, 버튼을 누르면 무언가가 발생한다는 신호를 받고 싶다면, 버튼에 시그널을 연결하면 된다.\n\n스크립트는 지도(Map)�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.551609765291214,
+  "generation_time": 296.486154794693,
+  "timestamp": "2025-07-07T00:48:11.466243",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

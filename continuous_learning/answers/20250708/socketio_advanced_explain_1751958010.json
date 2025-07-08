@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_advanced_explain_1751958010",
+  "question": "[데이터 분석 도구 개발 상황] 고급 실시간 통신의 Redis 개념을 적절한 예제와 함께 상세히 설명해주세요.",
+  "answer": "Redis는 메모리 기반의 오픈 소스 키-값 저장소로, 빠른 데이터 처리를 위해 설계되었습니다. 빠른 속도, 안전한 복제, 높은 성능, 다양한 자료구조를 지원하는 등 다양한 기능을 제공합니다. 실시간 데이터를 처리하는 데 적합한 서�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6019799101352692,
+  "generation_time": 304.70418524742126,
+  "timestamp": "2025-07-08T16:05:15.355219",
+  "topic": "고급 실시간 통신",
+  "language": "korean"
+}

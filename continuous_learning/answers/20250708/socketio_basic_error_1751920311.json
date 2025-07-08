@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_basic_error_1751920311",
+  "question": "Common Room, Namespace errors in 실시간 통신 기초 and how to fix them.",
+  "answer": "A: The issue is that you're trying to create a new instance of a class within a loop, but the class doesn't have a constructor that takes no arguments (the default constructor). So, you have to provide a constructor that takes one argument:\npublic class ChatRoom {\n    String roomName;\n    String namespace;\n\n    public ChatRoom(String namespace) {\n        this.namespace = namespace;\n    }\n}\n\nThen, in your loop you can create a new instance of ChatRoom like this:\nfor (int i = 0; i < rooms.length; i++) {\n    ChatRoom chatRoom = new ChatRoom(rooms[i]);\n    // rest of your code\n}\n\n\nA: You need to define a constructor for your ChatRoom class. A constructor is a special method that is used to initialize objects. The constructor's name must be the same as the class name, and it cannot have a return type (like void).\npublic class ChatRoom {\n    String roomName;\n    String namespace;\n\n    public ChatRoom(String namespace) {  // <-- This is the constructor\n        this.namespace = namespace;\n    }\n}\n\nThen, you can instantiate your objects like this:\nfor (int i = 0; i < rooms.length; i++",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.631626889705658,
+  "generation_time": 292.8007462024689,
+  "timestamp": "2025-07-08T05:36:44.734337",
+  "topic": "실시간 통신 기초",
+  "language": "english"
+}

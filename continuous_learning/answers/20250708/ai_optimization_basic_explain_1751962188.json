@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_basic_explain_1751962188",
+  "question": "Deep dive into AI 코드 생성 기초 architecture, especially Prompt, Token components.",
+  "answer": "## Prerequisites\n\n- Basic understanding of AI, Machine Learning, and programming\n- Python environment with Jupyter Notebook installed\n- Basic knowledge of libraries like NumPy, Pandas, Matplotlib, etc.\n\n## Introduction\n\nArtificial Intelligence (AI) is a broad field that involves the creation of intelligent machines capable of performing tasks that would typically require human intelligence. AI is based on the concept of machine learning, which is a subset of machine learning.\n\nIn this tutorial, we will explore the basics of AI, machine learning, and programming. We will focus on a specific tool called Python, which is widely used in the field of AI and machine learning.\n\n## Prompt and Token\n\nIn the context of AI, a prompt is a message or input given to an AI system to guide its output. A token is a unit of text that the AI system can process, and it's often a word or a sentence.\n\n## Architecture\n\n### 1. Prompt\n\nThe prompt is the input that the AI system receives. It's the information that the AI uses to generate its output. It could be a question, a statement, or a request. For example:\n\n```python\nprompt = \"What is the capital of France?\"\n```\n\n### 2. Token\n\nTokens are the units of text that the AI",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7243707036972045,
+  "generation_time": 362.83828926086426,
+  "timestamp": "2025-07-08T17:15:51.856052",
+  "topic": "AI 코드 생성 기초",
+  "language": "english"
+}

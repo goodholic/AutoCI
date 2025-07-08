@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_error_1751974979",
+  "question": "Godot 기초에서 시그널, 노드, 스크립트 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+  "answer": "---\n\n## 시그널\n\n### 문제\n\n노드 간의 통신을 위해 시그널을 사용하는 중에 아래와 같은 오류가 발생하였습니다.\n\n`TypeError: Attempted to emit a signal with an invalid target or the signal does not exist.`\n\n### 해결책\n\n이 오류는 다음과 같은 경우에 발생할 수 있습니다.\n\n- 시그널이 정의되지 않은 노드에 대해 시도",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6168638777732849,
+  "generation_time": 420.543883562088,
+  "timestamp": "2025-07-08T20:50:00.103403",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

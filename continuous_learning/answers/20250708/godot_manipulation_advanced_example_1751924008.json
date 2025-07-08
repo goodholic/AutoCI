@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_manipulation_advanced_example_1751924008",
+  "question": "[블록체인 dApp 개발 상황] 고급 자동화 조작을 활용한 적절한 최적화작업, 애니메이션설정 구현 예제를 작성해주세요.",
+  "answer": "# 예제 1\n\n## 개발 언어\n자바스크립트\n\n## 코드\n```javascript\nfunction animate(obj, target) {\n  clearInterval(obj.timer);\n  obj.timer = setInterval(function () {\n    var step = (target - obj.offsetLeft) / 10;\n    step = step > 0 ? Math.ceil(step) : Math.floor(step);\n    if (obj.offsetLeft == target) {\n      clearInterval(obj.timer);\n    } else {\n      obj.style.left = obj.offsetLeft + step + 'px';\n    }\n  }, 30);\n}\n\n// 사용법\nvar elem = document.getElementById('elem');\nanimate(elem, 100);\n```\n\n## 설명\n이 코드는 자바스크립트를 활용하여 웹 페이지의 �",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6898224937915802,
+  "generation_time": 298.241806268692,
+  "timestamp": "2025-07-08T06:38:27.035960",
+  "topic": "고급 자동화 조작",
+  "language": "korean"
+}

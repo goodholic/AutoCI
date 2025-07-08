@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_basic_error_1751928271",
+  "question": "AI 코드 생성 기초 프롬프트, 응답, 토큰 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+  "answer": "제가 받은 에러는 다음과 같습니다.\n\n```\n{\"message\":\"AI code generation failed: invalid_request: You must provide a valid AI prompt. Please provide a non-empty, non-null prompt.\",\"type\":\"invalid_request_error\"}\n```\n\n위의 에러 메시지를 보면 AI 코드 생성에 실패했다고 알려주고, 유효한 AI 프롬프트를 제공하라는 요청을 하고 있는 것 같습니다. 따라서 프롬프트를 제대로 �",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6871400415897368,
+  "generation_time": 297.9371271133423,
+  "timestamp": "2025-07-08T07:49:29.820534",
+  "topic": "AI 코드 생성 기초",
+  "language": "korean"
+}

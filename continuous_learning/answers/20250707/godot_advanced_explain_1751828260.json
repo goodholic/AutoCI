@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_explain_1751828260",
+  "question": "Godot 고급에서 커스텀노드, 셰이더가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+  "answer": "---\n\nGodot 고급에서 커스텀 노드는 핵심 그래픽 노드와 함께 사용되며, 새로운 그래픽 기능을 추가하고 기존 노드를 완전히 대체하는 데 사용됩니다. 커스텀 노드는 셰이더를 통해 렌더링되며, 이는 셰이더 언어를 사용하여 작성됩니�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5834437620639801,
+  "generation_time": 296.66801166534424,
+  "timestamp": "2025-07-07T04:02:37.053003",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

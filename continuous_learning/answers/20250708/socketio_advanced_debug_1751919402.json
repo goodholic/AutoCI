@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_advanced_debug_1751919402",
+  "question": "Systematically trace and resolve Redis, Broadcast errors in 고급 실시간 통신.",
+  "answer": "1. Redis:\n\n- Redis는 키-값 저장소이며 빠르게 속도를 처리합니다. 그러나 메모리 기반 저장소이므로 메모리가 부족할 경우 오류가 발생할 수 있습니다.\n- 메모리 부족 오류를 처리하려면 어떻게 해야 합니까?\n- Redis 서버에서 오류가 발생하",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6239199376106261,
+  "generation_time": 293.03478240966797,
+  "timestamp": "2025-07-08T05:26:38.118890",
+  "topic": "고급 실시간 통신",
+  "language": "english"
+}

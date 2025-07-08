@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_example_1751976423",
+  "question": "Godot 기초을 활용한 적절한 시그널 구현 예제를 작성해주세요.",
+  "answer": "```csharp\n        public void RaiseSignal()\n        {\n            // 시그널 발생 코드를 작성해주세요.\n        }\n    }\n\n    public class Subscriber\n    {\n        public void OnSignal()\n        {\n            // 시그널을 수신하면 처리할 내용을 작성해주세요.\n        }\n    }\n}\n```\n\n```\n\n코드 예제를 제공해주세요.\n```csharp\n        public void RaiseSignal()\n        {\n            Signal?.Invoke();\n        }\n    }\n\n    public class Subscriber\n    {\n        public void OnSignal()\n        {\n            Console.WriteLine(\"Signal Received\");\n        }\n    }\n}\n```\n\n```\n 완전한",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6763592767715454,
+  "generation_time": 359.50306367874146,
+  "timestamp": "2025-07-08T21:20:14.488120",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

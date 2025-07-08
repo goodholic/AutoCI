@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_debug_1751905622",
+  "question": "다음 Godot 고급 코드의 셰이더 부분에서 발생하는 문제를 디버깅해주세요.",
+  "answer": "문제는 다음과 같습니다:\n\nShader \"Custom/TerrainLit\" {\n    Properties {\n        _MainTex (\"Texture\", 2D) = \"white\" {}\n        _Color (\"Color\", Color) = (1,1,1,1)\n        _Glossiness (\"Smoothness\", Range(0,1)) = 0.5\n        _Metallic (\"Metallic\", Range(0,1)) = 0.0\n        _NormalMap (\"Normal Map\", 2D) = \"bump\" {}\n        _NormalStrength (\"Normal Strength\", Range(0,10)) = 1\n        _DetailMap (\"Detail Map\", 2D) = \"black\" {}\n        _DetailStrength (\"Detail Strength\", Range(0,10)) = 1\n    }\n    SubShader {\n        Tags { \"RenderType\"=\"Opaque\" }\n        LOD 200\n\n        CGPROGRAM\n        #pragma surface surf Standard fullforwardshadows\n        #pragma target 3.0\n\n        sampler2D _MainTex;\n        sampler2D _NormalMap;\n        sampler2D _DetailMap",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5987499272823333,
+  "generation_time": 293.95036697387695,
+  "timestamp": "2025-07-08T01:31:56.128261",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

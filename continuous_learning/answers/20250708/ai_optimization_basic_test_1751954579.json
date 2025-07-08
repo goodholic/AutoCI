@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_basic_test_1751954579",
+  "question": "Implement unit tests for AI 코드 생성 기초 Response, Context, Token module.",
+  "answer": "from ai import Response, Context, Token\n\n\ndef test_response_init():\n    r = Response(\"Hello, World\")\n    assert r.message == \"Hello, World\"\n\n\ndef test_context_init():\n    c = Context(\"Hello, World\")\n    assert c.message == \"Hello, World\"\n\n\ndef test_token_init():\n    t = Token(\"Hello, World\")\n    assert t.message == \"Hello, World\"\n\n\ndef test_response_generate():\n    r = Response(\"Hello, World\")\n    assert r.generate(\"Hello, World\") == \"Hello, World\"\n\n\ndef test_context_generate():\n    c = Context(\"Hello, World\")\n    assert c.generate(\"Hello, World\") == \"Hello, World\"\n\n\ndef test_token_generate():\n    t = Token(\"Hello, World\")\n    assert t.generate(\"Hello, World\") == \"Hello, World\"\n\n\ndef test_response_process():\n    r = Response(\"Hello, World\")\n    assert r.process(\"Hello, World\") == \"Hello, World\"\n\n\ndef test_context_process():\n    c = Context(\"Hello, World\")\n    assert c.process(\"Hello, World\") == \"Hello, World\"\n\n\ndef",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6353743469715118,
+  "generation_time": 300.4260256290436,
+  "timestamp": "2025-07-08T15:07:59.747741",
+  "topic": "AI 코드 생성 기초",
+  "language": "english"
+}

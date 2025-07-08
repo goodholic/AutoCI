@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_csharp_debug_1751952369",
+  "question": "[AI 챗봇 개발 상황] Find and fix bugs in C# 고급 통합 implementation focusing on Performance, GDExtension, NativeCall.",
+  "answer": "I have a code base written in C# and it has been integrated with GDExtension and NativeCall. I have been working on a new feature and I've been facing some performance issues. I've tried profiling the application to identify the bottlenecks but haven't found any issues. So, I'm not sure what else to look for.\n\nWhat are some strategies to identify and fix performance issues in a C# application?\n\n1. Profiling: Profiling is a critical first step. It helps identify which parts of your code are consuming the most resources.\n\n2. Code Review: Reviewing your code for inefficiencies can help identify performance issues. Look for areas where you can simplify your code or make it more efficient.\n\n3. Use Benchmarking Tools: Tools such as BenchmarkDotNet can help measure the performance of your code over time and identify any changes in performance.\n\n4. Optimize Data Structures and Algorithms: Make sure you're using the most appropriate data structures and algorithms for your specific task. This can greatly improve performance.\n\n5. Use Memory Management Tools: Tools such as JetBrains dotMemory can help identify memory leaks and optimize memory usage.\n\n6. Concurrency and Parallelism: If you're working with large data sets or performing complex calculations, consider using concurrency and",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.673211600780487,
+  "generation_time": 313.57293009757996,
+  "timestamp": "2025-07-08T14:36:33.848962",
+  "topic": "C# 고급 통합",
+  "language": "english"
+}

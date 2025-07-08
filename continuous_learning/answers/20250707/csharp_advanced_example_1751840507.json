@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_advanced_example_1751840507",
+  "question": "Implement a real-world scenario using C# 고급 기능 and LINQ.",
+  "answer": "제목, 가격, 출판사 등의 정보를 알맞게 입력해주세요.\n\n            //To find the book with the highest price\n            var bookWithHighestPrice = books.OrderByDescending(x => x.Price).FirstOrDefault();\n            Console.WriteLine($\"Book with the highest price: {bookWithHighestPrice.Title}, Price: {bookWithHighestPrice.Price}\");\n            \n            //To find the books published by a specific publisher\n            string publisher = \"Publisher1\";\n            var booksByPublisher = books.Where(x => x.Publisher == publisher).ToList();\n            foreach (var book in booksByPublisher)\n            {\n                Console.WriteLine($\"Title: {book.Title}, Author: {book.Author}, Price: {book.Price}\");\n            }\n            \n            //To find the average price of all the books\n            double averagePrice = books.Average(x => x.Price);\n            Console.WriteLine($\"Average price of all the books: {averagePrice}\");",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5990306413173675,
+  "generation_time": 375.2031924724579,
+  "timestamp": "2025-07-07T07:33:33.807158",
+  "topic": "C# 고급 기능",
+  "language": "english"
+}

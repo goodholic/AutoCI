@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_design_1751912967",
+  "question": "Design a scalable architecture for Script, Signal using Godot 기초.",
+  "answer": "A: Scripting:\nScripting in Godot is done using GDScript, a powerful and flexible scripting language designed specifically for the Godot game engine. It's an object-oriented language that includes features like inheritance, encapsulation, and polymorphism. GDScript is integrated into the Godot editor and allows for real-time script editing.\n\nTo use a script, you create a new GDScript file inside the Godot project, then attach it to a node in the scene tree. The script can then control the behavior of the node, respond to events, and manipulate the node's properties.\n\nArchitecture:\nThe architecture of a Godot project can vary depending on the complexity and scale of the game. However, a basic architecture might include:\n\n1. **Scenes**: Godot uses a scene-based system where nodes are organized into scenes. Each scene can represent a level, a character, or a UI element, and can be reused across different parts of the game.\n\n2. **Scripts**: Each scene will have one or more scripts attached to its nodes. These scripts control the behavior of the nodes in the scene.\n\n3. **Signals**: Signals are used for communication between different nodes. For example, a player node might send a signal when it dies, and a game manager node might listen for this signal and handle",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6499701130390168,
+  "generation_time": 292.26278734207153,
+  "timestamp": "2025-07-08T03:39:22.506213",
+  "topic": "Godot 기초",
+  "language": "english"
+}

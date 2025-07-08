@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_explain_1751903495",
+  "question": "[블록체인 dApp 개발 상황] 적절한 Godot 기초 사용법을 시그널, 스크립트, 씬를 중심으로 단계별로 설명해주세요.",
+  "answer": "## 시그널(Signal)\n\n시그널은 오브젝트 간의 통신을 위한 메커니즘입니다. 특정 이벤트가 발생하면 시그널을 발생시키고, 이를 수신하는 오브젝트들은 해당 시그널을 수신하여 특정 동작을 수행합니다.\n\nGodot에서 시그널을 사용하는 방법은 다",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.569278769493103,
+  "generation_time": 297.1036639213562,
+  "timestamp": "2025-07-08T00:56:32.349899",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

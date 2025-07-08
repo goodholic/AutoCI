@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_basic_explain_1751973624",
+  "question": "Explain the relationship between 실시간 통신 기초 and Namespace, Socket, Event with real-world scenarios.",
+  "answer": "In the context of computer networks, a real-time communication system is a system that allows for the exchange of messages or data between computers in real-time. This means that the sender of a message must be able to receive the message immediately, often in less than a second. \n\nNamespaces, Sockets, and Events are fundamental concepts in the context of real-time communication systems.\n\n- **Namespaces**: In the context of web development, a namespace is a way of organizing code so that different parts of the application can have the same variable names. In the context of real-time communication, a namespace is a way of grouping sockets. Each socket can belong to a namespace and only sockets in the same namespace can communicate with each other.\n\n- **Sockets**: A socket is a software endpoint that opens a connection between an IP address and a port number. In the context of real-time communication, sockets are used to establish a two-way communication link between two computers. When a socket is created, it is bound to a port number and an IP address. This allows data to be sent to that socket and received from it. \n\n- **Events**: In many real-time communication systems, events are used to signal when specific actions occur. For example, a \"message received\" event could be triggered when a message is received over a socket. Events allow for a high level",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6411423778533936,
+  "generation_time": 348.1430139541626,
+  "timestamp": "2025-07-08T20:32:32.977875",
+  "topic": "실시간 통신 기초",
+  "language": "english"
+}

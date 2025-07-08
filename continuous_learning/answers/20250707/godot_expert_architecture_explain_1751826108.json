@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_explain_1751826108",
+  "question": "[데이터 분석 도구 개발 상황] How does CustomEngine, SceneSystem work in 변형된 Godot 아키텍처? Include implementation details.",
+  "answer": "- Developers can first choose the game engine that suits their project.\n- Developers can build their own custom engine using the modified Godot architecture.\n- Custom engine can use most of the existing features of the Godot engine.\n\n- The CustomEngine is a key component of the system, responsible for managing the game's resources, processing game logic, and rendering graphics.\n- The SceneSystem is also a key component, responsible for managing the game's scenes. It allows developers to create reusable pieces of code called nodes that can be placed and manipulated within a scene.\n\n- The CustomEngine and SceneSystem work together to create the game's visual and interactive elements. The CustomEngine processes the game's logic, and the SceneSystem manages the game's scenes, allowing for a flexible and dynamic gameplay.\n- The game's scenes are loaded, processed, and rendered by the CustomEngine, and the game's logic is processed by the CustomEngine. The SceneSystem helps to organize and manage these scenes and their logic.\n- The CustomEngine and SceneSystem are modular and can be expanded or modified to suit the needs of different projects and development teams.\n\n- The CustomEngine and SceneSystem are written in C++, allowing for high performance and efficient resource management. They are designed to be lightweight and flexible, making them suitable for a wide range of",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6108978927135467,
+  "generation_time": 295.3784010410309,
+  "timestamp": "2025-07-07T03:31:49.862901",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "english"
+}

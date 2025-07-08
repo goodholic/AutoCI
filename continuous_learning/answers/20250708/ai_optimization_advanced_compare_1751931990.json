@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_advanced_compare_1751931990",
+  "question": "[데이터 분석 도구 개발 상황] Analyze pros and cons of various Chaining implementations in AI 고급 최적화.",
+  "answer": "- Chaining의 단점\n  - 불필요한 중복 작업 발생 가능성: Chaining을 사용하면 이미 수행된 작업을 다시 수행할 가능성이 있음\n  - 작업 순서의 변경이 어려울 수 있음: Chaining은 순차적인 작업이므로, 작업 순서를 변경하기 어려울 수 있음\n\n- 다양한 Chaining 구현 방�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6509217429161072,
+  "generation_time": 294.28799319267273,
+  "timestamp": "2025-07-08T08:56:29.612589",
+  "topic": "AI 고급 최적화",
+  "language": "english"
+}

@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_manipulation_basic_debug_1751840168",
+  "question": "다음 기본 에디터 조작 코드의 속성설정 부분에서 발생하는 문제를 디버깅해주세요.",
+  "answer": "모든 코드는 C#으로 작성되었습니다.\n\n```csharp\nclass Program\n{\n    static void Main(string[] args)\n    {\n        Editor ed = new Editor();\n        ed.Text = \"Hello, World!\";\n        ed.SetText(\"Hello, Editor!\");\n        Console.WriteLine(ed.Text);\n    }\n}\n\nclass Editor\n{\n    private string text;\n\n    public string Text\n    {\n        get { return text; }\n        set { \n            // 에디터 조작 코드\n            text = value;\n        }\n    }\n\n    public void SetText(string value)\n    {\n        // 에디터 조작 코드\n        this.text = value;\n    }\n}\n```\n\n## 예시\n본문에 제공된 코드에서, 에디�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6464627730846405,
+  "generation_time": 325.9525637626648,
+  "timestamp": "2025-07-07T07:21:34.464555",
+  "topic": "기본 에디터 조작",
+  "language": "korean"
+}

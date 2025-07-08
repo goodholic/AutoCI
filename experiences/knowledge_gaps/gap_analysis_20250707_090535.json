@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-07-07T09:05:35.158395",
+  "total_gaps": 2,
+  "critical_gaps": 1,
+  "high_priority_gaps": 1,
+  "auto_fixable_gaps": 0,
+  "gaps": [
+    {
+      "category": "error_pattern_async_await",
+      "severity": 1.0,
+      "description": "async_await 오류가 빈번히 발생함 (74회)",
+      "suggested_actions": [
+        "async_await 오류 해결 방법 학습",
+        "async_await 예방 패턴 습득",
+        "async_await 관련 모범 사례 검색"
+      ],
+      "search_keywords": [
+        "async_await",
+        "solution",
+        "best practices"
+      ],
+      "priority": "high",
+      "detected_at": "2025-07-07T09:05:34.883575",
+      "auto_fix_possible": false
+    },
+    {
+      "category": "project_quality",
+      "severity": 0.9,
+      "description": "프로젝트 실패율이 높음 (20/20)",
+      "suggested_actions": [
+        "기초 학습 강화",
+        "단순한 프로젝트부터 시작",
+        "오류 패턴 분석 및 해결"
+      ],
+      "search_keywords": [
+        "game development best practices",
+        "common errors",
+        "debugging"
+      ],
+      "priority": "critical",
+      "detected_at": "2025-07-07T09:05:25.965487",
+      "auto_fix_possible": false
+    }
+  ]
+}

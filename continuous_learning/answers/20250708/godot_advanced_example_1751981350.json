@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_example_1751981350",
+  "question": "Godot 고급을 활용한 적절한 커스텀노드, 셰이더 구현 예제를 작성해주세요.",
+  "answer": "다음은 제가 아는 것으로 여러 예제를 제공해드리겠습니다.\n\n## 셰이더 샘플\n\n```csharp\nshader_type canvas_item;\n\nuniform float time: hint_range(0.0, 1.0);\nuniform vec4 color: hint_color = vec4(1.0);\n\nvoid fragment() {\n    vec4 mixed = mix(vec4(1.0), color, time);\n    COLOR = mixed * texture(TEXTURE, UV);\n}\n```\n\n위의 셰이더는 시간에 따라 색을 바꾸는 셰이더입니다.\n\n## 커스텀노드 샘플\n\n```csharp\nusing God",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7229427993297577,
+  "generation_time": 329.13998079299927,
+  "timestamp": "2025-07-08T22:34:39.614049",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

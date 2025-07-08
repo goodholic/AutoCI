@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_implement_1751972174",
+  "question": "적절한 데이터타입, 변수, 클래스 시스템을 C# 기초 문법 기반으로 설계하고 구현해주세요.",
+  "answer": "```java\n        Shape rectangle = new Rectangle(5, 10);\n        System.out.println(\"Rectangle Area: \" + rectangle.getArea());\n        System.out.println(\"Rectangle Perimeter: \" + rectangle.getPerimeter());\n\n        Shape circle = new Circle(5);\n        System.out.println(\"Circle Area: \" + circle.getArea());\n        System.out.println(\"Circle Perimeter: \" + circle.getPerimeter());\n    }\n}\n```\n\n저의 설계가 다음과 같은 방식으로 동작합니다:\n\n1. 기본적인 `Shape` 클래스를 정의하고, `getArea()` 및 `getPerimeter()` 메소드를 추상 메소드로 선언합니다.\n2. `Shape`",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.713395652770996,
+  "generation_time": 503.48362970352173,
+  "timestamp": "2025-07-08T20:13:01.203529",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

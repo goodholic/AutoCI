@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_explain_1751968689",
+  "question": "How does inheritance, function work in 프로그래밍 기본 용어? Include implementation details.",
+  "answer": "Inheritance in programming is a fundamental concept that allows one class to inherit properties and methods from another class. This promotes code reusability and the organization of similar code into more manageable pieces. \n\nFunction in programming refers to a piece of code that performs a specific task. Functions can take inputs, perform operations on these inputs, and potentially return a result. \n\nWhen it comes to combining these two concepts, we can use inheritance in a function. This is often done in object-oriented programming languages. A derived class can inherit from a base class, and then override certain methods to provide its own implementation.\n\nHere is a simple example in Python:\n\n```python\nclass Base:\n    def greet(self):\n        return \"Hello, World!\"\n\nclass Derived(Base):\n    def greet(self):\n        return \"Hello, Class!\"\n\nbase = Base()\nderived = Derived()\n\nprint(base.greet())  # Output: Hello, World!/\nprint(derived.greet())  # Output: Hello, Class!/\n```\n\nIn the above example, `Derived` class is derived from `Base` class. It inherits the `greet` method from `Base` class and provides its own implementation.\n\nFunction can also be used in this context. For example, we could have a `",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.693170450925827,
+  "generation_time": 332.2584671974182,
+  "timestamp": "2025-07-08T19:03:41.389330",
+  "topic": "프로그래밍 기본 용어",
+  "language": "english"
+}

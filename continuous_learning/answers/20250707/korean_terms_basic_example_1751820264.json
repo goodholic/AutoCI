@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_example_1751820264",
+  "question": "Build a practical application demonstrating class, function in 프로그래밍 기본 용어.",
+  "answer": "A practical application is a project that you can demonstrate by coding. In this case, we'll build a program that calculates the average of a list of numbers.\n\n## Step 1: Define a class\n\nWe'll start by defining a class named `Statistics`. This class will have one method, `average`, which calculates the average of a list of numbers.\n\n```python\nclass Statistics:\n    def average(self, numbers):\n        return sum(numbers) / len(numbers)\n```\n\n## Step 2: Create an instance of the class\n\nNext, we'll create an instance of the `Statistics` class.\n\n```python\nstats = Statistics()\n```\n\n## Step 3: Use the class method\n\nFinally, we'll use the `average` method of the `stats` instance to calculate the average of a list of numbers.\n\n```python\nnumbers = [5, 10, 15, 20, 25]\naverage = stats.average(numbers)\nprint(\"The average is:\", average)\n```\n\nThis program will output:\n\n```\nThe average is: 15.0\n```\n\nThis program demonstrates the use of a class and its method in Python. The class defines a method for",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6600883162021636,
+  "generation_time": 295.9434700012207,
+  "timestamp": "2025-07-07T01:49:20.774587",
+  "topic": "프로그래밍 기본 용어",
+  "language": "english"
+}

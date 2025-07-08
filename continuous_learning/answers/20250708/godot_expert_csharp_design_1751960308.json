@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_csharp_design_1751960308",
+  "question": "Design a scalable architecture for GDExtension, MemoryManagement, NativeCall using C# 고급 통합.",
+  "answer": "## Scalable Architecture\n\n1. **Process Management**: The architecture should be designed to handle multiple processes. This would allow for parallel processing and efficient use of resources.\n\n2. **Communication Mechanism**: The architecture should provide a mechanism for communication between the GDScript and C# code. This could be through a message queue or a shared memory space.\n\n3. **Memory Management**: The architecture should be designed to handle memory management efficiently. This includes memory allocation and deallocation, garbage collection, and memory leak prevention.\n\n4. **Threading Model**: The architecture should support multi-threading. This would allow for concurrent execution of GDScript and C# code.\n\n5. **Integration Points**: The architecture should provide integration points for GDScript and C# code. This would allow for the connection of the two languages and the execution of code written in either language.\n\n## Design Considerations\n\n1. **Performance**: The architecture should be designed to maximize performance, taking into account the execution time and resource usage of the GDScript and C# code.\n\n2. **Scalability**: The architecture should be designed to scale with the size of the project. This means that as the project grows, the architecture should still be able to handle the increased workload efficiently.\n\n3. **Maintainability**: The architecture should be",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6701009654998779,
+  "generation_time": 332.2869918346405,
+  "timestamp": "2025-07-08T16:50:30.840810",
+  "topic": "C# 고급 통합",
+  "language": "english"
+}

@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_compare_1751955197",
+  "question": "[실시간 멀티플레이어 게임 개발 상황] Analyze pros and cons of various Script, Signal, Scene implementations in Godot 기초.",
+  "answer": "Consistency is key.\n\n## What is the difference between a script and a scene in Godot?\n\n- A script is a piece of code that can be attached to a node in the scene tree. It is used to control the behavior of the node, such as handling user input, updating the node's properties, and interacting with other nodes.\n- A scene, on the other hand, is a hierarchical collection of nodes and resources, which can be used as a blueprint for creating similar objects. It's a way to organize and reuse game objects and their behavior.\n\n## What are the pros and cons of using scripts and scenes in Godot?\n\n### Scripts\n\nPros:\n1. Flexibility: Scripts allow for a high degree of flexibility and customization. They can be written in any language that compiles to C#, including Python and JavaScript, which can make prototyping and development faster.\n2. Code Reusability: Scripts can be reused across different scenes, making it easier to maintain and update code.\n3. Real-time editing: Scripts can be edited and tested in real-time, without the need to restart the game or reload the scene.\n\nCons:\n1. Complexity: Scripts can be more complex to write and debug than scenes, especially for large projects.\n2. Performance: Scripts are",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6742914402484893,
+  "generation_time": 301.4229636192322,
+  "timestamp": "2025-07-08T15:23:30.464196",
+  "topic": "Godot 기초",
+  "language": "english"
+}

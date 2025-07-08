@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_example_1751821190",
+  "question": "실제 게임/앱에서 사용할 수 있는 Godot 기초의 씬, 스크립트, 노드 활용 예제를 만들어주세요.",
+  "answer": "```\n\n- 아래 코드는 대화 씬을 구성하는 코드입니다.\n\n```gd\nextends Control\n\n# 텍스트와 선택지를 보여주는 대화 씬에 필요한 UI 노드.\nexport(TextureButton) var background:TextureButton\nexport(Label) var text_label:Label\nexport(Button) var choice_button_1:Button\nexport(Button) var choice_button_2:Button\n\n# 대화 정보를 저장하는 변수.\nvar dialog_data:DialogData\n\n# 대화 씬의 정보를 설정하는 메소드.\nfunc set_",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6487288784980774,
+  "generation_time": 296.8418788909912,
+  "timestamp": "2025-07-07T02:09:54.482749",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

@@ -54,7 +54,8 @@ class KoreanConversationSystem:
             "명령": ["시작", "중지", "실행", "정지", "빌드", "테스트"],
             "기능_추가": ["기능 추가", "추가해줘", "넣어줘"],
             "게임_수정": ["수정해줘", "바꿔줘", "변경해줘"],
-            "대화": ["안녕", "반가워", "고마워", "미안", "괜찮아"]
+            "대화": ["안녕", "반가워", "고마워", "미안", "괜찮아"],
+            "pytorch_학습": ["pytorch", "파이토치", "텐서", "tensor", "autograd", "신경망", "딥러닝", "학습", "모델"]
         }
         
         # 엔티티 추출 패턴
@@ -71,7 +72,14 @@ class KoreanConversationSystem:
             "체력": ["체력", "hp", "생명력"],
             "사운드": ["사운드", "소리", "음악"],
             "그래픽": ["그래픽", "시각", "효과"],
-            "UI": ["UI", "인터페이스", "화면"]
+            "UI": ["UI", "인터페이스", "화면"],
+            "pytorch": ["pytorch", "파이토치", "토치"],
+            "tensor": ["텐서", "tensor", "배열"],
+            "autograd": ["autograd", "자동미분", "미분", "그래디언트"],
+            "neural_network": ["신경망", "네트워크", "nn", "모델"],
+            "training": ["학습", "훈련", "training", "train"],
+            "optimizer": ["옵티마이저", "optimizer", "adam", "sgd"],
+            "loss": ["손실", "loss", "로스", "손실함수"]
         }
         
         # AI 모델 컨트롤러 초기화
@@ -82,6 +90,39 @@ class KoreanConversationSystem:
         except ImportError:
             self.ai_controller = None
             logger.warning("AI 모델 컨트롤러를 로드할 수 없습니다. 의도/엔티티 인식이 제한됩니다.")
+        
+        # PyTorch 튜터 초기화
+        try:
+            from modules.pytorch_tutor import PyTorchTutor
+            self.pytorch_tutor = PyTorchTutor()
+            logger.info("PyTorch 튜터가 한글 대화 시스템에 연결되었습니다.")
+        except ImportError:
+            self.pytorch_tutor = None
+            logger.warning("PyTorch 튜터를 로드할 수 없습니다.")
+        
+        # 연속 학습 시스템 연동
+        try:
+            from core_system.continuous_learning_system import ContinuousLearningSystem
+            self.learning_system = ContinuousLearningSystem()
+            self.knowledge_base = self.learning_system.knowledge_base
+            logger.info("연속 학습 시스템과 연동되었습니다.")
+        except Exception as e:
+            self.learning_system = None
+            logger.warning(f"연속 학습 시스템을 로드할 수 없습니다: {e}")
+            
+            # 지식 베이스 직접 로드 시도
+            try:
+                kb_path = Path(__file__).parent.parent / "continuous_learning" / "knowledge_base" / "knowledge_base.json"
+                if kb_path.exists():
+                    with open(kb_path, 'r', encoding='utf-8') as f:
+                        self.knowledge_base = json.load(f)
+                    logger.info(f"지식 베이스를 직접 로드했습니다: {len(self.knowledge_base)} 카테고리")
+                else:
+                    self.knowledge_base = {}
+                    logger.warning("지식 베이스 파일을 찾을 수 없습니다.")
+            except Exception as kb_error:
+                self.knowledge_base = {}
+                logger.error(f"지식 베이스 로드 실패: {kb_error}")
         
         # 대화 상태 관리
         self.conversation_state = {
@@ -196,7 +237,7 @@ class KoreanConversationSystem:
         if self.ai_controller:
             try:
                 prompt = f"""
-다음 사용자 입력의 의도를 가장 잘 나타내는 단일 키워드를 선택하세요. 가능한 의도는 '질문', '요청', '피드백', '설명', '명령', '기능_추가', '게임_수정', '대화' 입니다.
+다음 사용자 입력의 의도를 가장 잘 나타내는 단일 키워드를 선택하세요. 가능한 의도는 '질문', '요청', '피드백', '설명', '명령', '기능_추가', '게임_수정', '대화', 'pytorch_학습' 입니다.
 
 사용자 입력: {text}
 의도:
@@ -204,7 +245,7 @@ class KoreanConversationSystem:
                 response = await self.ai_controller.generate_response(prompt, model_name="deepseek-coder-7b") # await 추가
                 if response and response.get('response'):
                     intent = response['response'].strip().lower()
-                    if intent in ['질문', '요청', '피드백', '설명', '명령', '기능_추가', '게임_수정', '대화']:
+                    if intent in ['질문', '요청', '피드백', '설명', '명령', '기능_추가', '게임_수정', '대화', 'pytorch_학습']:
                         return intent
             except Exception as e:
                 logger.warning(f"AI 기반 의도 분류 실패: {e}. 기본 분류로 폴백합니다.")
@@ -222,7 +263,7 @@ class KoreanConversationSystem:
         if self.ai_controller:
             try:
                 prompt = f"""
-다음 사용자 입력에서 게임 개발과 관련된 엔티티를 쉼표로 구분하여 나열하세요. 가능한 엔티티는 'godot', 'csharp', 'network', 'nakama', 'ai', 'build', 'error', '점프', '속도', '체력', '사운드', '그래픽', 'UI' 입니다.
+다음 사용자 입력에서 게임 개발 및 PyTorch와 관련된 엔티티를 쉼표로 구분하여 나열하세요. 가능한 엔티티는 'godot', 'csharp', 'network', 'nakama', 'ai', 'build', 'error', '점프', '속도', '체력', '사운드', '그래픽', 'UI', 'pytorch', 'tensor', 'autograd', 'neural_network', 'training', 'optimizer', 'loss' 입니다.
 
 사용자 입력: {text}
 엔티티:
@@ -269,8 +310,39 @@ class KoreanConversationSystem:
             if any(greeting in user_input.lower() for greeting in ["안녕", "반가", "하이"]):
                 return self._select_template("greeting")
         
+        elif intent == "pytorch_학습":
+            # PyTorch 학습 모드 처리
+            if self.pytorch_tutor:
+                return await self._handle_pytorch_learning(user_input, entities)
+            else:
+                return "PyTorch 튜터가 설치되지 않았습니다. 모듈을 확인해주세요."
+        
         elif intent == "질문":
             topic = entities[0] if entities else "그것"
+            
+            # 먼저 지식 베이스에서 검색
+            knowledge_results = self._search_knowledge_base(user_input, entities)
+            if knowledge_results:
+                response = "📚 **학습한 지식 기반 답변**\n\n"
+                
+                # 가장 관련성 높은 답변 사용
+                best_result = knowledge_results[0]
+                response += f"**{best_result['category']}** 카테고리에서 찾은 정보:\n\n"
+                response += best_result['item'].get('answer', '답변 없음')
+                
+                # 추가 관련 정보가 있으면 표시
+                if len(knowledge_results) > 1:
+                    response += "\n\n**관련 정보:**\n"
+                    for result in knowledge_results[1:3]:  # 최대 2개 추가
+                        response += f"- {result['category']}: {result['item'].get('question', '')[:50]}...\n"
+                
+                return response
+            
+            # PyTorch 관련 질문 처리
+            if self.pytorch_tutor and any(e in ["pytorch", "tensor", "autograd", "neural_network", "training", "optimizer", "loss"] for e in entities):
+                return await self._handle_pytorch_question(user_input, entities)
+            
+            # 기존 템플릿 응답
             response = self._select_template("question_acknowledge", topic=topic)
             
             # 정보 수집기를 사용하여 웹에서 답변 검색
@@ -288,6 +360,10 @@ class KoreanConversationSystem:
             return f"{response}\n\n{answer}"
         
         elif intent == "요청":
+            # AI 통합 요청 처리
+            if any(keyword in user_input.lower() for keyword in ["ai 추가", "ai 넣어", "인공지능", "pytorch"]):
+                return await self._handle_ai_integration_request(user_input, entities)
+            
             action = self._extract_action(user_input)
             response = self._select_template("command_acknowledge", action=action)
             
@@ -307,11 +383,28 @@ class KoreanConversationSystem:
             feature_or_aspect = self._extract_feature_or_aspect(user_input)
             action = "추가" if intent == "기능_추가" else "수정"
             
+            # 학습한 지식을 활용한 게임 수정 제안
+            knowledge_results = self._search_knowledge_base(user_input, entities)
+            
             if self.game_factory and self.game_factory.current_project:
-                success = await self._handle_game_modification(feature_or_aspect, action, user_input)
+                # 지식 베이스의 정보를 활용하여 더 나은 수정 제안
+                if knowledge_results:
+                    logger.info(f"관련 지식 {len(knowledge_results)}개 발견, 게임 수정에 활용")
+                    
+                    # 가장 관련성 높은 지식을 프롬프트에 포함
+                    best_knowledge = knowledge_results[0]['item'].get('answer', '')
+                    enhanced_input = f"{user_input}\n\n참고 지식: {best_knowledge[:500]}"
+                else:
+                    enhanced_input = user_input
+                
+                success = await self._handle_game_modification(feature_or_aspect, action, enhanced_input)
+                
                 if success:
-                    return self._select_template("game_modification_success", 
+                    response = self._select_template("game_modification_success", 
                                                  feature_or_aspect=feature_or_aspect, action=action)
+                    if knowledge_results:
+                        response += "\n\n💡 학습한 지식을 활용하여 더 나은 수정을 적용했습니다!"
+                    return response
                 else:
                     return self._select_template("game_modification_fail", 
                                                  feature_or_aspect=feature_or_aspect, action=action)
@@ -599,6 +692,183 @@ AI가 사용자의 요청을 다음과 같이 해석했습니다:
         self.conversation_state = data.get("conversation_state", self.conversation_state)
         
         logger.info(f"대화가 {filepath}에서 불러와졌습니다.")
+    
+    async def _handle_pytorch_learning(self, user_input: str, entities: List[str]) -> str:
+        """PyTorch 학습 요청 처리"""
+        # 특정 주제 검색
+        search_results = self.pytorch_tutor.search_topic(user_input)
+        
+        if search_results:
+            # 검색 결과가 있으면 첫 번째 주제 설명
+            topic = search_results[0]
+            response = f"🎓 **PyTorch 학습 모드**\n\n"
+            response += self.pytorch_tutor.format_response(topic['topic_id'], style="detailed")
+            
+            # 실습 코드 제공
+            practice_code = self.pytorch_tutor.generate_practice_code(topic['topic_id'])
+            if practice_code:
+                response += f"\n\n**💡 실습해보기**\n```python\n{practice_code}\n```"
+            
+            return response
+        
+        # 학습 경로 제공
+        if "시작" in user_input or "기초" in user_input:
+            learning_path = self.pytorch_tutor.get_learning_path("beginner")
+            response = "🎓 **PyTorch 학습을 시작하겠습니다!**\n\n"
+            response += "추천 학습 경로:\n"
+            for i, topic_id in enumerate(learning_path[:5], 1):
+                topic_info = self.pytorch_tutor.get_topic_explanation(topic_id)
+                if topic_info:
+                    response += f"{i}. {topic_info['title']} (`{topic_id}`)\n"
+            
+            response += "\n원하는 주제를 선택하거나 'pytorch 텐서 알려줘'와 같이 질문해주세요!"
+            return response
+        
+        # 기본 응답
+        return """🎓 **PyTorch 학습 도우미**
+
+PyTorch의 다양한 주제를 학습할 수 있습니다:
+
+📚 **기초 과정**
+- PyTorch 소개
+- 텐서(Tensor) 기초
+- 자동 미분(Autograd)
+
+🔧 **심화 과정**
+- 신경망 구축 (nn.Module)
+- 손실 함수와 옵티마이저
+- 모델 학습 루프
+
+💬 **사용 예시**
+- "pytorch 텐서 기초 알려줘"
+- "autograd 설명해줘"
+- "신경망 만드는 방법 보여줘"
+
+어떤 주제부터 시작하시겠습니까?"""
+    
+    async def _handle_pytorch_question(self, user_input: str, entities: List[str]) -> str:
+        """PyTorch 관련 질문 처리"""
+        # 관련 주제 검색
+        for entity in entities:
+            if entity in ["tensor", "autograd", "neural_network", "training", "optimizer", "loss"]:
+                search_results = self.pytorch_tutor.search_topic(entity)
+                if search_results:
+                    topic = search_results[0]
+                    return self.pytorch_tutor.format_response(topic['topic_id'], style="detailed")
+        
+        # AI를 통한 답변 생성
+        if self.ai_controller:
+            try:
+                prompt = f"""
+PyTorch에 대한 다음 질문에 한글로 친절하게 답변해주세요:
+
+질문: {user_input}
+
+답변은 다음 형식으로 작성해주세요:
+1. 간단한 설명
+2. 예제 코드 (있다면)
+3. 추가 학습 자료 (있다면)
+"""
+                response = await self.ai_controller.generate_response(prompt, model_name="deepseek-coder-7b")
+                if response and response.get('response'):
+                    return f"🤖 **PyTorch 질문 답변**\n\n{response['response']}"
+            except Exception as e:
+                logger.error(f"PyTorch 질문 처리 중 오류: {e}")
+        
+        return "PyTorch 관련 질문을 더 구체적으로 설명해주시면 도움을 드릴 수 있습니다."
+    
+    def _search_knowledge_base(self, query: str, entities: List[str]) -> List[Dict[str, Any]]:
+        """지식 베이스에서 관련 정보 검색"""
+        results = []
+        query_lower = query.lower()
+        
+        # 모든 카테고리 검색
+        for category, items in self.knowledge_base.items():
+            if isinstance(items, dict):
+                # 하위 카테고리가 있는 경우
+                for subcategory, subitems in items.items():
+                    if isinstance(subitems, list):
+                        for item in subitems:
+                            if self._is_relevant_knowledge(item, query_lower, entities):
+                                results.append({
+                                    "category": f"{category}/{subcategory}",
+                                    "item": item
+                                })
+            elif isinstance(items, list):
+                # 직접 아이템 리스트인 경우
+                for item in items:
+                    if self._is_relevant_knowledge(item, query_lower, entities):
+                        results.append({
+                            "category": category,
+                            "item": item
+                        })
+        
+        # 품질 점수로 정렬
+        results.sort(key=lambda x: x['item'].get('quality_score', 0), reverse=True)
+        return results[:5]  # 상위 5개만 반환
+    
+    def _is_relevant_knowledge(self, item: Dict[str, Any], query: str, entities: List[str]) -> bool:
+        """지식 항목이 쿼리와 관련있는지 확인"""
+        # 질문이나 답변에 쿼리가 포함되어 있는지
+        if query in item.get('question', '').lower() or query in item.get('answer', '').lower():
+            return True
+        
+        # 키워드 매칭
+        item_keywords = [kw.lower() for kw in item.get('keywords', [])]
+        for entity in entities:
+            if entity in item_keywords:
+                return True
+        
+        # 쿼리의 단어들이 키워드에 있는지
+        query_words = query.split()
+        for word in query_words:
+            if any(word in kw for kw in item_keywords):
+                return True
+        
+        return False
+    
+    async def _handle_ai_integration_request(self, user_input: str, entities: List[str]) -> str:
+        """게임에 AI 통합 요청 처리"""
+        try:
+            from modules.pytorch_game_ai import integrate_pytorch_with_godot
+            
+            # 현재 게임 프로젝트 확인
+            if not self.game_factory or not self.game_factory.current_project:
+                return "먼저 게임 프로젝트를 생성해주세요. AI를 추가하려면 게임이 있어야 합니다."
+            
+            game_type = self.game_factory.current_project.get("type", "platformer")
+            project_path = self.game_factory.current_project.get("path", "")
+            
+            # PyTorch AI 통합
+            integration_result = integrate_pytorch_with_godot(game_type, project_path)
+            
+            response = f"🤖 **PyTorch AI가 {game_type} 게임에 통합되었습니다!**\n\n"
+            
+            # 학습한 지식 활용
+            knowledge_results = self._search_knowledge_base("게임 ai", ["ai", "godot", "neural_network"])
+            if knowledge_results:
+                response += "📚 **관련 학습 지식:**\n"
+                response += knowledge_results[0]['item'].get('answer', '')[:300] + "...\n\n"
+            
+            response += "**생성된 AI 기능:**\n"
+            response += f"- 게임 타입: {game_type}\n"
+            response += f"- AI 스크립트: {len(integration_result['ai_script'])} 줄\n"
+            response += f"- 모델 경로: {integration_result['model_path']}\n\n"
+            
+            response += "**통합 방법:**\n"
+            response += "1. 생성된 AI 스크립트를 게임에 추가\n"
+            response += "2. 캐릭터나 적에 AI 컴포넌트 연결\n"
+            response += "3. 게임 플레이로 AI 학습 데이터 수집\n\n"
+            
+            response += "💡 AI가 게임을 플레이하면서 점점 더 똑똑해집니다!"
+            
+            return response
+            
+        except ImportError:
+            return "PyTorch 게임 AI 모듈을 로드할 수 없습니다."
+        except Exception as e:
+            logger.error(f"AI 통합 중 오류: {e}")
+            return "AI 통합 중 오류가 발생했습니다."
 
 
 # 전역 인스턴스

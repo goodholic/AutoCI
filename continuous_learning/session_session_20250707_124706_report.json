@@ -1,0 +1,159 @@
+{
+  "session_id": "session_20250707_124706",
+  "start_time": "2025-07-07T12:47:06.391577",
+  "end_time": "2025-07-07T15:32:10.138715",
+  "duration_hours": 2.7510408730555556,
+  "questions_asked": 14,
+  "successful_answers": 0,
+  "success_rate": 0.0,
+  "topics_covered": [
+    "csharp_basics",
+    "socketio_advanced",
+    "godot_expert_architecture",
+    "ai_optimization_basic",
+    "korean_terms_basic",
+    "socketio_basic",
+    "godot_basics",
+    "godot_expert_csharp",
+    "ai_optimization_advanced"
+  ],
+  "models_used": {
+    "deepseek-coder-7b": 14
+  },
+  "knowledge_gained": 14,
+  "memory_usage_history": [
+    {
+      "timestamp": "2025-07-07T12:49:27.472761",
+      "model": "deepseek-coder-7b",
+      "memory_gb": 1.8583755493164062,
+      "memory_percent": 14.1
+    }
+  ],
+  "experience_buffer_size": 17,
+  "feedback_history": [
+    {
+      "timestamp": "2025-07-07T14:00:52.427972",
+      "quality_score": 0.85,
+      "issues": [
+        "incomplete"
+      ],
+      "response_length": 490
+    },
+    {
+      "timestamp": "2025-07-07T14:50:48.705176",
+      "quality_score": 0.5,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 0
+    },
+    {
+      "timestamp": "2025-07-07T15:06:36.781215",
+      "quality_score": 0.6,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 127
+    }
+  ],
+  "pytorch_stats": {
+    "total_epochs": 5,
+    "total_samples": 0,
+    "average_quality_score": 0.0,
+    "topic_accuracy": 0.0,
+    "learning_history": [
+      {
+        "epoch": 1,
+        "quality_loss": 0.014179493300616741,
+        "topic_loss": 1.6192524433135986,
+        "timestamp": "2025-07-07T15:31:50.915793"
+      },
+      {
+        "epoch": 2,
+        "quality_loss": 0.01348916906863451,
+        "topic_loss": 1.609240174293518,
+        "timestamp": "2025-07-07T15:31:55.077692"
+      },
+      {
+        "epoch": 3,
+        "quality_loss": 0.011730378493666649,
+        "topic_loss": 1.5654652118682861,
+        "timestamp": "2025-07-07T15:31:59.397540"
+      },
+      {
+        "epoch": 4,
+        "quality_loss": 0.0010814662091434002,
+        "topic_loss": 1.2240986824035645,
+        "timestamp": "2025-07-07T15:32:03.779033"
+      },
+      {
+        "epoch": 5,
+        "quality_loss": 0.0731402263045311,
+        "topic_loss": 1.3877400159835815,
+        "timestamp": "2025-07-07T15:32:07.804860"
+      }
+    ]
+  },
+  "diversity_metrics": {
+    "total_questions": 160,
+    "unique_questions": 160,
+    "uniqueness_ratio": 1.0,
+    "diversity_score": 0.949,
+    "type_distribution": {
+      "explain": 23,
+      "error": 18,
+      "design": 9,
+      "example": 31,
+      "debug": 13,
+      "implement": 16,
+      "integrate": 19,
+      "test": 2,
+      "optimize": 18,
+      "compare": 2,
+      "translate": 6,
+      "refactor": 3
+    },
+    "topic_distribution": {
+      "실시간 통신 기초": 17,
+      "C# 고급 기능": 10,
+      "Godot 기초": 14,
+      "기본 에디터 조작": 9,
+      "프로그래밍 기본 용어": 15,
+      "변형된 Godot 아키텍처": 13,
+      "Godot 고급": 15,
+      "고급 자동화 조작": 5,
+      "AI 고급 최적화": 15,
+      "C# 기초 문법": 13,
+      "고급 실시간 통신": 9,
+      "C# 고급 통합": 11,
+      "고급 프로그래밍 용어": 8,
+      "AI 코드 생성 기초": 6
+    },
+    "keyword_distribution": {
+      "변수": 18,
+      "클래스": 18,
+      "이벤트": 15,
+      "파인튜닝": 13,
+      "프롬프트엔지니어링": 13,
+      "컨텍스트관리": 13,
+      "체이닝": 13,
+      "노드": 12,
+      "씬": 12,
+      "시그널": 12,
+      "스크립트": 12,
+      "커스텀노드": 12,
+      "셰이더": 12,
+      "물리엔진": 12,
+      "최적화": 12,
+      "GDExtension": 11,
+      "NativeCall": 11,
+      "소켓": 10,
+      "룸": 10,
+      "네임스페이스": 10
+    },
+    "avg_similarity": 0.045,
+    "type_entropy": 3.238,
+    "topic_entropy": 3.733,
+    "keyword_entropy": 6.436
+  }
+}

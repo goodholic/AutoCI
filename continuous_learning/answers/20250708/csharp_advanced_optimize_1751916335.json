@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_advanced_optimize_1751916335",
+  "question": "프로파일링을 통해 C# 고급 기능의 이벤트, LINQ 성능 문제를 찾고 해결해주세요.",
+  "answer": "이벤트 처리기를 등록할 때 주의해야 할 점은,\n\n```csharp\npublic class MyClass\n{\n    public event EventHandler MyEvent;\n\n    public void OnMyEvent()\n    {\n        EventHandler handler = MyEvent;\n        if (handler != null)\n        {\n            handler(this, EventArgs.Empty);\n        }\n    }\n}\n```\n\n위 코드는 이벤트 핸들러를 등록할 때마다 구독자 목록을 순회하게 되기 때문에 매우 비효율적입니다. 이를 방지하기 위해 �",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6733053755760192,
+  "generation_time": 294.56408524513245,
+  "timestamp": "2025-07-08T04:30:30.381791",
+  "topic": "C# 고급 기능",
+  "language": "korean"
+}

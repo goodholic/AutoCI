@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_explain_1751819962",
+  "question": "Explain the relationship between Godot 기초 and Signal with real-world scenarios.",
+  "answer": "The relationship between Godot and signals can be visualized in a real-world scenario. Imagine you're watching a television show, and you're notified when a certain event happens on the show. This is similar to how signals work in Godot. \n\nFor instance, let's say you're watching a game show, and you want to know when a specific character in the game finishes a level. You would turn the notifications on for that character. When that character finishes a level, the show hosts would notify you, and you would then go back to watching the game show.\n\nIn Godot, the character is the 'emitter' of the signal. When the character finishes the level, it 'emits' a signal. The 'receiver' (or the listener) is the game that is watching the show. In Godot, this would be a script that is programmed to respond to the signal.\n\nIn Godot, signals are a way for objects to communicate with each other. They are a way to notify other objects about specific events that have happened. This is a key aspect of event-driven programming, where objects are notified when certain events occur and can then respond to them.\n\nIn summary, Godot signals provide a way for objects to communicate with each other in a way that is similar to the way notifications work in real-world scenarios.\n\nThe relationship between Godot",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5856825387477874,
+  "generation_time": 294.42980337142944,
+  "timestamp": "2025-07-07T01:44:17.172103",
+  "topic": "Godot 기초",
+  "language": "english"
+}

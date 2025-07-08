@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_integrate_1751856860",
+  "question": "Unity에서 Godot로 마이그레이션할 때 C# 기초 문법의 클래스, 메서드를 어떻게 변환하는지 보여주세요.",
+  "answer": "예를 들어 다음과 같은 C# 코드가 있다고 가정해 봅시다:\n\n```csharp\npublic class Player : KinematicBody2D {\n    public override void _PhysicsProcess(float delta) {\n        // 플레이어 물리 처리\n    }\n}\n```\n\nGodot에서 이를 어떻게 다루는지 보여주는 코드를 보여드리겠습니다:\n\n```gdscript\nextends KinematicBody2D\n\nfunc _physics_process(delta):\n    # 플레이어 물리 처리\n```\n\nGodot에서�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6604869079589843,
+  "generation_time": 374.3770635128021,
+  "timestamp": "2025-07-07T12:00:35.387486",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

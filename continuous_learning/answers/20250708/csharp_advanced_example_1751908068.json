@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_advanced_example_1751908068",
+  "question": "실제 게임/앱에서 사용할 수 있는 C# 고급 기능의 이벤트, 델리게이트, async/await 활용 예제를 만들어주세요.",
+  "answer": "1. 이벤트\n   - 이벤트는 특정 이벤트가 발생했을 때 실행할 메소드를 연결해주는 기능입니다.\n   - 클래스 내부에 메소드를 정의하고, 이 메소드에 이벤트가 발생했을 때 실행될 내용을 작성할 수 있습니다.\n   - 프로그램 코드에서 이벤트�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.601977596282959,
+  "generation_time": 297.0254271030426,
+  "timestamp": "2025-07-08T02:12:45.672529",
+  "topic": "C# 고급 기능",
+  "language": "korean"
+}

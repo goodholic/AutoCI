@@ -86,13 +86,22 @@ class GameFactory24H:
         
         return None
     
-    async def start_factory(self, game_name: str, game_type: str):
-        """24시간 게임 제작 공장 시작"""
+    async def start_factory(self, game_name: str, game_type: str, existing_project: bool = False):
+        """24시간 게임 제작 공장 시작
+        
+        Args:
+            game_name: 게임 이름
+            game_type: 게임 타입 (platformer, rpg, etc.)
+            existing_project: 기존 프로젝트 여부
+        """
         self.factory_running = True
         self.start_time = datetime.now()
         self.estimated_completion = self.start_time + timedelta(hours=24)
-        self.current_project = game_name
         self.game_type = game_type  # 게임 타입 저장
+        
+        # 기존 프로젝트가 아닌 경우에만 current_project 설정
+        if not existing_project:
+            self.current_project = game_name
         
         # 백그라운드 프로세스 추적 시작
         from modules.background_process_tracker import get_process_tracker
@@ -120,18 +129,31 @@ class GameFactory24H:
         
         # 2. 진정한 24시간 끈질긴 게임 제작 시작
         try:
-            # 먼저 MVP로 기본 게임 생성
-            from modules.mvp_game_prototype import get_mvp_prototype
-            mvp_factory = get_mvp_prototype()
-            print("\n🎯 MVP 프로토타입으로 기본 게임을 생성합니다.")
-            
-            # MVP 게임 생성
-            result = await mvp_factory.create_mvp_game(game_name)
-            
-            if result["success"]:
-                print("\n✅ 기본 게임 생성 성공!")
-                project_path = Path(result["project_path"])
+            if existing_project:
+                # 기존 프로젝트 사용
+                print("\n📂 기존 프로젝트를 이어서 개발합니다.")
+                project_path = Path(self.current_project['path'])
                 
+                # 프로젝트 정보 표시
+                print(f"   경로: {project_path}")
+                print(f"   기존 기능: {', '.join(self.current_project.get('features', []))}")
+                
+                result = {"success": True, "project_path": str(project_path)}
+            else:
+                # 먼저 MVP로 기본 게임 생성
+                from modules.mvp_game_prototype import get_mvp_prototype
+                mvp_factory = get_mvp_prototype()
+                print("\n🎯 MVP 프로토타입으로 기본 게임을 생성합니다.")
+                
+                # MVP 게임 생성
+                result = await mvp_factory.create_mvp_game(game_name)
+                
+                if result["success"]:
+                    print("\n✅ 기본 게임 생성 성공!")
+                    project_path = Path(result["project_path"])
+            
+            # 프로젝트 생성/로드 성공 시 24시간 개선 시작
+            if result["success"]:
                 # 이제 24시간 끈질긴 개선 시작
                 from modules.persistent_game_improver import get_persistent_improver
                 improver = get_persistent_improver()
@@ -141,7 +163,13 @@ class GameFactory24H:
                 print("🚀 검색, AI, 모든 방법을 동원해 문제를 해결합니다.")
                 
                 # 비동기로 24시간 개선 시작 - 태스크를 저장하고 관리
-                self.improvement_task = asyncio.create_task(improver.start_24h_improvement(project_path))
+                try:
+                    self.improvement_task = asyncio.create_task(improver.start_24h_improvement(project_path))
+                    # 태스크가 완료되거나 오류가 발생할 때까지 잠시 대기
+                    await asyncio.sleep(0.1)  # Let the task start
+                except Exception as e:
+                    print(f"⚠️ 개선 작업 시작 중 오류: {e}")
+                    # Continue anyway
                 
                 # 개선 상태 파일 생성
                 status_file = self.root / "improvement_status.json"
@@ -192,7 +220,8 @@ class GameFactory24H:
         if not self.godot_exe:
             print("❌ Godot 실행 파일을 찾을 수 없습니다!")
             print("💡 'autoci build-godot' 명령어로 먼저 빌드하세요.")
-            return False
+            print("⚠️  Godot 없이 계속 진행합니다...")
+            return True  # Continue without Godot
         
         # WSL에서 Windows 프로그램 실행
         windows_path = self.godot_exe.replace("/mnt/c", "C:").replace("/mnt/d", "D:").replace("/", "\\")

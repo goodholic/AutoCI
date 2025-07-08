@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_integrate_1751841230",
+  "question": "Unity에서 Godot로 마이그레이션할 때 Godot 고급의 최적화, 셰이더를 어떻게 변환하는지 보여주세요.",
+  "answer": "---\n\nGodot에서는 비슷한 기능을 제공하는 방법이 조금 다릅니다. 여기서는 Godot에서 사용할 수 있는 고급 기능에 대해 설명합니다.\n\n**1. 물리 기반 조작:**\n\nUnity에서는 물리 및 조작을 위한 Rigidbody 및 CharacterController를 사용합니다. Godot에서는 물리 및 조작을 위한 �",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6019262766838074,
+  "generation_time": 538.5888116359711,
+  "timestamp": "2025-07-07T07:42:49.194167",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

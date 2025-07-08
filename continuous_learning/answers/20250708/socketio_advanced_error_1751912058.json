@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_advanced_error_1751912058",
+  "question": "적절한 개발자가 고급 실시간 통신의 브로드캐스트, Redis, 미들웨어에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+  "answer": "- 통신의 구조: 우선 프로토콜을 설명해야겠죠? TCP/IP는 무엇이고 UDP는 어떤 프로토콜인가요? \n- 브로드캐스트와 멀티캐스트의 차이는 무엇인가요?\n- 실시간 통신은 결국 어떤 목적으로 사용되나요?\n- 브로드캐스트 메시지를 전송할 때는",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5715427565574646,
+  "generation_time": 297.796270608902,
+  "timestamp": "2025-07-08T03:19:15.832841",
+  "topic": "고급 실시간 통신",
+  "language": "korean"
+}

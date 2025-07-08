@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_csharp_example_1751853017",
+  "question": "Build a practical application demonstrating Performance in C# 고급 통합.",
+  "answer": "(\n    static void Main(string[] args)\n    {\n        var processes = Process.GetProcesses();\n\n        foreach (var process in processes)\n        {\n            cpuCounters.Add(new PerformanceCounter(\"Process\", \"% Processor Time\", process.ProcessName));\n            memoryCounters.Add(new PerformanceCounter(\"Process\", \"Working Set\", process.ProcessName));\n        }\n\n        timer = new Timer(1000);\n        timer.Elapsed += Timer_Elapsed;\n        timer.AutoReset = true;\n        timer.Start();\n\n        Console.ReadLine();\n    }\n\n    static void Timer_Elapsed(object sender, ElapsedEventArgs e)\n    {\n        var highestCpu = new KeyValuePair<Process, float>(null, 0);\n        var highestMemory = new KeyValuePair<Process, float>(null, 0);\n\n        for (int i = 0; i < cpuCounters.Count; i++)\n        {\n            cpuCounters[i].NextValue();\n            memoryCounters[i].NextValue();\n\n            var cpuUsage = cpuCounters[i].NextValue();\n            var memoryUsage = memoryCounters[i].NextValue() / 1024",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6005380606651306,
+  "generation_time": 305.9430344104767,
+  "timestamp": "2025-07-07T11:00:39.183647",
+  "topic": "C# 고급 통합",
+  "language": "english"
+}

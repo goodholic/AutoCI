@@ -2,34 +2,84 @@
 """
 AutoCI - AI 게임 개발 시스템
 24시간 자동 게임 개발 AI
+Cross-platform support for Windows and WSL
 """
 
 import sys
 import os
 import asyncio
+import platform
+import subprocess
 from pathlib import Path
+from datetime import datetime
 
-# 프로젝트 경로 추가
-PROJECT_ROOT = Path("/mnt/d/AutoCI/AutoCI")
+# Platform detection and path setup
+def get_project_root():
+    """Get project root path based on platform"""
+    if platform.system() == "Windows":
+        # Windows: use script directory
+        return Path(os.path.dirname(os.path.abspath(__file__)))
+    else:
+        # WSL/Linux: use configured path
+        return Path("/mnt/d/AutoCI/AutoCI")
+
+# Set project root
+PROJECT_ROOT = get_project_root()
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / 'core_system'))
 sys.path.insert(0, str(PROJECT_ROOT / 'modules'))
 sys.path.insert(0, str(PROJECT_ROOT / 'modules_active'))
 
-# Xlib 경고 억제
-from core.xlib_suppressor import suppress_all_xlib_warnings
-suppress_all_xlib_warnings()
+# Platform-specific imports
+if platform.system() != "Windows":
+    try:
+        from core.xlib_suppressor import suppress_all_xlib_warnings
+        suppress_all_xlib_warnings()
+    except ImportError:
+        pass  # Xlib not needed on Windows
+
+# Import session manager
+try:
+    from modules.game_session_manager import GameSessionManager
+    SESSION_MANAGER_AVAILABLE = True
+except ImportError:
+    SESSION_MANAGER_AVAILABLE = False
 
 # 가상환경 활성화 체크
 def check_virtualenv():
     """가상환경 체크 및 활성화 안내"""
+    # Windows에서 py 명령어로 실행하는 경우 가상환경 체크 건너뛰기
+    if platform.system() == "Windows" and os.environ.get('AUTOCI_SKIP_VENV_CHECK') == '1':
+        return True
+        
     if not hasattr(sys, 'real_prefix') and not (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
         print("⚠️  가상환경이 활성화되지 않았습니다.")
         print("다음 명령어로 가상환경을 활성화하세요:")
-        print("  source autoci_env/bin/activate  # Linux/WSL")
-        print("  autoci_env\\Scripts\\activate.bat  # Windows")
+        if platform.system() == "Windows":
+            print("  autoci_env\\Scripts\\activate.bat  # Command Prompt")
+            print("  autoci_env\\Scripts\\Activate.ps1  # PowerShell")
+        else:
+            print("  source autoci_env/bin/activate  # Linux/WSL")
         return False
     return True
+
+def get_python_executable():
+    """Get the appropriate Python executable"""
+    return sys.executable
+
+def run_python_script(script_path, args=""):
+    """Run Python script with cross-platform support"""
+    python_exe = get_python_executable()
+    if platform.system() == "Windows":
+        # Windows: use subprocess for better compatibility
+        cmd = [python_exe, str(script_path)]
+        if args:
+            cmd.extend(args.split())
+        return subprocess.run(cmd, capture_output=False)
+    else:
+        # WSL/Linux: use os.system
+        cmd = f'"{python_exe}" "{script_path}" {args}'
+        return os.system(cmd)
 
 
 def main():
@@ -45,28 +95,244 @@ def main():
         command = sys.argv[1].lower()
         
         if command == 'learn':
-            # AI 학습 모드
+            # AI 학습 모드 - 개선된 버전
+            print("🎓 AutoCI 개선된 학습 시스템을 시작합니다!")
+            print("📚 고품질 지시-응답 데이터셋을 구축하며 학습합니다")
+            print("📊 과적합 방지 및 품질 모니터링이 활성화됩니다")
+            print("💡 Gemini의 조언을 반영한 체계적인 학습을 진행합니다")
+            
+            script_path = PROJECT_ROOT / "core_system" / "continuous_learning_system.py"
             if len(sys.argv) > 2 and sys.argv[2] == 'low':
-                print("🧠 메모리 최적화 학습 모드 시작...")
-                os.system(f"python {PROJECT_ROOT}/core_system/continuous_learning_system.py --low-memory")
+                print("\n🧠 메모리 최적화 학습 모드 시작 (8GB)...")
+                run_python_script(script_path, "24", "8")
             else:
-                print("🧠 통합 학습 모드 시작...")
-                os.system(f"python {PROJECT_ROOT}/core_system/continuous_learning_system.py")
+                print("\n🧠 통합 학습 모드 시작 (32GB)...")
+                run_python_script(script_path, "24", "32")
         
         elif command == 'monitor':
             # 모니터링 대시보드
             print("📊 모니터링 대시보드 시작...")
-            os.system(f"python {PROJECT_ROOT}/modules/realtime_monitoring_system.py")
+            script_path = PROJECT_ROOT / "modules" / "realtime_monitoring_system.py"
+            run_python_script(script_path)
         
         elif command == 'fix':
             # 학습 기반 엔진 개선
             print("🔧 학습 기반 엔진 개선 시작...")
-            os.system(f"python {PROJECT_ROOT}/core_system/ai_engine_updater.py")
+            script_path = PROJECT_ROOT / "core_system" / "ai_engine_updater.py"
+            run_python_script(script_path)
+        
+        elif command == 'create':
+            # 게임 생성/이어서 개발
+            if len(sys.argv) > 2:
+                game_type = sys.argv[2]
+            else:
+                # 게임 타입을 물어봄
+                print("\n🎮 어떤 게임을 만들고 싶으신가요?")
+                print("\n선택 가능한 게임 타입:")
+                print("  1. platformer - 플랫폼 게임")
+                print("  2. racing     - 레이싱 게임")
+                print("  3. rpg        - RPG 게임")
+                print("  4. puzzle     - 퍼즐 게임")
+                print("\n게임 타입을 입력하세요 (번호 또는 이름): ", end='')
+                
+                choice = input().strip().lower()
+                
+                # 번호로 선택한 경우 처리
+                game_type_map = {
+                    '1': 'platformer',
+                    '2': 'racing',
+                    '3': 'rpg',
+                    '4': 'puzzle'
+                }
+                
+                if choice in game_type_map:
+                    game_type = game_type_map[choice]
+                elif choice in ['platformer', 'racing', 'rpg', 'puzzle']:
+                    game_type = choice
+                else:
+                    print("❌ 잘못된 선택입니다. platformer, racing, rpg, puzzle 중 하나를 선택해주세요.")
+                    sys.exit(1)
+            
+            # 선택된 게임 타입으로 진행
+            if SESSION_MANAGER_AVAILABLE:
+                session_manager = GameSessionManager()
+                existing_session = session_manager.get_active_session(game_type)
+                
+                if existing_session and existing_session.status != 'completed':
+                    print(f"\n🎮 기존 {game_type} 게임 개발을 발견했습니다!")
+                    print(f"   게임 이름: {existing_session.game_name}")
+                    print(f"   진행률: {existing_session.progress.get('completion_percentage', 0)}%")
+                    print(f"   마지막 수정: {existing_session.last_modified}")
+                    print("\n이어서 개발하시겠습니까? (y/n): ", end='')
+                    
+                    if input().lower() == 'y':
+                        print("🔄 게임 개발을 이어서 진행합니다...")
+                        asyncio.run(resume_game_development(existing_session))
+                    else:
+                        print("🆕 새로운 게임 개발을 시작합니다...")
+                        asyncio.run(create_new_game(game_type))
+                else:
+                    print(f"\n🆕 새로운 {game_type} 게임 개발을 시작합니다...")
+                    asyncio.run(create_new_game(game_type))
+            else:
+                print(f"\n🎮 {game_type} 게임 생성 시작...")
+                asyncio.run(create_new_game(game_type))
+        
+        elif command == 'resume':
+            
+            # Godot 프로젝트 경로 (여러 경로 시도)
+            possible_paths = [
+                Path("/home/super3720/Documents/Godot/Projects"),  # WSL direct path
+                Path.home() / "Documents" / "Godot" / "Projects",  # User home path
+                Path("//wsl.localhost/Ubuntu/home/super3720/Documents/Godot/Projects"),  # Windows WSL path
+                Path("/mnt/c/Users") / os.environ.get('USER', 'super3720') / "Documents" / "Godot" / "Projects"  # WSL to Windows
+            ]
+            
+            godot_projects_path = None
+            for path in possible_paths:
+                if path.exists():
+                    godot_projects_path = path
+                    print(f"✅ Godot 프로젝트 경로 발견: {path}")
+                    break
+                    
+            if godot_projects_path and godot_projects_path.exists():
+                print("🎮 Godot 프로젝트 목록:")
+                
+                # 프로젝트 디렉토리 찾기 (project.godot 파일이 있는 디렉토리)
+                projects = []
+                for item in godot_projects_path.iterdir():
+                    if item.is_dir() and (item / "project.godot").exists():
+                        projects.append(item)
+                
+                if not projects:
+                    print("💭 Godot 프로젝트를 찾을 수 없습니다.")
+                else:
+                    # 프로젝트 목록 표시
+                    for i, project in enumerate(projects, 1):
+                        project_name = project.name
+                        # project.godot 파일에서 프로젝트 정보 읽기
+                        project_file = project / "project.godot"
+                        if project_file.exists():
+                            print(f"\n{i}. {project_name}")
+                            print(f"   경로: {project}")
+                            # 마지막 수정 시간 표시
+                            mtime = datetime.fromtimestamp(project_file.stat().st_mtime)
+                            print(f"   마지막 수정: {mtime.strftime('%Y-%m-%d %H:%M:%S')}")
+                    
+                    print("\n어떤 프로젝트를 이어서 개발하시겠습니까? (번호 입력): ", end='')
+                    try:
+                        choice = int(input())
+                        if 1 <= choice <= len(projects):
+                            selected_project = projects[choice - 1]
+                            print(f"\n🔄 {selected_project.name} 프로젝트로 이동합니다...")
+                            
+                            # 프로젝트 디렉토리로 이동
+                            os.chdir(selected_project)
+                            print(f"📁 현재 디렉토리: {os.getcwd()}")
+                            
+                            # 24시간 자동 게임 개발 모드로 전환
+                            print("\n🚀 24시간 자동 게임 개발 모드를 시작합니다...")
+                            print("💫 AI가 자동으로 게임을 분석하고 개선합니다.")
+                            
+                            # 프로젝트 타입 추측 (디렉토리 이름 기반)
+                            project_name = selected_project.name.lower()
+                            game_type = 'platformer'  # 기본값
+                            if 'rpg' in project_name:
+                                game_type = 'rpg'
+                            elif 'tactic' in project_name or 'strategy' in project_name:
+                                game_type = 'strategy'
+                            elif 'racing' in project_name:
+                                game_type = 'racing'
+                            elif 'puzzle' in project_name:
+                                game_type = 'puzzle'
+                            
+                            print(f"🎮 게임 타입: {game_type}")
+                            
+                            # PersistentGameImprover를 사용한 24시간 개선 모드 시작
+                            try:
+                                from modules.persistent_game_improver import PersistentGameImprover
+                                
+                                improver = PersistentGameImprover()  # No controller argument
+                                
+                                # 프로젝트 경로와 타입 설정
+                                asyncio.run(improver.start_24h_improvement(
+                                    selected_project  # Path object expected, not string
+                                ))
+                            except ImportError as e:
+                                print(f"⚠️ PersistentGameImprover 로드 실패: {e}")
+                                # Fallback to original method
+                                asyncio.run(start_auto_development(selected_project, game_type))
+                            except Exception as e:
+                                print(f"❌ 오류 발생: {e}")
+                                # Fallback to original method
+                                asyncio.run(start_auto_development(selected_project, game_type))
+                        else:
+                            print("❌ 잘못된 번호입니다.")
+                    except ValueError:
+                        print("❌ 잘못된 입력입니다.")
+            else:
+                print(f"❌ Godot 프로젝트 경로를 찾을 수 없습니다: {godot_projects_path}")
+                
+                # 기존 세션 매니저 fallback
+                if SESSION_MANAGER_AVAILABLE:
+                    print("\n💾 대신 저장된 세션을 확인합니다...")
+                    session_manager = GameSessionManager()
+                    sessions = session_manager.list_sessions(status='paused')
+                    
+                    if sessions:
+                        for i, session in enumerate(sessions, 1):
+                            print(f"\n{i}. {session.game_name} ({session.game_type})")
+                            print(f"   진행률: {session.progress.get('completion_percentage', 0)}%")
+                        
+                        print("\n세션을 선택하시겠습니까? (y/N): ", end='')
+                        if input().lower() == 'y':
+                            print("번호 입력: ", end='')
+                            try:
+                                choice = int(input())
+                                if 1 <= choice <= len(sessions):
+                                    selected_session = sessions[choice - 1]
+                                    print(f"\n🔄 {selected_session.game_name} 개발을 재개합니다...")
+                                    asyncio.run(resume_game_development(selected_session))
+                            except ValueError:
+                                print("❌ 잘못된 입력입니다.")
+        
+        elif command == 'sessions':
+            # 모든 세션 보기
+            if SESSION_MANAGER_AVAILABLE:
+                print("📁 모든 게임 개발 세션:")
+                session_manager = GameSessionManager()
+                sessions = session_manager.list_sessions()
+                
+                if not sessions:
+                    print("💭 저장된 세션이 없습니다.")
+                else:
+                    for session in sessions:
+                        status_emoji = {
+                            'active': '🔴',
+                            'paused': '🟡', 
+                            'completed': '🟢'
+                        }.get(session.status, '⚪')
+                        
+                        print(f"\n{status_emoji} {session.game_name} ({session.game_type})")
+                        print(f"   ID: {session.session_id}")
+                        print(f"   상태: {session.status}")
+                        print(f"   진행률: {session.progress.get('completion_percentage', 0)}%")
+                        print(f"   생성일: {session.created_at}")
+                        print(f"   마지막 수정: {session.last_modified}")
+                        if session.features:
+                            print(f"   기능들: {', '.join(session.features)}")
+            else:
+                print("❌ 세션 관리자를 사용할 수 없습니다.")
         
         elif command == 'chat':
             # 한글 대화 모드
             print("💬 한글 대화 모드 시작...")
             asyncio.run(chat_mode())
+        
+        elif command == 'talk':
+            # PyTorch 대화형 학습 모드
+            print("🔥 PyTorch 대화형 학습 모드 시작...")
+            asyncio.run(pytorch_talk_mode())
         
         elif command == '--help' or command == '-h':
             show_help()
@@ -92,6 +358,59 @@ async def interactive_mode():
     from core_system.autoci_panda3d_main import AutoCIPanda3DMain
     autoci = AutoCIPanda3DMain()
     await autoci.start()
+
+async def create_new_game(game_type: str):
+    """새 게임 생성 (기존 프로젝트 있으면 이어서 개발)"""
+    try:
+        # Enhanced create 사용
+        from modules.create_enhanced import create_or_continue_game
+        await create_or_continue_game(game_type)
+    except ImportError:
+        # Fallback to original method
+        try:
+            from core_system.autoci_panda3d_main import AutoCIPanda3DMain
+            autoci = AutoCIPanda3DMain()
+            
+            # 세션 매니저가 있으면 새 세션 생성
+            if SESSION_MANAGER_AVAILABLE:
+                session_manager = GameSessionManager()
+                game_name = f"{game_type}_game_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                session = session_manager.create_session(game_type, game_name)
+                autoci.current_session = session
+            
+            await autoci.create_game(game_type)
+        except Exception as e:
+            print(f"❌ 게임 생성 중 오류 발생: {e}")
+    except Exception as e:
+        print(f"❌ 게임 생성 중 오류 발생: {e}")
+
+async def resume_game_development(session):
+    """기존 게임 개발 이어서 하기"""
+    try:
+        from core_system.autoci_panda3d_main import AutoCIPanda3DMain
+        autoci = AutoCIPanda3DMain()
+        
+        # 세션 재개
+        if SESSION_MANAGER_AVAILABLE:
+            session_manager = GameSessionManager()
+            session_manager.resume_session(session.session_id)
+            autoci.current_session = session
+            
+            # 진행 상황 표시
+            print(f"\n📦 프로젝트 정보:")
+            print(f"   현재 단계: {session.progress.get('stage', 'unknown')}")
+            print(f"   완료된 작업: {len(session.progress.get('completed_tasks', []))}")
+            print(f"   추가된 기능: {len(session.features)}")
+            
+            if session.features:
+                print(f"\n🎯 기존 기능들:")
+                for feature in session.features:
+                    print(f"   ✓ {feature}")
+        
+        # 게임 개발 계속
+        await autoci.resume_development(session)
+    except Exception as e:
+        print(f"❌ 게임 개발 재개 중 오류 발생: {e}")
 
 
 async def chat_mode():
@@ -121,18 +440,176 @@ async def chat_mode():
         print(f"\nAutoCI: {response}")
 
 
+async def pytorch_talk_mode():
+    """PyTorch 대화형 학습 모드"""
+    try:
+        from modules.pytorch_tutorial_system import PyTorchTutorialSystem
+        from modules.ai_model_integration import AIModelIntegration
+    except ImportError as e:
+        print(f"❌ 모듈 임포트 오류: {e}")
+        print("PyTorch 튜토리얼 시스템을 로드할 수 없습니다.")
+        return
+    
+    # AI 모델 연결 시도
+    ai_model = None
+    try:
+        ai_model = AIModelIntegration()
+        print("✅ AI 모델이 연결되었습니다. 더 나은 답변을 제공할 수 있습니다.")
+    except Exception as e:
+        print(f"⚠️  AI 모델 연결 실패: {e}")
+        print("기본 튜토리얼 모드로 진행합니다.")
+    
+    # PyTorch 튜토리얼 시스템 시작
+    tutorial_system = PyTorchTutorialSystem(ai_model)
+    await tutorial_system.start_tutorial_session()
+
+
+async def start_auto_development(project_path, game_type):
+    """24시간 자동 게임 개발 시작"""
+    try:
+        # 24시간 게임 개발 시스템 임포트
+        from modules.game_factory_24h import GameFactory24H
+        from modules.game_development_pipeline import GameDevelopmentPipeline
+        
+        print("\n🏭 24시간 게임 개발 공장을 시작합니다...")
+        print(f"📂 프로젝트: {project_path}")
+        print(f"🎮 게임 타입: {game_type}")
+        print("\n⏰ 개발 일정:")
+        print("  - 분석 단계: 1시간")
+        print("  - 개선 계획: 2시간") 
+        print("  - 기능 구현: 16시간")
+        print("  - 테스트/최적화: 5시간")
+        print("\n💡 Ctrl+C를 눌러 언제든 중단할 수 있습니다.")
+        
+        # 기존 프로젝트 심층 분석
+        print("\n🔍 기존 프로젝트를 분석하는 중...")
+        existing_features = []
+        project_analysis = {
+            'scenes': [],
+            'scripts': [],
+            'assets': [],
+            'systems': []
+        }
+        
+        # project.godot 파일에서 기본 정보 읽기
+        project_file = project_path / "project.godot"
+        if project_file.exists():
+            print("✅ project.godot 파일 발견")
+            existing_features.append("기본 프로젝트 구조")
+            
+            # project.godot 내용 분석
+            try:
+                with open(project_file, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    if 'config/name=' in content:
+                        game_name = content.split('config/name=')[1].split('\n')[0].strip('"')
+                        print(f"   게임 이름: {game_name}")
+                    if 'main_scene=' in content:
+                        main_scene = content.split('main_scene=')[1].split('\n')[0].strip('"')
+                        print(f"   메인 씬: {main_scene}")
+            except:
+                pass
+        
+        # 씬 파일 분석
+        scene_count = 0
+        for scene_file in project_path.rglob("*.tscn"):
+            scene_count += 1
+            project_analysis['scenes'].append(scene_file.relative_to(project_path))
+        if scene_count > 0:
+            existing_features.append(f"씬 파일 {scene_count}개")
+            print(f"   발견된 씬: {scene_count}개")
+        
+        # 스크립트 파일 분석
+        script_count = 0
+        for ext in ["*.gd", "*.cs"]:
+            for script_file in project_path.rglob(ext):
+                script_count += 1
+                project_analysis['scripts'].append(script_file.relative_to(project_path))
+        if script_count > 0:
+            existing_features.append(f"스크립트 {script_count}개")
+            print(f"   발견된 스크립트: {script_count}개")
+        
+        # 에셋 분석
+        asset_types = {
+            'images': ['*.png', '*.jpg', '*.jpeg'],
+            'audio': ['*.wav', '*.ogg', '*.mp3'],
+            'models': ['*.obj', '*.gltf', '*.glb']
+        }
+        
+        for asset_type, extensions in asset_types.items():
+            count = 0
+            for ext in extensions:
+                count += len(list(project_path.rglob(ext)))
+            if count > 0:
+                existing_features.append(f"{asset_type} {count}개")
+                project_analysis['assets'].append(f"{asset_type}: {count}")
+        
+        # 주요 시스템/기능 감지
+        if any("player" in str(f).lower() for f in project_analysis['scripts']):
+            project_analysis['systems'].append("플레이어 시스템")
+        if any("enemy" in str(f).lower() for f in project_analysis['scripts']):
+            project_analysis['systems'].append("적 시스템")
+        if any("ui" in str(f).lower() or "hud" in str(f).lower() for f in project_analysis['scripts']):
+            project_analysis['systems'].append("UI 시스템")
+        if any("inventory" in str(f).lower() for f in project_analysis['scripts']):
+            project_analysis['systems'].append("인벤토리 시스템")
+        if any("dialog" in str(f).lower() for f in project_analysis['scripts']):
+            project_analysis['systems'].append("대화 시스템")
+            
+        if project_analysis['systems']:
+            print(f"\n🎯 감지된 시스템: {', '.join(project_analysis['systems'])}")
+            existing_features.extend(project_analysis['systems'])
+            
+        if existing_features:
+            print(f"\n✨ 발견된 요소들: {', '.join(existing_features)}")
+        
+        # 24시간 자동 개발 시작
+        factory = GameFactory24H()
+        
+        # 기존 프로젝트로 초기화
+        factory.current_project = {
+            'path': str(project_path),
+            'name': project_path.name,
+            'type': game_type,
+            'features': existing_features or []
+        }
+        
+        # 개발 시작 (기존 프로젝트 모드)
+        await factory.start_factory(
+            game_name=project_path.name,
+            game_type=game_type,
+            existing_project=True
+        )
+        
+    except KeyboardInterrupt:
+        print("\n\n⚠️  사용자가 개발을 중단했습니다.")
+        print("📁 프로젝트는 현재 상태로 저장되었습니다.")
+    except ImportError as e:
+        print(f"\n❌ 24시간 개발 모듈을 찾을 수 없습니다: {e}")
+        print("\n대신 대화형 모드로 전환합니다...")
+        await interactive_mode()
+    except Exception as e:
+        print(f"\n❌ 자동 개발 중 오류 발생: {e}")
+        print("상세 오류:", str(e))
+
+
 def show_help():
     """도움말 표시"""
-    print("""
+    print(f"""
 AutoCI - AI 게임 개발 시스템 v5.0
+Platform: {platform.system()}
 
 사용법:
   autoci                    대화형 모드 시작
+  autoci create [type]      게임 생성/이어서 개발
+  autoci resume             Godot 프로젝트 선택하여 24시간 자동 개발
+  autoci sessions           모든 게임 개발 세션 보기
   autoci learn              AI 통합 학습 시작
   autoci learn low          메모리 최적화 학습 (8GB VRAM)
   autoci monitor            실시간 모니터링 대시보드
   autoci fix                학습 기반 엔진 개선
   autoci chat               한글 대화 전용 모드
+  autoci talk               PyTorch 대화형 학습 모드
   autoci --help             도움말 표시
 
 대화형 모드 명령어:
@@ -145,11 +622,24 @@ AutoCI - AI 게임 개발 시스템 v5.0
   exit/quit/종료           종료
 
 예제:
-  autoci
+  autoci create platformer  # 플랫폼 게임 생성 (기존 개발 있으면 이어서)
+  autoci resume             # Godot 프로젝트에서 24시간 자동 개발 시작
+  autoci sessions           # 모든 게임 개발 현황 확인
+  
+  대화형 모드:
   > create platformer game  # 플랫폼 게임 생성
   > add feature double_jump # 더블 점프 기능 추가
   > status                  # 개발 상태 확인
+
+플랫폼별 참고사항:
 """)
+    
+    if platform.system() == "Windows":
+        print("  - Windows에서 실행 중")
+        print("  - 경로에 백슬래시 사용: C:\\AutoCI\\AutoCI")
+    else:
+        print("  - WSL/Linux에서 실행 중")
+        print("  - 경로에 슬래시 사용: /mnt/d/AutoCI/AutoCI")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_manipulation_basic_design_1751827024",
+  "question": "[IoT 디바이스 개발 상황] Propose design patterns for 기본 에디터 조작 based PropertyConfig, ScriptAttach systems.",
+  "answer": "## 제안:\n\n기본 에디터 조작을 위한 디자인 패턴을 제안하기 위해, 다음과 같은 디자인 패턴을 제안합니다.\n\n1. **데코레이터 패턴(Decorator Pattern):** 이 패턴은 객체의 동작을 동적으로 변경할 수 있게 해줍니다. 이 패턴은 디바이스 유형과 속성을 보완�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5949336266517639,
+  "generation_time": 295.102650642395,
+  "timestamp": "2025-07-07T03:47:05.217987",
+  "topic": "기본 에디터 조작",
+  "language": "english"
+}

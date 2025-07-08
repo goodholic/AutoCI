@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_compare_1751908373",
+  "question": "[블록체인 dApp 개발 상황] C# 기초 문법과 다른 기술의 클래스 구현 방식을 비교 분석해주세요.",
+  "answer": "```\n\n다른 기술의 클래스 구현 방식을 비교 분석해주세요.\n\nC#을 사용할 때, 다른 기술을 사용할 때 비교적 간단하게 클래스를 구현할 수 있습니다.\n\n아래는 두 예시를 들어보겠습니다.\n\n1. 리액트(React)와 자바스크립트(JavaScript)\n\n```\n// React\nclass Hello extends React.Component {\n  render() {",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6628441882133485,
+  "generation_time": 294.92056250572205,
+  "timestamp": "2025-07-08T02:22:48.135433",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

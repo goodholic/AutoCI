@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_integrate_1751855175",
+  "question": "Godot 엔진에서 Godot 기초의 씬 개념을 C#으로 구현해주세요.",
+  "answer": "```csharp\nusing Godot;\nusing System;\n\npublic class MyScene : Node2D\n{\n    private Label label;\n    private Timer timer;\n\n    public override void _Ready()\n    {\n        label = GetNode<Label>(\"Label\");\n        timer = GetNode<Timer>(\"Timer\");\n\n        timer.Timeout += OnTimerTimeout;\n    }\n\n    private void OnTimerTimeout()\n    {\n        label.Text = \"Timer has timed out!\";\n    }\n}\n```\n\n이 코드는 Godot 엔진에서 씬을 구현하는 방법을 C#으로 보여줍니다. 씬에는 Label과 Timer 노드가 있습니다. 씬이 준비되면, 코드는 Label과 Timer 노드를 가져�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6618468356132508,
+  "generation_time": 305.8144941329956,
+  "timestamp": "2025-07-07T11:31:21.084923",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

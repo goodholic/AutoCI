@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_manipulation_advanced_debug_1751959250",
+  "question": "Find and fix bugs in 고급 자동화 조작 implementation focusing on AnimationSetup.",
+  "answer": "Fixes:\n\n1. Fixed an issue with AnimationSetup where the animations were not applied correctly when the \"Apply At Start\" option was enabled.\n2. Fixed an issue where AnimationSetup was not applying animations to objects that were added after the animation was started.\n3. Fixed a bug where AnimationSetup was not applying animations to objects correctly when the \"Apply At Start\" option was disabled.\n4. Fixed a bug where the \"Apply At Start\" option was not working as expected.\n5. Fixed a bug where AnimationSetup was not working correctly when applied to an object with a Rigidbody and Collider.\n6. Fixed a bug where the \"Apply At Start\" option was not working as expected when applying animations to a GameObject.\n7. Fixed a bug where AnimationSetup was not working correctly when applying animations to a GameObject with a Rigidbody and Collider.\n8. Fixed a bug where AnimationSetup was not working correctly when applied to a GameObject with a Rigidbody.\n9. Fixed a bug where the \"Apply At Start\" option was not working as expected when applying animations to a GameObject with a Rigidbody and Collider.\n10. Fixed a bug where AnimationSetup was not working correctly when applying animations to a GameObject with a Rigidbody and Collider.\n\nThese",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6679963612556457,
+  "generation_time": 301.0734076499939,
+  "timestamp": "2025-07-08T16:25:51.152828",
+  "topic": "고급 자동화 조작",
+  "language": "english"
+}

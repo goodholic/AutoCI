@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-07-06T08:41:15.839406",
+  "game_type": "rpg",
+  "feature": "combat_system",
+  "phase": "mechanics",
+  "attempt_number": 790,
+  "success": false,
+  "duration": 8.15436315536499,
+  "error": "'AIModelIntegration' object has no attribute 'validate_code'",
+  "quality_score": 0.1,
+  "lesson_learned": "combat_system 구현 중 예외 발생 - AttributeError 처리 필요"
+}

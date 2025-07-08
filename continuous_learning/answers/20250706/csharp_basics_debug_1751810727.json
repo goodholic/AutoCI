@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_debug_1751810727",
+  "question": "다음 C# 기초 문법 코드의 메서드, 데이터타입 부분에서 발생하는 문제를 디버깅해주세요.",
+  "answer": "답변:\n주어진 코드는 다음과 같은 문제를 발생시킬 수 있습니다.\n\n1. 메서드: \n   - `Main` 메서드의 `foreach` 반복문에서 짝수만 필터링하는 것 외에도 `PrintMatrix` 메서드는 사용되지 않습니다. 이 메서드는 `Matrix`를 출력하는 역할을 하는데, 출력이 되지 않습",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5820361351966857,
+  "generation_time": 296.9569442272186,
+  "timestamp": "2025-07-06T23:15:32.292427",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

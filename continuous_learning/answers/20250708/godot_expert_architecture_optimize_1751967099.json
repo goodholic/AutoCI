@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_optimize_1751967099",
+  "question": "변형된 Godot 아키텍처에서 렌더파이프라인, 리소스관리, 씬시스템 관련 성능을 최적화하는 방법을 제시해주세요.",
+  "answer": "## 렌더파이프라인\n\n엔진의 렌더파이프라인은 유니티의 경우 멀티패스 셰이더를 사용하지만, Godot 엔진은 단일패스 셰이더를 사용하는 것이 일반적입니다. 이는 비용이 많이 드는 셰이더를 사용하지 않기 때문에 렌더링 속도를 높일 수 있다는",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5949903059005737,
+  "generation_time": 301.53689455986023,
+  "timestamp": "2025-07-08T18:36:40.963365",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "korean"
+}

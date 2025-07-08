@@ -25,6 +25,7 @@ from modules.korean_conversation_interface import KoreanConversationInterface
 from modules.game_development_pipeline import GameDevelopmentPipeline
 from modules.realtime_monitoring_system import RealtimeMonitoringSystem
 from modules.enterprise_ai_model_system import EnterpriseAIModelSystem
+from modules.game_session_manager import GameSessionManager, GameSession
 
 # 로깅 설정
 logging.basicConfig(
@@ -46,6 +47,8 @@ class AutoCIPanda3DMain:
         self.is_running = False
         self.current_game = None
         self.components = {}
+        self.current_session = None
+        self.session_manager = GameSessionManager()
         
         # 컴포넌트 초기화
         self._initialize_components()
@@ -78,6 +81,9 @@ class AutoCIPanda3DMain:
             
             # 컴포넌트 간 연결
             self._connect_components()
+            
+            # 세션 매니저 등록
+            self.components['session_manager'] = self.session_manager
             
         except Exception as e:
             logger.error(f"컴포넌트 초기화 실패: {e}")
@@ -190,6 +196,10 @@ class AutoCIPanda3DMain:
         """게임 생성 시작"""
         game_name = f"{game_type}_game_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
+        # 세션 생성
+        if self.current_session is None:
+            self.current_session = self.session_manager.create_session(game_type, game_name)
+        
         print(f"\n🎮 '{game_name}' 생성 시작...")
         print("📊 24시간 자동 개발이 시작됩니다!")
         
@@ -202,8 +212,44 @@ class AutoCIPanda3DMain:
             self.current_game = game_name
             print(f"✅ 게임 개발이 시작되었습니다!")
             print(f"📂 프로젝트 위치: game_projects/{game_name}")
+            
+            # 세션 업데이트
+            if self.current_session:
+                self.session_manager.update_progress(self.current_session.session_id, {
+                    'stage': 'development_started',
+                    'current_task': 'initial_setup'
+                })
         else:
             print("❌ 게임 생성 실패")
+    
+    async def create_game(self, game_type: str):
+        """게임 생성 (외부 호출용)"""
+        await self._create_game(game_type)
+    
+    async def resume_development(self, session: GameSession):
+        """기존 게임 개발 재개"""
+        self.current_session = session
+        self.current_game = session.game_name
+        
+        print(f"\n🔄 '{session.game_name}' 개발 재개...")
+        print(f"📊 현재 진행률: {session.progress.get('completion_percentage', 0)}%")
+        
+        # 게임 파이프라인 복원
+        if hasattr(self.components['game_pipeline'], 'resume_development'):
+            success = await self.components['game_pipeline'].resume_development(session)
+        else:
+            # 기본 개발 계속
+            success = await self.components['game_pipeline'].start_development(
+                session.game_name, session.game_type
+            )
+        
+        if success:
+            print(f"✅ 게임 개발이 재개되었습니다!")
+            
+            # 세션 상태 업데이트
+            self.session_manager.resume_session(session.session_id)
+        else:
+            print("❌ 게임 개발 재개 실패")
     
     async def _add_feature(self, feature: str):
         """기능 추가"""
@@ -215,6 +261,10 @@ class AutoCIPanda3DMain:
             
             if success:
                 print(f"✅ '{feature}' 기능이 추가되었습니다!")
+                
+                # 세션에 기능 추가
+                if self.current_session:
+                    self.session_manager.add_feature(self.current_session.session_id, feature)
             else:
                 print(f"❌ '{feature}' 기능 추가 실패")
     
@@ -237,6 +287,13 @@ class AutoCIPanda3DMain:
                 if status:
                     print(f"진행률: {status.get('progress', 0)}%")
                     print(f"현재 단계: {status.get('current_phase', 'N/A')}")
+            
+            # 세션 정보
+            if self.current_session:
+                print(f"\n💾 세션 정보:")
+                print(f"   ID: {self.current_session.session_id}")
+                print(f"   상태: {self.current_session.status}")
+                print(f"   기능 수: {len(self.current_session.features)}")
         else:
             print("현재 게임: 없음")
         
@@ -271,6 +328,11 @@ class AutoCIPanda3DMain:
         """시스템 종료"""
         logger.info("🛑 AutoCI 시스템 종료 중...")
         self.is_running = False
+        
+        # 현재 세션 일시 정지
+        if self.current_session and self.current_session.status == 'active':
+            self.session_manager.pause_session(self.current_session.session_id)
+            print(f"🟡 현재 세션이 일시 정지되었습니다: {self.current_session.session_id}")
         
         # 모든 컴포넌트 정리
         if 'monitoring' in self.components:

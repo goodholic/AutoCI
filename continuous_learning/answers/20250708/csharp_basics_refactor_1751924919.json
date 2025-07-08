@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_refactor_1751924919",
+  "question": "[데이터 분석 도구 개발 상황] 레거시 C# 기초 문법 코드를 메서드, 데이터타입, 변수 패턴을 사용해 리팩토링해주세요.",
+  "answer": "레거시 C# 코드는 다음과 같습니다.\n\n```C#\npublic class LegacyClass\n{\n    public string MyMethod(int a, int b)\n    {\n        int result = a + b;\n        return \"Result: \" + result;\n    }\n}\n```\n\n다음과 같이 리팩토링할 수 있습니다.\n\n```C#\npublic class RefactoredClass\n{\n    private const string ResultPrefix = \"Result: \";\n\n    public string Add(int a, int b)\n    {\n        int result = AddInternal(a, b);\n        return FormatResult(result);\n    }\n\n    private int AddInternal(int a, int b)\n    {\n        return a + b;\n    }\n\n    private string FormatResult(int result)\n    {\n        return ResultPrefix + result;\n    }\n}\n```\n\n리팩토링 후 코드�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.7074945342540742,
+  "generation_time": 298.37333154678345,
+  "timestamp": "2025-07-08T06:53:37.800521",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

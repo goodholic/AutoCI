@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_advanced_explain_1751915720",
+  "question": "How does LINQ, async work in C# 고급 기능? Include implementation details.",
+  "answer": "Link: https://www.codeproject.com/Articles/123537/LINQ-async-and-Csharp-Advanced-Features\n\nLINQ (Language Integrated Query) and async programming in C# are powerful features that can greatly enhance the efficiency and readability of your code. \n\nLINQ is a powerful feature in C# that allows you to write queries that are similar to SQL, using the same syntax. This means you can write queries that interact with objects in memory, like a database, without having to write any SQL. \n\nIn addition to LINQ, C# also supports async programming, which is a way to write non-blocking, asynchronous code. This can be particularly useful in applications that involve waiting on external resources, such as databases or the network, which can take a long time and block the execution of other code.\n\nHere is a simple example of LINQ:\n\n```csharp\nvar numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };\nvar evenNumbers = from num in numbers\n                  where num % 2 == 0\n                  select num;\nforeach (var num in evenNumbers)\n{\n    Console.WriteLine(num);\n}\n```\n\nAnd",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6828380119800568,
+  "generation_time": 292.9250593185425,
+  "timestamp": "2025-07-08T04:20:13.847493",
+  "topic": "C# 고급 기능",
+  "language": "english"
+}

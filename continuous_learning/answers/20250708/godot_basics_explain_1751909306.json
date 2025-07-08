@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_explain_1751909306",
+  "question": "Deep dive into Godot 기초 architecture, especially Node components.",
+  "answer": "## Node components\n\n### What are Node components?\n\nIn Godot, a Node is the basic building block. Everything in a Godot project is a Node. Nodes are like the building blocks of a Lego set. They include things like the character, the camera, the environment, the controls, etc. The nodes can be linked together to create a complex scene.\n\n### What are the components of a Node?\n\nA Node in Godot includes the following components:\n\n1. **Instance data**: This is where you store any data the node needs to maintain its state.\n2. **Instance methods**: These are the methods that the node uses to perform its functions.\n3. **Instance signals**: These are a way for nodes to communicate with each other.\n4. **Instance properties**: These are the characteristics of the node.\n5. **Instance nodes**: These are child nodes that the main node contains.\n\n### How to create Node components?\n\nCreating a Node component in Godot involves creating a new class. You can do this in the Godot editor by right-clicking on the Project Manager and selecting New > Class. This will create a new script file with a class named `Class`.\n\nYou can then define your instance data, methods, signals, properties, and nodes in this class.\n\nHere's a simple example of a Node",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6499701130390168,
+  "generation_time": 292.0073618888855,
+  "timestamp": "2025-07-08T02:33:18.957020",
+  "topic": "Godot 기초",
+  "language": "english"
+}

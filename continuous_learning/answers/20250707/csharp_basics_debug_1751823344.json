@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_debug_1751823344",
+  "question": "적절한 C# 기초 문법 프로젝트의 클래스, 데이터타입 오류를 체계적으로 추적하고 해결해주세요.",
+  "answer": "```csharp\nusing System;\n\nclass Program\n{\n    static void Main()\n    {\n        var a = 12;\n        var b = 5;\n        var c = a + b;\n\n        Console.WriteLine(c);\n    }\n}\n```\n\n위 코드는 간단한 덧셈 연산을 수행하는 프로그램입니다. 콘솔에 출력되는 값은 17입니다.\n\n코드에 오류가 없습니다. 하지만 적절한 오류 추적을 위해 코드를 분석하면 다음과 같�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6206059241294861,
+  "generation_time": 296.8821008205414,
+  "timestamp": "2025-07-07T02:40:41.629424",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

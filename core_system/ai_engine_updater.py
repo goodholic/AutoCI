@@ -2,6 +2,7 @@
 """
 AI 엔진 업데이터
 학습 데이터를 기반으로 AI의 게임 엔진 능력을 향상시키는 모듈
+Cross-platform support for Windows and WSL
 """
 
 import os
@@ -9,14 +10,26 @@ import sys
 import json
 import time
 import logging
+import platform
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 import asyncio
 
+# Platform-specific path setup
+def get_project_root():
+    """Get project root path based on platform"""
+    if platform.system() == "Windows":
+        # Windows: use script's parent directory
+        return Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    else:
+        # WSL/Linux: use configured path
+        return Path("/mnt/d/AutoCI/AutoCI")
+
 # 프로젝트 경로 설정
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = get_project_root()
 sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(PROJECT_ROOT / 'modules'))
 
 from modules.ai_model_integration import get_ai_integration
 from modules.panda3d_self_evolution_system import Panda3DSelfEvolutionSystem
@@ -33,6 +46,11 @@ class AIEngineUpdater:
         self.learning_data_path = self.project_root / "data" / "learning"
         self.evolution_data_path = self.project_root / "data" / "evolution"
         self.models_path = self.project_root / "models_ai"
+        
+        # Create directories if they don't exist
+        self.learning_data_path.mkdir(parents=True, exist_ok=True)
+        self.evolution_data_path.mkdir(parents=True, exist_ok=True)
+        self.models_path.mkdir(parents=True, exist_ok=True)
         
         # AI 모델 초기화
         self.ai_model = get_ai_integration()
@@ -63,6 +81,7 @@ class AIEngineUpdater:
         # 1. 학습 데이터 분석
         print("\n📊 학습 데이터 분석 중...")
         learning_insights = await self._analyze_learning_data()
+        self._last_insights = learning_insights  # 나중에 요약에서 사용하기 위해 저장
         
         # 2. 패턴 추출 및 최적화
         print("\n🧬 성공 패턴 추출 중...")
@@ -130,6 +149,64 @@ class AIEngineUpdater:
         # 진화 데이터베이스 분석
         evolution_insights = await self.evolution_system.get_evolution_insights()
         insights["evolution_data"] = evolution_insights
+        
+        # Godot 프로젝트 및 resume 세션 데이터 분석
+        guardian_data_path = self.project_root / "experiences" / "guardian_system"
+        insights["resume_sessions"] = []
+        insights["godot_improvements"] = []
+        
+        # 지식 베이스에서 학습
+        try:
+            from modules.knowledge_base_system import get_knowledge_base
+            kb = get_knowledge_base()
+            kb_insights = await kb.generate_insights_report()
+            insights["knowledge_base"] = kb_insights
+            logger.info(f"✅ 지식 베이스에서 {kb_insights['summary']['total_knowledge_entries']}개 항목 분석")
+        except Exception as e:
+            logger.warning(f"지식 베이스 분석 실패: {e}")
+        
+        # 실패 추적 시스템에서 학습
+        try:
+            from modules.failure_tracking_system import get_failure_tracker
+            ft = get_failure_tracker()
+            failure_report = await ft.get_failure_report()
+            insights["failure_tracking"] = failure_report
+            logger.info(f"✅ 실패 추적에서 {failure_report['statistics']['total_failures']}개 실패 분석")
+        except Exception as e:
+            logger.warning(f"실패 추적 분석 실패: {e}")
+        
+        if guardian_data_path.exists():
+            # resume 세션 파일들 분석
+            for file_path in guardian_data_path.glob("resume_session_*.json"):
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        resume_data = json.load(f)
+                        
+                        if resume_data.get("files_modified"):
+                            insights["resume_sessions"].append({
+                                "session_id": resume_data.get("session_id"),
+                                "project_path": resume_data.get("project_path"),
+                                "files_modified": len(resume_data.get("files_modified", [])),
+                                "improvements": resume_data.get("improvements", [])
+                            })
+                            
+                            # Godot 개선 사항 추출
+                            for improvement in resume_data.get("improvements", []):
+                                insights["godot_improvements"].append({
+                                    "type": improvement.get("type", "unknown"),
+                                    "description": improvement.get("description", ""),
+                                    "success": improvement.get("success", False)
+                                })
+                except Exception as e:
+                    logger.error(f"Resume 세션 데이터 읽기 오류: {e}")
+        
+        # Godot 프로젝트 직접 분석
+        godot_projects_path = Path("/home/super3720/Documents/Godot/Projects")
+        if godot_projects_path.exists():
+            insights["godot_projects_analyzed"] = []
+            for project_dir in godot_projects_path.iterdir():
+                if project_dir.is_dir() and (project_dir / "project.godot").exists():
+                    insights["godot_projects_analyzed"].append(project_dir.name)
         
         return insights
     
@@ -395,6 +472,15 @@ if not file_path.exists():
         print(f"  - 총 업데이트: {self.update_stats['total_updates']}")
         print(f"  - 성공: {self.update_stats['successful_updates']}")
         print(f"  - 실패: {self.update_stats['failed_updates']}")
+        
+        # Resume 세션 통계
+        if hasattr(self, '_last_insights') and self._last_insights.get('resume_sessions'):
+            print(f"\n🔄 Resume 세션 분석:")
+            print(f"  - 분석된 세션: {len(self._last_insights['resume_sessions'])}")
+            total_files = sum(s['files_modified'] for s in self._last_insights['resume_sessions'])
+            print(f"  - 수정된 파일: {total_files}")
+            if self._last_insights.get('godot_projects_analyzed'):
+                print(f"  - Godot 프로젝트: {', '.join(self._last_insights['godot_projects_analyzed'])}")
         
         if self.update_stats['improvements']:
             print(f"\n✨ 주요 개선사항:")

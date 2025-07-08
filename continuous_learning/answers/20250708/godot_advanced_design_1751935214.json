@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_design_1751935214",
+  "question": "확장 가능한 Godot 고급 최적화, 셰이더 구조를 설계하고 다이어그램으로 표현해주세요.",
+  "answer": "---\n\n## 스키마\n\n### 노드 시스템\n\nGodot에서 사용되는 주요 노드 시스템은 객체 지향 프로그래밍을 기반으로 합니다. 노드는 단지 객체와 그래프를 구성하는 블록들 중 하나입니다. 각 노드는 특정 역할을 수행하며, 그래프를 통해 노드들",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6624023449420928,
+  "generation_time": 297.6537299156189,
+  "timestamp": "2025-07-08T09:45:12.101772",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

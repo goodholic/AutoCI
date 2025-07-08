@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_example_1751824882",
+  "question": "Godot 고급과 커스텀노드, 셰이더를 결합한 창의적인 코드 예제를 제시해주세요.",
+  "answer": "```\n\n코드 예시의 내용에 대한 설명을 제공해주세요.\n```gdscript\n# 새로운 스크립트 클래스를 만든다.\nextends Node2D\n\n# 노드 정의\nvar my_node: Node2D\n\n# 노드의 위치를 저장하는 벡터\nvar node_position: Vector2\n\n# 노드의 색상을 저장하는 벡터\nvar node_color: Color\n\n# 초기화 함수\nfunc _ready():\n    # 노드를 생성하고",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6237194800376892,
+  "generation_time": 296.12069630622864,
+  "timestamp": "2025-07-07T03:11:24.883900",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

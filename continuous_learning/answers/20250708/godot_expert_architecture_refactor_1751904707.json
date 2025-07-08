@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_refactor_1751904707",
+  "question": "레거시 변형된 Godot 아키텍처 코드를 커스텀엔진 패턴을 사용해 리팩토링해주세요.",
+  "answer": "---\n\n# 리팩토링 요구사항\n\n## 완료 조건\n\n- Godot 엔진을 사용하지 않고 커스텀엔진 패턴을 구현합니다.\n- 최소한 다음과 같은 부분들을 지원해야 합니다:\n    - 시간 여행\n    - 시간 여행시 일시정지 지원\n    - 스크립트 코드의 변경 감지\n    - 코드 변경",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.570961343050003,
+  "generation_time": 294.43775248527527,
+  "timestamp": "2025-07-08T01:16:41.559704",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "korean"
+}

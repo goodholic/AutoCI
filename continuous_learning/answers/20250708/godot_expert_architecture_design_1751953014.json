@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_design_1751953014",
+  "question": "확장 가능한 변형된 Godot 아키텍처 리소스관리, 씬시스템, 커스텀엔진 구조를 설계하고 다이어그램으로 표현해주세요.",
+  "answer": "## 3. 아키텍처 설계\n\n### 3.1 Godot 아키텍처 구성요소\n\nGodot 엔진은 다음과 같은 주요 구성요소로 구성되어 있습니다.\n\n- **씬 그래프 (Scene Graph)**: 씬은 노드들의 계층 구조로 구성되어 있습니다. 이 구조를 통해 씬의 일부를 다른 씬에 쉽게 재사용할 수",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6178459179401398,
+  "generation_time": 305.3827085494995,
+  "timestamp": "2025-07-08T14:41:59.636723",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "korean"
+}

@@ -1,0 +1,4236 @@
+[
+  {
+    "question": "적절한 실시간 통신 기초 사용법을 룸, 소켓, 이벤트를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T17:38:19.712689",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] C# 고급 기능에서 LINQ, async/await, 델리게이트 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-06T17:46:15.421513",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 적절한 프로젝트를 위한 Godot 기초 기반 시그널 설계 패턴을 제안해주세요.",
+    "type": "design",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-06T17:51:39.339678",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating ScriptAttach, NodeCreation, SceneSetup in 기본 에디터 조작.",
+    "type": "example",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-06T17:56:59.824527",
+    "keywords": [
+      "NodeCreation",
+      "SceneSetup",
+      "PropertyConfig",
+      "ScriptAttach"
+    ]
+  },
+  {
+    "question": "프로그래밍 기본 용어에서 발생하는 변수 관련 버그를 찾고 수정해주세요.",
+    "type": "debug",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-06T18:02:18.816852",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] Design and build a SceneSystem module using 변형된 Godot 아키텍처 best practices.",
+    "type": "implement",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-06T18:02:30.053280",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "Godot 고급과 Godot의 물리엔진, 최적화를 연동하는 실용적인 예제를 만들어주세요.",
+    "type": "integrate",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-06T18:07:52.401936",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "초보자도 이해할 수 있도록 기본 에디터 조작의 씬구성, 노드생성를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-06T18:13:19.796218",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 적절한 실시간 통신 기초 프로젝트의 룸, 이벤트, 네임스페이스 부분에 대한 단위 테스트를 구현해주세요.",
+    "type": "test",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T18:20:03.607046",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "실제 게임/앱에서 사용할 수 있는 고급 자동화 조작의 물리설정, 복잡한씬구성 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-06T18:25:30.130886",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 고급 자동화 조작에서 발생하는 복잡한씬구성, 애니메이션설정, 물리설정 관련 버그를 찾고 수정해주세요.",
+    "type": "debug",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-06T18:30:56.934876",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "다음 AI 고급 최적화 코드의 컨텍스트관리, 파인튜닝, 프롬프트엔지니어링 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-06T18:36:26.617335",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 적절한 수준의 AI 고급 최적화 프로젝트에서 컨텍스트관리, 파인튜닝, 체이닝를 어떻게 활용하는지 보여주세요.",
+    "type": "example",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-06T18:41:50.465648",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] AI 고급 최적화과 Godot의 프롬프트엔지니어링, 컨텍스트관리를 연동하는 실용적인 예제를 만들어주세요.",
+    "type": "integrate",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-06T18:47:21.771488",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] 적절한 개발자가 AI 고급 최적화의 프롬프트엔지니어링, 체이닝, 파인튜닝에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-06T18:53:34.394429",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "Implement unit tests for C# 기초 문법 class module.",
+    "type": "test",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-06T18:59:39.595217",
+    "keywords": [
+      "variable",
+      "datatype",
+      "method",
+      "class"
+    ]
+  },
+  {
+    "question": "실시간 통신 기초과 Godot의 이벤트, 룸를 연동하는 실용적인 예제를 만들어주세요.",
+    "type": "integrate",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T19:05:27.221936",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "다음 Godot 기초 코드의 노드 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-06T19:11:18.182361",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating Shader in Godot 고급.",
+    "type": "example",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-06T19:17:00.329736",
+    "keywords": [
+      "CustomNode",
+      "Shader",
+      "Physics2D/3D",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "Common CustomEngine, ResourceManager errors in 변형된 Godot 아키텍처 and how to fix them.",
+    "type": "error",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-06T19:22:39.920899",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "적절한 수준의 고급 실시간 통신 프로젝트에서 미들웨어, Redis, 브로드캐스트를 어떻게 활용하는지 보여주세요.",
+    "type": "example",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-06T19:28:37.297665",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "Build a bridge between 실시간 통신 기초 Event, Namespace and Godot systems.",
+    "type": "integrate",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T19:34:23.855766",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "Optimize C# 고급 기능 performance focusing on event, delegate, LINQ bottlenecks.",
+    "type": "optimize",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-06T19:40:18.669334",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "룸, 이벤트, 소켓를 사용하여 실시간 통신 기초 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T19:46:11.561267",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "적절한 개발자가 C# 고급 통합의 성능최적화에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-06T19:52:00.208486",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] 초보자도 이해할 수 있도록 고급 실시간 통신의 클러스터링를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-06T19:59:45.684548",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Reduce memory footprint and execution time for 실시간 통신 기초 with Room, Event.",
+    "type": "optimize",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T20:06:07.876805",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "Propose design patterns for 고급 실시간 통신 based Middleware, Clustering, Redis systems.",
+    "type": "design",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-06T20:11:47.406558",
+    "keywords": [
+      "Broadcast",
+      "Middleware",
+      "Clustering",
+      "Redis"
+    ]
+  },
+  {
+    "question": "Troubleshooting guide for C# 고급 기능 LINQ, async issues.",
+    "type": "error",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-06T20:18:39.390491",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] C# 고급 기능에서 LINQ를 처리하는 여러 방법의 장단점을 비교해주세요.",
+    "type": "compare",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-06T20:25:47.838352",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "적절한 개발자가 변형된 Godot 아키텍처의 렌더파이프라인에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-06T20:32:48.464674",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Unity에서 Godot로 마이그레이션할 때 고급 자동화 조작의 물리설정, 애니메이션설정를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-06T20:39:03.069766",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "주어진 요구사항에 맞춰 기본 에디터 조작로 노드생성, 씬구성 모듈을 개발해주세요.",
+    "type": "implement",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-06T20:46:50.395597",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "AI 고급 최적화을 사용하여 파인튜닝, 프롬프트엔지니어링, 체이닝 기능을 가진 시스템을 구현해주세요.",
+    "type": "implement",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-06T20:53:49.174517",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] 기본 에디터 조작에서 발생하는 스크립트연결 관련 버그를 찾고 수정해주세요.",
+    "type": "debug",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-06T21:00:24.630489",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "Translate 객체, 변수 to English and explain in 프로그래밍 기본 용어 context.",
+    "type": "translate",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-06T21:07:06.761773",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating Namespace in 실시간 통신 기초.",
+    "type": "example",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T21:07:17.570478",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "프로파일링을 통해 프로그래밍 기본 용어의 클래스 성능 문제를 찾고 해결해주세요.",
+    "type": "optimize",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-06T21:18:01.134712",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] AI 고급 최적화 컨텍스트관리, 체이닝, 프롬프트엔지니어링 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-06T21:18:13.233892",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "Godot 고급와 셰이더의 관계를 실제 사례를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-06T21:23:43.847324",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "적절한 개발자가 실시간 통신 기초의 네임스페이스, 룸에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-06T21:29:02.159466",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 주어진 요구사항에 맞춰 고급 프로그래밍 용어로 캡슐화, 인터페이스 모듈을 개발해주세요.",
+    "type": "implement",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-06T21:35:26.262297",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "다음 AI 고급 최적화 코드의 체이닝, 컨텍스트관리 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-06T21:35:39.939927",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "적절한 클래스, 메서드, 데이터타입 시스템을 C# 기초 문법 기반으로 설계하고 구현해주세요.",
+    "type": "implement",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-06T21:42:06.091562",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "SOLID 원칙에 따라 C# 고급 기능의 델리게이트 구현을 리팩토링해주세요.",
+    "type": "refactor",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-06T21:48:05.076314",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "적절한 개발자가 변형된 Godot 아키텍처의 렌더파이프라인, 씬시스템에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-06T21:54:33.523867",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Common MemoryManagement, NativeCall errors in C# 고급 통합 and how to fix them.",
+    "type": "error",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-06T22:00:49.336009",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "MemoryManagement",
+      "Performance"
+    ]
+  },
+  {
+    "question": "Unity에서 Godot로 마이그레이션할 때 프로그래밍 기본 용어의 객체, 상속, 변수를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-06T22:09:44.217193",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "다형성를 사용하여 고급 프로그래밍 용어 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-06T22:17:53.424184",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] Analyze pros and cons of various RenderPipeline, ResourceManager, SceneSystem implementations in 변형된 Godot 아키텍처.",
+    "type": "compare",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-06T22:18:01.819270",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "Godot 4.x에서 변형된 Godot 아키텍처 기반 커스텀엔진 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-06T22:28:54.118569",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Godot 고급을 사용하여 셰이더 기능을 가진 시스템을 구현해주세요.",
+    "type": "implement",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-06T22:32:07.021454",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] 기본 에디터 조작의 SceneSetup, PropertyConfig에 해당하는 한국어 전문용어와 실무 사용 예를 제시해주세요.",
+    "type": "translate",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-06T22:39:38.084913",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] Implement a real-world scenario using 고급 실시간 통신 and Clustering, Middleware, Redis.",
+    "type": "example",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-06T22:39:54.748169",
+    "keywords": [
+      "Broadcast",
+      "Middleware",
+      "Clustering",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] 씬시스템, 리소스관리를 사용하여 변형된 Godot 아키텍처 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-06T22:50:07.668736",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating Prompt in AI 코드 생성 기초.",
+    "type": "example",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-06T22:55:14.860074",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "다음 C# 기초 문법 코드의 메서드, 데이터타입 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-06T23:05:27.463895",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] Godot 기초과 시그널, 노드를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-06T23:15:38.907184",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "Create a 적절한 example using 고급 프로그래밍 용어 with interface, abstraction, polymorphism.",
+    "type": "example",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-06T23:20:42.109465",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 적절한 시그널, 씬 시스템을 Godot 기초 기반으로 설계하고 구현해주세요.",
+    "type": "implement",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-06T23:20:55.337017",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] Godot 고급 물리엔진, 최적화, 셰이더 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-06T23:26:04.063825",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Reduce memory footprint and execution time for 고급 실시간 통신 with Redis, Clustering.",
+    "type": "optimize",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-06T23:31:09.864366",
+    "keywords": [
+      "Broadcast",
+      "Middleware",
+      "Clustering",
+      "Redis"
+    ]
+  },
+  {
+    "question": "적절한 프로젝트를 위한 프로그래밍 기본 용어 기반 함수 설계 패턴을 제안해주세요.",
+    "type": "design",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-06T23:41:25.750658",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "Unity에서 Godot로 마이그레이션할 때 고급 프로그래밍 용어의 추상화, 인터페이스, 캡슐화를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-06T23:41:34.423295",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] C# 기초 문법의 클래스, 메서드, 변수 개념을 적절한 예제와 함께 상세히 설명해주세요.",
+    "type": "explain",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-06T23:46:46.428647",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "Godot 고급 셰이더 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-06T23:51:54.207848",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Unity에서 Godot로 마이그레이션할 때 C# 기초 문법의 클래스, 메서드, 데이터타입를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-06T23:56:59.025364",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "Common PromptEngineering, FineTuning errors in AI 고급 최적화 and how to fix them.",
+    "type": "error",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T00:02:06.586662",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] AI 고급 최적화의 파인튜닝 개념을 적절한 예제와 함께 상세히 설명해주세요.",
+    "type": "explain",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T00:12:12.083056",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] 적절한 프로젝트를 위한 고급 프로그래밍 용어 기반 캡슐화, 추상화, 인터페이스 설계 패턴을 제안해주세요.",
+    "type": "design",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-07T00:12:26.950052",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] SOLID 원칙에 따라 변형된 Godot 아키텍처의 리소스관리, 씬시스템, 커스텀엔진 구현을 리팩토링해주세요.",
+    "type": "refactor",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-07T00:12:33.704758",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] Create a glossary of C# 고급 기능 terms translating async/await, 델리게이트.",
+    "type": "translate",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-07T00:17:48.279978",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "AI 코드 생성 기초과 프롬프트, 토큰, 컨텍스트를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-07T00:27:57.112113",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "Common method errors in C# 기초 문법 and how to fix them.",
+    "type": "error",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T00:33:08.551779",
+    "keywords": [
+      "variable",
+      "datatype",
+      "method",
+      "class"
+    ]
+  },
+  {
+    "question": "초보자도 이해할 수 있도록 Godot 기초의 스크립트, 시그널를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T00:43:14.967416",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] 실시간 통신 기초과 네임스페이스, 룸를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T00:48:18.311128",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] 기본 에디터 조작을 활용한 적절한 노드생성, 속성설정, 씬구성 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-07T00:53:32.571286",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "Migrate Node patterns from Unity to Godot using Godot 기초 principles.",
+    "type": "integrate",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T01:03:44.831194",
+    "keywords": [
+      "Node",
+      "Scene",
+      "Signal",
+      "Script"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] 프로그래밍 기본 용어의 object, inheritance, function에 해당하는 한국어 전문용어와 실무 사용 예를 제시해주세요.",
+    "type": "translate",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T01:08:53.230344",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] Show creative usage of 프로그래밍 기본 용어 combining inheritance, class, object features.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T01:14:04.201889",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] C# 기초 문법와 데이터타입의 관계를 실제 사례를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T01:24:10.795023",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "C# 기초 문법을 활용한 적절한 데이터타입, 클래스, 메서드 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T01:29:14.881297",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "Optimize C# 고급 기능 performance focusing on event, async, LINQ bottlenecks.",
+    "type": "optimize",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-07T01:34:18.362339",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "Explain the relationship between Godot 기초 and Signal with real-world scenarios.",
+    "type": "explain",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T01:39:22.730237",
+    "keywords": [
+      "Node",
+      "Scene",
+      "Signal",
+      "Script"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating class, function in 프로그래밍 기본 용어.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T01:44:24.819327",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 Godot 고급의 물리엔진, 최적화, 셰이더 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T01:49:35.435089",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Propose design patterns for 기본 에디터 조작 based NodeCreation systems.",
+    "type": "design",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-07T01:54:43.238835",
+    "keywords": [
+      "NodeCreation",
+      "SceneSetup",
+      "PropertyConfig",
+      "ScriptAttach"
+    ]
+  },
+  {
+    "question": "실제 게임/앱에서 사용할 수 있는 Godot 기초의 씬, 스크립트, 노드 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T01:59:50.742897",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "실시간 통신 기초과 소켓를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T02:10:06.060632",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "Debug Room, Namespace related issues in 실시간 통신 기초 code.",
+    "type": "debug",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T02:15:14.624579",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] Propose design patterns for 프로그래밍 기본 용어 based object, inheritance, variable systems.",
+    "type": "design",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T02:25:24.982508",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "Show creative usage of C# 고급 통합 combining Performance, GDExtension features.",
+    "type": "example",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T02:25:30.823037",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "MemoryManagement",
+      "Performance"
+    ]
+  },
+  {
+    "question": "적절한 C# 기초 문법 프로젝트의 클래스, 데이터타입 오류를 체계적으로 추적하고 해결해주세요.",
+    "type": "debug",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T02:35:44.734937",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "Godot 고급과 커스텀노드, 최적화를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T02:40:52.932522",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "AI 고급 최적화과 프롬프트엔지니어링, 파인튜닝, 체이닝를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T02:46:02.025386",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "AI 고급 최적화에서 파인튜닝, 컨텍스트관리, 체이닝 관련 성능을 최적화하는 방법을 제시해주세요.",
+    "type": "optimize",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T02:51:10.871294",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "Godot 기초을 사용하여 씬, 스크립트 기능을 가진 시스템을 구현해주세요.",
+    "type": "implement",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T02:56:17.432016",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "Godot 고급과 커스텀노드, 셰이더를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T03:01:22.306921",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating class, method in C# 기초 문법.",
+    "type": "example",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T03:11:35.002321",
+    "keywords": [
+      "variable",
+      "datatype",
+      "method",
+      "class"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] How does CustomEngine, SceneSystem work in 변형된 Godot 아키텍처? Include implementation details.",
+    "type": "explain",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-07T03:21:48.906968",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 프로파일링을 통해 실시간 통신 기초의 룸, 이벤트, 네임스페이스 성능 문제를 찾고 해결해주세요.",
+    "type": "optimize",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T03:31:57.831082",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] Propose design patterns for 기본 에디터 조작 based PropertyConfig, ScriptAttach systems.",
+    "type": "design",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-07T03:37:04.180369",
+    "keywords": [
+      "NodeCreation",
+      "SceneSetup",
+      "PropertyConfig",
+      "ScriptAttach"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 초보자도 이해할 수 있도록 C# 고급 통합의 성능최적화, NativeCall, 메모리관리를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T03:47:19.622077",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "AI 고급 최적화과 파인튜닝를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T03:52:31.474858",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "Godot 고급에서 커스텀노드, 셰이더가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T03:57:40.372532",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "초보자도 이해할 수 있도록 AI 고급 최적화의 컨텍스트관리를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T04:02:44.267069",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "C# 고급 통합을 활용한 적절한 메모리관리 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T04:07:55.511174",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "Godot 기초과 씬를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T04:13:01.926823",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "Find and fix bugs in 고급 프로그래밍 용어 implementation focusing on abstraction, encapsulation, interface.",
+    "type": "debug",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-07T04:18:11.791366",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "Godot 4.x에서 변형된 Godot 아키텍처 기반 리소스관리 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-07T04:18:23.155377",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] 고급 자동화 조작과 최적화작업, 복잡한씬구성, 애니메이션설정를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-07T04:23:31.127066",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] C# 고급 통합에서 GDExtension가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T04:28:41.823482",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "고급 프로그래밍 용어을 활용한 캡슐화 시스템의 아키텍처를 설계해주세요.",
+    "type": "design",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-07T04:33:49.206851",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "프로그래밍 기본 용어에서 변수가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T07:03:12.854464",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] Godot 4.x에서 C# 기초 문법 기반 메서드, 변수, 클래스 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T07:03:18.333156",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "다음 기본 에디터 조작 코드의 속성설정 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-07T07:16:08.498586",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "Implement a real-world scenario using C# 고급 기능 and LINQ.",
+    "type": "example",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-07T07:21:47.547052",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 프로그래밍 기본 용어의 함수, 상속 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T07:33:42.139009",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "Unity에서 Godot로 마이그레이션할 때 Godot 고급의 최적화, 셰이더를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T07:33:50.591321",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating Namespace, Socket, Room in 실시간 통신 기초.",
+    "type": "example",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T07:42:59.975130",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "초보자도 이해할 수 있도록 실시간 통신 기초의 소켓, 네임스페이스를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T08:04:43.774389",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "다음 영문 Godot 고급 문서를 한국어로 번역하고 최적화, 물리엔진, 커스텀노드 용어를 해설해주세요.",
+    "type": "translate",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T08:23:53.519259",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Implement a 적절한 system using 고급 실시간 통신 with Redis, Broadcast, Middleware features.",
+    "type": "implement",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-07T08:35:23.495113",
+    "keywords": [
+      "Broadcast",
+      "Middleware",
+      "Clustering",
+      "Redis"
+    ]
+  },
+  {
+    "question": "적절한 시그널 시스템을 Godot 기초 기반으로 설계하고 구현해주세요.",
+    "type": "implement",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T08:43:14.370926",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "Godot 기초 스크립트, 노드, 씬 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T08:51:06.129457",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 C# 고급 통합의 성능최적화, NativeCall, 메모리관리 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T08:59:27.830780",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "AI 고급 최적화에서 프롬프트엔지니어링가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T09:10:59.267007",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating Room in 실시간 통신 기초.",
+    "type": "example",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T09:18:47.215500",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "다음 프로그래밍 기본 용어 코드의 클래스, 변수, 함수 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T09:44:04.870339",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] Optimize 프로그래밍 기본 용어 performance focusing on inheritance, class, variable bottlenecks.",
+    "type": "optimize",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T09:44:13.379263",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "Profile and improve CustomNode, Optimization, Shader usage in Godot 고급 applications.",
+    "type": "optimize",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T10:09:09.127155",
+    "keywords": [
+      "CustomNode",
+      "Shader",
+      "Physics2D/3D",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] Reduce memory footprint and execution time for 고급 실시간 통신 with Middleware.",
+    "type": "optimize",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-07T10:24:54.984074",
+    "keywords": [
+      "Broadcast",
+      "Middleware",
+      "Clustering",
+      "Redis"
+    ]
+  },
+  {
+    "question": "확장 가능한 C# 고급 기능 이벤트, 델리게이트 구조를 설계하고 다이어그램으로 표현해주세요.",
+    "type": "design",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-07T10:39:44.689891",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "C# 고급 기능와 이벤트의 관계를 실제 사례를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-07T10:45:05.492903",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "Build a practical application demonstrating Performance in C# 고급 통합.",
+    "type": "example",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T10:50:17.622990",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "MemoryManagement",
+      "Performance"
+    ]
+  },
+  {
+    "question": "변형된 Godot 아키텍처의 커스텀엔진, 씬시스템, 리소스관리 개념을 적절한 예제와 함께 상세히 설명해주세요.",
+    "type": "explain",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-07T11:00:48.283353",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Unity에서 Godot로 마이그레이션할 때 고급 실시간 통신의 미들웨어, 클러스터링, 브로드캐스트를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-07T11:06:03.031165",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] Integrate Token from AI 코드 생성 기초 into Godot with C#.",
+    "type": "integrate",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-07T11:11:24.019311",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "Explain 적절한 고급 프로그래밍 용어 focusing on polymorphism, abstraction with practical examples.",
+    "type": "explain",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-07T11:26:00.719388",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "Godot 엔진에서 Godot 기초의 씬 개념을 C#으로 구현해주세요.",
+    "type": "integrate",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T11:26:15.218987",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "Show creative usage of Godot 고급 combining Physics2D/3D, Shader features.",
+    "type": "example",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T11:31:27.867238",
+    "keywords": [
+      "CustomNode",
+      "Shader",
+      "Physics2D/3D",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "Unity에서 Godot로 마이그레이션할 때 C# 기초 문법의 클래스, 메서드를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T11:54:20.994032",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "How does AnimationSetup, ComplexScene work in 고급 자동화 조작? Include implementation details.",
+    "type": "explain",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-07T12:00:45.251072",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "Godot 고급 코드의 메모리 사용량과 실행 속도를 커스텀노드, 셰이더 관점에서 개선해주세요.",
+    "type": "optimize",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-07T12:10:23.421441",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "C# 기초 문법과 Godot의 변수를 연동하는 실용적인 예제를 만들어주세요.",
+    "type": "integrate",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-07T12:47:06.393260",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "C# 고급 통합의 MemoryManagement, Performance에 해당하는 한국어 전문용어와 실무 사용 예를 제시해주세요.",
+    "type": "translate",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T13:01:02.335756",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "프로파일링을 통해 고급 실시간 통신의 브로드캐스트, 미들웨어 성능 문제를 찾고 해결해주세요.",
+    "type": "optimize",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-07T13:01:07.948461",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 변형된 Godot 아키텍처의 렌더파이프라인, 커스텀엔진 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-07T13:07:21.686929",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] Show creative usage of 프로그래밍 기본 용어 combining variable, inheritance features.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T13:17:49.391914",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Error handling best practices for Response, Context in AI 코드 생성 기초.",
+    "type": "error",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-07T13:18:00.249934",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "적절한 개발자가 변형된 Godot 아키텍처의 씬시스템, 렌더파이프라인에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-07T13:29:16.597216",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Design and build a function, inheritance module using 프로그래밍 기본 용어 best practices.",
+    "type": "implement",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T13:35:42.411226",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "실시간 통신 기초 룸, 이벤트, 소켓 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T14:00:58.709285",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] Debug Room related issues in 실시간 통신 기초 code.",
+    "type": "debug",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-07T14:14:17.115605",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] Godot 기초 코드의 메모리 사용량과 실행 속도를 스크립트 관점에서 개선해주세요.",
+    "type": "optimize",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T14:50:58.843081",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] Explain the relationship between AI 코드 생성 기초 and Context, Prompt with real-world scenarios.",
+    "type": "explain",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-07T14:56:15.907005",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] SOLID 원칙에 따라 C# 고급 통합의 성능최적화, 메모리관리 구현을 리팩토링해주세요.",
+    "type": "refactor",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T15:06:46.924479",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "Migrate Chaining patterns from Unity to Godot using AI 고급 최적화 principles.",
+    "type": "integrate",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T15:16:00.079203",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "적절한 C# 고급 통합 사용법을 성능최적화, GDExtension, NativeCall를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T15:21:11.709368",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 적절한 환경에서 AI 코드 생성 기초의 컨텍스트 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-07T15:26:24.621872",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "AI 고급 최적화에서 컨텍스트관리 관련 성능을 최적화하는 방법을 제시해주세요.",
+    "type": "optimize",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T23:14:48.500430",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 고급 프로그래밍 용어을 사용하여 다형성, 추상화 기능을 가진 시스템을 구현해주세요.",
+    "type": "implement",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-07T23:22:47.287272",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] Build a practical application demonstrating FineTuning in AI 고급 최적화.",
+    "type": "example",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-07T23:22:59.331073",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "프로그래밍 기본 용어을 사용하여 상속, 변수 기능을 가진 시스템을 구현해주세요.",
+    "type": "implement",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T23:35:30.615020",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "Redis를 사용하여 고급 실시간 통신 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-07T23:35:37.148989",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] Analyze pros and cons of various polymorphism, abstraction, interface implementations in 고급 프로그래밍 용어.",
+    "type": "compare",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-07T23:41:57.717005",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] Propose design patterns for 고급 프로그래밍 용어 based polymorphism systems.",
+    "type": "design",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-07T23:42:11.369334",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] 적절한 C# 고급 통합 프로젝트의 메모리관리 오류를 체계적으로 추적하고 해결해주세요.",
+    "type": "debug",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-07T23:42:21.011594",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] 변수, 상속를 사용하여 프로그래밍 기본 용어 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-07T23:48:05.077863",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "프로파일링을 통해 Godot 기초의 노드, 스크립트, 씬 성능 문제를 찾고 해결해주세요.",
+    "type": "optimize",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-07T23:48:19.281330",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] Debug LINQ, async related issues in C# 고급 기능 code.",
+    "type": "debug",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-07T23:53:51.022975",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "Show creative usage of 고급 실시간 통신 combining Clustering features.",
+    "type": "example",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T00:05:11.771842",
+    "keywords": [
+      "Broadcast",
+      "Middleware",
+      "Clustering",
+      "Redis"
+    ]
+  },
+  {
+    "question": "Clean up and modernize 고급 자동화 조작 ComplexScene, AnimationSetup, PhysicsConfig codebase.",
+    "type": "refactor",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T00:16:31.895242",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "적절한 프로젝트를 위한 고급 자동화 조작 기반 물리설정 설계 패턴을 제안해주세요.",
+    "type": "design",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T00:27:29.369493",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 Godot 고급의 커스텀노드 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T00:28:44.739338",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "적절한 C# 기초 문법 사용법을 클래스, 데이터타입, 변수를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T00:36:15.040789",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] 초보자도 이해할 수 있도록 고급 프로그래밍 용어의 추상화, 인터페이스를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T00:46:24.622972",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "Migrate encapsulation, polymorphism, interface patterns from Unity to Godot using 고급 프로그래밍 용어 principles.",
+    "type": "integrate",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T00:46:30.664803",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 적절한 Godot 기초 사용법을 시그널, 스크립트, 씬를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T00:51:35.227661",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 적절한 환경에서 변형된 Godot 아키텍처의 리소스관리 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T00:56:41.506212",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Debug ContextManagement, PromptEngineering, Chaining related issues in AI 고급 최적화 code.",
+    "type": "debug",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T01:01:47.423410",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "레거시 변형된 Godot 아키텍처 코드를 커스텀엔진 패턴을 사용해 리팩토링해주세요.",
+    "type": "refactor",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T01:11:47.104473",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Migrate SceneSystem, ResourceManager, RenderPipeline patterns from Unity to Godot using 변형된 Godot 아키텍처 principles.",
+    "type": "integrate",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T01:16:56.117475",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "다음 Godot 고급 코드의 셰이더 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T01:27:02.160633",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "성능, 가독성, 유지보수 관점에서 AI 고급 최적화의 체이닝, 파인튜닝 접근법들을 평가해주세요.",
+    "type": "compare",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T01:32:04.663467",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 적절한 고급 프로그래밍 용어 사용법을 인터페이스, 추상화, 다형성를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T01:37:08.807808",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "Godot 4.x에서 고급 자동화 조작 기반 물리설정, 애니메이션설정, 복잡한씬구성 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T01:37:15.791917",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] Godot 고급을 사용하여 물리엔진, 셰이더 기능을 가진 시스템을 구현해주세요.",
+    "type": "implement",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T01:42:25.502993",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Godot 엔진에서 실시간 통신 기초의 이벤트 개념을 C#으로 구현해주세요.",
+    "type": "integrate",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T01:47:26.790116",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] 실제 게임/앱에서 사용할 수 있는 프로그래밍 기본 용어의 변수, 객체, 함수 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T01:57:38.586698",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] 초보자도 이해할 수 있도록 실시간 통신 기초의 네임스페이스를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T01:57:44.156564",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "Godot 기초을 활용한 적절한 씬 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T02:02:49.385312",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "실제 게임/앱에서 사용할 수 있는 C# 고급 기능의 이벤트, 델리게이트, async/await 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T02:07:48.628350",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] C# 기초 문법과 다른 기술의 클래스 구현 방식을 비교 분석해주세요.",
+    "type": "compare",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T02:12:53.450125",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 고급 실시간 통신과 Godot의 클러스터링, 브로드캐스트를 연동하는 실용적인 예제를 만들어주세요.",
+    "type": "integrate",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T02:23:01.717834",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 고급 프로그래밍 용어에서 발생하는 인터페이스 관련 버그를 찾고 수정해주세요.",
+    "type": "debug",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T02:28:13.471018",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "Deep dive into Godot 기초 architecture, especially Node components.",
+    "type": "explain",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T02:28:26.930107",
+    "keywords": [
+      "Node",
+      "Scene",
+      "Signal",
+      "Script"
+    ]
+  },
+  {
+    "question": "고급 실시간 통신과 클러스터링, Redis를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T02:33:30.202198",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] 고급 자동화 조작에서 최적화작업, 복잡한씬구성, 물리설정가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T02:38:39.212906",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "C# 고급 통합에서 성능최적화, 메모리관리, GDExtension 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T02:43:49.262774",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "고급 자동화 조작에서 최적화작업 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T02:49:00.880054",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "Create architectural diagrams for function, variable implementation in 프로그래밍 기본 용어.",
+    "type": "design",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T02:54:03.724638",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "적절한 실시간 통신 기초 프로젝트의 룸, 이벤트 오류를 체계적으로 추적하고 해결해주세요.",
+    "type": "debug",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T02:59:08.463702",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "C# 고급 통합에서 메모리관리 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T03:04:12.836524",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] 변형된 Godot 아키텍처과 씬시스템, 리소스관리를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T03:09:14.461439",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "적절한 개발자가 고급 실시간 통신의 브로드캐스트, Redis, 미들웨어에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T03:14:18.020649",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Explain 적절한 C# 기초 문법 focusing on class, variable, method with practical examples.",
+    "type": "explain",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T03:19:21.889496",
+    "keywords": [
+      "variable",
+      "datatype",
+      "method",
+      "class"
+    ]
+  },
+  {
+    "question": "Design a scalable architecture for Script, Signal using Godot 기초.",
+    "type": "design",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T03:29:27.565794",
+    "keywords": [
+      "Node",
+      "Scene",
+      "Signal",
+      "Script"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] 프로그래밍 기본 용어의 객체 부분을 더 깔끔하고 유지보수하기 쉽게 개선해주세요.",
+    "type": "refactor",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T03:39:30.745784",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "AI 코드 생성 기초에서 프롬프트, 컨텍스트, 응답를 처리하는 여러 방법의 장단점을 비교해주세요.",
+    "type": "compare",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T03:39:40.995785",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "컨텍스트, 프롬프트를 사용하여 AI 코드 생성 기초 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T03:44:46.959822",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "Reduce memory footprint and execution time for 변형된 Godot 아키텍처 with ResourceManager.",
+    "type": "optimize",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T03:49:56.497984",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] 실시간 통신 기초에서 네임스페이스가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T04:00:05.317640",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "다음 AI 코드 생성 기초 코드의 프롬프트 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T04:05:14.696802",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "렌더파이프라인, 리소스관리, 씬시스템를 사용하여 변형된 Godot 아키텍처 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T04:10:14.905340",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "How does LINQ, async work in C# 고급 기능? Include implementation details.",
+    "type": "explain",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T04:15:20.902340",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "Find and fix bugs in AI 코드 생성 기초 implementation focusing on Token.",
+    "type": "debug",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T04:20:28.789586",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "프로파일링을 통해 C# 고급 기능의 이벤트, LINQ 성능 문제를 찾고 해결해주세요.",
+    "type": "optimize",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T04:25:35.798302",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "Implement a 적절한 system using 고급 자동화 조작 with Optimization, ComplexScene features.",
+    "type": "implement",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T04:30:41.642317",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "적절한 고급 자동화 조작 사용법을 물리설정, 복잡한씬구성, 최적화작업를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T04:40:53.843753",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "고급 프로그래밍 용어에서 다형성, 추상화 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T04:46:05.517035",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 고급 실시간 통신의 미들웨어 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T04:46:11.492479",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "Explain 적절한 프로그래밍 기본 용어 focusing on inheritance with practical examples.",
+    "type": "explain",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T04:51:13.993829",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "Unity에서 Godot로 마이그레이션할 때 고급 실시간 통신의 브로드캐스트, 클러스터링를 어떻게 변환하는지 보여주세요.",
+    "type": "integrate",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T04:51:19.533029",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Explain the relationship between 고급 자동화 조작 and AnimationSetup with real-world scenarios.",
+    "type": "explain",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T04:56:33.391463",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] Godot 엔진에서 프로그래밍 기본 용어의 함수, 상속 개념을 C#으로 구현해주세요.",
+    "type": "integrate",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T05:06:34.987322",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] How does event, async, delegate work in C# 고급 기능? Include implementation details.",
+    "type": "explain",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T05:11:38.393954",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "Systematically trace and resolve Redis, Broadcast errors in 고급 실시간 통신.",
+    "type": "debug",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T05:16:42.316349",
+    "keywords": [
+      "Broadcast",
+      "Middleware",
+      "Clustering",
+      "Redis"
+    ]
+  },
+  {
+    "question": "Improve Chaining, ContextManagement, FineTuning implementation in AI 고급 최적화 following SOLID principles.",
+    "type": "refactor",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T05:26:44.243337",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "Common Room, Namespace errors in 실시간 통신 기초 and how to fix them.",
+    "type": "error",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T05:31:51.917447",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 성능, 가독성, 유지보수 관점에서 변형된 Godot 아키텍처의 렌더파이프라인 접근법들을 평가해주세요.",
+    "type": "compare",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T05:36:52.980361",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 주어진 요구사항에 맞춰 고급 자동화 조작로 애니메이션설정 모듈을 개발해주세요.",
+    "type": "implement",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T05:42:04.618343",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "AI 고급 최적화와 체이닝의 관계를 실제 사례를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T05:47:10.224568",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 주어진 요구사항에 맞춰 C# 고급 통합로 메모리관리, 성능최적화 모듈을 개발해주세요.",
+    "type": "implement",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T05:52:15.535492",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] AI 고급 최적화에서 프롬프트엔지니어링, 파인튜닝, 컨텍스트관리가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T05:57:27.252827",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "확장 가능한 고급 실시간 통신 브로드캐스트, 미들웨어, 클러스터링 구조를 설계하고 다이어그램으로 표현해주세요.",
+    "type": "design",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T06:02:34.354527",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "실제 게임/앱에서 사용할 수 있는 C# 고급 통합의 메모리관리, NativeCall, 성능최적화 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T06:07:45.979591",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "Explain 적절한 Godot 기초 focusing on Script, Scene with practical examples.",
+    "type": "explain",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T06:18:04.169768",
+    "keywords": [
+      "Node",
+      "Scene",
+      "Signal",
+      "Script"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] 씬구성를 사용하여 기본 에디터 조작 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-08T06:23:10.915234",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] 적절한 환경에서 고급 실시간 통신의 Redis, 클러스터링 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T06:28:23.375200",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[블록체인 dApp 개발 상황] 고급 자동화 조작을 활용한 적절한 최적화작업, 애니메이션설정 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T06:33:28.777921",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "Implement a real-world scenario using AI 코드 생성 기초 and Token, Context.",
+    "type": "example",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T06:38:34.198833",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 레거시 C# 기초 문법 코드를 메서드, 데이터타입, 변수 패턴을 사용해 리팩토링해주세요.",
+    "type": "refactor",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T06:48:39.405832",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "고급 자동화 조작에서 복잡한씬구성, 최적화작업, 애니메이션설정 관련 성능을 최적화하는 방법을 제시해주세요.",
+    "type": "optimize",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T06:53:43.398131",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "Godot 기초과 씬, 노드, 시그널를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T06:58:54.104391",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "적절한 개발자가 Godot 기초의 씬에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+    "type": "error",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T07:09:08.299226",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "초보자도 이해할 수 있도록 실시간 통신 기초의 네임스페이스, 소켓, 이벤트를 비유를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T07:14:14.910507",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] 실시간 통신 기초과 룸, 소켓를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T07:19:19.804545",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "Common CustomNode errors in Godot 고급 and how to fix them.",
+    "type": "error",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T07:29:26.372354",
+    "keywords": [
+      "CustomNode",
+      "Shader",
+      "Physics2D/3D",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "Translate 프롬프트, 응답 to English and explain in AI 코드 생성 기초 context.",
+    "type": "translate",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T07:39:30.075847",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "AI 코드 생성 기초 프롬프트, 응답, 토큰 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T07:44:31.861636",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "Show creative usage of AI 고급 최적화 combining ContextManagement features.",
+    "type": "example",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T07:49:37.672836",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] C# 고급 기능을 활용한 이벤트 시스템의 아키텍처를 설계해주세요.",
+    "type": "design",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T07:54:36.924916",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 변형된 Godot 아키텍처와 씬시스템, 렌더파이프라인의 관계를 실제 사례를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T07:59:47.400517",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "적절한 프로젝트를 위한 기본 에디터 조작 기반 스크립트연결 설계 패턴을 제안해주세요.",
+    "type": "design",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-08T08:04:55.978290",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "Godot 엔진에서 고급 자동화 조작의 물리설정, 애니메이션설정, 복잡한씬구성 개념을 C#으로 구현해주세요.",
+    "type": "integrate",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T08:10:01.176761",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "적절한 Godot 고급 프로젝트의 최적화, 물리엔진, 커스텀노드 오류를 체계적으로 추적하고 해결해주세요.",
+    "type": "debug",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T08:15:12.072471",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] 고급 자동화 조작 코드의 메모리 사용량과 실행 속도를 복잡한씬구성, 물리설정, 애니메이션설정 관점에서 개선해주세요.",
+    "type": "optimize",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T08:20:14.947498",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "Godot 고급의 커스텀노드 개념을 적절한 예제와 함께 상세히 설명해주세요.",
+    "type": "explain",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T08:25:25.730881",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "[웹 서비스 백엔드 개발 상황] 고급 프로그래밍 용어의 다형성 개념을 적절한 예제와 함께 상세히 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T08:30:32.658544",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] Common MemoryManagement errors in C# 고급 통합 and how to fix them.",
+    "type": "error",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T08:30:44.663557",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "MemoryManagement",
+      "Performance"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] 기본 에디터 조작에서 속성설정, 스크립트연결가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-08T08:40:53.555093",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] 프로그래밍 기본 용어에서 객체, 함수, 상속 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T08:46:06.041444",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "고급 프로그래밍 용어을 사용하여 추상화, 다형성, 캡슐화 기능을 가진 시스템을 구현해주세요.",
+    "type": "implement",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T08:46:18.926922",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] Analyze pros and cons of various Chaining implementations in AI 고급 최적화.",
+    "type": "compare",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T08:46:30.641229",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "적절한 C# 고급 통합 프로젝트의 NativeCall 오류를 체계적으로 추적하고 해결해주세요.",
+    "type": "debug",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T08:56:36.997864",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "Godot 4.x에서 C# 고급 기능 기반 델리게이트, LINQ, 이벤트 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T09:01:47.703921",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "Design and build a interface, polymorphism, abstraction module using 고급 프로그래밍 용어 best practices.",
+    "type": "implement",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T09:07:40.047242",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "TDD 방식으로 실시간 통신 기초의 룸, 이벤트, 네임스페이스 모듈을 개발해주세요.",
+    "type": "test",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T09:07:49.724450",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 프로파일링을 통해 Godot 기초의 노드 성능 문제를 찾고 해결해주세요.",
+    "type": "optimize",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T09:13:12.012127",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "실시간 통신 기초와 소켓, 네임스페이스, 룸의 관계를 실제 사례를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T09:18:33.486364",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "속성설정, 씬구성, 스크립트연결를 사용하여 기본 에디터 조작 기반의 실용적인 애플리케이션을 만들어주세요.",
+    "type": "example",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-08T09:24:01.954481",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "적절한 고급 자동화 조작 사용법을 물리설정를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T09:29:30.520198",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] Godot 4.x에서 고급 자동화 조작 기반 최적화작업, 물리설정 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T09:34:55.347766",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "확장 가능한 Godot 고급 최적화, 셰이더 구조를 설계하고 다이어그램으로 표현해주세요.",
+    "type": "design",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T09:40:14.426886",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Build a bridge between 고급 자동화 조작 AnimationSetup and Godot systems.",
+    "type": "integrate",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T12:53:35.632780",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "적절한 변형된 Godot 아키텍처 사용법을 커스텀엔진, 렌더파이프라인를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T13:04:46.975646",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Common function errors in 프로그래밍 기본 용어 and how to fix them.",
+    "type": "error",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T13:10:03.251519",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 확장 가능한 고급 프로그래밍 용어 추상화, 캡슐화 구조를 설계하고 다이어그램으로 표현해주세요.",
+    "type": "design",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T13:26:32.173817",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Godot 기초 코드의 메모리 사용량과 실행 속도를 노드 관점에서 개선해주세요.",
+    "type": "optimize",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T13:26:47.178072",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "고급 프로그래밍 용어에서 추상화가 어떻게 작동하는지 내부 메커니즘을 포함해 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-08T13:33:14.347245",
+    "keywords": [
+      "다형성",
+      "캡슐화",
+      "추상화",
+      "인터페이스"
+    ]
+  },
+  {
+    "question": "Profile and improve SceneSystem usage in 변형된 Godot 아키텍처 applications.",
+    "type": "optimize",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T13:33:29.356110",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 실제 게임/앱에서 사용할 수 있는 Godot 고급의 셰이더, 물리엔진, 커스텀노드 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T13:38:54.671259",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "주어진 요구사항에 맞춰 AI 고급 최적화로 파인튜닝 모듈을 개발해주세요.",
+    "type": "implement",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T13:44:28.299055",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "Godot 고급과 Godot의 최적화, 셰이더, 커스텀노드를 연동하는 실용적인 예제를 만들어주세요.",
+    "type": "integrate",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T13:49:55.805541",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Show creative usage of C# 고급 기능 combining delegate features.",
+    "type": "example",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T14:00:54.493016",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "Godot 4.x에서 기본 에디터 조작 기반 속성설정, 스크립트연결, 노드생성 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-08T14:18:13.134905",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] Find and fix bugs in C# 고급 통합 implementation focusing on Performance, GDExtension, NativeCall.",
+    "type": "debug",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T14:26:09.318086",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "MemoryManagement",
+      "Performance"
+    ]
+  },
+  {
+    "question": "[모바일 앱 개발 상황] 적절한 변수, 클래스 시스템을 프로그래밍 기본 용어 기반으로 설계하고 구현해주세요.",
+    "type": "implement",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T14:36:45.339010",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "확장 가능한 변형된 Godot 아키텍처 리소스관리, 씬시스템, 커스텀엔진 구조를 설계하고 다이어그램으로 표현해주세요.",
+    "type": "design",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T14:36:54.233426",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Create a complete mini-project showcasing AI 고급 최적화 and FineTuning, PromptEngineering, ContextManagement.",
+    "type": "implement",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T14:42:06.128727",
+    "keywords": [
+      "FineTuning",
+      "PromptEngineering",
+      "ContextManagement",
+      "Chaining"
+    ]
+  },
+  {
+    "question": "function, variable 용어를 한국어로 번역하고 프로그래밍 기본 용어 맥락에서의 의미를 설명해주세요.",
+    "type": "translate",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T14:52:26.362773",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "기본 에디터 조작에서 노드생성, 속성설정, 스크립트연결 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-08T14:57:45.528595",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "Implement unit tests for AI 코드 생성 기초 Response, Context, Token module.",
+    "type": "test",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T15:02:59.300752",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "Godot 고급와 커스텀노드의 관계를 실제 사례를 들어 설명해주세요.",
+    "type": "explain",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T15:08:09.532668",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] Analyze pros and cons of various Script, Signal, Scene implementations in Godot 기초.",
+    "type": "compare",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T15:13:17.315138",
+    "keywords": [
+      "Node",
+      "Scene",
+      "Signal",
+      "Script"
+    ]
+  },
+  {
+    "question": "Reduce memory footprint and execution time for C# 고급 통합 with MemoryManagement, NativeCall.",
+    "type": "optimize",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T15:23:40.192232",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "MemoryManagement",
+      "Performance"
+    ]
+  },
+  {
+    "question": "C# 고급 기능과 델리게이트, async/await를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T15:33:55.403150",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "[실시간 멀티플레이어 게임 개발 상황] Godot 4.x에서 변형된 Godot 아키텍처 기반 씬시스템, 리소스관리 시스템을 구축하는 방법을 설명해주세요.",
+    "type": "integrate",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T15:44:25.997527",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] Create a complete mini-project showcasing C# 고급 기능 and LINQ, delegate.",
+    "type": "implement",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T15:49:45.152185",
+    "keywords": [
+      "delegate",
+      "event",
+      "LINQ",
+      "async"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 고급 실시간 통신의 Redis 개념을 적절한 예제와 함께 상세히 설명해주세요.",
+    "type": "explain",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T16:00:10.632665",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Error handling best practices for datatype, variable in C# 기초 문법.",
+    "type": "error",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T16:05:21.926803",
+    "keywords": [
+      "variable",
+      "datatype",
+      "method",
+      "class"
+    ]
+  },
+  {
+    "question": "다음 Godot 고급 코드의 최적화, 셰이더, 커스텀노드 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T16:15:41.776686",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Find and fix bugs in 고급 자동화 조작 implementation focusing on AnimationSetup.",
+    "type": "debug",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T16:20:50.062652",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "성능, 가독성, 유지보수 관점에서 AI 고급 최적화의 체이닝, 파인튜닝 접근법들을 평가해주세요.",
+    "type": "compare",
+    "topic": "AI 고급 최적화",
+    "timestamp": "2025-07-08T16:25:59.335652",
+    "keywords": [
+      "파인튜닝",
+      "프롬프트엔지니어링",
+      "컨텍스트관리",
+      "체이닝"
+    ]
+  },
+  {
+    "question": "기본 에디터 조작에서 발생하는 씬구성, 스크립트연결, 속성설정 관련 버그를 찾고 수정해주세요.",
+    "type": "debug",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-08T16:33:01.338995",
+    "keywords": [
+      "노드생성",
+      "씬구성",
+      "속성설정",
+      "스크립트연결"
+    ]
+  },
+  {
+    "question": "Design a scalable architecture for GDExtension, MemoryManagement, NativeCall using C# 고급 통합.",
+    "type": "design",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T16:38:28.837558",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "MemoryManagement",
+      "Performance"
+    ]
+  },
+  {
+    "question": "How does PhysicsConfig, ComplexScene work in 고급 자동화 조작? Include implementation details.",
+    "type": "explain",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T16:50:37.237677",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "적절한 커스텀엔진, 렌더파이프라인 시스템을 변형된 Godot 아키텍처 기반으로 설계하고 구현해주세요.",
+    "type": "implement",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T17:00:09.713502",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Deep dive into AI 코드 생성 기초 architecture, especially Prompt, Token components.",
+    "type": "explain",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T17:09:48.994219",
+    "keywords": [
+      "Prompt",
+      "Context",
+      "Token",
+      "Response"
+    ]
+  },
+  {
+    "question": "Godot 기초과 노드, 스크립트를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T18:23:35.218129",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "변형된 Godot 아키텍처에서 렌더파이프라인, 리소스관리, 씬시스템 관련 성능을 최적화하는 방법을 제시해주세요.",
+    "type": "optimize",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T18:31:39.403798",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "Explain 적절한 고급 자동화 조작 focusing on PhysicsConfig, AnimationSetup, ComplexScene with practical examples.",
+    "type": "explain",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T18:36:55.279578",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "프로그래밍 기본 용어과 함수, 변수를 결합한 창의적인 코드 예제를 제시해주세요.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T18:47:06.928761",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 프로그래밍 기본 용어의 상속 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T18:47:16.076350",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Namespace 용어를 한국어로 번역하고 실시간 통신 기초 맥락에서의 의미를 설명해주세요.",
+    "type": "translate",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T18:47:25.399788",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "실시간 통신 기초 코드의 메모리 사용량과 실행 속도를 룸, 소켓, 네임스페이스 관점에서 개선해주세요.",
+    "type": "optimize",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T18:52:47.461730",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "How does inheritance, function work in 프로그래밍 기본 용어? Include implementation details.",
+    "type": "explain",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T18:58:09.107288",
+    "keywords": [
+      "variable",
+      "function",
+      "class",
+      "object",
+      "inheritance"
+    ]
+  },
+  {
+    "question": "실제 게임/앱에서 사용할 수 있는 Godot 기초의 씬, 노드 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T19:03:54.035225",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "C# 기초 문법과 변수, 클래스를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T19:43:26.469848",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "적절한 데이터타입, 변수, 클래스 시스템을 C# 기초 문법 기반으로 설계하고 구현해주세요.",
+    "type": "implement",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T19:56:14.904251",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "Explain the relationship between 실시간 통신 기초 and Namespace, Socket, Event with real-world scenarios.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T20:20:24.612253",
+    "keywords": [
+      "Socket",
+      "Event",
+      "Room",
+      "Namespace"
+    ]
+  },
+  {
+    "question": "적절한 환경에서 고급 실시간 통신의 클러스터링, 브로드캐스트, 미들웨어 병목현상을 해결하는 방법을 보여주세요.",
+    "type": "optimize",
+    "topic": "고급 실시간 통신",
+    "timestamp": "2025-07-08T20:32:47.198894",
+    "keywords": [
+      "브로드캐스트",
+      "미들웨어",
+      "클러스터링",
+      "Redis"
+    ]
+  },
+  {
+    "question": "적절한 수준의 프로그래밍 기본 용어 프로젝트에서 변수, 클래스를 어떻게 활용하는지 보여주세요.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T20:42:44.403245",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "Godot 기초에서 시그널, 노드, 스크립트 사용 시 발생하는 일반적인 오류와 해결책을 정리해주세요.",
+    "type": "error",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T20:42:59.250109",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 프로그래밍 기본 용어에서 발생하는 클래스 관련 버그를 찾고 수정해주세요.",
+    "type": "debug",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-08T20:50:14.359025",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] C# 고급 통합과 GDExtension를 활용한 미니 프로젝트를 완성해주세요.",
+    "type": "implement",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-08T20:50:19.880592",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "실제 게임/앱에서 사용할 수 있는 AI 코드 생성 기초의 프롬프트, 응답, 컨텍스트 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T21:00:43.139487",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "Godot 기초을 활용한 적절한 시그널 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T21:07:03.577184",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "[데이터 분석 도구 개발 상황] 다음 AI 코드 생성 기초 코드의 응답, 토큰, 컨텍스트 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-08T21:20:27.522598",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] Godot 엔진에서 C# 기초 문법의 변수, 데이터타입, 메서드 개념을 C#으로 구현해주세요.",
+    "type": "integrate",
+    "topic": "C# 기초 문법",
+    "timestamp": "2025-07-08T21:39:08.628409",
+    "keywords": [
+      "변수",
+      "데이터타입",
+      "메서드",
+      "클래스"
+    ]
+  },
+  {
+    "question": "적절한 실시간 통신 기초 사용법을 이벤트를 중심으로 단계별로 설명해주세요.",
+    "type": "explain",
+    "topic": "실시간 통신 기초",
+    "timestamp": "2025-07-08T21:47:35.941006",
+    "keywords": [
+      "소켓",
+      "이벤트",
+      "룸",
+      "네임스페이스"
+    ]
+  },
+  {
+    "question": "적절한 노드 시스템을 Godot 기초 기반으로 설계하고 구현해주세요.",
+    "type": "implement",
+    "topic": "Godot 기초",
+    "timestamp": "2025-07-08T21:53:31.613621",
+    "keywords": [
+      "노드",
+      "씬",
+      "시그널",
+      "스크립트"
+    ]
+  },
+  {
+    "question": "변형된 Godot 아키텍처 렌더파이프라인, 리소스관리 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T21:59:35.183310",
+    "keywords": [
+      "커스텀엔진",
+      "렌더파이프라인",
+      "씬시스템",
+      "리소스관리"
+    ]
+  },
+  {
+    "question": "적절한 고급 자동화 조작 프로젝트의 애니메이션설정, 복잡한씬구성, 최적화작업 오류를 체계적으로 추적하고 해결해주세요.",
+    "type": "debug",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-08T22:05:23.829054",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "[클라우드 서비스 개발 상황] C# 고급 기능에서 델리게이트 관련 성능을 최적화하는 방법을 제시해주세요.",
+    "type": "optimize",
+    "topic": "C# 고급 기능",
+    "timestamp": "2025-07-08T22:11:05.935043",
+    "keywords": [
+      "델리게이트",
+      "이벤트",
+      "LINQ",
+      "async/await"
+    ]
+  },
+  {
+    "question": "Common SceneSystem, RenderPipeline, CustomEngine errors in 변형된 Godot 아키텍처 and how to fix them.",
+    "type": "error",
+    "topic": "변형된 Godot 아키텍처",
+    "timestamp": "2025-07-08T22:16:39.925781",
+    "keywords": [
+      "CustomEngine",
+      "RenderPipeline",
+      "SceneSystem",
+      "ResourceManager"
+    ]
+  },
+  {
+    "question": "Godot 고급을 활용한 적절한 커스텀노드, 셰이더 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-08T22:29:10.454083",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] Create a complete mini-project showcasing 고급 자동화 조작 and AnimationSetup, Optimization.",
+    "type": "implement",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-09T00:02:50.249255",
+    "keywords": [
+      "ComplexScene",
+      "AnimationSetup",
+      "PhysicsConfig",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "프로파일링을 통해 C# 고급 통합의 NativeCall, 성능최적화 성능 문제를 찾고 해결해주세요.",
+    "type": "optimize",
+    "topic": "C# 고급 통합",
+    "timestamp": "2025-07-09T00:17:33.813119",
+    "keywords": [
+      "GDExtension",
+      "NativeCall",
+      "메모리관리",
+      "성능최적화"
+    ]
+  },
+  {
+    "question": "[자동화 스크립트 개발 상황] 고급 자동화 조작 코드의 메모리 사용량과 실행 속도를 복잡한씬구성, 최적화작업 관점에서 개선해주세요.",
+    "type": "optimize",
+    "topic": "고급 자동화 조작",
+    "timestamp": "2025-07-09T00:24:24.507055",
+    "keywords": [
+      "복잡한씬구성",
+      "애니메이션설정",
+      "물리설정",
+      "최적화작업"
+    ]
+  },
+  {
+    "question": "[AI 챗봇 개발 상황] 다음 영문 프로그래밍 기본 용어 문서를 한국어로 번역하고 함수, 변수 용어를 해설해주세요.",
+    "type": "translate",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-09T00:28:35.953739",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "다음 AI 코드 생성 기초 코드의 토큰, 프롬프트 부분에서 발생하는 문제를 디버깅해주세요.",
+    "type": "debug",
+    "topic": "AI 코드 생성 기초",
+    "timestamp": "2025-07-09T00:28:45.523259",
+    "keywords": [
+      "프롬프트",
+      "컨텍스트",
+      "토큰",
+      "응답"
+    ]
+  },
+  {
+    "question": "Migrate PropertyConfig, NodeCreation patterns from Unity to Godot using 기본 에디터 조작 principles.",
+    "type": "integrate",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-09T00:31:00.344597",
+    "keywords": [
+      "NodeCreation",
+      "SceneSetup",
+      "PropertyConfig",
+      "ScriptAttach"
+    ]
+  },
+  {
+    "question": "[IoT 디바이스 개발 상황] 프로그래밍 기본 용어을 활용한 적절한 상속, 클래스 구현 예제를 작성해주세요.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-09T00:33:21.494971",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  },
+  {
+    "question": "Common PropertyConfig, ScriptAttach errors in 기본 에디터 조작 and how to fix them.",
+    "type": "error",
+    "topic": "기본 에디터 조작",
+    "timestamp": "2025-07-09T00:33:32.471363",
+    "keywords": [
+      "NodeCreation",
+      "SceneSetup",
+      "PropertyConfig",
+      "ScriptAttach"
+    ]
+  },
+  {
+    "question": "Godot 고급 셰이더 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+    "type": "error",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-09T00:38:42.314883",
+    "keywords": [
+      "커스텀노드",
+      "셰이더",
+      "물리엔진",
+      "최적화"
+    ]
+  },
+  {
+    "question": "Create a 적절한 example using Godot 고급 with Optimization, Physics2D/3D.",
+    "type": "example",
+    "topic": "Godot 고급",
+    "timestamp": "2025-07-09T00:40:59.994960",
+    "keywords": [
+      "CustomNode",
+      "Shader",
+      "Physics2D/3D",
+      "Optimization"
+    ]
+  },
+  {
+    "question": "[게임 엔진 플러그인 개발 상황] Design a scalable architecture for polymorphism, encapsulation using 고급 프로그래밍 용어.",
+    "type": "design",
+    "topic": "고급 프로그래밍 용어",
+    "timestamp": "2025-07-09T00:43:30.539376",
+    "keywords": [
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "interface"
+    ]
+  },
+  {
+    "question": "실제 게임/앱에서 사용할 수 있는 프로그래밍 기본 용어의 클래스 활용 예제를 만들어주세요.",
+    "type": "example",
+    "topic": "프로그래밍 기본 용어",
+    "timestamp": "2025-07-09T00:43:47.700482",
+    "keywords": [
+      "변수",
+      "함수",
+      "클래스",
+      "객체",
+      "상속"
+    ]
+  }
+]

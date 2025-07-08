@@ -1,0 +1,272 @@
+{
+  "session_id": "session_20250706_223207",
+  "start_time": "2025-07-06T22:32:07.020368",
+  "end_time": "2025-07-07T04:34:35.760042",
+  "duration_hours": 6.041316577222223,
+  "questions_asked": 54,
+  "successful_answers": 0,
+  "success_rate": 0.0,
+  "topics_covered": [
+    "godot_advanced",
+    "socketio_advanced",
+    "godot_expert_architecture",
+    "ai_optimization_basic",
+    "csharp_basics",
+    "godot_basics",
+    "korean_terms_advanced",
+    "ai_optimization_advanced",
+    "csharp_advanced",
+    "socketio_basic",
+    "godot_manipulation_basic",
+    "korean_terms_basic",
+    "godot_expert_csharp",
+    "godot_manipulation_advanced"
+  ],
+  "models_used": {
+    "deepseek-coder-7b": 54
+  },
+  "knowledge_gained": 54,
+  "memory_usage_history": [
+    {
+      "timestamp": "2025-07-06T22:34:25.845325",
+      "model": "deepseek-coder-7b",
+      "memory_gb": 1.8305130004882812,
+      "memory_percent": 13.9
+    }
+  ],
+  "experience_buffer_size": 70,
+  "feedback_history": [
+    {
+      "timestamp": "2025-07-06T22:49:58.710331",
+      "quality_score": 0.5,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 0
+    },
+    {
+      "timestamp": "2025-07-06T23:05:14.520253",
+      "quality_score": 0.5,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 0
+    },
+    {
+      "timestamp": "2025-07-06T23:15:32.287358",
+      "quality_score": 0.7,
+      "issues": [
+        "language_mix",
+        "incomplete"
+      ],
+      "response_length": 165
+    },
+    {
+      "timestamp": "2025-07-06T23:41:11.936893",
+      "quality_score": 0.75,
+      "issues": [
+        "language_mix",
+        "incomplete"
+      ],
+      "response_length": 278
+    },
+    {
+      "timestamp": "2025-07-07T00:12:05.193512",
+      "quality_score": 0.7999999999999999,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 1196
+    },
+    {
+      "timestamp": "2025-07-07T00:27:50.084223",
+      "quality_score": 0.65,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 149
+    },
+    {
+      "timestamp": "2025-07-07T00:43:07.370937",
+      "quality_score": 0.9,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 1101
+    },
+    {
+      "timestamp": "2025-07-07T01:03:39.436213",
+      "quality_score": 0.6,
+      "issues": [
+        "incomplete"
+      ],
+      "response_length": 127
+    },
+    {
+      "timestamp": "2025-07-07T01:24:05.599975",
+      "quality_score": 0.7,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 397
+    },
+    {
+      "timestamp": "2025-07-07T02:09:54.477539",
+      "quality_score": 0.9,
+      "issues": [
+        "incomplete"
+      ],
+      "response_length": 338
+    },
+    {
+      "timestamp": "2025-07-07T02:25:12.930720",
+      "quality_score": 0.7,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 719
+    },
+    {
+      "timestamp": "2025-07-07T02:35:31.954357",
+      "quality_score": 0.85,
+      "issues": [
+        "language_mix",
+        "incomplete"
+      ],
+      "response_length": 283
+    },
+    {
+      "timestamp": "2025-07-07T03:11:24.879011",
+      "quality_score": 0.8,
+      "issues": [
+        "incomplete"
+      ],
+      "response_length": 234
+    },
+    {
+      "timestamp": "2025-07-07T03:21:35.776270",
+      "quality_score": 0.85,
+      "issues": [
+        "language_mix",
+        "incomplete"
+      ],
+      "response_length": 321
+    },
+    {
+      "timestamp": "2025-07-07T03:31:49.857533",
+      "quality_score": 0.75,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 1389
+    },
+    {
+      "timestamp": "2025-07-07T03:47:05.216728",
+      "quality_score": 0.7,
+      "issues": [
+        "language_mix"
+      ],
+      "response_length": 154
+    }
+  ],
+  "pytorch_stats": {
+    "total_epochs": 5,
+    "total_samples": 0,
+    "average_quality_score": 0.0,
+    "topic_accuracy": 0.0,
+    "learning_history": [
+      {
+        "epoch": 1,
+        "quality_loss": 0.02188129536807537,
+        "topic_loss": 1.5660063028335571,
+        "timestamp": "2025-07-07T04:34:08.262321"
+      },
+      {
+        "epoch": 2,
+        "quality_loss": 0.02083362080156803,
+        "topic_loss": 1.5499656200408936,
+        "timestamp": "2025-07-07T04:34:14.572661"
+      },
+      {
+        "epoch": 3,
+        "quality_loss": 0.018177254125475883,
+        "topic_loss": 1.5002062320709229,
+        "timestamp": "2025-07-07T04:34:20.885050"
+      },
+      {
+        "epoch": 4,
+        "quality_loss": 0.0017904812702909112,
+        "topic_loss": 1.2646631002426147,
+        "timestamp": "2025-07-07T04:34:27.242637"
+      },
+      {
+        "epoch": 5,
+        "quality_loss": 0.04713040962815285,
+        "topic_loss": 1.467355728149414,
+        "timestamp": "2025-07-07T04:34:33.597248"
+      }
+    ]
+  },
+  "diversity_metrics": {
+    "total_questions": 113,
+    "unique_questions": 113,
+    "uniqueness_ratio": 1.0,
+    "diversity_score": 0.945,
+    "type_distribution": {
+      "explain": 14,
+      "error": 14,
+      "design": 8,
+      "example": 25,
+      "debug": 10,
+      "implement": 13,
+      "integrate": 11,
+      "test": 2,
+      "optimize": 8,
+      "compare": 2,
+      "translate": 4,
+      "refactor": 2
+    },
+    "topic_distribution": {
+      "실시간 통신 기초": 12,
+      "C# 고급 기능": 7,
+      "Godot 기초": 10,
+      "기본 에디터 조작": 8,
+      "프로그래밍 기본 용어": 9,
+      "변형된 Godot 아키텍처": 10,
+      "Godot 고급": 10,
+      "고급 자동화 조작": 4,
+      "AI 고급 최적화": 13,
+      "C# 기초 문법": 10,
+      "고급 실시간 통신": 5,
+      "C# 고급 통합": 6,
+      "고급 프로그래밍 용어": 7,
+      "AI 코드 생성 기초": 2
+    },
+    "keyword_distribution": {
+      "변수": 12,
+      "클래스": 12,
+      "파인튜닝": 12,
+      "프롬프트엔지니어링": 12,
+      "컨텍스트관리": 12,
+      "체이닝": 12,
+      "이벤트": 11,
+      "커스텀노드": 9,
+      "셰이더": 9,
+      "물리엔진": 9,
+      "최적화": 9,
+      "소켓": 8,
+      "룸": 8,
+      "네임스페이스": 8,
+      "노드": 8,
+      "씬": 8,
+      "시그널": 8,
+      "스크립트": 8,
+      "LINQ": 7,
+      "variable": 7
+    },
+    "avg_similarity": 0.047,
+    "type_entropy": 3.244,
+    "topic_entropy": 3.697,
+    "keyword_entropy": 6.36
+  }
+}

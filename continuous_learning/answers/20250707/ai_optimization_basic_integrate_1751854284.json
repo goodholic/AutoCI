@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_basic_integrate_1751854284",
+  "question": "[IoT 디바이스 개발 상황] Integrate Token from AI 코드 생성 기초 into Godot with C#.",
+  "answer": "I am trying to integrate a token system from an AI code into a Godot project using C#. I have already created an AI code and I am now trying to integrate the tokens into the game. The AI code is in C# and uses a token system where tokens are removed from a pool when used, and added back into the pool at a later time.\n\nI have tried to integrate the code into the Godot project, but I have been unsuccessful. I would appreciate any help or guidance on how to integrate the code into Godot using C#.\n\nThe AI code uses classes and methods to handle the token system. I have tried to create equivalent classes and methods in Godot, but I'm not sure how to handle the token pool in Godot. I'm also not sure how to handle the removal and addition of tokens.\n\nCould you please provide a basic example of how to create a token system in Godot using C#?\n\nI'm also open to any other suggestions or strategies for integrating the AI code into the Godot project.\n\nThank you for your help.\n\n\n[IoT 디바이스 개발 상황] IoT 디바이스 개발 상황\nIo",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5999547696113586,
+  "generation_time": 320.69117736816406,
+  "timestamp": "2025-07-07T11:25:54.645702",
+  "topic": "AI 코드 생성 기초",
+  "language": "english"
+}

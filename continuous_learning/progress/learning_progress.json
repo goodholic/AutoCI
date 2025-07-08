@@ -1,12 +1,12 @@
 {
-  "total_hours": 12.01111030861111,
-  "total_questions": 230,
-  "total_successful": 0,
+  "total_hours": 264.93815045222243,
+  "total_questions": 2615,
+  "total_successful": 22,
   "topics_progress": {
     "godot_advanced": {
-      "questions_asked": 9,
+      "questions_asked": 55,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T05:04:16.471307"
+      "last_studied": "2025-07-08T17:16:32.784549"
     },
     "nakama_advanced": {
       "questions_asked": 7,
@@ -14,14 +14,14 @@
       "last_studied": "2025-07-05T23:51:46.502913"
     },
     "godot_basics": {
-      "questions_asked": 9,
+      "questions_asked": 58,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T05:04:16.471427"
+      "last_studied": "2025-07-08T22:35:10.346881"
     },
     "godot_expert_architecture": {
-      "questions_asked": 9,
+      "questions_asked": 56,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T05:04:16.471392"
+      "last_studied": "2025-07-08T22:35:10.346888"
     },
     "nakama_basics": {
       "questions_asked": 6,
@@ -29,52 +29,62 @@
       "last_studied": "2025-07-05T15:59:01.414497"
     },
     "godot_expert_csharp": {
-      "questions_asked": 6,
+      "questions_asked": 46,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414499"
+      "last_studied": "2025-07-08T22:35:10.346883"
     },
     "socketio_advanced": {
-      "questions_asked": 7,
+      "questions_asked": 53,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T03:00:04.201709"
+      "last_studied": "2025-07-08T22:35:10.346879"
     },
     "csharp_basics": {
-      "questions_asked": 9,
+      "questions_asked": 57,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T05:04:16.471422"
+      "last_studied": "2025-07-08T22:35:10.346886"
     },
     "csharp_advanced": {
-      "questions_asked": 6,
+      "questions_asked": 49,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T05:04:16.471120"
+      "last_studied": "2025-07-08T22:35:10.346892"
     },
     "korean_terms_basic": {
-      "questions_asked": 6,
+      "questions_asked": 44,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T03:00:04.201763"
+      "last_studied": "2025-07-08T17:16:32.784545"
     },
     "korean_terms_advanced": {
-      "questions_asked": 3,
+      "questions_asked": 38,
       "successful_answers": 0,
-      "last_studied": "2025-07-05T15:59:01.414509"
+      "last_studied": "2025-07-08T09:47:51.224876"
     },
     "socketio_basic": {
-      "questions_asked": 3,
+      "questions_asked": 47,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T05:04:16.471429"
+      "last_studied": "2025-07-08T22:35:10.346876"
     },
     "godot_manipulation_advanced": {
-      "questions_asked": 1,
+      "questions_asked": 38,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T03:00:04.201758"
+      "last_studied": "2025-07-08T22:35:10.346890"
     },
     "ai_optimization_advanced": {
-      "questions_asked": 2,
+      "questions_asked": 46,
       "successful_answers": 0,
-      "last_studied": "2025-07-06T05:04:16.471387"
+      "last_studied": "2025-07-08T17:16:32.784543"
+    },
+    "ai_optimization_basic": {
+      "questions_asked": 40,
+      "successful_answers": 0,
+      "last_studied": "2025-07-08T22:35:10.346885"
+    },
+    "godot_manipulation_basic": {
+      "questions_asked": 36,
+      "successful_answers": 0,
+      "last_studied": "2025-07-08T17:16:32.784536"
     }
   },
-  "last_session_id": "session_20250706_053450",
-  "last_save_time": "2025-07-06T05:34:50.908551",
+  "last_session_id": "session_20250709_002424",
+  "last_save_time": "2025-07-09T00:43:47.721244",
   "sessions_completed": []
 }

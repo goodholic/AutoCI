@@ -108,7 +108,11 @@ def run_command(command, args):
         "fix": PROJECT_ROOT / "core_system" / "autoci_main.py",
         "create": PROJECT_ROOT / "core_system" / "autoci_main.py",
         "monitor": PROJECT_ROOT / "core_system" / "autoci_main.py",
-        "evolve": PROJECT_ROOT / "core_system" / "autoci_main.py"
+        "evolve": PROJECT_ROOT / "core_system" / "autoci_main.py",
+        "resume": PROJECT_ROOT / "autoci",  # Use main autoci script for resume
+        "sessions": PROJECT_ROOT / "autoci",  # Use main autoci script for sessions
+        "chat": PROJECT_ROOT / "autoci",  # Use main autoci script for chat
+        "talk": PROJECT_ROOT / "autoci"  # Use main autoci script for talk
     }
     
     # 명령어에 따른 스크립트 선택
@@ -129,6 +133,10 @@ def run_command(command, args):
     elif command == "evolve":
         script = script_map["evolve"]
         cmd_args = ["evolve"] + list(args)
+    elif command in ["resume", "sessions", "chat", "talk"]:
+        # These commands use the main autoci script
+        script = script_map[command]
+        cmd_args = [command] + list(args)
     elif command in ["analyze", "monitor", "demo"]:
         script = script_map.get(command, script_map["main"])
         cmd_args = [command] + list(args)
@@ -179,14 +187,18 @@ def cli(ctx):
 사용 가능한 명령어:
   autoci              - 대화형 모드로 AutoCI 시작
   autoci create       - 새 게임 자동 생성 (24시간)
+  autoci resume       - Godot 프로젝트 선택하여 24시간 자동 개발
+  autoci sessions     - 모든 게임 개발 세션 보기
   autoci learn        - AI 모델 기반 연속 학습
   autoci learn low    - 메모리 최적화 연속 학습
   autoci fix          - 학습 기반 게임 엔진 능력 업데이트
   autoci monitor      - 실시간 개발 모니터링
+  autoci chat         - AI와 한글로 대화
   autoci demo         - 5분 빠른 데모
 
 예시:
   autoci create --name MyGame --type platformer
+  autoci resume
   autoci learn
   autoci monitor --port 5001
         """)
@@ -277,6 +289,37 @@ def analyze(path):
     """게임 프로젝트 분석"""
     print(f"\n🔍 프로젝트 분석: {path}")
     run_command("analyze", ["--path", path])
+
+
+@cli.command()
+def talk():
+    """AI와 한글로 대화하며 게임 개발 (학습한 지식 활용)"""
+    print("\n💬 AutoCI 대화 모드")
+    print("🧠 학습한 지식을 바탕으로 질문에 답변하고 게임을 개선합니다")
+    run_command("talk", [])
+
+
+@cli.command()
+def chat():
+    """AI와 한글로 대화하며 게임 개발 (talk와 동일)"""
+    print("\n💬 AutoCI 대화 모드")
+    print("🧠 학습한 지식을 바탕으로 질문에 답변하고 게임을 개선합니다")
+    run_command("chat", [])
+
+
+@cli.command()
+def resume():
+    """Godot 프로젝트 선택하여 24시간 자동 개발"""
+    print("\n🔄 AutoCI 프로젝트 재개")
+    print("🎮 Godot 프로젝트를 선택하여 24시간 자동 개발을 시작합니다")
+    run_command("resume", [])
+
+
+@cli.command()
+def sessions():
+    """모든 게임 개발 세션 보기"""
+    print("\n📁 AutoCI 세션 목록")
+    run_command("sessions", [])
 
 
 if __name__ == "__main__":

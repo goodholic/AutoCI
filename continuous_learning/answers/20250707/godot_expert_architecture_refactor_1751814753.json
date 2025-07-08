@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_refactor_1751814753",
+  "question": "[실시간 멀티플레이어 게임 개발 상황] SOLID 원칙에 따라 변형된 Godot 아키텍처의 리소스관리, 씬시스템, 커스텀엔진 구현을 리팩토링해주세요.",
+  "answer": "- 리소스관리: 자원의 재사용성을 높여주고, 메모리를 효율적으로 관리할 수 있도록 리소스 관리 시스템을 개선해주세요.\n- 씬시스템: 씬을 전환할 때 딱 필요한 정보만 로드하고, 불필요한 리소스를 미리 로드하지 않도록 개선�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5671094012260437,
+  "generation_time": 300.36167669296265,
+  "timestamp": "2025-07-07T00:17:34.083071",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "korean"
+}

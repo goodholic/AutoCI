@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_implement_1751961609",
+  "question": "적절한 커스텀엔진, 렌더파이프라인 시스템을 변형된 Godot 아키텍처 기반으로 설계하고 구현해주세요.",
+  "answer": "##### 기능 요구 사항\n\n- 적절한 커스텀 렌더러를 구현하여 객체의 외형을 변경할 수 있습니다.\n- 적절한 커스텀 셰이더를 구현하여 객체의 색상, 반사, 빛의 영향 등을 변경할 수 있습니다.\n- 적절한 렌더 파이프라인을 구성하여 여러 카�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6020550537109375,
+  "generation_time": 572.5550227165222,
+  "timestamp": "2025-07-08T17:09:42.294343",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "korean"
+}

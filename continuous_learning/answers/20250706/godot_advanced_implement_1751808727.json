@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_implement_1751808727",
+  "question": "Godot 고급을 사용하여 셰이더 기능을 가진 시스템을 구현해주세요.",
+  "answer": "#### 지시사항\n\n1. 먼저, 다음과 같은 기본 셰이더 코드를 구현해주세요.\n\n```shader\nshader_type canvas_item;\n\nuniform float time: hint_range(0.0, 1.0) = 0.0;\n\nvoid fragment() {\n    COLOR.rgb = vec3(time);\n}\n```\n\n2. 이를 기반으로 프로그래밍 방식으로 스티커 색상을 변경하는 코드를 구현해주세요.\n\n3. 스티커 색상을 변경하�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6271038937568665,
+  "generation_time": 305.9898521900177,
+  "timestamp": "2025-07-06T22:39:32.019385",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

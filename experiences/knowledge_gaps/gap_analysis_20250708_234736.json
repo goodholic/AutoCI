@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-07-08T23:47:36.413866",
+  "total_gaps": 2,
+  "critical_gaps": 0,
+  "high_priority_gaps": 2,
+  "auto_fixable_gaps": 1,
+  "gaps": [
+    {
+      "category": "error_pattern_async_await",
+      "severity": 1.0,
+      "description": "async_await 오류가 빈번히 발생함 (214회)",
+      "suggested_actions": [
+        "async_await 오류 해결 방법 학습",
+        "async_await 예방 패턴 습득",
+        "async_await 관련 모범 사례 검색"
+      ],
+      "search_keywords": [
+        "async_await",
+        "solution",
+        "best practices"
+      ],
+      "priority": "high",
+      "detected_at": "2025-07-08T23:47:35.872269",
+      "auto_fix_possible": false
+    },
+    {
+      "category": "project_creation_frequency",
+      "severity": 0.8,
+      "description": "최근 1주일간 생성된 프로젝트가 부족함",
+      "suggested_actions": [
+        "더 자주 autoci create 실행",
+        "다양한 게임 타입 실험",
+        "프로젝트 생성 자동화 고려"
+      ],
+      "search_keywords": [
+        "game development",
+        "project templates",
+        "rapid prototyping"
+      ],
+      "priority": "high",
+      "detected_at": "2025-07-08T23:47:19.898041",
+      "auto_fix_possible": true
+    }
+  ]
+}

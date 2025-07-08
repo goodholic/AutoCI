@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_error_1751979575",
+  "question": "변형된 Godot 아키텍처 렌더파이프라인, 리소스관리 관련 에러 메시지를 해석하고 디버깅하는 방법을 가이드해주세요.",
+  "answer": "## 렌더링 파이프라인\n\n렌더링 파이프라인은 게임이나 그래픽을 생성하는 과정을 의미합니다. 이 과정에는 다양한 단계가 포함됩니다. 각 단계는 입력된 데이터를 다음 단계로 넘겨주고, 결과를 만들어냅니다.\n\nGodot에서 렌더링 파이프라인",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6235796844959258,
+  "generation_time": 339.98939776420593,
+  "timestamp": "2025-07-08T22:05:15.193591",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "korean"
+}

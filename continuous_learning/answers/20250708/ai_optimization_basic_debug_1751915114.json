@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_basic_debug_1751915114",
+  "question": "다음 AI 코드 생성 기초 코드의 프롬프트 부분에서 발생하는 문제를 디버깅해주세요.",
+  "answer": "<jupyter_code>\n# 디버깅 코드\n\nimport torch\nfrom transformers import GPT2Tokenizer, GPT2LMHeadModel\n\ntokenizer = GPT2Tokenizer.from_pretrained('gpt2')\nmodel = GPT2LMHeadModel.from_pretrained('gpt2')\n\nprompt = \"Hello, how are you?\"\ninput_ids = tokenizer.encode(prompt, return_tensors='pt')\noutputs = model(input_ids)\nloss, logits = outputs[:2]\n\npredictions = logits[0].argmax(-1)\nnext_word = tokenizer.decode(predictions)\n\nprint(next_word)\n<jupyter_output>\n<empty_output>\n<jupyter_text>\n문제 설명 : 코드는 정상적으로 실행되나, 예측된 다음 단어가 정상적으�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.610231373310089,
+  "generation_time": 294.8796103000641,
+  "timestamp": "2025-07-08T04:10:09.595509",
+  "topic": "AI 코드 생성 기초",
+  "language": "korean"
+}

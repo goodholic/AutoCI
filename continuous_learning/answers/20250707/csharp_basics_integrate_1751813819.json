@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_integrate_1751813819",
+  "question": "Unity에서 Godot로 마이그레이션할 때 C# 기초 문법의 클래스, 메서드, 데이터타입를 어떻게 변환하는지 보여주세요.",
+  "answer": "C#에서 Godot으로 마이그레이션\n\n1. 클래스 선언: 클래스를 선언할 때 Godot에서는 기본적으로 상속할 부모 클래스를 지정해야 합니다. 보통 `Node`를 상속받습니다.\n\n```csharp\nusing Godot;\n\npublic class MyNode : Node\n{\n    // 여기에 코드를 작성합니다.\n}\n```\n\n2. 메서드 선언: C#에서는 메",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6420613360404968,
+  "generation_time": 299.03928780555725,
+  "timestamp": "2025-07-07T00:01:58.077574",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

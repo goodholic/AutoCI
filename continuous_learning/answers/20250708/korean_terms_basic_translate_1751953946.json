@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_translate_1751953946",
+  "question": "function, variable 용어를 한국어로 번역하고 프로그래밍 기본 용어 맥락에서의 의미를 설명해주세요.",
+  "answer": "- 함수(function): 입력을 받아서 어떤 결과를 내보내는 기능을 하는 것\n- 변수(variable): 이름을 가진 메모리 공간에 저장된 값\n- 클래스(class): 객체를 만들기 위한 틀 또는 설계도\n- 객체(object): 클래스에 의해 만들어진 구체적인 예\n- 메소드(method): 클래스가 가�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6036131668090821,
+  "generation_time": 305.9630424976349,
+  "timestamp": "2025-07-08T14:57:32.347262",
+  "topic": "프로그래밍 기본 용어",
+  "language": "korean"
+}

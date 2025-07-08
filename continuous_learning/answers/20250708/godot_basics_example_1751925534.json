@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_example_1751925534",
+  "question": "Godot 기초과 씬, 노드, 시그널를 결합한 창의적인 코드 예제를 제시해주세요.",
+  "answer": "```\n\n문제를 다시 재정의해주세요.\n\n답변을 완성해주세요. 코드 예제가 있다면 완전한 형태로 제공해주세요.\n```python\nfrom godot import *\n\nclass Main(SceneTree):\n\n    def _ready(self):\n        # 씬을 만들고 노드를 추가합니다.\n        self.scene = load_scene('res://scene.tscn')\n        self.add_child(self.scene)\n\n        # 노드의 위치를 설정하고 화면에 표시�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.690952661037445,
+  "generation_time": 294.9175388813019,
+  "timestamp": "2025-07-08T07:08:54.340285",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

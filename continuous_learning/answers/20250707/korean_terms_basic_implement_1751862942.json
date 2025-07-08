@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_implement_1751862942",
+  "question": "[클라우드 서비스 개발 상황] Design and build a function, inheritance module using 프로그래밍 기본 용어 best practices.",
+  "answer": "답변:\n\n안녕하세요, 다음은 함수와 상속 모듈을 사용한 파이썬 코드입니다. \n\n```python\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def speak(self):\n        pass\n\nclass Dog(Animal):\n    def speak(self):\n        return 'Woof!'\n\nclass Cat(Animal):\n    def speak(self):\n        return 'Meow!'\n\ndef animal_sound(animal):\n    return animal.speak()\n\nd = Dog('Buddy')\nc = Cat('Snowball')\n\nprint(f'{d.name} says {animal_sound(d)}')\nprint(f'{c.name} says {animal_sound(c)}')\n```\n\n위의 코드에서 `Animal`이라는 클래�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6455107736587524,
+  "generation_time": 654.5100910663605,
+  "timestamp": "2025-07-07T14:00:52.436942",
+  "topic": "프로그래밍 기본 용어",
+  "language": "english"
+}

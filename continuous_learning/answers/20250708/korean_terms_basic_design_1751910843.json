@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_design_1751910843",
+  "question": "Create architectural diagrams for function, variable implementation in 프로그래밍 기본 용어.",
+  "answer": "# Solution\n\n## Function Implementation\n\n```\nfunction add(a, b) {\n  return a + b;\n}\n```\n\n```\nfunction subtract(a, b) {\n  return a - b;\n}\n```\n\n## Variable Implementation\n\n```\nlet num1 = 10;\nlet num2 = 20;\n```\n\n## Architectural Diagram\n\nAn architectural diagram is a visual representation of a system's structure and relationships. It demonstrates how different components interact with each other. This can be a simple block diagram, a flowchart, or a more complex diagram like a UML class diagram.\n\n```\n+-----------------+\n|                 |\n|  Function add   |\n|    (a, b)       |\n|                 |\n+-----------------+\n      |\n      v\n+-----------------+\n|                 |\n|  Function sub   |\n|    (a, b)       |\n|                 |\n+-----------------+\n      |\n      v\n+-----------------+\n|                 |\n|  Variables num1 |\n|                 |\n+-----------------+\n      |\n      v\n+-----------------+\n|                 |\n|  Variables num2 |\n|                 |\n+-----------------+\n```\n\nThis diagram represents the flow of data through the system. The functions `add` and",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6501748073101044,
+  "generation_time": 292.9256749153137,
+  "timestamp": "2025-07-08T02:58:56.670842",
+  "topic": "프로그래밍 기본 용어",
+  "language": "english"
+}

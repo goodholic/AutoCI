@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_basic_integrate_1751906846",
+  "question": "Godot 엔진에서 실시간 통신 기초의 이벤트 개념을 C#으로 구현해주세요.",
+  "answer": "```\n\n## 예시 코드\n```csharp\n    public void TriggerEvent(string eventName)\n    {\n        if (events.ContainsKey(eventName))\n        {\n            events[eventName].callback();\n        }\n    }\n\n    // 이벤트 제거 함수\n    public void RemoveListener(string eventName, Action callback)\n    {\n        if (events.ContainsKey(eventName))\n        {\n            events[eventName].callback -= callback;\n        }\n    }\n}\n```\n이 코드는 기본적으로 이벤트 디자인 패턴을 구현한 것으로, 이벤트 이름과 콜백 함수를 입력받아 이벤트를 추가, 트�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6460616040229797,
+  "generation_time": 296.2008845806122,
+  "timestamp": "2025-07-08T01:57:28.000957",
+  "topic": "실시간 통신 기초",
+  "language": "korean"
+}

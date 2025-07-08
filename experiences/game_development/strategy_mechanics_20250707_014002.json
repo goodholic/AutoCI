@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-07-07T01:39:58.763783",
+  "game_type": "strategy",
+  "feature": "enemy_ai",
+  "phase": "mechanics",
+  "attempt_number": 1206,
+  "success": false,
+  "duration": 3.8131730556488037,
+  "error": "'AIModelIntegration' object has no attribute 'validate_code'",
+  "quality_score": 0.1,
+  "lesson_learned": "enemy_ai 구현 중 예외 발생 - AttributeError 처리 필요"
+}

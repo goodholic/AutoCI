@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_advanced_optimize_1751897688",
+  "question": "AI 고급 최적화에서 컨텍스트관리 관련 성능을 최적화하는 방법을 제시해주세요.",
+  "answer": "<br/>\n\n## 고급 최적화 전략\n\n1. 동적 컨텍스트 전환 최소화: 컨텍스트 전환은 비용이 많이 드는 작업이므로, 최대한 줄여야 한다. 동시에 처리할 수 있는 컨텍스트 수를 제한하거나, 대기 중인 컨텍스트 수를 최소화하는 등의 방법을 사",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6012041306495666,
+  "generation_time": 315.2544448375702,
+  "timestamp": "2025-07-07T23:22:35.311906",
+  "topic": "AI 고급 최적화",
+  "language": "korean"
+}

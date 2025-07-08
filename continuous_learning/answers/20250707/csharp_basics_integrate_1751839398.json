@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_integrate_1751839398",
+  "question": "[모바일 앱 개발 상황] Godot 4.x에서 C# 기초 문법 기반 메서드, 변수, 클래스 시스템을 구축하는 방법을 설명해주세요.",
+  "answer": "]\n```\n\n2. 변수\n\n변수는 값을 저장하는 공간입니다. 여러 타입의 변수를 지원하며, 변수를 선언할 때 반드시 타입을 지정해야 합니다.\n\n```csharp\nint a = 10; // 정수 변수 선언\nstring b = \"Hello, World!\"; // 문자열 변수 선언\n```\n\n3. 클래스\n\n클래스는 변수와 메서드를 그룹�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6465735900402069,
+  "generation_time": 303.21643805503845,
+  "timestamp": "2025-07-07T07:15:55.075087",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

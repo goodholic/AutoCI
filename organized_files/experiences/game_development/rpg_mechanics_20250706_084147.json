@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-07-06T08:41:43.065056",
+  "game_type": "rpg",
+  "feature": "save_system",
+  "phase": "mechanics",
+  "attempt_number": 790,
+  "success": false,
+  "duration": 4.665215730667114,
+  "error": "'AIModelIntegration' object has no attribute 'validate_code'",
+  "quality_score": 0.1,
+  "lesson_learned": "save_system 구현 중 예외 발생 - AttributeError 처리 필요"
+}

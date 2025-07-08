@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_explain_1751923084",
+  "question": "Explain 적절한 Godot 기초 focusing on Script, Scene with practical examples.",
+  "answer": "# What is Godot?\n\nGodot is an open-source, versatile, and cross-platform game engine. It supports 2D and 3D games, along with a suite of tools that can be used to make them. Godot is free and open source, created by Juan Linietsky, Ariel Manzur, and the Godot community.\n\n# Why Godot?\n\nGodot is a versatile game engine that provides a wide range of features. It's free and open-source, which means you can use it for any purpose. It's cross-platform, which means you can develop games for Windows, macOS, Linux, Android, iOS, and more. It's also very easy to use, thanks to its intuitive interface and a large community of developers who contribute to its development.\n\n# What is scripting?\n\nScripting is a way to control the behavior of a game in a game engine. It allows you to create custom scripts that control how objects interact with each other, what happens when certain events occur, and much more.\n\n# What is a scene in Godot?\n\nIn Godot, a scene is a file that contains a tree of nodes. Each node represents an object in the game, and each node can have children, which allows you to create complex game objects by combining simpler ones. Scenes can include scripts, which control the behavior of",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6686682403087616,
+  "generation_time": 292.96997141838074,
+  "timestamp": "2025-07-08T06:22:57.158021",
+  "topic": "Godot 기초",
+  "language": "english"
+}

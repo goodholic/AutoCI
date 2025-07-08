@@ -1,0 +1,58 @@
+{
+  "successful_patterns": [
+    {
+      "feature": "player_movement_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "jumping_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "gravity_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "collision_detection_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "enemy_ai_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "collectibles_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "level_progression_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "score_system_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "lives_system_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "power_ups_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "moving_platforms_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "checkpoints_alt",
+      "game_type": "strategy"
+    },
+    {
+      "feature": "player_movement",
+      "game_type": "strategy"
+    }
+  ],
+  "failure_patterns": [],
+  "optimization_opportunities": []
+}

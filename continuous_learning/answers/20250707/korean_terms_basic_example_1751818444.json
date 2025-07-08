@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_basic_example_1751818444",
+  "question": "[자동화 스크립트 개발 상황] Show creative usage of 프로그래밍 기본 용어 combining inheritance, class, object features.",
+  "answer": "[자동화 스크립트 개발 상황] 프로그래밍 기본 용어인 `inheritance`, `class`, `object` 를 자유롭게 조합하여 활용하는 방법을 구체적으로 설명해주세요.\n\n기존 답변:\n```python\nclass Animal:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n    def sound(self):\n        pass\n\nclass Dog(Animal):\n    def sound(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def sound(self):\n        return \"Meow!\"\n\n# 객체 생성\ndog1 = Dog(\"",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5817722356319427,
+  "generation_time": 295.55239152908325,
+  "timestamp": "2025-07-07T01:24:05.604899",
+  "topic": "프로그래밍 기본 용어",
+  "language": "english"
+}

@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_manipulation_advanced_explain_1751967415",
+  "question": "Explain 적절한 고급 자동화 조작 focusing on PhysicsConfig, AnimationSetup, ComplexScene with practical examples.",
+  "answer": "# AnimationSetup\n\nAnimationSetup is a class used in Unity to control the animation settings of an object. This class is often used in conjunction with the PhysicsConfig class to create a more realistic simulation.\n\n## Properties\n\n- `frameRate`: Controls the frame rate of the animation.\n\n\n\n# ComplexScene\n\nComplexScene is a class used in Unity to manage a complex scene, including multiple objects, physics, and animations. This class is often used in conjunction with the PhysicsConfig and AnimationSetup classes to create a more realistic and complex simulation.\n\n## Properties\n\n- `objects`: A list of objects in the scene.\n\n\n\nPlease provide examples of practical usage of these classes in Unity.\n\n# PhysicsConfig\n\nHere's an example of how to use the PhysicsConfig class:\n\n```csharp\npublic class PhysicsConfigExample : MonoBehaviour\n{\n    void Start()\n    {\n        PhysicsConfig config = new PhysicsConfig();\n        config.gravity = new Vector3(0, -9.8f, 0);\n        config.drag = 0.5f;\n        config.angularDrag = 0.05f;\n        config.velocityIterations = 8;\n        config.positionIterations = 3;\n        \n        Phys",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6415573990345,
+  "generation_time": 297.4222266674042,
+  "timestamp": "2025-07-08T18:46:59.840977",
+  "topic": "고급 자동화 조작",
+  "language": "english"
+}

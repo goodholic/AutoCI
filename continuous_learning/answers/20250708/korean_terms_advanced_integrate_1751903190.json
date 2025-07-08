@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_advanced_integrate_1751903190",
+  "question": "Migrate encapsulation, polymorphism, interface patterns from Unity to Godot using 고급 프로그래밍 용어 principles.",
+  "answer": "## Migrate Unity encapsulation, polymorphism, and interface patterns to Godot using advanced programming concepts\n\nIn the process of migrating from Unity to Godot, it's important to understand and make use of advanced programming concepts, such as encapsulation, polymorphism, and interface patterns. Here's how you can do this:\n\n1. **Encapsulation**: In Unity, you often use scripts to hide important details and provide a simpler interface. In Godot, you can use classes and inheritance to achieve similar results. For example, you can create a parent class for all your characters and then inherit from it in your enemy and player classes. This allows you to define what a character is and how it behaves in one place, then use it in multiple places in your game.\n\n2. **Polymorphism**: Polymorphism is a powerful feature of object-oriented programming languages that allows you to use objects of different types interchangeably. In Unity, you can use interfaces or abstract classes to create polymorphic behavior. In Godot, you can use inheritance and the `is` operator to achieve similar results. For example, you could create an interface for all your characters, and then have your enemy and player classes implement this interface.\n\n3. **Interface patterns**: Interfaces are a way to define how classes can interact with other classes. In",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.633545514345169,
+  "generation_time": 293.11942648887634,
+  "timestamp": "2025-07-08T00:51:23.804232",
+  "topic": "고급 프로그래밍 용어",
+  "language": "english"
+}

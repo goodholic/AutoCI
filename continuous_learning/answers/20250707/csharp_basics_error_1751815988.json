@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_error_1751815988",
+  "question": "Common method errors in C# 기초 문법 and how to fix them.",
+  "answer": "A: If you're trying to compile a simple 'Hello, World!' application in C#, you should use a `Main` method that matches the signature of the `Main` method in `Program.cs`.\n\nHere's how your code should look:\n\n```csharp\nusing System;\n\nclass Program\n{\n    static void Main(string[] args)\n    {\n        Console.WriteLine(\"Hello, World!\");\n    }\n}\n```\n\nThe `Main` method in the `Program` class must have the signature `static void Main(string[] args)`. This is the entry point of a C# console application. The `args` parameter is an array of strings that represent the command-line arguments. In this case, we're not using any command-line arguments, so we can simply pass an empty array.\n\nPlease note that the class must be named `Program`, and it must be inside a namespace. In this case, we're using the default namespace, so we don't need any `namespace` declaration.\n\nIf you're using Visual Studio, you can run this program by right-clicking on the `Program.cs` file in Solution Explorer, then selecting 'Set as Startup Item', and then pressing F5 to start debugging.\n\nIf you're not using Visual Studio",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6422634851932525,
+  "generation_time": 294.46344351768494,
+  "timestamp": "2025-07-07T00:43:07.375906",
+  "topic": "C# 기초 문법",
+  "language": "english"
+}

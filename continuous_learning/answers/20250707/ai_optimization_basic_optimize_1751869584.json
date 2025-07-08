@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_basic_optimize_1751869584",
+  "question": "[AI 챗봇 개발 상황] 적절한 환경에서 AI 코드 생성 기초의 컨텍스트 병목현상을 해결하는 방법을 보여주세요.",
+  "answer": "AI 코드 생성은 크게 두 가지로 나눠볼 수 있다.\n\n1. 코드 생성 모델을 학습시키는 것\n2. 학습된 모델을 사용하여 코드를 생성하는 것\n\n생성 모델을 학습시키는 것에서 병목현상이 발생할 수 있는 경우는 다양하다. 대표적으로 메모�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.601363263130188,
+  "generation_time": 309.15997648239136,
+  "timestamp": "2025-07-07T15:31:33.801456",
+  "topic": "AI 코드 생성 기초",
+  "language": "korean"
+}

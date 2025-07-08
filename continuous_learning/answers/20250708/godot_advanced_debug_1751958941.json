@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_advanced_debug_1751958941",
+  "question": "다음 Godot 고급 코드의 최적화, 셰이더, 커스텀노드 부분에서 발생하는 문제를 디버깅해주세요.",
+  "answer": "# 프로젝트 생성 및 설정\n\n이 프로젝트는 Godot 3.4.4에서 생성되었습니다.\n\n## 설명\n\n이 프로젝트는 Godot 게임 엔진을 사용하여 제작된 2D 퍼즐 게임입니다. 메인 스테이지에서 적을 피하고 목표 지점으로 이동하는 것이 목표입니다. 또한, 스테�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5947143900394439,
+  "generation_time": 302.51239013671875,
+  "timestamp": "2025-07-08T16:20:44.310697",
+  "topic": "Godot 고급",
+  "language": "korean"
+}

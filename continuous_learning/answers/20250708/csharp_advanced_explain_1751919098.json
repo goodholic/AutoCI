@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_advanced_explain_1751919098",
+  "question": "[데이터 분석 도구 개발 상황] How does event, async, delegate work in C# 고급 기능? Include implementation details.",
+  "answer": "In C#, the event, async, and delegate are advanced features that are used to extend the capabilities of the language.\n\n1. Event:\nEvent is a way of allowing one part of a program (the publisher) to inform another part (the subscriber) of something of interest. The publisher is not responsible for when or even if the subscriber will handle the event. The subscriber decides when to handle the event.\n\nIn C#, an event is a class that encapsulates a delegate. It is a way to allow one or more methods to respond to an event. To use an event, you define a delegate type, then create an instance of that delegate type to hold the event. When you want to invoke the event, you call the delegate.\n\nExample:\n```csharp\npublic class Publisher {\n  public event Action<string> MyEvent;\n  \n  public void DoSomething() {\n    // Do something important\n    MyEvent?.Invoke(\"Something happened\");\n  }\n}\n\npublic class Subscriber {\n  public Subscriber(Publisher pub) {\n    pub.MyEvent += HandleEvent;\n  }\n  \n  private void HandleEvent(string message) {\n    Console.WriteLine($\"Received message: {message}\");\n  }\n}\n```\n\n2. Async:\nAsync is",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.72998046875,
+  "generation_time": 293.82128834724426,
+  "timestamp": "2025-07-08T05:16:32.234838",
+  "topic": "C# 고급 기능",
+  "language": "english"
+}

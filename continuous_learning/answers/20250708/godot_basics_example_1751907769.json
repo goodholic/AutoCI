@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_example_1751907769",
+  "question": "Godot 기초을 활용한 적절한 씬 구현 예제를 작성해주세요.",
+  "answer": "각 씬은 다음과 같은 기능을 가지고 있습니다:\n\n1. 시작 씬(Start Scene): 게임을 시작하거나, 게임 규칙을 설명하는 씬입니다. 사용자가 게임을 시작하면 게임 씬으로 넘어갑니다.\n2. 게임 씬(Game Scene): 게임을 진행하는 씬입니다. 사용자가 원하는 대�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6154485642910004,
+  "generation_time": 293.5114803314209,
+  "timestamp": "2025-07-08T02:07:42.914377",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

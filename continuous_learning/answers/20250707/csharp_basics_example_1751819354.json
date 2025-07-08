@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_example_1751819354",
+  "question": "C# 기초 문법을 활용한 적절한 데이터타입, 클래스, 메서드 구현 예제를 작성해주세요.",
+  "answer": "# 적절한 데이터타입\n\n# 정수형 데이터타입\na = 10\nprint(type(a))  # <class 'int'>\n\n# 실수형 데이터타입\nb = 10.0\nprint(type(b))  # <class 'float'>\n\n# 문자형 데이터타입\nc = 'Hello'\nprint(type(c))  # <class 'str'>\n\n# 리스트형 데이터타입\nd = [1, 2, 3, 4, 5]\nprint(type(d))  # <class 'list'>\n\n# 튜플형 데이터타입\ne = (1, 2, 3, 4, 5)\nprint(type(e))  # <class 'tuple",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.599283891916275,
+  "generation_time": 296.5448920726776,
+  "timestamp": "2025-07-07T01:34:11.443872",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}

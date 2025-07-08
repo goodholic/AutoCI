@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_optimize_1751949209",
+  "question": "Profile and improve SceneSystem usage in 변형된 Godot 아키텍처 applications.",
+  "answer": "## Changes\n\n### Improvements\n\n- [#63](https://github.com/godotengine/godot/pull/63): Improvements to the SceneSystem. \n- [#74](https://github.com/godotengine/godot/pull/74): Improve SceneSystem performance and usability.\n- [#82](https://github.com/godotengine/godot/pull/82): Improve loading times and performance of SceneSystem.\n- [#84](https://github.com/godotengine/godot/pull/84): Improve SceneSystem performance and memory usage.\n- [#91](https://github.com/godotengine/godot/pull/91): Optimize SceneSystem for better performance.\n- [#93](https://github.com/godotengine/godot/pull/93): Improve SceneSystem performance and usability by caching some operations.\n- [#96](https://github.com/godotengine/godot/pull/96): Improve SceneSystem performance by reducing memory usage.\n- [#104](https://github.com/godotengine/godot/pull/104): Improve SceneSystem performance with caching",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6543859541416168,
+  "generation_time": 316.0632758140564,
+  "timestamp": "2025-07-08T13:38:45.440686",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "english"
+}

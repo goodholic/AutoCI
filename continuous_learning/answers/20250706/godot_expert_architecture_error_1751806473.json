@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_error_1751806473",
+  "question": "적절한 개발자가 변형된 Godot 아키텍처의 렌더파이프라인, 씬시스템에서 자주 실수하는 부분과 예방법을 설명해주세요.",
+  "answer": "## Godot의 렌더파이프라인\n\n렌더링은 게임이 화면에 그려지는 과정을 의미합니다. 기본적으로 Godot은 다음과 같은 렌더링 파이프라인을 사용합니다.\n\n1. 씬 그래프(Scene Graph) : 모든 노드는 이 그래프에 연결되어 있습니다. 이는 노드의 계층 구조를 나타�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5970979273319243,
+  "generation_time": 360.94761633872986,
+  "timestamp": "2025-07-06T22:00:34.478654",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "korean"
+}

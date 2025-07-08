@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_optimize_1751933592",
+  "question": "[AI 챗봇 개발 상황] 프로파일링을 통해 Godot 기초의 노드 성능 문제를 찾고 해결해주세요.",
+  "answer": "방식:\n1. Godot Engine 내부에 내장된 프로파일링 도구 사용\n2. 문제 발생 시 프로파일러를 통해 노드를 살펴보고 원인을 파악\n3. 프로파일링을 통해 찾은 문제를 해결하고 적용\n\n예시:\nGodot 게임 엔진의 내부에 프로파일링 도구를 사용하여 게임의 �",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6982172310352325,
+  "generation_time": 313.6557297706604,
+  "timestamp": "2025-07-08T09:18:25.689459",
+  "topic": "Godot 기초",
+  "language": "korean"
+}

@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_basics_integrate_1751817824",
+  "question": "Migrate Node patterns from Unity to Godot using Godot 기초 principles.",
+  "answer": "## Introduction\n\nIn this tutorial series, we will migrate Node patterns from Unity to Godot using Godot's basic principles.\n\nGodot is a free and open-source game engine that can be used to make 2D and 3D games. It is a game engine developed by the same people who created Blender and the Python scripting language.\n\nOne of the main differences between Unity and Godot is how they handle nodes. In Unity, nodes are used to build up a hierarchy of objects that can be manipulated and interacted with through the Unity editor. In Godot, the equivalent would be to use scenes and scripts.\n\n## Unity to Godot Migration\n\nLet's say we have a simple Unity project with a ball object that moves around the screen. We'll go through the steps to migrate this to Godot.\n\n### 1. Create a New Godot Project\n\nOpen Godot and create a new project.\n\n### 2. Create a New Scene\n\nIn Godot, we don't have nodes like in Unity. Instead, we work with scenes and scripts. Create a new scene (right-click in the Project panel and select New > Scene).\n\n### 3. Import Unity Assets\n\nTo import an asset from Unity, you can use the Import Asset tool (right-click in the Project panel and select",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6272444593906402,
+  "generation_time": 294.06358647346497,
+  "timestamp": "2025-07-07T01:08:38.907224",
+  "topic": "Godot 기초",
+  "language": "english"
+}

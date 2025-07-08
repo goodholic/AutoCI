@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_architecture_error_1751980599",
+  "question": "Common SceneSystem, RenderPipeline, CustomEngine errors in 변형된 Godot 아키텍처 and how to fix them.",
+  "answer": "## 답변\n\n### 1. 엔진\n\nGodot 엔진은 게임 엔진의 핵심 부분으로, 씬 관리, 노드, 리소스 관리, 스크립팅, 렌더링 및 충돌 테스트 등을 포함합니다. 그러나 일부 개발자는 엔진을 변형하거나 엔진 자체에 대한 완전히 새로운 접근 방식을 개발",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6455800950527191,
+  "generation_time": 358.1982705593109,
+  "timestamp": "2025-07-08T22:29:02.829138",
+  "topic": "변형된 Godot 아키텍처",
+  "language": "english"
+}

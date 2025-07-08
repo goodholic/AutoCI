@@ -1,0 +1,27 @@
+{
+  "total_gaps": 2,
+  "auto_filled": 0,
+  "auto_actions": [],
+  "manual_actions": [
+    {
+      "gap": "error_pattern_async_await",
+      "reason": "manual_intervention_required",
+      "suggested_actions": [
+        "async_await 오류 해결 방법 학습",
+        "async_await 예방 패턴 습득",
+        "async_await 관련 모범 사례 검색"
+      ]
+    },
+    {
+      "gap": "project_quality",
+      "reason": "manual_intervention_required",
+      "suggested_actions": [
+        "기초 학습 강화",
+        "단순한 프로젝트부터 시작",
+        "오류 패턴 분석 및 해결"
+      ]
+    }
+  ],
+  "success_rate": 0.0,
+  "timestamp": "2025-07-06T17:04:45.934413"
+}

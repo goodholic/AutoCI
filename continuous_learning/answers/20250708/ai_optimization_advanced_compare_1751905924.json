@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_advanced_compare_1751905924",
+  "question": "성능, 가독성, 유지보수 관점에서 AI 고급 최적화의 체이닝, 파인튜닝 접근법들을 평가해주세요.",
+  "answer": "## 체이닝 접근법\n\n체이닝 접근법은 가장 간단한 접근법으로, 하나의 알고리즘을 여러 번 실행하여 결과를 다른 알고리즘에 넘겨주는 방식입니다. 이는 입력값이 작은 경우에 주로 사용되며, 전체 작업을 부분적으로 수행하기 때문에",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5692841100692749,
+  "generation_time": 295.66555881500244,
+  "timestamp": "2025-07-08T01:37:00.347483",
+  "topic": "AI 고급 최적화",
+  "language": "korean"
+}

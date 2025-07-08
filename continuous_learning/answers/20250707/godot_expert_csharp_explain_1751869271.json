@@ -1,0 +1,11 @@
+{
+  "question_id": "godot_expert_csharp_explain_1751869271",
+  "question": "적절한 C# 고급 통합 사용법을 성능최적화, GDExtension, NativeCall를 중심으로 단계별로 설명해주세요.",
+  "answer": "## 고급 통합 C#과 Godot 게임 엔진 연동\n\n### 성능 최적화\n\n- 메모리 관리: Godot에서는 메모리를 직접 관리해야 합니다. 잘못된 메모리 관리는 메모리 누수를 일으킬 수 있습니다.\n- 메모리 풀링: 재사용 가능한 객체를 사용하여 메모리를 효�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5718789625167846,
+  "generation_time": 305.73148226737976,
+  "timestamp": "2025-07-07T15:26:17.457254",
+  "topic": "C# 고급 통합",
+  "language": "korean"
+}

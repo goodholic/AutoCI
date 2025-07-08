@@ -62,7 +62,10 @@
       "Bash(/dev/null)",
       "Bash(echo:*)",
       "Bash(do echo -n \"$f: \")",
-      "Bash(tail:*)"
+      "Bash(tail:*)",
+      "Bash(pip --version)",
+      "Bash(autoci talk)",
+      "Bash(./autoci resume)"
     ],
     "deny": []
   }

@@ -1,0 +1,11 @@
+{
+  "question_id": "korean_terms_advanced_integrate_1751812894",
+  "question": "Unity에서 Godot로 마이그레이션할 때 고급 프로그래밍 용어의 추상화, 인터페이스, 캡슐화를 어떻게 변환하는지 보여주세요.",
+  "answer": "## 추상화\n\nGodot은 추상화를 위한 몇 가지 기능을 제공합니다. 예를 들어, 스크립트는 추상화를 위한 기본 클래스를 제공하지 않습니다. 대신 스크립트는 추상 클래스를 지원하지 않고 인터페이스를 지원합니다. \n\nUnity에서 C#의 추상 클�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5516096401214599,
+  "generation_time": 299.40282249450684,
+  "timestamp": "2025-07-06T23:46:33.841615",
+  "topic": "고급 프로그래밍 용어",
+  "language": "korean"
+}

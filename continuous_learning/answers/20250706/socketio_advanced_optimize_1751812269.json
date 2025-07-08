@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_advanced_optimize_1751812269",
+  "question": "Reduce memory footprint and execution time for 고급 실시간 통신 with Redis, Clustering.",
+  "answer": "```\n\n```javascript\nclient.get('key', function(err, res) {\n    if (err) throw err;\n    console.log(res); // 'value'\n});\n```\n\n### 클러스터링 설정\n\n위의 예제에서 제공한 것 처럼 레디스 클러스터링을 사용하여 레디스 클라이언트 객체를 생성할 때 선택적으로 클러스터링 옵션을 전달할 수 있습니다.\n\n```javascript\nlet client = new RedisCluster([\n    // 레디스 �",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5967121124267578,
+  "generation_time": 294.8015625476837,
+  "timestamp": "2025-07-06T23:41:11.938148",
+  "topic": "고급 실시간 통신",
+  "language": "english"
+}

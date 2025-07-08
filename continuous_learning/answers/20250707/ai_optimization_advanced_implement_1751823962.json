@@ -1,0 +1,11 @@
+{
+  "question_id": "ai_optimization_advanced_implement_1751823962",
+  "question": "AI 고급 최적화과 프롬프트엔지니어링, 파인튜닝, 체이닝를 활용한 미니 프로젝트를 완성해주세요.",
+  "answer": "## 문제 0. 숫자 정렬하기\n\n문제: 숫자 리스트를 입력받아 오름차순으로 정렬하는 함수를 작성하세요.\n\n```python\ndef sort_numbers(numbers):\n    # 여기에 코드를 작성하세요.\n    pass\n\nprint(sort_numbers([5, 2, 3, 1, 4]))  # [1, 2, 3, 4, 5] 출력\n```\n\n## 문제 1. 가장 많은 글자 수의 단어\n\n문제: 문",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.6367179322242736,
+  "generation_time": 298.62311816215515,
+  "timestamp": "2025-07-07T02:51:00.662191",
+  "topic": "AI 고급 최적화",
+  "language": "korean"
+}

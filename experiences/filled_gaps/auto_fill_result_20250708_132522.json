@@ -1,0 +1,24 @@
+{
+  "total_gaps": 2,
+  "auto_filled": 1,
+  "auto_actions": [
+    {
+      "gap": "project_creation_frequency",
+      "action": "auto_fixed",
+      "timestamp": "2025-07-08T13:25:22.472526"
+    }
+  ],
+  "manual_actions": [
+    {
+      "gap": "error_pattern_async_await",
+      "reason": "manual_intervention_required",
+      "suggested_actions": [
+        "async_await 오류 해결 방법 학습",
+        "async_await 예방 패턴 습득",
+        "async_await 관련 모범 사례 검색"
+      ]
+    }
+  ],
+  "success_rate": 0.5,
+  "timestamp": "2025-07-08T13:25:22.472888"
+}

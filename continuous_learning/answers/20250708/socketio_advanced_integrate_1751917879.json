@@ -1,0 +1,11 @@
+{
+  "question_id": "socketio_advanced_integrate_1751917879",
+  "question": "Unity에서 Godot로 마이그레이션할 때 고급 실시간 통신의 브로드캐스트, 클러스터링를 어떻게 변환하는지 보여주세요.",
+  "answer": "Godot의 실시간 통신 기능은 패킷 교환 방식을 사용하여 네트워킹을 처리하는 방식으로 변경되었습니다. 이 글에서는 예제를 통해 어떻게 변환하는지 보여드리겠습니다.\n\n우선 알아두시면 좋을 것들은, Godot은 기본적으로 UDP 통신을 사용하�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.5854069757461547,
+  "generation_time": 299.1420097351074,
+  "timestamp": "2025-07-08T04:56:18.690146",
+  "topic": "고급 실시간 통신",
+  "language": "korean"
+}

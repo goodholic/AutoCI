@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_example_1751825495",
+  "question": "Build a practical application demonstrating class, method in C# 기초 문법.",
+  "answer": "```csharp\n{\n    public Calculator(int number)\n    {\n        this.number = number;\n    }\n\n    public int Add()\n    {\n        return number + 10;\n    }\n\n    public int Subtract()\n    {\n        return number - 10;\n    }\n}\n```\n\n```\n\n- 문제 설명: 사용자로부터 숫자를 입력받고, 이 숫자에 10을 더하거나 뺀 결과를 출력하는 프로그램을 만드는 문제입니다.\n- 요구사항: 사용자로부터 숫자를 입력받�",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.639013295173645,
+  "generation_time": 294.0084767341614,
+  "timestamp": "2025-07-07T03:21:35.781381",
+  "topic": "C# 기초 문법",
+  "language": "english"
+}

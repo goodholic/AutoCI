@@ -1,0 +1,11 @@
+{
+  "question_id": "csharp_basics_integrate_1751860026",
+  "question": "C# 기초 문법과 Godot의 변수를 연동하는 실용적인 예제를 만들어주세요.",
+  "answer": "class MyNode(object):\n    def __init__(self):\n        self.variable = None\n\n    def set_variable(self, value):\n        self.variable = value\n\n    def get_variable(self):\n        return self.variable\n\n# 사용법\n\nnode = MyNode()\nnode.set_variable(10)\nprint(node.get_variable())  # 출력: 10\n\n\n# 다음은 Godot의 노드와 연동하는 예제입니다.\n\nfrom godot import exposed, export, Node, Signal\n\nclass MyGodotNode(Node):\n    variable = export(int)\n\n    def _on_MyGodotNode_ready(self):\n        self.variable = 10\n        print(self.variable)  # 출력: 10\n\n    @exposed\n    def get_variable(self):\n        return self.variable\n\n    @exposed\no000000000000000000000000000",
+  "model": "deepseek-coder-7b",
+  "quality_score": 0.613583242893219,
+  "generation_time": 680.0591332912445,
+  "timestamp": "2025-07-07T13:00:47.899041",
+  "topic": "C# 기초 문법",
+  "language": "korean"
+}
